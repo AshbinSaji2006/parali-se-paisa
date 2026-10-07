@@ -155,7 +155,7 @@ s = base("", None, None,
          "We use free satellite data to see every field, find the burns that fire satellites now miss, and send balers to the fields most likely to burn, so farmers earn from straw instead of burning it.")
 text(s, 0.6, 0.55, 7.4, 1.0, "Parali Se Paisa", size=44, color=GREEN_DARK, bold=True)
 text(s, 0.6, 1.65, 7.2, 1.6, "The burns the fire satellites stopped seeing, and the balers that can reach them first", size=24, color=INK2)
-text(s, 0.6, 3.25, 7.0, 1.2, ["Satellite AI that turns paddy straw into verified farmer income",
+text(s, 0.6, 3.25, 7.0, 1.2, ["Satellite AI that helps turn paddy straw into farmer income",
                               "Greenovators Hackathon 2026 · Waste to Wealth · Net Zero AI Architecture"], size=15, color=INK2)
 text(s, 0.6, 5.2, 7.0, 1.2, ["Real data: Sentinel-2, VIIRS, MODIS and ERA5 for Sri Muktsar Sahib, Punjab, 2023–2026",
                               f"{fmt(C[2025]['crop_fields'])} crop fields · 74 satellite scenes · 12.6 million field observations"], size=13, color=MUTED)
@@ -283,7 +283,7 @@ picture(s, ROOT / "reports" / "pitch" / "_farmer_crop.png", 8.5, 1.5, h=5.2)
 cert = Image.open(SHOTS / "Certificate-Detail-1366.png")
 cert.crop((250, 0, 1366, 700)).save(ROOT / "reports" / "pitch" / "_cert_crop.png")
 picture(s, ROOT / "reports" / "pitch" / "_cert_crop.png", 11.2, 1.5, w=1.9)
-text(s, 11.2, 2.8, 1.9, 2, ["No-burn certificate with QR verification"], size=11, color=INK2)
+text(s, 11.2, 2.8, 1.9, 2, ["Prototype no-burn certificate with QR metadata check"], size=11, color=INK2)
 
 # 11 Impact and scale
 straw_value = now["district_straw_total_t"] * 1690 / 1e7

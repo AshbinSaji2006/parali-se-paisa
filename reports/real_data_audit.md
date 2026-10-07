@@ -50,3 +50,14 @@ Before this branch, the snapshot also had four correctness defects and one wrong
 * **Research claims re-checked against committed products.** The 2023 and 2024 census reproduces exactly from `field_events_*.parquet` and `firms_muktsar.parquet`: crop fields, strict and loose fields and hectares, and VIIRS S-NPP + NOAA-20 alert counts. The 2025 headline (7,930 ha) uses the 5-day harmonised subset and needs the excluded full time series to reproduce; the all-date value (9,137 ha) reproduces. The summary now states the cross-archive caveat for the 2023→2025 alert comparison.
 * **Wording.** "Char-confirmed" and "confirmed burns" implied verification of unvalidated rule candidates. They are renamed to "strict-tier burn(-scar) candidate" in the README, research summary, methods, demo guide, overlay legend, figure, map and deck generators, and four research-page labels. The committed PNG figures and the pitch PDF/PPTX keep their old titles until they are re-rendered with the full data; the figure render needs the LFS `risk_features_2025` and the excluded time series.
 * **Network.** This environment's egress policy denies Planetary Computer, source.coop, Open-Meteo, FIRMS and Azure blob hosts. Git LFS content is unreachable from it. Densification, polygon re-validation and coverage-gap filling therefore remain blocked here.
+* **Pitch deck.** `Parali_Se_Paisa_Greenovators2026.pptx` was edited in place (8 paragraphs, run formatting kept), and `scripts/build_pitch_deck.py` carries the same strings:
+  * "confirmed burns" became strict-tier burn candidates;
+  * "verified farmer income" became "helps turn paddy straw into farmer income", because the project does not verify income;
+  * "No-burn certificate with QR verification" became "Prototype no-burn certificate with QR metadata check".
+
+  Still stale until a full rebuild:
+  * the PDF export, which was made with PowerPoint/Segoe UI and should be re-exported from the PPTX;
+  * the embedded figure PNGs (f1, f2, f8 legend);
+  * the slide-10 app screenshot.
+
+  The deck generator also needs the git-ignored `.demo/visual-audit` screenshots.
