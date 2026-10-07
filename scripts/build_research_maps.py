@@ -27,7 +27,7 @@ FIG = ROOT / "reports" / "research" / "figures"
 
 CLASS_RGBA = {1: (195, 194, 183, 110),   # crop field, no burn candidate (muted, translucent)
               2: (236, 131, 90, 235),    # loose burn candidate (serious)
-              3: (208, 59, 59, 255)}     # strict char-confirmed burn (critical)
+              3: (208, 59, 59, 255)}     # strict char-tier burn candidate (critical)
 
 
 def hex_rgba(h: str, a: int = 255):
@@ -80,7 +80,7 @@ def main() -> None:
             for b in range(4):
                 rgba[b][m] = col[b]
         info = to_wgs84(rgba, transform, crs, f"burn_{y}")
-        info.update(year=y, kind="burn_tier", legend=[["Char-confirmed burn (strict)", "#d03b3b"], ["Burn candidate (loose)", "#ec835a"], ["Crop field, no burn candidate", "#c3c2b7"]])
+        info.update(year=y, kind="burn_tier", legend=[["Strict char-tier burn candidate", "#d03b3b"], ["Burn candidate (loose)", "#ec835a"], ["Crop field, no burn candidate", "#c3c2b7"]])
         meta["overlays"].append(info)
         print("overlay", y, info["width"], info["height"], flush=True)
     r = pd.read_parquet(PROD / "risk_2026_preseason.parquet").merge(ids, on="field_id")
@@ -117,7 +117,7 @@ def main() -> None:
     from pyproj import Transformer
     x, yv = Transformer.from_crs(4326, crs, always_xy=True).transform(f.longitude.values, f.latitude.values)
     ax.scatter(x, yv, s=7, c=fs.INK, marker="o", linewidths=0, label=f"VIIRS fire alert ({len(f):,})")
-    ax.scatter([], [], s=30, c="#d03b3b", marker="s", label="Char-confirmed burn (strict)")
+    ax.scatter([], [], s=30, c="#d03b3b", marker="s", label="Strict char-tier burn candidate")
     ax.scatter([], [], s=30, c="#ec835a", marker="s", label="Burn candidate (loose)")
     ax.scatter([], [], s=30, c="#c3c2b7", marker="s", label="Crop field, no burn candidate")
     ax.legend(loc="lower left", fontsize=8, frameon=True, facecolor=fs.SURFACE, edgecolor=fs.GRID)

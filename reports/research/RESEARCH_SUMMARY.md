@@ -16,8 +16,8 @@ Every number below comes from public satellite data processed by code in this re
 
 | # | Finding | Evidence |
 |---|---|---|
-| 1 | **VIIRS fire alerts over Muktsar fell 79% from 2023 to 2025 (2,792 → 600), but the char-confirmed burn-scar area did not fall (7,883 → 7,930 ha; loose tier 21,121 → 20,150 ha).** One VIIRS alert stood for 2.3 burned fields in 2023 and 11.9 in 2025. | `f1_alerts_vs_scars.png`, harmonised 5-day revisit |
-| 2 | **Only 8% of char-confirmed burns in 2025 had any VIIRS alert within 500 m during their ≤5-day burn window,** against 34% in 2023. Unburned control fields matched 4% and 20%, so these are upper bounds. Roughly 9 in 10 confirmed field burns in 2025 went unseen by the fire satellites. This independently supports iFOREST's finding that over 90% of large Punjab fires now occur after 3 PM, after the satellites pass. | `f2_blind_spot.png` |
+| 1 | **VIIRS fire alerts over Muktsar fell 79% from 2023 to 2025 (2,792 → 600), but the strict-tier burn-scar candidate area did not fall (7,883 → 7,930 ha; loose tier 21,121 → 20,150 ha).** One VIIRS alert stood for 2.3 burned fields in 2023 and 11.9 in 2025. | `f1_alerts_vs_scars.png`, harmonised 5-day revisit |
+| 2 | **Only 8% of strict-tier burn-scar candidates in 2025 had any VIIRS alert within 500 m during their ≤5-day burn window,** against 34% in 2023. Unburned control fields matched 4% and 20%, so these are upper bounds. Roughly 9 in 10 strict-tier field burn candidates in 2025 went unseen by the fire satellites (candidates are rule-derived and not yet validated). This independently supports iFOREST's finding that over 90% of large Punjab fires now occur after 3 PM, after the satellites pass. | `f2_blind_spot.png` |
 | 3 | **Smoke blinds optical monitoring when it matters.** From 29 Oct to 28 Nov 2023, at the burning peak, only 4–33% of fields were clear in the blue band. The SWIR-based detector kept 63–100% observable. | `f3_smoke_blindness.png` |
 | 4 | **A naive dNBR mistakes the paddy harvest for a fire.** A pre/post dNBR above 0.27 flags 97.9% of crop fields. Harvest-aware detection scores only post-harvest char. | `f4_naive_vs_aware.png` |
 | 5 | **The intervention window is about two weeks.** The median time from first harvested observation to first char observation is 15 days in 2023 and 2025. In 2025, 11% of burns came within 5 days of the harvest being observed, leaving a dispatcher at most one revisit to act; this is why pre-season booking matters. Only 0.5% burned before the harvest could be observed at all. | `f5_intervention_window.png` |
@@ -39,6 +39,7 @@ Parali Se Paisa measures what actually happened on every field from its burn sca
 - **Precision of the burn tiers.** The stratified human labels are pending. An AI-assisted visual check of 10 strict detections per year found char in about 7–8 of 10.
 - **Missed burns.** Small or quickly tilled burns between revisits are missed, so burn counts are lower bounds.
 - **2024 is incomplete,** because smog removed 3–21 Nov.
+- **The 2023→2025 alert comparison crosses archive sources.** 2023–2024 alerts come from FIRMS yearly country archives and 2025 from UMD monthly files. The satellites are like-for-like (S-NPP + NOAA-20; NOAA-21 excluded), but processing streams differ. The 2025 burned area figure (7,930 ha) uses the harmonised 5-day subset (21 of 26 dates). With all dates it is 9,137 ha, which reproduces from `field_events_2025.parquet`. The 2023 and 2024 census figures reproduce exactly from the committed field-event products.
 - **Crop type is not separated.** The cotton-growing south is not yet masked out.
 - **The replay assumes** that a baled field is not burned, and ignores farmer acceptance and travel time.
 

@@ -19,7 +19,9 @@ from shapely.geometry import box
 
 ROOT = Path(__file__).resolve().parents[1]
 REAL = ROOT / "data" / "real"
-PROCESSING_VERSION = "grid-aligned-20m-v3-boa-offset"
+PROCESSING_VERSION = "grid-aligned-20m-v4-bais2-red-floor"
+# Reflectance floor for BAIS2 pixels (see BAIS2 comment in run()); applies to new reductions only.
+BAIS2_MIN_B04 = 0.005
 
 
 def _read_aligned_band(src, reference_crs, transform, width, height, *, categorical=False):
@@ -181,15 +183,22 @@ def run(year_filter: int | None = None, force: bool = False) -> tuple[Path, gpd.
                     ndvi_den = b8 + b4; nbr_den = b8 + b12; bais_den = np.sqrt(np.maximum(b12 + b8a, 0))
                     ndvi = np.divide(b8-b4, ndvi_den, out=np.full_like(b8, np.nan), where=ndvi_den != 0)
                     nbr = np.divide(b8-b12, nbr_den, out=np.full_like(b8, np.nan), where=nbr_den != 0)
-                    bais2 = (1-np.sqrt(np.maximum(b6*b7*b8a/np.maximum(b4, 1e-8), 0))) * ((b12-b8a)/np.maximum(bais_den, 1e-8)+1)
+                    # BAIS2 divides by B04. The valid mask admits slightly negative post-offset
+                    # reflectance, and a near-zero red pixel would dominate the field mean, so
+                    # BAIS2 is only computed where B04 is physically meaningful.
+                    bais2_ok = b4 >= BAIS2_MIN_B04
+                    bais2 = np.where(bais2_ok, (1-np.sqrt(np.maximum(b6*b7*b8a/np.maximum(b4, BAIS2_MIN_B04), 0))) * ((b12-b8a)/np.maximum(bais_den, 1e-8)+1), np.nan)
                     z = zones[valid].ravel().astype(np.int64)
                     max_id = len(local)
                     counts = np.bincount(z, minlength=max_id+1)
                     zone_pixels = np.bincount(zones.ravel().astype(np.int64), minlength=max_id+1)
                     def means(a):
-                        vals = a[valid].ravel()
-                        return np.divide(np.bincount(z, weights=vals, minlength=max_id+1), counts,
-                                         out=np.full(max_id+1, np.nan), where=counts > 0)
+                        finite = valid & np.isfinite(a)
+                        zz = zones[finite].ravel().astype(np.int64)
+                        n = np.bincount(zz, minlength=max_id+1)
+                        return np.divide(np.bincount(zz, weights=a[finite].ravel(), minlength=max_id+1), n,
+                                         out=np.full(max_id+1, np.nan), where=n > 0)
+                    bais2_counts = np.bincount(zones[valid & bais2_ok].ravel().astype(np.int64), minlength=max_id+1)
                     stats = {key: means(arr) for key, arr in {"B04":b4,"B06":b6,"B07":b7,"B08":b8,"B8A":b8a,"B12":b12,
                                                               "ndvi":ndvi,"nbr":nbr,"bais2":bais2}.items()}
                     obs_time = pd.Timestamp(item.datetime).isoformat()
@@ -207,7 +216,8 @@ def run(year_filter: int | None = None, force: bool = False) -> tuple[Path, gpd.
                                "observation_quality": "GOOD" if counts[idx] >= 10 and counts[idx] / max(zone_pixels[idx],1) >= 0.5 else "POOR",
                                "cropland_fraction": field.get("cropland_fraction", None),
                                "reflectance_scale": 0.0001, "processing_baseline": baseline, "boa_offset_dn": boa_offset,
-                               "scl_valid_classes": "4,5,6", "real_or_synthetic": "REAL"}
+                               "scl_valid_classes": "4,5,6", "bais2_valid_pixel_count": int(bais2_counts[idx]),
+                               "bais2_min_b04": BAIS2_MIN_B04, "real_or_synthetic": "REAL"}
                         row.update({f"{k.lower()}_mean": float(v[idx]) for k, v in stats.items()})
                         row["NDVI"] = row.pop("ndvi_mean"); row["NBR"] = row.pop("nbr_mean"); row["BAIS2"] = row.pop("bais2_mean")
                         row["NDVI_mean"] = row["NDVI"]; row["NBR_mean"] = row["NBR"]; row["BAIS2_mean"] = row["BAIS2"]

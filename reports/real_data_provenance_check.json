@@ -1,0 +1,199 @@
+{
+  "artifacts": [
+    {
+      "dataset": "district_boundary",
+      "path": "data/real/boundaries/sri_muktsar_sahib_adm2.geojson",
+      "expected_sha256": "73a0cbaf99200a22257bff6873f6ee231197db13065be2308ba646218271c336",
+      "status": "OK"
+    },
+    {
+      "dataset": "district_boundary",
+      "path": "data/real/cache/geoBoundaries-IND-ADM2.geojson",
+      "expected_sha256": "8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40",
+      "status": "EXCLUDED_BY_POLICY"
+    },
+    {
+      "dataset": "district_boundary",
+      "path": "data/real/boundaries/geoboundaries_source_metadata.json",
+      "expected_sha256": "d20a8310ba0f065741be57b9d3675b98dce87d2453f9f2c21ba295cfd0928929",
+      "status": "OK_LINE_ENDINGS_NORMALISED"
+    },
+    {
+      "dataset": "field_boundaries",
+      "path": "data/real/fields/fields_of_the_world_muktsar.parquet",
+      "expected_sha256": "264820cdcc85f9a06afbd96ab58816a47c3d9ff3816ba5bb4681656cd48233c7",
+      "lfs_oid": "264820cdcc85f9a06afbd96ab58816a47c3d9ff3816ba5bb4681656cd48233c7",
+      "status": "LFS_POINTER_NOT_FETCHED_OID_MATCH"
+    },
+    {
+      "dataset": "field_boundaries",
+      "path": "data/real/fields/fields_of_the_world_muktsar.geojson",
+      "expected_sha256": "908d8a7626f340248eb52480a28d0f8acf5fb64f192fd11d45bc13b32b7bced7",
+      "status": "EXCLUDED_BY_POLICY"
+    },
+    {
+      "dataset": "worldcover",
+      "path": "data/real/landcover/worldcover_muktsar.tif",
+      "expected_sha256": "944b24892137ff98a3f4ffc1307f1fcc30a6d55558bc86eb2aaa5722632bf729",
+      "status": "OK"
+    },
+    {
+      "dataset": "worldcover",
+      "path": "data/real/landcover/worldcover_cropland_mask.tif",
+      "expected_sha256": "c88ffa50567b967a5e657f62c57f830fdcfbabab6b9f0e707ca43fb9db4abd4b",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_2023",
+      "path": "data/real/derived/features/sentinel2_field_observations.parquet",
+      "expected_sha256": "47b56e820714f04002442d256eb15f3a8736d0247c7a1949f0400bfe0616905a",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_2023",
+      "path": "data/real/derived/previews/ndvi_2023_S2B_MSIL2A_20231004T053649_R005_.png",
+      "expected_sha256": "fce333c0d502f7ecf4a78a310eb9b943fcbf7fa971385b5c5b59c94797384758",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_2023",
+      "path": "data/real/derived/previews/ndvi_2023_S2B_MSIL2A_20231203T054209_R005_.png",
+      "expected_sha256": "282b3c4e108f1a06ae8ff7ff3fd5d9b046cb11c7ffe41b4bde5ac004a8670671",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_2023",
+      "path": "data/real/derived/previews/ndvi_2024_S2A_MSIL2A_20241013T053801_R005_.png",
+      "expected_sha256": "03d1966bc0ee839e0fd6f2adb9867c7fe36bce95a6ad476d2b4484785e6f1ad5",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_2023",
+      "path": "data/real/derived/previews/ndvi_2024_S2B_MSIL2A_20241127T054109_R005_.png",
+      "expected_sha256": "a04b5404ff1946419bc36e928f6d1f233cd0e2a25d5e60c182ba4f3e15eb1bd3",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_2023",
+      "path": "data/real/derived/previews/ndvi_2026_S2C_MSIL2A_20261003T053651_R005_.png",
+      "expected_sha256": "efcb838bcb94bad2fd958d1da7cb854c98bb0276f3021c00020a417b813cb7e6",
+      "status": "OK"
+    },
+    {
+      "dataset": "weather",
+      "path": "data/real/weather/weather_hourly.parquet",
+      "expected_sha256": "e58f082871d5a571ffc9cde8c9fe86309bdf7acaff90addf00d4f75fde7f3be1",
+      "status": "OK"
+    },
+    {
+      "dataset": "weather",
+      "path": "data/real/weather/weather_daily.parquet",
+      "expected_sha256": "abe332e316e97e997a275c87e09932dcfffa9a5ee0b944dedab5d954b92e7234",
+      "status": "OK"
+    },
+    {
+      "dataset": "firms",
+      "path": "data/real/firms/active_fire_unified.parquet",
+      "expected_sha256": "3d77029c51376261450d36a15df8555882b90851773588310b6fadaf0e191c00",
+      "status": "OK"
+    },
+    {
+      "dataset": "firms",
+      "path": "data/real/firms/firms_muktsar.parquet",
+      "expected_sha256": "91d56f1a8cd281be6a8acacaf888979cf95116cae98fca56b8f39ae4ee0a7b86",
+      "status": "OK"
+    },
+    {
+      "dataset": "modis_burned_area",
+      "path": "data/real/burned_area/mcd64a1_muktsar.parquet",
+      "expected_sha256": "571307e0a29cd9b61c93c5f72092e1e198c0e3f84f5b2e11f5fbc3c323b2dd9a",
+      "status": "OK"
+    },
+    {
+      "dataset": "modis_burned_area",
+      "path": "data/real/burned_area/mcd64a1_burn_pixels.parquet",
+      "expected_sha256": "b2914d492d30cb0b00232972c06052e53163e081e9470f40638b351d6d862732",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel1",
+      "path": "data/real/sentinel1/sentinel1_scene_catalog.parquet",
+      "expected_sha256": "9b4e7198859c528c4b8179aa1a554799646feb6ab346f81a26634574606f1c0a",
+      "status": "OK"
+    },
+    {
+      "dataset": "real_features",
+      "path": "data/real/derived/features/real_field_features.parquet",
+      "expected_sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db",
+      "status": "OK"
+    },
+    {
+      "dataset": "temporal_features",
+      "path": "data/real/derived/features/real_temporal_features.parquet",
+      "expected_sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db",
+      "status": "OK"
+    },
+    {
+      "dataset": "weak_labels",
+      "path": "data/real/derived/labels/real_weak_labels.parquet",
+      "expected_sha256": "18f1bf07afa58c8127b8e6eccd617e862733f856099c0d26e0b011d9bf9e3031",
+      "status": "OK"
+    },
+    {
+      "dataset": "showcase_fields",
+      "path": "data/real/derived/showcase/showcase_real_fields.geojson",
+      "expected_sha256": "65106b7a23070258fd43edbbc521d52373023bc341db33974e18532ba72d45e6",
+      "status": "OK"
+    },
+    {
+      "dataset": "app_import",
+      "path": "data/real/derived/app_snapshot.json",
+      "expected_sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180",
+      "status": "OK"
+    },
+    {
+      "dataset": "reports",
+      "path": "reports/real_data_summary.md",
+      "expected_sha256": "5545f3556d42d8ef8a0706985f678d9e982922a6a0601230d914659d0be2f05d",
+      "status": "OK"
+    },
+    {
+      "dataset": "reports",
+      "path": "reports/real_field_provenance_example.md",
+      "expected_sha256": "e590a2f1877b5180ed4ff8139330c7aa81fbe61abeb8aa1fa1ee86b806c9bf03",
+      "status": "OK"
+    },
+    {
+      "dataset": "reports",
+      "path": "reports/real_data_disk_usage.json",
+      "expected_sha256": "d5c75c1dc1830499c62c98931181897893cd67b868060a6d91193a4e95bce695",
+      "status": "OK"
+    },
+    {
+      "dataset": "reports",
+      "path": "reports/real_data_validation.json",
+      "expected_sha256": "add578df9dff06993f1955a705fb2c7922e1dda57f33119d48f10194ce25f876",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_catalog",
+      "path": "data/real/sentinel2/catalog.parquet",
+      "expected_sha256": "0d9b92072c7a9edf506d09f35458d068b7f23a3ea7f6af68b80daf7ca45067be",
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel2_catalog",
+      "path": "data/real/sentinel2/catalog.csv",
+      "expected_sha256": "f22c402b18e54e3662d105ab9a6cf3db46aa33b536beb2740ccdb7528b31d6fa",
+      "status": "OK_LINE_ENDINGS_NORMALISED"
+    }
+  ],
+  "status_counts": {
+    "OK": 26,
+    "EXCLUDED_BY_POLICY": 2,
+    "OK_LINE_ENDINGS_NORMALISED": 2,
+    "LFS_POINTER_NOT_FETCHED_OID_MATCH": 1
+  },
+  "passed": true,
+  "integrity_scope": "SHA-256 file integrity against acquisition records; not a digital signature."
+}

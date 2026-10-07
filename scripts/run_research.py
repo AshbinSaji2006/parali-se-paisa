@@ -376,7 +376,7 @@ def figures(census, naive, smoke, lat, risk, rep, now) -> None:
     # F1 hero: indexed trends
     fig, ax = plt.subplots(figsize=(8.6, 4.4))
     series = [("VIIRS fire alerts (S-NPP + NOAA-20)", census.viirs_alerts, fs.SERIES[1], 0, "alerts"),
-              ("Sentinel-2 char-confirmed burn area (strict)", census.burned_strict_ha, fs.SERIES[0], 13, "ha"),
+              ("Sentinel-2 strict-tier burn-scar candidate area", census.burned_strict_ha, fs.SERIES[0], 13, "ha"),
               ("Sentinel-2 burn-candidate area (loose)", census.burned_loose_ha, fs.SERIES[2], -13, "ha")]
     for name, v, col, dy, unit in series:
         idx = 100 * v / v.iloc[0]
@@ -392,7 +392,7 @@ def figures(census, naive, smoke, lat, risk, rep, now) -> None:
     ax.set_ylim(0, 130)
     ax.set_title("Fire alerts fell 79%. Burn scars did not.")
     fs.note(fig, "Sri Muktsar Sahib, Oct-Dec. Sentinel-2 L2A at a harmonised 5-day revisit; VIIRS 375 m active fires (NASA FIRMS 2023-24, UMD archive 2025),\n"
-                 "vegetation-fire type, inside the district. Strict = char-confirmed tier; loose = all burn candidates.")
+                 "vegetation-fire type, inside the district. Strict = char-like signature tier; loose = all burn candidates; both are unverified rule candidates.")
     fig.tight_layout(rect=(0, 0.07, 1, 1))
     fig.savefig(FIG / "f1_alerts_vs_scars.png", dpi=180)
     plt.close(fig)
@@ -410,7 +410,7 @@ def figures(census, naive, smoke, lat, risk, rep, now) -> None:
     ax.set_ylabel("Share with a VIIRS alert within 500 m (%)")
     ax.set_ylim(0, 45)
     ax.legend(loc="upper right")
-    ax.set_title("How many confirmed burns did the fire satellites see?")
+    ax.set_title("How many strict-tier burn candidates did the fire satellites see?")
     fs.note(fig, "Burned fields observed within <=5 days by Sentinel-2 (strict char tier).\nControl: unburned harvested fields given the same observation windows (proximity baseline).")
     fig.tight_layout(rect=(0, 0.075, 1, 1))
     fig.savefig(FIG / "f2_blind_spot.png", dpi=180)

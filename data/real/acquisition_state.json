@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-10-07T15:18:28.936911+00:00",
+  "updated_at": "2026-10-07T17:20:53.001494+00:00",
   "pilot": {
     "district": "Sri Muktsar Sahib",
     "aliases": [
@@ -822,11 +822,11 @@
       "artifacts": [
         {
           "path": "data/real/derived/features/real_field_features.parquet",
-          "bytes": 804934,
-          "sha256": "cd6d1b1ba49f9ea3fb83db264b84aa0864bdf51fff1ddcdf41491114f7ac6b1b"
+          "bytes": 970146,
+          "sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db"
         }
       ],
-      "updated_at": "2026-10-07T15:10:38.291788+00:00",
+      "updated_at": "2026-10-07T17:20:52.748179+00:00",
       "metadata": {
         "rows": 3640
       }
@@ -836,11 +836,11 @@
       "artifacts": [
         {
           "path": "data/real/derived/features/real_temporal_features.parquet",
-          "bytes": 804934,
-          "sha256": "cd6d1b1ba49f9ea3fb83db264b84aa0864bdf51fff1ddcdf41491114f7ac6b1b"
+          "bytes": 970146,
+          "sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db"
         }
       ],
-      "updated_at": "2026-10-07T15:10:38.367154+00:00",
+      "updated_at": "2026-10-07T17:20:52.778593+00:00",
       "metadata": {
         "rows": 3640
       }
@@ -850,11 +850,11 @@
       "artifacts": [
         {
           "path": "data/real/derived/labels/real_weak_labels.parquet",
-          "bytes": 13784,
-          "sha256": "0b45046ffc78c0addeb45bb8c17d4ce719c280369bfacb69b1b4621677b026d0"
+          "bytes": 16885,
+          "sha256": "18f1bf07afa58c8127b8e6eccd617e862733f856099c0d26e0b011d9bf9e3031"
         }
       ],
-      "updated_at": "2026-10-07T15:10:38.417716+00:00",
+      "updated_at": "2026-10-07T17:20:52.792661+00:00",
       "metadata": {
         "rows": 3640
       }
@@ -864,11 +864,11 @@
       "artifacts": [
         {
           "path": "data/real/derived/showcase/showcase_real_fields.geojson",
-          "bytes": 788940,
-          "sha256": "43b00560ca3d6c644591d888cd931c37874ecfd78765e9f1561257c81b6c274a"
+          "bytes": 795724,
+          "sha256": "65106b7a23070258fd43edbbc521d52373023bc341db33974e18532ba72d45e6"
         }
       ],
-      "updated_at": "2026-10-07T15:10:38.493470+00:00",
+      "updated_at": "2026-10-07T17:20:52.837751+00:00",
       "metadata": {
         "rows": 100
       }
@@ -878,11 +878,11 @@
       "artifacts": [
         {
           "path": "data/real/derived/app_snapshot.json",
-          "bytes": 2569111,
-          "sha256": "d5c0d9d5a7f1957aa30444434e47dffe7ceea4e93a677168c5ea9c5265462da9"
+          "bytes": 3450098,
+          "sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180"
         }
       ],
-      "updated_at": "2026-10-07T15:10:38.538091+00:00",
+      "updated_at": "2026-10-07T17:20:52.843445+00:00",
       "date_range": null,
       "warnings": [],
       "metadata": {
@@ -895,26 +895,26 @@
       "artifacts": [
         {
           "path": "reports/real_data_summary.md",
-          "bytes": 2106,
-          "sha256": "c33ac8406abcef83e1bd1b72089e8a04df0a99276eb8f591a143f0672a9538e4"
+          "bytes": 3166,
+          "sha256": "a8fb968eadcc0b11e5fa5a50cd3f0ad789dbb47a60dd613e02c1acf5b2d0781e"
         },
         {
           "path": "reports/real_field_provenance_example.md",
-          "bytes": 1831,
-          "sha256": "aba5e0998dc3c39432e69c769ceaaae1b5e48284137509c5d3720f4becbc305f"
+          "bytes": 2399,
+          "sha256": "e590a2f1877b5180ed4ff8139330c7aa81fbe61abeb8aa1fa1ee86b806c9bf03"
         },
         {
           "path": "reports/real_data_disk_usage.json",
-          "bytes": 262,
-          "sha256": "e81cc37a37f569e7456c772aef41f2a8bf4e3e994377ef139c95914f87d67a28"
+          "bytes": 237,
+          "sha256": "e13643f2ed41461f7d9d719bd5e71c29e0b87c5b93e4b382c56428ed97c8f547"
         },
         {
           "path": "reports/real_data_validation.json",
-          "bytes": 543,
-          "sha256": "eacd675e6ef6cfd4f83da729c1e1750a8a55bc2398a61414f753fe87b728b819"
+          "bytes": 1216,
+          "sha256": "90a36ca5844bd67e7ae1eea9eebb0f5962a640add069c46b994a15e5fb59110c"
         }
       ],
-      "updated_at": "2026-10-07T15:10:38.742880+00:00",
+      "updated_at": "2026-10-07T17:20:53.001117+00:00",
       "metadata": {}
     },
     "sentinel2_catalog": {

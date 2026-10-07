@@ -1,6 +1,6 @@
 # Real dataset manifest
 
-Generated: 2026-10-07T15:10:38.660367+00:00
+Generated: 2026-10-07T17:20:52.907754+00:00
 
 | Dataset | Status | Provider | Files |
 |---|---|---|---|
@@ -15,8 +15,8 @@ Generated: 2026-10-07T15:10:38.660367+00:00
 | sentinel2_2024 | real_derived | Microsoft Planetary Computer | 6 |
 | sentinel2_2025 | real_derived | Microsoft Planetary Computer | 6 |
 | sentinel2_2026 | real_derived | Microsoft Planetary Computer | 6 |
-| reports | real_derived | Local validation | 4 |
 | firms | real_downloaded | NASA FIRMS / University of Maryland fire archive | 2 |
+| reports | real_derived | Local validation | 4 |
 | real_features | real_derived | Derived / real-only | 1 |
 | temporal_features | real_derived | Derived / real-only | 1 |
 | weak_labels | real_derived | Derived / real-only | 1 |

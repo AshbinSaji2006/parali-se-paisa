@@ -7,6 +7,8 @@ import pandas as pd
 import pytest
 import rasterio
 
+from src.data.provenance import content_available, is_lfs_pointer
+
 ROOT = Path(__file__).resolve().parents[2]
 REAL = ROOT / "data" / "real"
 REQUIRED = [
@@ -15,10 +17,13 @@ REQUIRED = [
     REAL / "landcover" / "worldcover_muktsar.tif",
     REAL / "derived" / "features" / "sentinel2_field_observations.parquet",
 ]
+# The field Parquet is a Git LFS object; an un-fetched pointer is missing data, not a failure.
 pytestmark = pytest.mark.skipif(not all(p.exists() for p in REQUIRED), reason="Real acquisitions are not present locally")
 
 
 def test_real_boundary_and_research_fields_are_valid():
+    if not content_available(REQUIRED[1]):
+        pytest.skip("Fields of The World Parquet is an un-fetched Git LFS pointer; run `git lfs pull`")
     boundary = gpd.read_file(REQUIRED[0])
     fields = gpd.read_parquet(REQUIRED[1])
     assert len(boundary) == 1 and boundary.crs.to_epsg() == 4326
@@ -49,6 +54,8 @@ def test_worldcover_and_sentinel2_measurements_are_real_and_plausible():
 
 def test_real_outputs_have_no_synthetic_or_demo_records():
     for path in REAL.rglob("*.parquet"):
+        if is_lfs_pointer(path):
+            continue
         frame = pd.read_parquet(path)
         for column in ("real_or_synthetic", "fixture_or_real", "demo_or_real"):
             if column in frame:
@@ -66,6 +73,19 @@ def test_temporal_rows_are_chronological_and_proxy_labels_disclaim_ground_truth(
     label_rows = pd.read_parquet(labels)
     assert label_rows.label_source.eq("REAL_S2_HEURISTIC_PROXY").all()
     assert label_rows.confidence.eq("LOW").all()
+    assert label_rows.is_ground_truth.eq(False).all()
+    transitions = label_rows.loc[label_rows.weak_label.ne("UNKNOWN")]
+    assert transitions.evidence_window_days.notna().all() and transitions.temporal_gap_category.notna().all()
+    large = transitions.loc[transitions.temporal_gap_category.eq("LARGE")]
+    assert large.reason.str.contains("ambiguous").all()
+
+
+def test_real_snapshot_is_strict_json():
+    snapshot = REAL / "derived" / "app_snapshot.json"
+    if not snapshot.exists(): pytest.skip("Real application snapshot is not built yet")
+    import json
+    def reject(token): raise ValueError(f"non-standard JSON constant {token}")
+    json.loads(snapshot.read_text(encoding="utf-8"), parse_constant=reject)
 
 
 def test_api_real_mode_reads_real_snapshot_without_demo_database(monkeypatch):
@@ -78,3 +98,31 @@ def test_api_real_mode_reads_real_snapshot_without_demo_database(monkeypatch):
     assert payload["fields"]
     assert all(f["provenance"] == "REAL_RESEARCH_BOUNDARY" for f in payload["fields"])
     assert payload["notice"].find("no ground truth") >= 0
+    for field in payload["fields"]:
+        intel = field["intelligence"]
+        assert intel["field_status"]["method"] == "RULE-BASED STATUS CANDIDATE"
+        assert intel["field_status"]["is_ground_truth"] is False
+        assert intel["burn_risk"]["risk_score"] is None and "PROBABILITY" not in intel["burn_risk"]["score_kind"]
+        assert field["eligibility"]["eligible"] is False and intel["straw"]["eligible"] is False
+
+
+def test_real_feature_rows_respect_quality_and_coverage_semantics():
+    path = REAL / "derived" / "features" / "real_field_features.parquet"
+    if not path.exists(): pytest.skip("Real feature table is not built yet")
+    features = pd.read_parquet(path)
+    # Weather is only "available" when a published reanalysis hour supplied the values.
+    available = features.weather_available.fillna(False).astype(bool)
+    assert features.loc[available, ["temperature_2m_c", "precipitation_mm"]].notna().all().all()
+    assert (pd.to_datetime(features.weather_observation_datetime, utc=True) <=
+            pd.to_datetime(features.observation_datetime, utc=True)).all()
+    # Pixel-artefact BAIS2 means are withheld from the feature value but kept as raw provenance.
+    unstable = features.BAIS2_quality.ne("OK")
+    assert features.loc[unstable, ["BAIS2", "BAIS2_mean"]].isna().all().all()
+    assert features.loc[unstable, "BAIS2_pixel_mean_raw"].notna().all()
+    # A zero fire count is only reported where the archive covers the look-back window.
+    for status_col, count_col in (("firms_coverage_status", "firms_viirs_detections_near_field"),
+                                  ("modis_ba_coverage_status", "modis_ba_burned_pixels_near_field")):
+        assert features.loc[features[status_col].eq("NOT_COVERED"), count_col].isna().all()
+        assert features.loc[features[status_col].ne("NOT_COVERED"), count_col].notna().all()
+    latest = pd.to_datetime(features.firms_latest_detection_datetime, utc=True, errors="coerce")
+    assert (latest.dropna() <= pd.to_datetime(features.observation_datetime, utc=True)[latest.notna()]).all()
