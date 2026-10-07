@@ -139,3 +139,32 @@ Built by `scripts/build_real_products.py`; see `reports/real_data_audit.md`.
 | `modis_ba_coverage_status`, `modis_ba_burned_pixels_near_field`, `modis_ba_latest_burn_date`, `modis_ba_availability` | MCD64A1 500 m burned pixels within 500 m with burn day in the 30 days before the acquisition day. Retrospective product, not knowable at acquisition time. |
 
 Weak labels (`real_weak_labels.parquet`) carry `evidence_window_start`, `evidence_window_days`, `temporal_gap_category` and `is_ground_truth=False`. A transition label means the change happened somewhere in the window; with a `LARGE` window the state on the labelled date is ambiguous. The app shows them as a `RULE-BASED STATUS CANDIDATE`.
+
+### Sentinel-1 radar season context
+
+`s1_context_status` is `SEASON_SUMMARY_AVAILABLE`, `INSUFFICIENT_RADAR_PIXELS` or `NOT_ACQUIRED_FOR_SEASON`. Values are filled only for 2025 rows acquired after the last radar pass (2025-09-28):
+
+* `s1_vh_min_transplant_db`: minimum VH from 25 May to 31 Jul;
+* `s1_vh_canopy_db`: mean VH from 15 Aug to 30 Sep;
+* `s1_vh_rise_db`: the difference between the two;
+* `s1_paddy_signature`: true when the transplanting minimum is below −20 dB and the rise is at least 4 dB.
+
+The provenance columns (`s1_product`, `s1_orbit_pass`, `s1_relative_orbit`, `s1_polarization`, `s1_units`, `s1_passes`, `s1_window`) describe the source: Sentinel-1A RTC gamma0, IW GRDH 1SDV, descending, relative orbit 34, with field means taken in linear power and then converted to dB. These are season summaries, not per-date VV/VH observations.
+
+### Reference labels
+
+The human review packages are `reports/research/label_tool/label_reference_<year>.html` with manifest `reference_package_<year>.json`. Reviewer exports go in `data/real/labels/reference_labels_<year>_<reviewer>.csv`, with these columns:
+
+| Column(s) | Content |
+|---|---|
+| `package`, `item_id`, `field_id`, `year`, `candidate_date` | Which item was reviewed |
+| `reviewer`, `reviewed_at` | Who reviewed it and when |
+| `burn_label` | BURNT, NOT_BURNT or UNCLEAR |
+| `state_label` | STANDING, HARVESTED, BURNT, SOWN or UNKNOWN |
+| `confidence` | HIGH, MEDIUM or LOW |
+| `evidence`, `notes` | Evidence checkboxes and free-text notes |
+| `label_before_context`, `context_viewed`, `context_viewed_at` | The answer before the reviewer opened ancillary context, and when they opened it |
+| `source_images` | Dates of the image chips shown |
+| `label_quality`, `label_source` | `B` and `HUMAN_MULTI_DATE_VISUAL_REVIEW` |
+
+`scripts/import_reference_labels.py` validates the exports and reports agreement. It writes consensus labels only where reviewers agree.

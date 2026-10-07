@@ -19,6 +19,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.data.provenance import content_available
+from src.features.radar_context import S1_SEASON, radar_season_context
 from src.features.fire_context import bais2_stability, firms_context, modis_burned_area_context
 from src.features.temporal_features import build_temporal_rows
 
@@ -30,7 +31,6 @@ SHOWCASE_PATH = REAL / "derived" / "showcase" / "showcase_real_fields.geojson"
 MODERATE_GAP_DAYS, LARGE_GAP_DAYS = 14, 30
 WEATHER_CORE = ("temperature_2m_c", "precipitation_mm")
 STATUS_METHOD = "RULE-BASED STATUS CANDIDATE"
-SHOWCASE_SIZE = 100
 
 
 def _asof_weather(hourly: pd.DataFrame, grid_id: int, reference: pd.Timestamp) -> dict:
@@ -229,42 +229,89 @@ def _current_candidate(last: pd.Series, dense: dict | None, weak: dict) -> dict:
     return {**unknown, "reason": "No established crop in the dense series this season; insufficient evidence."}
 
 
-def _demo_suitability(obs: pd.DataFrame, labels: pd.DataFrame, events: dict) -> pd.DataFrame:
-    """Rank fields for a transparent demonstration; this is not a scientific ranking.
+GROUP_QUOTAS = {
+    "A_BURN_LIKE_MULTI_SIGNAL": 40,
+    "C_POST_HARVEST_GREEN_UP": 30,
+    "B_HARVEST_NO_BURN": 30,
+    "D_STABLE_STANDING": 20,
+    "E_AMBIGUOUS_SYSTEM_CAUTION": 20,
+}
 
-    Prefers clean, mostly-cropland fields with complete observation quality and a
-    clear narrative that independent sources agree on (dense-series candidate,
-    VIIRS/MODIS proximity, MCD64A1). Agreement between sources is corroboration,
-    not ground truth.
+
+def _demo_suitability(obs: pd.DataFrame, labels: pd.DataFrame, events: dict, dense_latest: dict) -> pd.DataFrame:
+    """Group and rank fields for a transparent demonstration; not a scientific or burn-risk ranking.
+
+    Groups (first match wins): A burn-like season with a strict Sentinel-2 burn-scar candidate and
+    FIRMS/MODIS proximity; C a post-harvest observation whose NDVI has recovered (sowing-like);
+    B harvested in at least two seasons with no burn candidate and no fire detections in covered
+    windows; D a current standing-crop candidate with no burn candidate in any season; E cases
+    where sources disagree or quality is weak, useful for showing the system's caution.
+    Agreement between sources is corroboration, not ground truth.
     """
     rows = []
-    harvested = labels.loc[labels.weak_label.eq("HARVESTED")].groupby("field_id").size()
+    weak = labels.set_index(["field_id", "observation_datetime"]).weak_label
     for field_id, group in obs.groupby("field_id"):
+        group = group.sort_values("observation_datetime")
         ev = events.get(field_id, {})
         strict = sorted(y for y, e in ev.items() if e.get("burn_tier") == "CHAR_STRICT")
+        loose_only = sorted(y for y, e in ev.items() if e.get("burn_tier") == "CHAR_LOOSE")
         no_burn = sorted(y for y, e in ev.items() if e.get("harvested") and e.get("burn_tier") == "NONE")
         viirs = pd.to_numeric(group.firms_viirs_detections_near_field, errors="coerce").fillna(0)
         firms_years = sorted(map(int, group.loc[viirs.gt(0), "year"].unique()))
         modis_years = sorted(map(int, group.loc[pd.to_numeric(group.modis_ba_burned_pixels_near_field, errors="coerce").fillna(0).gt(0), "year"].unique()))
         corroborated = sorted(set(strict) & (set(firms_years) | set(modis_years)))
-        clean = bool(group.observation_quality.eq("GOOD").all() and group.BAIS2_quality.eq("OK").all()
+        green_up = []
+        conflicts = []
+        for _, r in group.iterrows():
+            e = ev.get(int(r.year), {})
+            harvest = pd.Timestamp(e["harvest_observed"]) if e.get("harvest_observed") else None
+            day = pd.Timestamp(r.observation_datetime).tz_convert("UTC").tz_localize(None)
+            if harvest is not None and e.get("burn_tier") == "NONE" and day - harvest >= pd.Timedelta(days=20) and r.NDVI >= .40:
+                green_up.append(int(r.year))
+            label = weak.get((field_id, r.observation_datetime))
+            if label == "HARVESTED" and e and (harvest is None or harvest > day):
+                conflicts.append(f"{int(r.year)}: sparse HARVESTED proxy but dense series shows no harvest by {day.date()}")
+        dense = dense_latest.get(field_id) or {}
+        last = group.iloc[-1]
+        standing_now = bool(dense and not dense.get("harvested") and (dense.get("peak_nbr") or 0) >= .5 and last.NDVI >= .55)
+        good_obs = int(group.observation_quality.eq("GOOD").sum())
+        clean = bool(good_obs == len(group) and group.BAIS2_quality.eq("OK").all()
                      and pd.to_numeric(group.cropland_fraction, errors="coerce").fillna(0).ge(.9).all())
+        fire_covered = int(group.firms_coverage_status.eq("COMPLETE").sum())
+        radar = bool(group.get("s1_context_status", pd.Series(dtype=object)).eq("SEASON_SUMMARY_AVAILABLE").any())
+        weather_ok = int(group.weather_available.fillna(False).astype(bool).sum())
         if corroborated:
-            category = "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS"
-        elif no_burn and len(no_burn) >= 2 and not firms_years and not modis_years:
-            category = "HARVESTED_NO_BURN_CANDIDATE_NO_FIRE_DETECTIONS"
-        elif strict:
-            category = "BURN_SCAR_CANDIDATE_UNCORROBORATED"
+            category = "A_BURN_LIKE_MULTI_SIGNAL"
+        elif green_up:
+            category = "C_POST_HARVEST_GREEN_UP"
+        elif len(no_burn) >= 2 and not strict and not loose_only and not firms_years and not modis_years:
+            category = "B_HARVEST_NO_BURN"
+        elif standing_now and clean and not strict and not loose_only and not conflicts:
+            category = "D_STABLE_STANDING"
         else:
+            category = "E_AMBIGUOUS_SYSTEM_CAUTION"
+        if category == "E_AMBIGUOUS_SYSTEM_CAUTION" and not (conflicts or loose_only or strict or not clean):
             category = "OTHER"
-        score = (3 * len(corroborated) + (2 if len(strict) >= 2 else 0) + int(harvested.get(field_id, 0))
-                 + (2 if category.startswith("HARVESTED_NO_BURN") else 0) + (4 if clean else 0)
-                 + min(float(group.area_ha.iloc[0]), 10) / 5)
+        score = (good_obs / len(group) * 4 + (1 - float(group.cloud_fraction.mean())) * 2
+                 + fire_covered / len(group) * 2 + (1 if radar else 0) + weather_ok / len(group)
+                 + 2 * len(corroborated) + (2 if clean else 0) + min(float(group.area_ha.iloc[0]), 10) / 5)
         rows.append({"field_id": field_id, "demo_category": category, "demo_score": round(score, 3),
-                     "demo_clean_observations": clean, "strict_burn_candidate_years": strict,
-                     "harvested_no_burn_candidate_years": no_burn, "firms_near_field_years": firms_years,
-                     "modis_ba_near_field_years": modis_years, "corroborated_burn_years": corroborated})
+                     "demo_clean_observations": clean, "good_observations": good_obs, "observations": int(len(group)),
+                     "mean_cloud_fraction": round(float(group.cloud_fraction.mean()), 4),
+                     "fire_windows_complete": fire_covered, "radar_context": radar, "weather_available_rows": weather_ok,
+                     "strict_burn_candidate_years": strict, "loose_only_burn_candidate_years": loose_only,
+                     "harvested_no_burn_candidate_years": no_burn, "post_harvest_green_up_years": sorted(set(green_up)),
+                     "firms_near_field_years": firms_years, "modis_ba_near_field_years": modis_years,
+                     "corroborated_burn_years": corroborated, "current_standing_candidate": standing_now,
+                     "source_conflicts": conflicts})
     return pd.DataFrame(rows).sort_values(["demo_score", "field_id"], ascending=[False, True]).reset_index(drop=True)
+
+
+def _select_showcase(candidates: pd.DataFrame) -> pd.DataFrame:
+    picks = [candidates.loc[candidates.demo_category.eq(group)].head(quota) for group, quota in GROUP_QUOTAS.items()]
+    order = {group: i for i, group in enumerate(GROUP_QUOTAS)}
+    ranked = pd.concat(picks).assign(_g=lambda d: d.demo_category.map(order))
+    return ranked.sort_values(["_g", "demo_score", "field_id"], ascending=[True, False, True]).drop(columns="_g").reset_index(drop=True)
 
 
 def _json_safe(value):
@@ -336,11 +383,21 @@ def build() -> dict:
     obs = obs.join(firms_context(obs, firms))
     obs = obs.join(modis_burned_area_context(obs, pd.read_parquet(REAL / "burned_area" / "mcd64a1_burn_pixels.parquet"),
                                              pd.read_parquet(REAL / "burned_area" / "mcd64a1_muktsar.parquet")))
+    radar_path = REAL / "derived" / "research" / f"paddy_mask_s1_{S1_SEASON}.parquet"
+    obs = obs.join(radar_season_context(obs, pd.read_parquet(radar_path) if content_available(radar_path) else None))
 
     obs = obs.sort_values(["field_id", "observation_datetime"]).reset_index(drop=True)
     obs["days_since_previous_observation"] = obs.groupby("field_id").observation_datetime.diff().dt.total_seconds() / 86400
     temporal_rows, temporal_report = build_temporal_rows(obs.to_dict("records"))
     temporal = pd.DataFrame(temporal_rows)
+    gaps = temporal.days_since_previous_observation.dropna()
+    bins = [("<=10", gaps.le(10)), ("11-20", gaps.gt(10) & gaps.le(20)), ("21-30", gaps.gt(20) & gaps.le(30)),
+            ("31-45", gaps.gt(30) & gaps.le(45)), (">45", gaps.gt(45))]
+    temporal_report["gap_distribution_days"] = {k: {"count": int(m.sum()), "share": round(float(m.mean()), 4) if len(gaps) else None} for k, m in bins}
+    per_field = temporal.groupby("field_id").size()
+    temporal_report["fields_with_ge_3_observations"] = int(per_field.ge(3).sum())
+    temporal_report["fields_with_ge_5_observations"] = int(per_field.ge(5).sum())
+    temporal_report["max_observations_per_field_season"] = int(temporal.groupby(["field_id", "year"]).size().max())
     temporal_report_path = ROOT / "reports" / "real_temporal_feature_quality_report.json"
     temporal_report_path.write_text(json.dumps(temporal_report, indent=2, default=str) + "\n", encoding="utf-8")
     obs = temporal
@@ -363,11 +420,11 @@ def build() -> dict:
     events = _research_events(set(obs.field_id))
     latest_year = int(obs.year.max())
     dense_latest = _dense_series_state(set(obs.field_id), latest_year)
-    suitability = _demo_suitability(obs, labels_df, events)
+    suitability = _demo_suitability(obs, labels_df, events, dense_latest)
     # Showcase only fields with real processed observations and committed source geometry.
     geometries = context["geometries"]
     candidates = suitability.loc[suitability.field_id.isin(set(geometries.field_id))]
-    ranked = candidates.head(SHOWCASE_SIZE).reset_index(drop=True)
+    ranked = _select_showcase(candidates)
     ranked["demo_rank"] = np.arange(1, len(ranked) + 1)
     showcase = geometries.loc[geometries.field_id.isin(set(ranked.field_id))].copy()
     showcase = showcase.drop(columns=[c for c in ("cropland_fraction", "demo_rank", "demo_category", "demo_score") if c in showcase])
@@ -384,6 +441,7 @@ def build() -> dict:
         "field_context_source": context["source"],
         "candidate_pool": int(len(candidates)), "observed_fields": int(len(suitability)),
         "category_counts_in_pool": candidates.demo_category.value_counts().to_dict(),
+        "category_counts_selected": ranked.demo_category.value_counts().to_dict(), "group_quotas": GROUP_QUOTAS,
         "fields": json.loads(ranked.to_json(orient="records"))}, indent=2) + "\n", encoding="utf-8")
 
     labels_by_key = labels_df.set_index(["field_id", "observation_datetime"])
@@ -436,7 +494,8 @@ def build() -> dict:
                               "score_kind": "UNAVAILABLE", "top_factors": [],
                               "availability": {"weather": bool(last.get("weather_available")),
                                                "firms": firms_status in {"COMPLETE", "PARTIAL"},
-                                               "modis": modis_status in {"COMPLETE", "PARTIAL"}},
+                                               "modis": modis_status in {"COMPLETE", "PARTIAL"},
+                                               "radar_season_summary": bool(hist.s1_context_status.eq("SEASON_SUMMARY_AVAILABLE").any())},
                               "fire_context_notice": "FIRMS/MODIS detections near the field centroid are proximity context, not attribution or ground truth."},
                 "provenance": {"observation_datetime": pd.Timestamp(last.observation_datetime).isoformat(), "fixture_or_real": "REAL",
                                "model_trust_state": "NO_MODEL", "processing_version": last.get("processing_version"),

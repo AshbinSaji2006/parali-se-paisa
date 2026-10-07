@@ -33,5 +33,30 @@
   "omitted_history": [
     "FIRMS event count histories are omitted because the C table has only as-of window summaries, not event-level detections.",
     "Weather rolling histories are omitted because the C table has only observation-level aggregates, not daily record histories."
-  ]
+  ],
+  "gap_distribution_days": {
+    "<=10": {
+      "count": 0,
+      "share": 0.0
+    },
+    "11-20": {
+      "count": 520,
+      "share": 0.3333
+    },
+    "21-30": {
+      "count": 0,
+      "share": 0.0
+    },
+    "31-45": {
+      "count": 0,
+      "share": 0.0
+    },
+    ">45": {
+      "count": 1040,
+      "share": 0.6667
+    }
+  },
+  "fields_with_ge_3_observations": 520,
+  "fields_with_ge_5_observations": 520,
+  "max_observations_per_field_season": 2
 }

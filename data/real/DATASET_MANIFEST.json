@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-07T17:20:53.002772+00:00",
+  "generated_at": "2026-10-07T17:53:59.957420+00:00",
   "pilot": {
     "district": "Sri Muktsar Sahib",
     "state": "Punjab",
@@ -902,13 +902,13 @@
       "source_dataset": "Sentinel-2 + ERA5 real field features",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:20:52.753887+00:00",
+      "downloaded_at": "2026-10-07T17:53:59.369432+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "data/real/derived/features/real_field_features.parquet",
-          "bytes": 970146,
-          "sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db"
+          "bytes": 995528,
+          "sha256": "60f9f881365837cc024b4677c6ea9e784ded735e1f9e7693d7634401d3de53eb"
         }
       ],
       "rows": 3640
@@ -919,13 +919,13 @@
       "source_dataset": "Leakage-safe real observation deltas",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:20:52.784238+00:00",
+      "downloaded_at": "2026-10-07T17:53:59.398805+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "data/real/derived/features/real_temporal_features.parquet",
-          "bytes": 970146,
-          "sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db"
+          "bytes": 995528,
+          "sha256": "60f9f881365837cc024b4677c6ea9e784ded735e1f9e7693d7634401d3de53eb"
         }
       ],
       "rows": 3640
@@ -936,7 +936,7 @@
       "source_dataset": "Low-confidence rule proxy labels",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:20:52.794508+00:00",
+      "downloaded_at": "2026-10-07T17:53:59.409088+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
@@ -953,16 +953,16 @@
       "source_dataset": "Observed real research fields",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:20:52.841939+00:00",
+      "downloaded_at": "2026-10-07T17:53:59.446919+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "data/real/derived/showcase/showcase_real_fields.geojson",
-          "bytes": 795724,
-          "sha256": "65106b7a23070258fd43edbbc521d52373023bc341db33974e18532ba72d45e6"
+          "bytes": 694812,
+          "sha256": "a1e8f77a0b41b630cf002f51aa2529f084ad5f5d1607b9816f3d6f81351a984b"
         }
       ],
-      "rows": 100
+      "rows": 92
     },
     {
       "dataset": "app_import",
@@ -970,13 +970,13 @@
       "source_dataset": "Read-only real product snapshot",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:20:52.856594+00:00",
+      "downloaded_at": "2026-10-07T17:53:59.458844+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "data/real/derived/app_snapshot.json",
-          "bytes": 3450098,
-          "sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180"
+          "bytes": 3252086,
+          "sha256": "1c3bcad45450e973494a4abea560775a647937df8866318026d9977c16800b4e"
         }
       ],
       "mode_switch": "DATA_MODE=real",
@@ -988,13 +988,13 @@
       "source_dataset": "Real data status reports",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:20:53.002758+00:00",
+      "downloaded_at": "2026-10-07T17:53:59.957406+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "reports/real_data_summary.md",
-          "bytes": 3166,
-          "sha256": "a8fb968eadcc0b11e5fa5a50cd3f0ad789dbb47a60dd613e02c1acf5b2d0781e"
+          "bytes": 2687,
+          "sha256": "c46e76930015ac72481e8d7bb5219f51a03d9365c6123d7b298e782aa8fb6047"
         },
         {
           "path": "reports/real_field_provenance_example.md",
@@ -1003,13 +1003,13 @@
         },
         {
           "path": "reports/real_data_disk_usage.json",
-          "bytes": 237,
-          "sha256": "e13643f2ed41461f7d9d719bd5e71c29e0b87c5b93e4b382c56428ed97c8f547"
+          "bytes": 244,
+          "sha256": "a690942876eb1907a59464de2c890dd31a1c8ace2721482d5142e4aa373239fa"
         },
         {
           "path": "reports/real_data_validation.json",
-          "bytes": 1216,
-          "sha256": "90a36ca5844bd67e7ae1eea9eebb0f5962a640add069c46b994a15e5fb59110c"
+          "bytes": 842,
+          "sha256": "cdfef659f0cabf14e6e994caa7b2dfeac962f0354ae42e59d3a5a3732a9ffd55"
         }
       ]
     }

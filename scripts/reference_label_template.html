@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reference Label Review</title>
+<style>
+:root{--bg:#f6f5f1;--fg:#1d2a24;--muted:#5b6b63;--card:#fff;--line:#d9dcd5;--accent:#2f6b4f;--burn:#b23a2b;--no:#2f6b4f;--unk:#7a6a2a}
+@media (prefers-color-scheme:dark){:root{--bg:#141815;--fg:#e6ebe7;--muted:#9fb0a6;--card:#1d231f;--line:#334038;--accent:#6fbf94;--burn:#e2765f;--no:#6fbf94;--unk:#d1bd6a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,sans-serif}
+main{max-width:1150px;margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between}
+h1{font-size:20px;margin:0}.muted{color:var(--muted)}h2{font-size:15px;margin:14px 0 6px}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:10px 0}.bar>i{display:block;height:100%;background:var(--accent)}
+.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 12px}
+.frame img{width:100%;image-rendering:pixelated;border-radius:4px;display:block}
+.frame b{display:block;margin-bottom:4px}.pair{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pair small{display:block;text-align:center;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+button{font:inherit;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+button.sel{background:var(--accent);border-color:var(--accent);color:#fff}
+button.burn.sel{background:var(--burn);border-color:var(--burn)}button.unk.sel{background:var(--unk);border-color:var(--unk)}
+button:disabled{opacity:.45;cursor:not-allowed}
+label.chk{display:inline-flex;gap:4px;align-items:center;margin-right:10px}
+input[type=text],textarea{font:inherit;padding:7px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg)}
+textarea{width:100%;min-height:54px}
+pre{white-space:pre-wrap;font:12px/1.4 ui-monospace,monospace;margin:0}
+.warn{color:var(--burn)}
+@media (max-width:760px){.frames{grid-template-columns:1fr}}
+</style></head><body><main>
+<header><h1>Reference label review · __YEAR__</h1><span class="muted" id="count"></span></header>
+<div class="card" id="who">
+  <div class="row"><b>Reviewer</b><input type="text" id="reviewer" placeholder="Name or initials (required)" maxlength="60" aria-label="Reviewer name">
+  <span class="muted">Package __PACKAGE__ · labels stay in this browser until exported.</span></div>
+</div>
+<div class="bar"><i id="prog"></i></div>
+<div class="muted" id="where"></div>
+<div class="frames" id="frames"></div>
+
+<h2>1 · Did the outlined field burn between the before and after dates?</h2>
+<div class="row" id="burnRow">
+  <button class="burn" data-burn="BURNT">B · Burnt (char/ash in outlined field)</button>
+  <button data-burn="NOT_BURNT">N · Not burnt</button>
+  <button class="unk" data-burn="UNCLEAR">U · Can't tell</button>
+</div>
+<h2>2 · Field state on the candidate (middle) date</h2>
+<div class="row" id="stateRow">
+  <button data-state="STANDING">Standing crop</button><button data-state="HARVESTED">Harvested, residue present</button>
+  <button data-state="BURNT">Burnt</button><button data-state="SOWN">Tilled or sown / green-up</button>
+  <button data-state="UNKNOWN">Unknown / ambiguous</button>
+</div>
+<h2>3 · Confidence and evidence</h2>
+<div class="row" id="confRow"><button data-conf="HIGH">High</button><button data-conf="MEDIUM">Medium</button><button data-conf="LOW">Low</button></div>
+<div class="row" id="evidence">
+  <label class="chk"><input type="checkbox" value="CHAR_IN_SWIR">Char dark in SWIR</label>
+  <label class="chk"><input type="checkbox" value="CHAR_IN_TRUE_COLOUR">Char grey/black in true colour</label>
+  <label class="chk"><input type="checkbox" value="RESIDUE_VISIBLE">Straw/residue visible</label>
+  <label class="chk"><input type="checkbox" value="TILLED_SOIL">Tilled soil</label>
+  <label class="chk"><input type="checkbox" value="GREEN_UP">Green-up</label>
+  <label class="chk"><input type="checkbox" value="HAZE_OR_CLOUD">Haze/cloud limits view</label>
+  <label class="chk"><input type="checkbox" value="BOUNDARY_MISMATCH">Outline does not match field</label>
+</div>
+<textarea id="notes" placeholder="Notes (optional)" aria-label="Notes"></textarea>
+<div class="row"><button id="back">← Back</button><button id="save">Save and next →</button><button id="skip">Skip →</button><span class="muted" id="status"></span></div>
+
+<h2>4 · Ancillary context (opens after step 1)</h2>
+<div class="card"><button id="reveal" disabled>Show context</button>
+<span class="muted"> FIRMS/MODIS proximity is context, not proof. Opening it is recorded; you may revise your answer afterwards.</span>
+<pre id="ctx" hidden></pre></div>
+
+<div class="card" style="margin-top:12px"><b>How to judge.</b> Look at the yellow-outlined field across the three dates. In SWIR false colour fresh burn scars turn near black or deep maroon; in true colour they look charcoal grey or black and are usually sharply bounded by the field edge. Tilled soil is brown-grey to pink-purple in SWIR, not black; freshly irrigated soil is dark in true colour but stays reddish-purple in SWIR. Partial burns count as Burnt. Use Can't tell for haze, cloud or ambiguous cases. The detector's answer is hidden.
+<div class="row"><button id="export">Export CSV</button><span class="muted">Save as <code>data/real/labels/reference_labels___YEAR___&lt;reviewer&gt;.csv</code> and run <code>python scripts/import_reference_labels.py</code>.</span></div>
+<textarea id="csv" hidden readonly style="min-height:120px;font:12px monospace"></textarea></div>
+</main>
+<script>
+const ITEMS = __ITEMS__;
+const PACKAGE = "__PACKAGE__";
+const KEY = "reference-labels-" + PACKAGE;
+const $ = id => document.getElementById(id);
+let store = {reviewer: "", labels: {}};
+try { store = Object.assign(store, JSON.parse(localStorage.getItem(KEY) || "{}")); } catch (e) {}
+let i = 0; while (i < ITEMS.length - 1 && store.labels[ITEMS[i].item_id]) i++;
+let draft = {};
+function persist(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
+$("reviewer").value = store.reviewer || "";
+$("reviewer").oninput = e => { store.reviewer = e.target.value.trim(); persist(); render(); };
+function pick(rowId, attr, value){ document.querySelectorAll(`#${rowId} button`).forEach(b => b.classList.toggle("sel", b.dataset[attr] === value)); }
+function render(){
+  const it = ITEMS[i]; const done = Object.keys(store.labels).length;
+  const saved = store.labels[it.item_id];
+  draft = saved ? JSON.parse(JSON.stringify(saved)) : {burn_label: null, state_label: null, confidence: null, evidence: [], notes: "",
+          label_before_context: null, context_viewed: false, opened_at: new Date().toISOString()};
+  $("count").textContent = `Item ${i+1} of ${ITEMS.length} · ${done} reviewed`;
+  $("prog").style.width = (100*done/ITEMS.length) + "%";
+  $("where").textContent = `Field ${it.field_id} · ${it.lat}, ${it.lon}`;
+  $("frames").innerHTML = it.frames.map((f,k) => `<div class="card frame"><b>${["Before","Candidate","After"][k]} · ${f.date}</b><div class="pair"><div><img src="${f.rgb}" alt="True colour ${f.date}"><small>True colour</small></div><div><img src="${f.swir}" alt="SWIR ${f.date}"><small>SWIR false colour</small></div></div></div>`).join("");
+  pick("burnRow","burn",draft.burn_label); pick("stateRow","state",draft.state_label); pick("confRow","conf",draft.confidence);
+  document.querySelectorAll("#evidence input").forEach(c => c.checked = draft.evidence.includes(c.value));
+  $("notes").value = draft.notes || "";
+  $("ctx").hidden = !draft.context_viewed; $("ctx").textContent = draft.context_viewed ? JSON.stringify(it.context, null, 1) : "";
+  $("reveal").disabled = !draft.burn_label;
+  const missing = [!store.reviewer && "reviewer", !draft.burn_label && "step 1", !draft.state_label && "step 2", !draft.confidence && "confidence"].filter(Boolean);
+  $("save").disabled = missing.length > 0;
+  $("status").innerHTML = missing.length ? `<span class="warn">Needed: ${missing.join(", ")}</span>` : (saved ? "Saved" : "");
+}
+document.querySelectorAll("#burnRow button").forEach(b => b.onclick = () => { draft.burn_label = b.dataset.burn; if (!draft.context_viewed) draft.label_before_context = b.dataset.burn; refresh(); });
+document.querySelectorAll("#stateRow button").forEach(b => b.onclick = () => { draft.state_label = b.dataset.state; refresh(); });
+document.querySelectorAll("#confRow button").forEach(b => b.onclick = () => { draft.confidence = b.dataset.conf; refresh(); });
+function refresh(){
+  pick("burnRow","burn",draft.burn_label); pick("stateRow","state",draft.state_label); pick("confRow","conf",draft.confidence);
+  $("reveal").disabled = !draft.burn_label;
+  const missing = [!store.reviewer && "reviewer", !draft.burn_label && "step 1", !draft.state_label && "step 2", !draft.confidence && "confidence"].filter(Boolean);
+  $("save").disabled = missing.length > 0;
+  $("status").innerHTML = missing.length ? `<span class="warn">Needed: ${missing.join(", ")}</span>` : "";
+}
+$("reveal").onclick = () => { draft.context_viewed = true; draft.context_viewed_at = new Date().toISOString(); $("ctx").hidden = false; $("ctx").textContent = JSON.stringify(ITEMS[i].context, null, 1); };
+$("save").onclick = () => {
+  const it = ITEMS[i];
+  draft.evidence = [...document.querySelectorAll("#evidence input:checked")].map(c => c.value);
+  draft.notes = $("notes").value.replace(/[\r\n]+/g, " ").trim();
+  store.labels[it.item_id] = Object.assign(draft, {reviewer: store.reviewer, reviewed_at: new Date().toISOString(),
+    field_id: it.field_id, year: it.year, candidate_date: it.candidate_date, frame_dates: it.frames.map(f => f.date)});
+  persist(); if (i < ITEMS.length - 1) i++; render();
+};
+$("back").onclick = () => { if (i > 0) { i--; render(); } };
+$("skip").onclick = () => { if (i < ITEMS.length - 1) { i++; render(); } };
+const q = v => { const s = v == null ? "" : String(v); return /[",;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+$("export").onclick = () => {
+  const head = ["package","item_id","field_id","year","candidate_date","reviewer","reviewed_at","burn_label","state_label","confidence",
+                "evidence","notes","label_before_context","context_viewed","context_viewed_at","source_images","label_quality","label_source"];
+  const rows = [head];
+  for (const [id, v] of Object.entries(store.labels)) rows.push([PACKAGE, id, v.field_id, v.year, v.candidate_date, v.reviewer, v.reviewed_at,
+    v.burn_label, v.state_label, v.confidence, (v.evidence||[]).join("|"), v.notes, v.label_before_context, v.context_viewed, v.context_viewed_at || "",
+    "Sentinel-2 L2A true colour + SWIR chips: " + (v.frame_dates||[]).join(" / "), "B", "HUMAN_MULTI_DATE_VISUAL_REVIEW"]);
+  const csv = rows.map(r => r.map(q).join(",")).join("\n");
+  const ta = $("csv"); ta.hidden = false; ta.value = csv; ta.select();
+  try { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], {type: "text/csv"}));
+        a.download = `reference_labels___YEAR___${(store.reviewer||"reviewer").replace(/\W+/g, "_")}.csv`; a.click(); } catch (e) {}
+};
+document.addEventListener("keydown", e => { if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+  const k = e.key.toLowerCase(); const m = {b:"BURNT", n:"NOT_BURNT", u:"UNCLEAR"};
+  if (m[k]) document.querySelector(`#burnRow button[data-burn="${m[k]}"]`).click();
+  else if (k === "arrowleft") $("back").click(); else if (k === "arrowright") $("skip").click(); });
+render();
+</script></body></html>

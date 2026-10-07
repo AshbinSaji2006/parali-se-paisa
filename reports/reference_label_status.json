@@ -1,0 +1,15 @@
+{
+  "generated_at": "2026-10-07T17:52:33.661977+00:00",
+  "reviewer_files": [],
+  "packages": {
+    "2023": 120,
+    "2025": 240
+  },
+  "accepted_rows": 0,
+  "rejected_rows": 0,
+  "rejections": [],
+  "reviewers": [],
+  "reviewed_items": 0,
+  "is_ground_truth": "Human Tier-B visual reference labels; not field surveys.",
+  "state": "NO_HUMAN_LABELS"
+}

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T17:20:53.000247+00:00",
+  "generated_at": "2026-10-07T17:53:59.954979+00:00",
   "checks": {
     "boundary": true,
     "field_count_ge_100": true,
@@ -20,16 +20,9 @@
     "fire_context_coverage_flags": true,
     "weak_label_evidence_windows": true,
     "artifact_provenance": true,
-    "field_polygons_revalidated": false,
+    "field_polygons_revalidated": true,
     "app_real_mode": true
   },
   "issues": [],
-  "unfetched_lfs_objects": [
-    "data/real/fields/fields_of_the_world_muktsar.parquet",
-    "data/real/derived/research/paddy_mask_s1_2025.parquet",
-    "data/real/derived/timeseries/risk_features_2024.parquet",
-    "data/real/derived/timeseries/risk_features_2025.parquet",
-    "data/real/derived/timeseries/hazard_panel_2024.parquet",
-    "data/real/derived/timeseries/hazard_panel_2025.parquet"
-  ]
+  "unfetched_lfs_objects": []
 }

@@ -52,3 +52,17 @@ def test_bais2_pixel_artefact_is_flagged_against_band_mean_recomputation():
     frame = pd.DataFrame([{**bands, "BAIS2": .09}, {**bands, "BAIS2": -16.3}])
     flags = bais2_stability(frame)
     assert flags.BAIS2_quality.tolist() == ["OK", "UNSTABLE_PIXEL_ARTEFACT"]
+
+
+def test_radar_season_context_is_causal_and_never_filled():
+    from src.features.radar_context import radar_season_context
+    obs = pd.DataFrame({"field_id": ["a", "a", "b", "c"], "year": [2025, 2025, 2025, 2024],
+                        "observation_datetime": pd.to_datetime(["2025-09-20T05:00Z", "2025-10-20T05:00Z",
+                                                                "2025-10-20T05:00Z", "2024-10-13T05:00Z"], utc=True)})
+    summary = pd.DataFrame({"field_id": ["a", "b"], "vh_min_transplant_db": [-21.0, None],
+                            "vh_canopy_db": [-15.0, None], "vh_rise_db": [6.0, None], "paddy_s1": [True, False]})
+    ctx = radar_season_context(obs, summary)
+    assert ctx.s1_context_status.tolist() == ["NOT_ACQUIRED_FOR_SEASON", "SEASON_SUMMARY_AVAILABLE",
+                                              "INSUFFICIENT_RADAR_PIXELS", "NOT_ACQUIRED_FOR_SEASON"]
+    assert ctx.s1_vh_canopy_db.iloc[1] == -15.0 and ctx.s1_paddy_signature.iloc[1]
+    assert ctx.s1_vh_canopy_db.drop(index=1).isna().all() and ctx.s1_relative_orbit.iloc[1] == 34

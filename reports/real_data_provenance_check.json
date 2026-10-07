@@ -22,8 +22,7 @@
       "dataset": "field_boundaries",
       "path": "data/real/fields/fields_of_the_world_muktsar.parquet",
       "expected_sha256": "264820cdcc85f9a06afbd96ab58816a47c3d9ff3816ba5bb4681656cd48233c7",
-      "lfs_oid": "264820cdcc85f9a06afbd96ab58816a47c3d9ff3816ba5bb4681656cd48233c7",
-      "status": "LFS_POINTER_NOT_FETCHED_OID_MATCH"
+      "status": "OK"
     },
     {
       "dataset": "field_boundaries",
@@ -124,13 +123,13 @@
     {
       "dataset": "real_features",
       "path": "data/real/derived/features/real_field_features.parquet",
-      "expected_sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db",
+      "expected_sha256": "60f9f881365837cc024b4677c6ea9e784ded735e1f9e7693d7634401d3de53eb",
       "status": "OK"
     },
     {
       "dataset": "temporal_features",
       "path": "data/real/derived/features/real_temporal_features.parquet",
-      "expected_sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db",
+      "expected_sha256": "60f9f881365837cc024b4677c6ea9e784ded735e1f9e7693d7634401d3de53eb",
       "status": "OK"
     },
     {
@@ -142,19 +141,19 @@
     {
       "dataset": "showcase_fields",
       "path": "data/real/derived/showcase/showcase_real_fields.geojson",
-      "expected_sha256": "65106b7a23070258fd43edbbc521d52373023bc341db33974e18532ba72d45e6",
+      "expected_sha256": "a1e8f77a0b41b630cf002f51aa2529f084ad5f5d1607b9816f3d6f81351a984b",
       "status": "OK"
     },
     {
       "dataset": "app_import",
       "path": "data/real/derived/app_snapshot.json",
-      "expected_sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180",
+      "expected_sha256": "1c3bcad45450e973494a4abea560775a647937df8866318026d9977c16800b4e",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_summary.md",
-      "expected_sha256": "5545f3556d42d8ef8a0706985f678d9e982922a6a0601230d914659d0be2f05d",
+      "expected_sha256": "a8fb968eadcc0b11e5fa5a50cd3f0ad789dbb47a60dd613e02c1acf5b2d0781e",
       "status": "OK"
     },
     {
@@ -166,13 +165,13 @@
     {
       "dataset": "reports",
       "path": "reports/real_data_disk_usage.json",
-      "expected_sha256": "d5c75c1dc1830499c62c98931181897893cd67b868060a6d91193a4e95bce695",
+      "expected_sha256": "e13643f2ed41461f7d9d719bd5e71c29e0b87c5b93e4b382c56428ed97c8f547",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_validation.json",
-      "expected_sha256": "add578df9dff06993f1955a705fb2c7922e1dda57f33119d48f10194ce25f876",
+      "expected_sha256": "90a36ca5844bd67e7ae1eea9eebb0f5962a640add069c46b994a15e5fb59110c",
       "status": "OK"
     },
     {
@@ -189,10 +188,9 @@
     }
   ],
   "status_counts": {
-    "OK": 26,
+    "OK": 27,
     "EXCLUDED_BY_POLICY": 2,
-    "OK_LINE_ENDINGS_NORMALISED": 2,
-    "LFS_POINTER_NOT_FETCHED_OID_MATCH": 1
+    "OK_LINE_ENDINGS_NORMALISED": 2
   },
   "passed": true,
   "integrity_scope": "SHA-256 file integrity against acquisition records; not a digital signature."

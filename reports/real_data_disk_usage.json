@@ -1,12 +1,12 @@
 {
-  "fields": 133,
+  "fields": 40289117,
   "landcover": 1889158,
   "sentinel2": 1037828,
   "weather": 850108,
   "firms": 3647892,
   "burned_area": 92338,
   "sentinel1": 47812,
-  "derived": 86232762,
-  "total_real_bytes": 94205609,
-  "total_real_gb": 0.0942
+  "derived": 172170943,
+  "total_real_bytes": 220432772,
+  "total_real_gb": 0.2204
 }
