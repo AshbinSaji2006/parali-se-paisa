@@ -47,12 +47,14 @@ def status_payload(request):
     mode = "REAL DATA / WEAK PROXIES" if real_mode else ("REAL DATA NOT READY" if real_requested else ("DEMO / SYNTHETIC" if request.app.state.demo_mode else "LIVE DATA UNAVAILABLE"))
     return {"mode": mode,
         "demo_mode": request.app.state.demo_mode, "live_verified": False,
-        "providers": {"Earth Engine": "NOT USED; Planetary Computer Sentinel-2" if real_mode else "UNVERIFIED — 0 real field observations", "FIRMS": "CREDENTIAL REQUIRED" if real_mode else "LIVE UNAVAILABLE",
-            "Weather": "Open-Meteo ERA5 historical reanalysis acquired" if real_mode else "LIVE UNAVAILABLE", "Database": "CONNECTED", "Model trust state": "NO_MODEL",
+        "providers": {"Earth Engine": "NOT USED; Planetary Computer Sentinel-2" if real_mode else "UNVERIFIED — 0 real field observations", "FIRMS": "ARCHIVE ACQUIRED (2023-2024 full years; 2025 Oct-Dec; 2026 NRT 7-day); field proximity context only" if real_mode else "LIVE UNAVAILABLE",
+            "Weather": "Open-Meteo ERA5 historical reanalysis acquired (0.25 deg grid; not a forecast)" if real_mode else "LIVE UNAVAILABLE",
+            "Field status": "RULE-BASED STATUS CANDIDATE (weak proxy; no trained model)" if real_mode else "RULE-BASED STATUS CANDIDATE",
+            "Sentinel-1": "CATALOG ONLY — 0 field observations" if real_mode else "LIVE UNAVAILABLE", "Database": "CONNECTED", "Model trust state": "NO_MODEL",
             "Routing provider": "GEODESIC_PROXY", "Buyer registry": "DEMO ONLY — 0 verified real buyers",
             "Baler registry": "DEMO ONLY — 0 verified real balers"},
         "ephemeral_jwt_key": request.app.state.ephemeral_jwt_key,
-        "notice": ("Read-only real-data mode displays acquired Sentinel-2 and ERA5 observations with research field boundaries. Labels are weak proxies; no ground truth, verified buyer/baler registry, or operational decision model is available." if real_mode else ("DATA_MODE=real is requested but the snapshot is unavailable; the product endpoint will not fall back to demo records." if real_requested else "Synthetic demonstration. Rule candidates, normalized risk scores and prototype certificates are not ground truth or government decisions."))}
+        "notice": ("Read-only real-data mode displays acquired Sentinel-2 and ERA5 observations with research field boundaries, plus FIRMS/MODIS fire detections as proximity context. Field status is a rule-based status candidate from weak proxy labels; no ground truth, verified buyer/baler registry, or operational decision model is available." if real_mode else ("DATA_MODE=real is requested but the snapshot is unavailable; the product endpoint will not fall back to demo records." if real_requested else "Synthetic demonstration. Rule candidates, normalized risk scores and prototype certificates are not ground truth or government decisions."))}
 
 
 @router.get("/system-status")

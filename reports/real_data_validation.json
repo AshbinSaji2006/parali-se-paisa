@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T15:10:38.741882+00:00",
+  "generated_at": "2026-10-07T17:10:22.059847+00:00",
   "checks": {
     "boundary": true,
     "field_count_ge_100": true,
@@ -10,11 +10,26 @@
     "bais2": true,
     "weather": true,
     "synthetic_contamination": true,
-    "sentinel2_common_20m_grid": false,
+    "sentinel2_common_20m_grid": true,
     "observation_quality_complete": true,
     "season_local_causal_temporal_features": true,
     "weather_not_after_satellite_time": true,
+    "sentinel2_boa_offset_harmonised": true,
+    "bais2_pixel_artefacts_withheld": true,
+    "weather_availability_consistent": true,
+    "fire_context_coverage_flags": true,
+    "weak_label_evidence_windows": true,
+    "artifact_provenance": true,
+    "field_polygons_revalidated": false,
     "app_real_mode": true
   },
-  "issues": []
+  "issues": [],
+  "unfetched_lfs_objects": [
+    "data/real/fields/fields_of_the_world_muktsar.parquet",
+    "data/real/derived/research/paddy_mask_s1_2025.parquet",
+    "data/real/derived/timeseries/risk_features_2024.parquet",
+    "data/real/derived/timeseries/risk_features_2025.parquet",
+    "data/real/derived/timeseries/hazard_panel_2024.parquet",
+    "data/real/derived/timeseries/hazard_panel_2025.parquet"
+  ]
 }

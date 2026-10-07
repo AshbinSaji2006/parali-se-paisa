@@ -123,3 +123,19 @@ The training contract CSV stores identifiers first, model inputs next, then targ
 The label registry is `data/processed/labels/status_labels.csv`. Supported status values are STANDING, HARVESTED, BURNT, and SOWN. Provenance sources and tiers are constrained: FIELD_SURVEY is A; MANUAL_SATELLITE_REVIEW and TRUSTED_EXTERNAL may be A/B; FIRMS_SUPPORTED_WEAK_LABEL is C; SYNTHETIC_TEST is S only. Every record also requires confidence, reviewer, notes, observation time, and creation time. Default training uses A/B labels only. Weak C and synthetic S labels are excluded by default.
 
 The rule status engine emits `status_candidate`, evidence strings, and a qualitative confidence band; it sets `is_ground_truth=false`. Straw values are preliminary tonnes with configurable input assumptions and a non-statistical scenario range. The burn-risk fallback is a weighted normalized score tagged `NORMALIZED_RULE_SCORE_NOT_PROBABILITY`; missing risk inputs remain absent and component availability is reported. No current data support a real status model, straw calibration, or burn-risk probability.
+
+## Real-data quality and fire-context columns (`real_field_features.parquet`)
+
+Built by `scripts/build_real_products.py`; see `reports/real_data_audit.md`.
+
+| Column | Meaning |
+|---|---|
+| `BAIS2_quality` | `OK` or `UNSTABLE_PIXEL_ARTEFACT` when the pixel-mean BAIS2 differs from BAIS2 of the band means by more than 0.25 (a near-zero red pixel dominates). Unstable values are removed from `BAIS2`/`BAIS2_mean`. |
+| `BAIS2_from_band_means`, `BAIS2_pixel_vs_band_mean_abs_diff`, `BAIS2_pixel_mean_raw` | Recomputation used for the flag and the original stored pixel mean (provenance only). |
+| `weather_grid_distance_km` | Distance from field centroid to the nearest acquired ERA5 grid point. Reanalysis is not a field measurement. |
+| `weather_available` | True only when a published reanalysis hour no more than 24 h before acquisition supplied non-null values. |
+| `firms_coverage_status`, `firms_window_covered_days` | `COMPLETE`/`PARTIAL`/`NOT_COVERED` coverage of the 30-day look-back by the acquired FIRMS/UMD archive. |
+| `firms_viirs_detections_near_field`, `firms_modis_detections_near_field`, `firms_nearest_detection_km`, `firms_latest_detection_datetime` | Active-fire detections (type 0 or NRT) within 1 km of the centroid, timestamped at or before acquisition. Null when the window is not covered; a `PARTIAL` zero is not evidence of no fire. Proximity context, not attribution. |
+| `modis_ba_coverage_status`, `modis_ba_burned_pixels_near_field`, `modis_ba_latest_burn_date`, `modis_ba_availability` | MCD64A1 500 m burned pixels within 500 m with burn day in the 30 days before the acquisition day. Retrospective product, not knowable at acquisition time. |
+
+Weak labels (`real_weak_labels.parquet`) carry `evidence_window_start`, `evidence_window_days`, `temporal_gap_category` and `is_ground_truth=False`. A transition label means the change happened somewhere in the window; with a `LARGE` window the state on the labelled date is ambiguous. The app shows them as a `RULE-BASED STATUS CANDIDATE`.

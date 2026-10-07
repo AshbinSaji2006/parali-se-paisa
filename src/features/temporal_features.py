@@ -198,13 +198,18 @@ def build_temporal_rows(rows, settings=None):
         "rows_without_compatible_radar_history": sum(r["radar_temporal_comparison_available"] is False for r in output),
         "large_gap_count": sum(r["temporal_gap_category"] == "LARGE" for r in output),
         "duplicate_timestamp_rows": duplicate_count,
-        "synthetic_rows": sum(r.get("fixture_or_real") == "SYNTHETIC" for r in output), "real_rows": sum(r.get("fixture_or_real") == "REAL" for r in output),
+        "synthetic_rows": sum(_provenance(r) == "SYNTHETIC" for r in output), "real_rows": sum(_provenance(r) == "REAL" for r in output),
         "nan_rate": {c: sum(r.get(c) is None for r in output) / len(output) if output else 0 for c in ("NDVI_prev", "NDVI_delta", "peak_NDVI_so_far", "NDVI_rolling_mean_3", "NDVI_slope_last_3", "VV_delta_db")},
         "leakage_test_status": "automated prefix-invariance tests are in tests/test_temporal_features.py; run pytest to execute", "warnings": warnings,
         "temporal_policy": "Within field_id+season+year; sort UTC; exclude POOR or zero-valid-pixel rows from future history; LIMITED rows are eligible; same-time duplicates are retained and see only strictly earlier timestamps.",
         "omitted_history": ["FIRMS event count histories are omitted because the C table has only as-of window summaries, not event-level detections.", "Weather rolling histories are omitted because the C table has only observation-level aggregates, not daily record histories."],
     }
     return output, report
+
+
+def _provenance(row):
+    # Fixture rows use fixture_or_real; acquired real tables use real_or_synthetic.
+    return row.get("fixture_or_real") or row.get("real_or_synthetic")
 
 
 def _median(values):

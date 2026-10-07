@@ -18,7 +18,7 @@
   "large_gap_count": 1040,
   "duplicate_timestamp_rows": 0,
   "synthetic_rows": 0,
-  "real_rows": 0,
+  "real_rows": 3640,
   "nan_rate": {
     "NDVI_prev": 0.5714285714285714,
     "NDVI_delta": 0.5714285714285714,
