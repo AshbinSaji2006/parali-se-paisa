@@ -1,0 +1,82 @@
+{
+  "input": "D:\\PROJECTS\\GREENOVATORS\\data\\raw\\fields\\fields.geojson",
+  "output": "D:\\PROJECTS\\GREENOVATORS\\data\\processed\\fields\\fields_clean.geojson",
+  "dataset_type": "DEMO",
+  "input_features": 7,
+  "valid_features": 4,
+  "skipped_features": 3,
+  "repaired_features": 1,
+  "duplicate_warnings": 1,
+  "overlap_warnings": [
+    {
+      "field_id_a": "DEMO-MUK-0001",
+      "field_id_b": "DEMO-MUK-0002",
+      "overlap_area_m2": 10685.47693568459
+    }
+  ],
+  "findings": [
+    {
+      "feature_index": 0,
+      "field_id": "DEMO-MUK-0001",
+      "issues": [],
+      "warnings": [],
+      "repaired": false
+    },
+    {
+      "feature_index": 1,
+      "field_id": "DEMO-MUK-0002",
+      "issues": [],
+      "warnings": [],
+      "repaired": false
+    },
+    {
+      "feature_index": 2,
+      "field_id": "DEMO-MUK-0003",
+      "issues": [],
+      "warnings": [],
+      "repaired": false
+    },
+    {
+      "feature_index": 3,
+      "field_id": "DEMO-MUK-DUP",
+      "issues": [
+        "duplicate_geometry"
+      ],
+      "warnings": [],
+      "repaired": false
+    },
+    {
+      "feature_index": 4,
+      "field_id": "DEMO-MUK-BOWTIE",
+      "issues": [],
+      "warnings": [
+        "geometry_repaired_make_valid"
+      ],
+      "repaired": true
+    },
+    {
+      "feature_index": 5,
+      "field_id": "DEMO-MUK-TINY",
+      "issues": [
+        "area_below_minimum"
+      ],
+      "warnings": [],
+      "repaired": false
+    },
+    {
+      "feature_index": 6,
+      "field_id": "DEMO-MUK-EMPTY",
+      "issues": [
+        "empty_geometry"
+      ],
+      "warnings": [],
+      "repaired": false
+    }
+  ],
+  "area_crs": "EPSG:32643",
+  "output_crs": "EPSG:4326",
+  "area_range_ha": [
+    2.13710153296937,
+    4.274212366226955
+  ]
+}

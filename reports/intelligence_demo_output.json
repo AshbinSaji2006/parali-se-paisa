@@ -1,0 +1,242 @@
+[
+  {
+    "field_id": "DEMO-MUK-0001",
+    "field_status": {
+      "status_candidate": "STANDING",
+      "method": "RULE-BASED STATUS CANDIDATE",
+      "evidence": [
+        "Recent FIRMS context is present; it is supporting evidence only",
+        "Relatively high NDVI without a large observed drop"
+      ],
+      "confidence_band": "LOW",
+      "is_ground_truth": false,
+      "model_trust_state": "NO_MODEL"
+    },
+    "straw": {
+      "eligible": false,
+      "status": "NOT_ELIGIBLE",
+      "reason": "Status is not harvested",
+      "is_ground_truth": false
+    },
+    "burn_risk": {
+      "status": "NOT_APPLICABLE_INSUFFICIENT_HARVEST_EVIDENCE",
+      "risk_score": null,
+      "method": "RULE_ENGINE_V1",
+      "score_kind": "NORMALIZED_RULE_SCORE_NOT_PROBABILITY",
+      "is_ground_truth": false
+    },
+    "provenance": {
+      "season": "kharif",
+      "year": "2026",
+      "observation_datetime": "2026-10-03T06:00:00+00:00",
+      "source_image_id_s2": "SYNTH-S2-A1",
+      "source_image_id_s1": "SYNTH-S1-A1",
+      "fixture_or_real": "SYNTHETIC",
+      "processing_version": "0.1.0",
+      "feature_schema_version": "1.0",
+      "status_source": "RULE-BASED STATUS CANDIDATE",
+      "model_trust_state": "NO_MODEL"
+    }
+  },
+  {
+    "field_id": "DEMO-MUK-0001",
+    "field_status": {
+      "status_candidate": "BURNT",
+      "method": "RULE-BASED STATUS CANDIDATE",
+      "evidence": [
+        "Large NDVI decline from the observed peak",
+        "Sharp negative NDVI change",
+        "NBR decreased",
+        "BAIS2 increased"
+      ],
+      "confidence_band": "MODERATE",
+      "is_ground_truth": false,
+      "model_trust_state": "NO_MODEL"
+    },
+    "straw": {
+      "eligible": false,
+      "status": "NOT_ELIGIBLE",
+      "reason": "Status is not harvested",
+      "is_ground_truth": false
+    },
+    "burn_risk": {
+      "status": "NOT_APPLICABLE_INSUFFICIENT_HARVEST_EVIDENCE",
+      "risk_score": null,
+      "method": "RULE_ENGINE_V1",
+      "score_kind": "NORMALIZED_RULE_SCORE_NOT_PROBABILITY",
+      "is_ground_truth": false
+    },
+    "provenance": {
+      "season": "kharif",
+      "year": "2026",
+      "observation_datetime": "2026-10-08T06:00:00+00:00",
+      "source_image_id_s2": "SYNTH-S2-A2",
+      "source_image_id_s1": "SYNTH-S1-A2",
+      "fixture_or_real": "SYNTHETIC",
+      "processing_version": "0.1.0",
+      "feature_schema_version": "1.0",
+      "status_source": "RULE-BASED STATUS CANDIDATE",
+      "model_trust_state": "NO_MODEL"
+    }
+  },
+  {
+    "field_id": "DEMO-MUK-0002",
+    "field_status": {
+      "status_candidate": null,
+      "method": "RULE-BASED STATUS CANDIDATE",
+      "evidence": [
+        "Recent FIRMS context is present; it is supporting evidence only",
+        "Evidence is insufficient for a descriptive status candidate"
+      ],
+      "confidence_band": "LOW",
+      "is_ground_truth": false,
+      "model_trust_state": "NO_MODEL"
+    },
+    "straw": {
+      "eligible": false,
+      "status": "NOT_ELIGIBLE",
+      "reason": "Status is not harvested",
+      "is_ground_truth": false
+    },
+    "burn_risk": {
+      "status": "NOT_APPLICABLE_INSUFFICIENT_HARVEST_EVIDENCE",
+      "risk_score": null,
+      "method": "RULE_ENGINE_V1",
+      "score_kind": "NORMALIZED_RULE_SCORE_NOT_PROBABILITY",
+      "is_ground_truth": false
+    },
+    "provenance": {
+      "season": "kharif",
+      "year": "2026",
+      "observation_datetime": "2026-10-04T06:00:00+00:00",
+      "source_image_id_s2": "SYNTH-S2-B1",
+      "source_image_id_s1": "SYNTH-S1-B1",
+      "fixture_or_real": "SYNTHETIC",
+      "processing_version": "0.1.0",
+      "feature_schema_version": "1.0",
+      "status_source": "RULE-BASED STATUS CANDIDATE",
+      "model_trust_state": "NO_MODEL"
+    }
+  },
+  {
+    "field_id": "DEMO-MUK-0002",
+    "field_status": {
+      "status_candidate": "BURNT",
+      "method": "RULE-BASED STATUS CANDIDATE",
+      "evidence": [
+        "Large NDVI decline from the observed peak",
+        "Sharp negative NDVI change",
+        "NBR decreased",
+        "BAIS2 increased",
+        "Recent FIRMS context is present; it is supporting evidence only"
+      ],
+      "confidence_band": "MODERATE",
+      "is_ground_truth": false,
+      "model_trust_state": "NO_MODEL"
+    },
+    "straw": {
+      "eligible": false,
+      "status": "NOT_ELIGIBLE",
+      "reason": "Status is not harvested",
+      "is_ground_truth": false
+    },
+    "burn_risk": {
+      "status": "NOT_APPLICABLE_INSUFFICIENT_HARVEST_EVIDENCE",
+      "risk_score": null,
+      "method": "RULE_ENGINE_V1",
+      "score_kind": "NORMALIZED_RULE_SCORE_NOT_PROBABILITY",
+      "is_ground_truth": false
+    },
+    "provenance": {
+      "season": "kharif",
+      "year": "2026",
+      "observation_datetime": "2026-10-09T06:00:00+00:00",
+      "source_image_id_s2": "SYNTH-S2-B2",
+      "source_image_id_s1": "SYNTH-S1-B1",
+      "fixture_or_real": "SYNTHETIC",
+      "processing_version": "0.1.0",
+      "feature_schema_version": "1.0",
+      "status_source": "RULE-BASED STATUS CANDIDATE",
+      "model_trust_state": "NO_MODEL"
+    }
+  },
+  {
+    "field_id": "DEMO-MUK-0003",
+    "field_status": {
+      "status_candidate": null,
+      "method": "RULE-BASED STATUS CANDIDATE",
+      "evidence": [
+        "Recent FIRMS context is present; it is supporting evidence only",
+        "Evidence is insufficient for a descriptive status candidate"
+      ],
+      "confidence_band": "LOW",
+      "is_ground_truth": false,
+      "model_trust_state": "NO_MODEL"
+    },
+    "straw": {
+      "eligible": false,
+      "status": "NOT_ELIGIBLE",
+      "reason": "Status is not harvested",
+      "is_ground_truth": false
+    },
+    "burn_risk": {
+      "status": "NOT_APPLICABLE_INSUFFICIENT_HARVEST_EVIDENCE",
+      "risk_score": null,
+      "method": "RULE_ENGINE_V1",
+      "score_kind": "NORMALIZED_RULE_SCORE_NOT_PROBABILITY",
+      "is_ground_truth": false
+    },
+    "provenance": {
+      "season": "kharif",
+      "year": "2026",
+      "observation_datetime": "2026-10-05T06:00:00+00:00",
+      "source_image_id_s2": "SYNTH-S2-C1",
+      "source_image_id_s1": "",
+      "fixture_or_real": "SYNTHETIC",
+      "processing_version": "0.1.0",
+      "feature_schema_version": "1.0",
+      "status_source": "RULE-BASED STATUS CANDIDATE",
+      "model_trust_state": "NO_MODEL"
+    }
+  },
+  {
+    "field_id": "DEMO-MUK-0003",
+    "field_status": {
+      "status_candidate": "BURNT",
+      "method": "RULE-BASED STATUS CANDIDATE",
+      "evidence": [
+        "Sharp negative NDVI change",
+        "NBR decreased",
+        "BAIS2 increased"
+      ],
+      "confidence_band": "MODERATE",
+      "is_ground_truth": false,
+      "model_trust_state": "NO_MODEL"
+    },
+    "straw": {
+      "eligible": false,
+      "status": "NOT_ELIGIBLE",
+      "reason": "Status is not harvested",
+      "is_ground_truth": false
+    },
+    "burn_risk": {
+      "status": "NOT_APPLICABLE_INSUFFICIENT_HARVEST_EVIDENCE",
+      "risk_score": null,
+      "method": "RULE_ENGINE_V1",
+      "score_kind": "NORMALIZED_RULE_SCORE_NOT_PROBABILITY",
+      "is_ground_truth": false
+    },
+    "provenance": {
+      "season": "kharif",
+      "year": "2026",
+      "observation_datetime": "2026-10-10T06:00:00+00:00",
+      "source_image_id_s2": "SYNTH-S2-C2",
+      "source_image_id_s1": "",
+      "fixture_or_real": "SYNTHETIC",
+      "processing_version": "0.1.0",
+      "feature_schema_version": "1.0",
+      "status_source": "RULE-BASED STATUS CANDIDATE",
+      "model_trust_state": "NO_MODEL"
+    }
+  }
+]

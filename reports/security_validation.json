@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "backend_suite": {"passed": 197, "failed": 0, "skipped": 1, "warnings": 3},
+  "authentication": {"status": "PASS", "password_hash": "Argon2id", "jwt_expiry_and_invalid_token": "covered", "invalid_login": "401"},
+  "authorization": {"status": "PASS", "unauthenticated_access": "401", "farmer_dispatch_denial": "403", "buyer_scope": "covered", "operator_scope": "covered"},
+  "ownership": {"status": "PASS", "farmer_field_scope": "covered", "foreign_field_hidden": "404", "pickup_field_scope": "covered"},
+  "live_mode_isolation": {"status": "PASS", "synthetic_rows_filtered": true, "demo_login_rejected": true, "operational_write_blocked": true},
+  "duplicate_dispatch": {"status": "PASS", "active_reassignment_blocked": true, "cancelled_assignment_releasable": true},
+  "reset_safety": {"status": "PASS", "real_row_preserved": true, "repeated_demo_reset": true},
+  "known_limitations": ["No live satellite/provider credentials or verified provider feed.", "PostgreSQL was not available for service-level verification.", "Prototype certificate checksum covers stored metadata; it is not a digital signature or PDF-file hash."]
+}

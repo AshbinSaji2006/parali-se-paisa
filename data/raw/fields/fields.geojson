@@ -1,0 +1,14 @@
+{
+  "type": "FeatureCollection",
+  "name": "synthetic_demo_fields_not_real_boundaries",
+  "metadata": {"dataset_type": "DEMO", "warning": "DEMO / SYNTHETIC / NOT REAL AGRICULTURAL BOUNDARIES. Replace with verified field polygons before operational use."},
+  "features": [
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-0001","village":"DEMO locality","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[[[74.52,30.02],[74.522,30.02],[74.522,30.022],[74.52,30.022],[74.52,30.02]]] }},
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-0002","village":"DEMO locality","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[[[74.521,30.021],[74.523,30.021],[74.523,30.023],[74.521,30.023],[74.521,30.021]]] }},
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-0003","village":"DEMO locality","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[[[74.525,30.02],[74.527,30.02],[74.527,30.022],[74.525,30.022],[74.525,30.02]]] }},
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-DUP","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[[[74.52,30.02],[74.522,30.02],[74.522,30.022],[74.52,30.022],[74.52,30.02]]] }},
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-BOWTIE","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[[[74.53,30.02],[74.532,30.022],[74.53,30.022],[74.532,30.02],[74.53,30.02]]] }},
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-TINY","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[[[74.54,30.02],[74.540001,30.02],[74.540001,30.020001],[74.54,30.020001],[74.54,30.02]]] }},
+    {"type":"Feature","properties":{"field_id":"DEMO-MUK-EMPTY","source":"synthetic_demo_fixture"},"geometry":{"type":"Polygon","coordinates":[]} }
+  ]
+}

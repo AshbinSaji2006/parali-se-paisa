@@ -1,0 +1,214 @@
+{
+  "type": "FeatureCollection",
+  "name": "fields_clean",
+  "metadata": {
+    "dataset_type": "DEMO",
+    "source": "D:\\PROJECTS\\GREENOVATORS\\data\\raw\\fields\\fields.geojson",
+    "warning": "DEMO / SYNTHETIC / NOT REAL AGRICULTURAL BOUNDARIES. Replace with verified field polygons before operational use.",
+    "coordinate_reference_system": "EPSG:4326 (RFC 7946)"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "field_id": "DEMO-MUK-0001",
+        "village": "DEMO locality",
+        "source": "synthetic_demo_fixture",
+        "farmer_id": null,
+        "district": "Sri Muktsar Sahib",
+        "centroid_lat": 30.021000000530414,
+        "centroid_lon": 74.52099999998097,
+        "area_m2": 42742.12366226955,
+        "area_ha": 4.274212366226955,
+        "crop": null,
+        "season": "kharif",
+        "created_at": "2026-10-06T17:57:35.339418+00:00",
+        "data_status": "DEMO_SYNTHETIC",
+        "geometry_repaired": false
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.52,
+              30.02
+            ],
+            [
+              74.522,
+              30.02
+            ],
+            [
+              74.522,
+              30.022
+            ],
+            [
+              74.52,
+              30.022
+            ],
+            [
+              74.52,
+              30.02
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_id": "DEMO-MUK-0002",
+        "village": "DEMO locality",
+        "source": "synthetic_demo_fixture",
+        "farmer_id": null,
+        "district": "Sri Muktsar Sahib",
+        "centroid_lat": 30.022000000530355,
+        "centroid_lon": 74.52199999998102,
+        "area_m2": 42741.69182740246,
+        "area_ha": 4.274169182740246,
+        "crop": null,
+        "season": "kharif",
+        "created_at": "2026-10-06T17:57:35.340339+00:00",
+        "data_status": "DEMO_SYNTHETIC",
+        "geometry_repaired": false
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.521,
+              30.021
+            ],
+            [
+              74.523,
+              30.021
+            ],
+            [
+              74.523,
+              30.023
+            ],
+            [
+              74.521,
+              30.023
+            ],
+            [
+              74.521,
+              30.021
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_id": "DEMO-MUK-0003",
+        "village": "DEMO locality",
+        "source": "synthetic_demo_fixture",
+        "farmer_id": null,
+        "district": "Sri Muktsar Sahib",
+        "centroid_lat": 30.021000000530414,
+        "centroid_lon": 74.52599999998118,
+        "area_m2": 42742.07691648181,
+        "area_ha": 4.274207691648181,
+        "crop": null,
+        "season": "kharif",
+        "created_at": "2026-10-06T17:57:35.341350+00:00",
+        "data_status": "DEMO_SYNTHETIC",
+        "geometry_repaired": false
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              74.525,
+              30.02
+            ],
+            [
+              74.527,
+              30.02
+            ],
+            [
+              74.527,
+              30.022
+            ],
+            [
+              74.525,
+              30.022
+            ],
+            [
+              74.525,
+              30.02
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "field_id": "DEMO-MUK-BOWTIE",
+        "source": "synthetic_demo_fixture",
+        "farmer_id": null,
+        "district": "Sri Muktsar Sahib",
+        "village": null,
+        "centroid_lat": 30.020999998477226,
+        "centroid_lon": 74.5310000000115,
+        "area_m2": 21371.0153296937,
+        "area_ha": 2.13710153296937,
+        "crop": null,
+        "season": "kharif",
+        "created_at": "2026-10-06T17:57:35.343343+00:00",
+        "data_status": "DEMO_SYNTHETIC",
+        "geometry_repaired": true
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                74.532,
+                30.02
+              ],
+              [
+                74.53,
+                30.02
+              ],
+              [
+                74.531,
+                30.021
+              ],
+              [
+                74.532,
+                30.02
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                74.532,
+                30.022
+              ],
+              [
+                74.531,
+                30.021
+              ],
+              [
+                74.53,
+                30.022
+              ],
+              [
+                74.532,
+                30.022
+              ]
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

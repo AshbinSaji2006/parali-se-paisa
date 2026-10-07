@@ -1,0 +1,33 @@
+{
+  "records_loaded": 2,
+  "records_rejected": [],
+  "records": [
+    {
+      "timestamp": "2026-10-02T00:00",
+      "date": "2026-10-02",
+      "temperature_c": null,
+      "humidity_pct": null,
+      "precipitation_mm": null,
+      "wind_speed": null,
+      "source": "DEMO_SYNTHETIC_FIXTURE",
+      "record_type": "demo_synthetic"
+    },
+    {
+      "timestamp": "2026-10-02T01:00",
+      "date": "2026-10-02",
+      "temperature_c": null,
+      "humidity_pct": null,
+      "precipitation_mm": null,
+      "wind_speed": null,
+      "source": "DEMO_SYNTHETIC_FIXTURE",
+      "record_type": "demo_synthetic"
+    }
+  ],
+  "variables": [
+    "temperature_2m",
+    "relative_humidity_2m",
+    "precipitation",
+    "wind_speed_10m"
+  ],
+  "dataset_type": "DEMO"
+}

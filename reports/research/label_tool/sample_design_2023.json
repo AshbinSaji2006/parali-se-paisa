@@ -1,0 +1,11 @@
+{
+ "year": 2023,
+ "population_by_stratum": {
+  "rule_burn_strict": 4829,
+  "rule_burn_loose_only": 7683,
+  "rule_no_burn": 96090
+ },
+ "n_per_stratum": 40,
+ "seed": 7,
+ "items": 120
+}

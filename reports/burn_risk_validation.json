@@ -1,0 +1,37 @@
+{
+  "status": "RULE_ENGINE_IMPLEMENTED_TRAINED_MODEL_UNAVAILABLE",
+  "target": "burned_within_next_3_days",
+  "real_outcome_labels": 0,
+  "rule_method": "weighted, available-component-normalized deterministic score",
+  "score_is_probability": false,
+  "configuration": {
+    "target": "burned_within_next_3_days",
+    "rule_engine_version": "RULE_ENGINE_V1",
+    "weights": {
+      "time_pressure": 0.25,
+      "dry_weather": 0.2,
+      "forecast_dryness": 0.15,
+      "low_humidity": 0.1,
+      "historical_burn_tendency": 0.15,
+      "baler_access": 0.05,
+      "buyer_access": 0.02,
+      "straw_volume": 0.04,
+      "nearby_fire_activity": 0.04
+    },
+    "thresholds": {
+      "days_to_deadline": 10,
+      "rain_72h_mm_for_wet": 12,
+      "forecast_rain_72h_mm_for_wet": 12,
+      "baler_distance_m_for_max": 20000,
+      "buyer_distance_m_for_max": 50000,
+      "straw_tonnes_for_max": 20
+    },
+    "levels": {
+      "LOW": 0.25,
+      "MEDIUM": 0.5,
+      "HIGH": 0.75
+    }
+  },
+  "forecast_inputs_used_by_fixture": false,
+  "unavailable_inputs_are_missing_not_zero": true
+}

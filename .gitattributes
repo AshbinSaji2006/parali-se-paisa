@@ -1,0 +1,6 @@
+data/real/derived/timeseries/hazard_panel_2025.parquet filter=lfs diff=lfs merge=lfs -text
+data/real/derived/timeseries/risk_features_2024.parquet filter=lfs diff=lfs merge=lfs -text
+data/real/derived/timeseries/risk_features_2025.parquet filter=lfs diff=lfs merge=lfs -text
+data/real/derived/research/paddy_mask_s1_2025.parquet filter=lfs diff=lfs merge=lfs -text
+data/real/fields/fields_of_the_world_muktsar.parquet filter=lfs diff=lfs merge=lfs -text
+data/real/derived/timeseries/hazard_panel_2024.parquet filter=lfs diff=lfs merge=lfs -text

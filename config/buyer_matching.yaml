@@ -1,0 +1,9 @@
+scoring:
+  compatibility_weight: 50
+  demand_fit_weight: 25
+  distance_weight: 25
+  maximum_distance_km: 250
+  price_weight: 0 # Disabled until verified real prices have a common reference basis.
+allocation:
+  keep_whole_field_together: true
+  oversubscription_tolerance_tonnes: 0.000001

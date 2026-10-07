@@ -1,0 +1,286 @@
+{
+  "status": "NO_MODEL",
+  "trust_state": "NO_MODEL",
+  "eligible_real_label_rows": 0,
+  "excluded_labels": [],
+  "message": "No eligible A/B real labels. No model was trained and no project metrics are available.",
+  "synthetic_pipeline_test_only": {
+    "metric_heading": "PIPELINE TEST METRICS \u2014 SYNTHETIC PIPELINE TEST ONLY \u2014 NOT A SCIENTIFIC PERFORMANCE RESULT",
+    "metrics": {
+      "random_forest": {
+        "validation": {
+          "accuracy": 1.0,
+          "macro_precision": 1.0,
+          "macro_recall": 1.0,
+          "macro_f1": 1.0,
+          "weighted_f1": 1.0,
+          "per_class": {
+            "STANDING": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "HARVESTED": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "BURNT": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "SOWN": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            }
+          },
+          "harvested_recall": 1.0,
+          "burnt_recall": 1.0,
+          "confusion_matrix_labels": [
+            "STANDING",
+            "HARVESTED",
+            "BURNT",
+            "SOWN"
+          ],
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              3
+            ]
+          ]
+        },
+        "test": {
+          "accuracy": 1.0,
+          "macro_precision": 1.0,
+          "macro_recall": 1.0,
+          "macro_f1": 1.0,
+          "weighted_f1": 1.0,
+          "per_class": {
+            "STANDING": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "HARVESTED": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "BURNT": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "SOWN": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            }
+          },
+          "harvested_recall": 1.0,
+          "burnt_recall": 1.0,
+          "confusion_matrix_labels": [
+            "STANDING",
+            "HARVESTED",
+            "BURNT",
+            "SOWN"
+          ],
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              3
+            ]
+          ]
+        }
+      },
+      "gradient_boosting": {
+        "validation": {
+          "accuracy": 1.0,
+          "macro_precision": 1.0,
+          "macro_recall": 1.0,
+          "macro_f1": 1.0,
+          "weighted_f1": 1.0,
+          "per_class": {
+            "STANDING": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "HARVESTED": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "BURNT": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "SOWN": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            }
+          },
+          "harvested_recall": 1.0,
+          "burnt_recall": 1.0,
+          "confusion_matrix_labels": [
+            "STANDING",
+            "HARVESTED",
+            "BURNT",
+            "SOWN"
+          ],
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              3
+            ]
+          ]
+        },
+        "test": {
+          "accuracy": 1.0,
+          "macro_precision": 1.0,
+          "macro_recall": 1.0,
+          "macro_f1": 1.0,
+          "weighted_f1": 1.0,
+          "per_class": {
+            "STANDING": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "HARVESTED": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "BURNT": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            },
+            "SOWN": {
+              "precision": 1.0,
+              "recall": 1.0,
+              "f1-score": 1.0,
+              "support": 3.0
+            }
+          },
+          "harvested_recall": 1.0,
+          "burnt_recall": 1.0,
+          "confusion_matrix_labels": [
+            "STANDING",
+            "HARVESTED",
+            "BURNT",
+            "SOWN"
+          ],
+          "confusion_matrix": [
+            [
+              3,
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              3,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              3,
+              0
+            ],
+            [
+              0,
+              0,
+              0,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    "model_path": "models\\field_status\\synthetic_test\\models.pkl",
+    "metadata_path": "models\\field_status\\synthetic_test\\metadata.json"
+  }
+}

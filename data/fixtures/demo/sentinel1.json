@@ -1,0 +1,7 @@
+{
+  "dataset_type": "DEMO",
+  "warning": "SYNTHETIC DEMO METADATA ONLY; not returned by Sentinel-1.",
+  "images_queried": 1,
+  "images_accepted": [{"source_image_id":"DEMO-S1-001","acquisition_datetime":"2026-10-03T00:10:00+00:00","sensor":"Sentinel-1","collection":"DEMO_FIXTURE","orbit_pass":"ASCENDING","relative_orbit_number":42,"instrument_mode":"IW","polarizations":["VV"],"has_vv":true,"has_vh":false,"processing_source":"synthetic fixture"}],
+  "warnings": ["Metadata fixture only; contains no radar measurements."]
+}

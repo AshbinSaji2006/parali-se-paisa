@@ -1,0 +1,133 @@
+{
+ "crs_source": "EPSG:32643",
+ "overlays": [
+  {
+   "name": "burn_2023",
+   "png": "burn_2023.png",
+   "bounds": [
+    [
+     29.89578223980405,
+     74.24462192022769
+    ],
+    [
+     30.67358223980405,
+     74.83062192022768
+    ]
+   ],
+   "width": 2930,
+   "height": 3889,
+   "year": 2023,
+   "kind": "burn_tier",
+   "legend": [
+    [
+     "Char-confirmed burn (strict)",
+     "#d03b3b"
+    ],
+    [
+     "Burn candidate (loose)",
+     "#ec835a"
+    ],
+    [
+     "Crop field, no burn candidate",
+     "#c3c2b7"
+    ]
+   ]
+  },
+  {
+   "name": "burn_2024",
+   "png": "burn_2024.png",
+   "bounds": [
+    [
+     29.89578223980405,
+     74.24462192022769
+    ],
+    [
+     30.67358223980405,
+     74.83062192022768
+    ]
+   ],
+   "width": 2930,
+   "height": 3889,
+   "year": 2024,
+   "kind": "burn_tier",
+   "legend": [
+    [
+     "Char-confirmed burn (strict)",
+     "#d03b3b"
+    ],
+    [
+     "Burn candidate (loose)",
+     "#ec835a"
+    ],
+    [
+     "Crop field, no burn candidate",
+     "#c3c2b7"
+    ]
+   ]
+  },
+  {
+   "name": "burn_2025",
+   "png": "burn_2025.png",
+   "bounds": [
+    [
+     29.89578223980405,
+     74.24462192022769
+    ],
+    [
+     30.67358223980405,
+     74.83062192022768
+    ]
+   ],
+   "width": 2930,
+   "height": 3889,
+   "year": 2025,
+   "kind": "burn_tier",
+   "legend": [
+    [
+     "Char-confirmed burn (strict)",
+     "#d03b3b"
+    ],
+    [
+     "Burn candidate (loose)",
+     "#ec835a"
+    ],
+    [
+     "Crop field, no burn candidate",
+     "#c3c2b7"
+    ]
+   ]
+  },
+  {
+   "name": "risk_2026",
+   "png": "risk_2026.png",
+   "bounds": [
+    [
+     29.89578223980405,
+     74.24462192022769
+    ],
+    [
+     30.67358223980405,
+     74.83062192022768
+    ]
+   ],
+   "width": 2930,
+   "height": 3889,
+   "year": 2026,
+   "kind": "risk_decile",
+   "legend": [
+    [
+     "Decile 10 (highest relative risk)",
+     "#0d366b"
+    ],
+    [
+     "Decile 6",
+     "#5598e7"
+    ],
+    [
+     "Decile 1 (lowest)",
+     "#cde2fb"
+    ]
+   ]
+  }
+ ]
+}

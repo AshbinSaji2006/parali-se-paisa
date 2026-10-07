@@ -1,0 +1,74 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+**/credentials*.json
+**/service-account*.json
+*.pem
+*.key
+
+# Python environments, caches, and packaging
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+*.egg-info/
+.eggs/
+
+# Node dependencies, builds, and test artifacts
+node_modules/
+frontend/dist/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+frontend/playwright-report/
+frontend/test-results/
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# Editors and operating-system files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs, temporary files, local databases, and demo runtime state
+*.log
+logs/
+*.tmp
+tmp/
+temp/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.sqlite-*
+*.sqlite3-*
+.demo/
+data/tmp/
+data/processed/certificates/
+
+# Reproducible bulk data. Scene JSON sidecars remain versioned.
+data/real/s2_stack/**/*.tif
+data/real/s1_stack/**/*.tif
+data/real/firms/raw/
+data/real/firms/monthly_cache/
+data/real/derived/timeseries/field_timeseries_*.parquet
+data/real/derived/timeseries/field_zones.npy
+data/real/fields/fields_of_the_world_muktsar.geojson
+data/real/cache/
+
+# Regenerable deck-rendering crops and slide-review screenshots
+reports/pitch/preview/
+reports/pitch/_*_crop.png

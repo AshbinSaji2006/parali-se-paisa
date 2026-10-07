@@ -1,0 +1,26 @@
+{
+  "points_loaded": 1,
+  "points_rejected": [
+    {
+      "row": 3,
+      "reason": "malformed_or_missing_required_value"
+    }
+  ],
+  "points": [
+    {
+      "latitude": 30.02,
+      "longitude": 74.52,
+      "acquisition_date": "2026-10-03",
+      "acquisition_time": "0512",
+      "acquisition_datetime": "2026-10-03T05:12:00+00:00",
+      "confidence": "nominal",
+      "satellite": "NOAA-20",
+      "instrument": "VIIRS",
+      "frp": 2.4,
+      "source": "DEMO_SYNTHETIC_FIXTURE"
+    }
+  ],
+  "fixture": true,
+  "dataset_type": "DEMO",
+  "cache_hit": true
+}

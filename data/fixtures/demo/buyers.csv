@@ -1,0 +1,3 @@
+buyer_id,name,buyer_type,latitude,longitude,accepted_residue_types,daily_demand_tonnes,remaining_demand_tonnes,max_moisture_pct,price_per_tonne,price_is_verified,operating_start,operating_end,status,demo_or_real,source
+DEMO-BUYER-01,DEMO Biomass Buyer A,BIOMASS_POWER,30.04,74.55,PADDY_STRAW,40,40,25,,false,06:00,20:00,AVAILABLE,DEMO,synthetic_demo_fixture
+DEMO-BUYER-02,DEMO Biomass Buyer B,PELLET,30.005,74.50,PADDY_STRAW,30,30,20,,false,06:00,20:00,AVAILABLE,DEMO,synthetic_demo_fixture

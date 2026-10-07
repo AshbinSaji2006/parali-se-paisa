@@ -1,0 +1,10 @@
+{
+  "command": "python -m pytest -q",
+  "passed": 193,
+  "failed": 0,
+  "skipped": 1,
+  "status": "PASS",
+  "scope": "Full offline repository suite; one external Earth Engine integration check skipped because it requires credentials/network access.",
+  "observed_warnings": 3,
+  "warning_source": "OR-Tools SWIG type deprecation warnings; no test failures."
+}

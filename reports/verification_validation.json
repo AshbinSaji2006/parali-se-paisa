@@ -1,0 +1,16 @@
+{
+  "provenance": "SYNTHETIC_FIXTURES_ONLY",
+  "no_burn_state": "NO_BURN_VERIFIED",
+  "no_burn_certificate_generated": true,
+  "certificate_id": "PARALI-DEMO-67c5ed71-f4b6-4431-bcc8-b16d2bdf4ca8",
+  "certificate_pdf": "D:\\PROJECTS\\GREENOVATORS\\data\\processed\\certificates\\PARALI-DEMO-67c5ed71-f4b6-4431-bcc8-b16d2bdf4ca8.pdf",
+  "certificate_qr": "D:\\PROJECTS\\GREENOVATORS\\data\\processed\\certificates\\PARALI-DEMO-67c5ed71-f4b6-4431-bcc8-b16d2bdf4ca8.png",
+  "certificate_sha256": "2882b08c3512ca0c8ef006c6d25e0e34f44a7a4add6c5343419024ac2994e2a4",
+  "prototype_disclaimer": "PROTOTYPE / DEMONSTRATION CERTIFICATE \u2014 NOT OFFICIAL GOVERNMENT CERTIFICATE",
+  "burn_state": "BURN_SIGNAL_DETECTED",
+  "burn_certificate_blocked": true,
+  "unclear_state": "MANUAL_REVIEW_REQUIRED",
+  "insufficient_state_at_deadline": "INSUFFICIENT_EVIDENCE",
+  "firms_alone_policy": "UNCLEAR / MANUAL REVIEW; never a burn finding",
+  "absence_of_firms_policy": "NOT evidence that burning did not occur"
+}

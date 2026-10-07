@@ -1,0 +1,23 @@
+target: burned_within_next_3_days
+rule_engine_version: RULE_ENGINE_V1
+weights:
+  time_pressure: 0.25
+  dry_weather: 0.20
+  forecast_dryness: 0.15
+  low_humidity: 0.10
+  historical_burn_tendency: 0.15
+  baler_access: 0.05
+  buyer_access: 0.02
+  straw_volume: 0.04
+  nearby_fire_activity: 0.04
+thresholds:
+  days_to_deadline: 10
+  rain_72h_mm_for_wet: 12
+  forecast_rain_72h_mm_for_wet: 12
+  baler_distance_m_for_max: 20000
+  buyer_distance_m_for_max: 50000
+  straw_tonnes_for_max: 20
+levels:
+  LOW: 0.25
+  MEDIUM: 0.50
+  HIGH: 0.75

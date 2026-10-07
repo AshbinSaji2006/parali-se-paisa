@@ -1,0 +1,8 @@
+baseline_yield_t_per_ha: 6.0
+peak_adjustment_enabled: true
+reference_peak_ndvi: 0.75
+peak_adjustment_coefficient: 0.25
+adjustment_min: 0.85
+adjustment_max: 1.10
+uncertainty_fraction: 0.30
+eligibility_rule_confidence_bands: [MODERATE, HIGH]

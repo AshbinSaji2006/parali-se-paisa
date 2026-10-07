@@ -1,0 +1,53 @@
+{
+  "dispatch_run_id": "179600fd-f4b6-4c5a-9971-87db7a69ce80",
+  "method": "ORTOOLS_V1",
+  "solver_status": "FEASIBLE_SOLUTION",
+  "baler_routes": [
+    {
+      "baler_id": "DEMO-BALER-02",
+      "stops": [
+        {
+          "sequence": 1,
+          "field_id": "SYNTHETIC-ACTION-FIELD-01",
+          "estimated_straw_tonnes": 12.0,
+          "service_minutes": 248,
+          "burn_risk_score": 0.6,
+          "burn_risk_level": "HIGH",
+          "risk_method": "RULE_ENGINE_V1",
+          "field_status": "HARVESTED",
+          "field_status_source": "RULE-BASED STATUS CANDIDATE",
+          "field_status_confidence": "MODERATE",
+          "harvest_evidence_state": "CANDIDATE",
+          "weather_suitability": "UNKNOWN",
+          "weather_source": "UNAVAILABLE",
+          "observation_quality": "GOOD",
+          "buyer_id": "DEMO-BUYER-02",
+          "provenance": "SYNTHETIC"
+        }
+      ],
+      "total_distance_km": 1.061,
+      "distance_method": "GEODESIC_PROXY",
+      "estimated_service_minutes": 248,
+      "estimated_travel_minutes": null,
+      "estimated_total_minutes": null,
+      "assigned_area_acres": 4.942,
+      "assigned_straw_tonnes": 12.0,
+      "route_duration_basis": "SERVICE_ONLY_DISTANCE_NOT_TIME",
+      "provenance": "DEMO"
+    }
+  ],
+  "unserved_fields": [],
+  "eligibility": [
+    {
+      "field_id": "SYNTHETIC-ACTION-FIELD-01",
+      "eligible": true,
+      "reasons": [],
+      "warnings": [
+        "Weather suitability is unknown; no forecast was available"
+      ]
+    }
+  ],
+  "distance_method": "GEODESIC_PROXY",
+  "provenance": "SYNTHETIC",
+  "created_at": "2026-10-06T20:34:36.081294Z"
+}

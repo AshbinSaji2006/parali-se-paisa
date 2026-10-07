@@ -1,0 +1,615 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-10-07T16:01:55.243136+00:00",
+  "policy": "Local data is not deleted. Files listed here remain in the working copy and are excluded from Git for clone size/reproducibility.",
+  "excluded_file_count": 101,
+  "excluded_total_bytes": 9949624742,
+  "excluded_datasets": [
+    {
+      "dataset": "geoboundaries_cache",
+      "path": "data/real/cache/geoBoundaries-IND-ADM2.geojson",
+      "bytes": 48317735,
+      "reason_excluded": "Reproducible country-wide source cache; district boundary and source metadata are versioned."
+    },
+    {
+      "dataset": "full_field_time_series",
+      "path": "data/real/derived/timeseries/field_timeseries_2023.parquet",
+      "bytes": 167454228,
+      "reason_excluded": "Large derived table; regenerate from included source code and upstream inputs."
+    },
+    {
+      "dataset": "full_field_time_series",
+      "path": "data/real/derived/timeseries/field_timeseries_2024.parquet",
+      "bytes": 151471897,
+      "reason_excluded": "Large derived table; regenerate from included source code and upstream inputs."
+    },
+    {
+      "dataset": "full_field_time_series",
+      "path": "data/real/derived/timeseries/field_timeseries_2025.parquet",
+      "bytes": 215378025,
+      "reason_excluded": "Large derived table; regenerate from included source code and upstream inputs."
+    },
+    {
+      "dataset": "full_field_time_series",
+      "path": "data/real/derived/timeseries/field_timeseries_2026.parquet",
+      "bytes": 76431068,
+      "reason_excluded": "Large derived table; regenerate from included source code and upstream inputs."
+    },
+    {
+      "dataset": "derived_zone_array",
+      "path": "data/real/derived/timeseries/field_zones.npy",
+      "bytes": 48137728,
+      "reason_excluded": "Rebuildable array derived from the field time-series pipeline."
+    },
+    {
+      "dataset": "field_boundaries_geojson",
+      "path": "data/real/fields/fields_of_the_world_muktsar.geojson",
+      "bytes": 521123987,
+      "reason_excluded": "Large duplicate export; the compact Parquet boundary file is versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/J1_VIIRS_C2_South_Asia_7d_20261007.csv",
+      "bytes": 553433,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/J2_VIIRS_C2_South_Asia_7d_20261007.csv",
+      "bytes": 573864,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/MODIS_C6_1_South_Asia_7d_20261007.csv",
+      "bytes": 44717,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/SUOMI_VIIRS_C2_South_Asia_7d_20261007.csv",
+      "bytes": 543352,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/modis_2023_India.csv",
+      "bytes": 6174807,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/modis_2024_India.csv",
+      "bytes": 5822801,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/viirs-jpss1_2023_India.csv",
+      "bytes": 47438738,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/viirs-jpss1_2024_India.csv",
+      "bytes": 46389955,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/viirs-snpp_2023_India.csv",
+      "bytes": 45363702,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "firms_raw_archive",
+      "path": "data/real/firms/raw/viirs-snpp_2024_India.csv",
+      "bytes": 43219694,
+      "reason_excluded": "Reproducible provider archive; compact derived regional tables are versioned."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250531_o34.tif",
+      "bytes": 36141973,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250612_o34.tif",
+      "bytes": 36487457,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250624_o34.tif",
+      "bytes": 36541329,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250706_o34.tif",
+      "bytes": 36475153,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250718_o34.tif",
+      "bytes": 36098403,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250730_o34.tif",
+      "bytes": 36074057,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250823_o34.tif",
+      "bytes": 35764775,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250904_o34.tif",
+      "bytes": 36038125,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250916_o34.tif",
+      "bytes": 36198031,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel1_raw",
+      "path": "data/real/s1_stack/2025/S1_20250928_o34.tif",
+      "bytes": 35781935,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20230904T053649_43RDP.tif",
+      "bytes": 110920023,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20230909T053651_43RDP.tif",
+      "bytes": 108534435,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20230914T053649_43RDP.tif",
+      "bytes": 109750405,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20230924T053649_43RDP.tif",
+      "bytes": 113089677,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20230929T053641_43RDP.tif",
+      "bytes": 111394278,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231004T053649_43RDP.tif",
+      "bytes": 111947526,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231009T053731_43RDP.tif",
+      "bytes": 112345830,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231014T053759_43RDP.tif",
+      "bytes": 112986847,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231019T053831_43RDP.tif",
+      "bytes": 113998789,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231024T053909_43RDP.tif",
+      "bytes": 113821145,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231029T053941_43RDP.tif",
+      "bytes": 110188614,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231103T054009_43RDP.tif",
+      "bytes": 111887505,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231113T054059_43RDP.tif",
+      "bytes": 111086324,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231118T054111_43RDP.tif",
+      "bytes": 110795563,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231123T054139_43RDP.tif",
+      "bytes": 107353179,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231128T054151_43RDP.tif",
+      "bytes": 107875279,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231203T054209_43RDP.tif",
+      "bytes": 109988620,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231208T054221_43RDP.tif",
+      "bytes": 110186798,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231213T054229_43RDP.tif",
+      "bytes": 109389221,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2023/S2_20231218T054231_43RDP.tif",
+      "bytes": 110619379,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20240903T053641_43RDP.tif",
+      "bytes": 112818356,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20240908T053649_43RDP.tif",
+      "bytes": 113001770,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20240923T053641_43RDP.tif",
+      "bytes": 111015990,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20240928T053639_43RDP.tif",
+      "bytes": 113633424,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241003T053651_43RDP.tif",
+      "bytes": 111179524,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241008T053639_43RDP.tif",
+      "bytes": 112325924,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241013T053801_43RDP.tif",
+      "bytes": 110924014,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241018T053739_43RDP.tif",
+      "bytes": 113798366,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241023T053901_43RDP.tif",
+      "bytes": 114448440,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241028T053839_43RDP.tif",
+      "bytes": 110454244,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241102T054001_43RDP.tif",
+      "bytes": 112446926,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241107T053929_43RDP.tif",
+      "bytes": 105508404,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241117T054019_43RDP.tif",
+      "bytes": 119350040,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241122T054141_43RDP.tif",
+      "bytes": 107277146,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241127T054109_43RDP.tif",
+      "bytes": 108944954,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241202T054211_43RDP.tif",
+      "bytes": 108424006,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241207T054129_43RDP.tif",
+      "bytes": 109589614,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241212T054231_43RDP.tif",
+      "bytes": 109943418,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2024/S2_20241217T054139_43RDP.tif",
+      "bytes": 110642294,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250908T053701_43RDP.tif",
+      "bytes": 118621922,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250910T054241_43RDP.tif",
+      "bytes": 114643140,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250913T053639_43RDP.tif",
+      "bytes": 110002264,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250918T053651_43RDP.tif",
+      "bytes": 110130502,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250923T053639_43RDP.tif",
+      "bytes": 109962010,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250928T053701_43RDP.tif",
+      "bytes": 108577456,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20250930T054251_43RDP.tif",
+      "bytes": 111577440,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251003T053639_43RDP.tif",
+      "bytes": 104258138,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251008T053741_43RDP.tif",
+      "bytes": 108436414,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251013T053659_43RDP.tif",
+      "bytes": 113872498,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251018T053841_43RDP.tif",
+      "bytes": 114137228,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251020T054251_43RDP.tif",
+      "bytes": 113720034,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251023T053809_43RDP.tif",
+      "bytes": 113144612,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251028T053951_43RDP.tif",
+      "bytes": 108373958,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251102T053909_43RDP.tif",
+      "bytes": 112822462,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251107T054041_43RDP.tif",
+      "bytes": 114677212,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251109T054251_43RDP.tif",
+      "bytes": 111817516,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251112T053959_43RDP.tif",
+      "bytes": 112972558,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251117T054131_43RDP.tif",
+      "bytes": 110085070,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251122T054039_43RDP.tif",
+      "bytes": 112019098,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251127T054211_43RDP.tif",
+      "bytes": 107950434,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251129T054251_43RDP.tif",
+      "bytes": 107737956,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251202T054109_43RDP.tif",
+      "bytes": 109209904,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251207T054231_43RDP.tif",
+      "bytes": 110457664,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251212T054139_43RDP.tif",
+      "bytes": 49015030,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2025/S2_20251217T054241_43RDP.tif",
+      "bytes": 110439598,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260903T053641_43RDP.tif",
+      "bytes": 111963306,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260905T054251_43RDP.tif",
+      "bytes": 109013454,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260908T053639_43RDP.tif",
+      "bytes": 110918328,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260913T053641_43RDP.tif",
+      "bytes": 113466806,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260918T053639_43RDP.tif",
+      "bytes": 111210364,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260923T053641_43RDP.tif",
+      "bytes": 111079016,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260925T054251_43RDP.tif",
+      "bytes": 111025090,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20260928T053639_43RDP.tif",
+      "bytes": 110980990,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    },
+    {
+      "dataset": "sentinel2_raw",
+      "path": "data/real/s2_stack/2026/S2_20261003T053651_43RDP.tif",
+      "bytes": 111378010,
+      "reason_excluded": "Reproducible raw satellite raster; too large for a normal Git clone."
+    }
+  ]
+}

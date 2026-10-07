@@ -1,0 +1,3 @@
+latitude,longitude,acq_date,acq_time,confidence,satellite,instrument,frp,source
+30.02,74.52,2026-10-03,0512,nominal,NOAA-20,VIIRS,2.4,DEMO_SYNTHETIC_FIXTURE
+not-a-lat,74.6,2026-10-03,0512,low,NOAA-20,VIIRS,,DEMO_SYNTHETIC_FIXTURE

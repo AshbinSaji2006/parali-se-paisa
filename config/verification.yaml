@@ -1,0 +1,13 @@
+monitoring:
+  deadline_days: 30
+  minimum_observations: 3
+  minimum_span_days: 20
+  minimum_quality: GOOD
+  allow_sowing_candidate_to_close: true
+burn_rules:
+  strong_nbr_delta_max: -0.20
+  strong_bais2_delta_min: 0.12
+  strong_ndvi_delta_max: -0.20
+  moderate_nbr_delta_max: -0.15
+  moderate_bais2_delta_min: 0.10
+  moderate_ndvi_delta_max: -0.15

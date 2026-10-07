@@ -1,0 +1,95 @@
+{
+  "trust_state": "SYNTHETIC_TEST_MODEL",
+  "dataset_provenance": "SYNTHETIC_TEST",
+  "metric_scope": "SYNTHETIC PIPELINE TEST ONLY \u2014 NOT A SCIENTIFIC PERFORMANCE RESULT",
+  "schema_version": "1.0",
+  "schema_fingerprint": "b292fb4f096287558a93ddd25f3ad9b7b0101b77eace8dd427ee7281e1ff75bb",
+  "features": [
+    "BAIS2_delta",
+    "BAIS2_mean",
+    "BAIS2_rolling_mean_2",
+    "BAIS2_rolling_mean_3",
+    "BAIS2_slope_last_3",
+    "NBR_delta",
+    "NBR_mean",
+    "NBR_pct_change",
+    "NBR_rolling_mean_2",
+    "NBR_rolling_mean_3",
+    "NBR_slope_last_3",
+    "NDVI_delta",
+    "NDVI_drop_fraction_from_peak",
+    "NDVI_drop_from_peak",
+    "NDVI_mean",
+    "NDVI_pct_change",
+    "NDVI_rolling_mean_2",
+    "NDVI_rolling_mean_3",
+    "NDVI_slope_last_3",
+    "VH_delta_db",
+    "VH_mean_db",
+    "VV_VH_ratio_linear",
+    "VV_VH_ratio_linear_delta",
+    "VV_delta_db",
+    "VV_mean_db",
+    "VV_minus_VH_db",
+    "VV_minus_VH_delta_db",
+    "cloud_fraction",
+    "day_of_year",
+    "days_since_first_observation_in_season",
+    "days_since_peak_NDVI",
+    "days_since_previous_observation",
+    "humidity_pct",
+    "observation_number_in_season",
+    "observation_quality",
+    "rain_72h",
+    "recent_fire_24h",
+    "recent_fire_72h",
+    "temperature_c",
+    "valid_pixel_fraction",
+    "wind_speed"
+  ],
+  "classes": [
+    "STANDING",
+    "HARVESTED",
+    "BURNT",
+    "SOWN"
+  ],
+  "class_mapping": {
+    "STANDING": 0,
+    "HARVESTED": 1,
+    "BURNT": 2,
+    "SOWN": 3
+  },
+  "all_missing_training_features_excluded": [],
+  "training_timestamp": "2026-10-06T20:06:26.619410+00:00",
+  "split_method": "stratified field-group split; no field crosses train/validation/test",
+  "dataset_provenance_summary": "SYNTHETIC_TEST",
+  "split_groups": {
+    "train": [
+      "SYNTH-BURNT-1",
+      "SYNTH-HARVESTED-2",
+      "SYNTH-SOWN-1",
+      "SYNTH-STANDING-1"
+    ],
+    "validation": [
+      "SYNTH-BURNT-0",
+      "SYNTH-HARVESTED-1",
+      "SYNTH-SOWN-2",
+      "SYNTH-STANDING-2"
+    ],
+    "test": [
+      "SYNTH-BURNT-2",
+      "SYNTH-HARVESTED-0",
+      "SYNTH-SOWN-0",
+      "SYNTH-STANDING-0"
+    ]
+  },
+  "row_counts": {
+    "train": 12,
+    "validation": 12,
+    "test": 12
+  },
+  "models": [
+    "random_forest",
+    "gradient_boosting"
+  ]
+}

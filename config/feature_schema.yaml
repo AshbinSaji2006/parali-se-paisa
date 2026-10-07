@@ -1,0 +1,1216 @@
+schema_version: '1.0'
+dataset: field_features_temporal.csv
+primary_key:
+- field_id
+- season
+- year
+- observation_datetime
+group_columns:
+- field_id
+- season
+- year
+label_column: status_label
+training_features:
+- BAIS2_delta
+- BAIS2_mean
+- BAIS2_rolling_mean_2
+- BAIS2_rolling_mean_3
+- BAIS2_slope_last_3
+- NBR_delta
+- NBR_mean
+- NBR_pct_change
+- NBR_rolling_mean_2
+- NBR_rolling_mean_3
+- NBR_slope_last_3
+- NDVI_delta
+- NDVI_drop_fraction_from_peak
+- NDVI_drop_from_peak
+- NDVI_mean
+- NDVI_pct_change
+- NDVI_rolling_mean_2
+- NDVI_rolling_mean_3
+- NDVI_slope_last_3
+- VH_delta_db
+- VH_mean_db
+- VV_VH_ratio_linear
+- VV_VH_ratio_linear_delta
+- VV_delta_db
+- VV_mean_db
+- VV_minus_VH_db
+- VV_minus_VH_delta_db
+- cloud_fraction
+- day_of_year
+- days_since_first_observation_in_season
+- days_since_peak_NDVI
+- days_since_previous_observation
+- humidity_pct
+- observation_number_in_season
+- observation_quality
+- rain_72h
+- recent_fire_24h
+- recent_fire_72h
+- temperature_c
+- valid_pixel_fraction
+- wind_speed
+fields:
+  field_id:
+    type: string
+    nullable: false
+    unit: none
+    feature_group: IDENTIFIER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  district:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  village:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  season:
+    type: string
+    nullable: false
+    unit: none
+    feature_group: IDENTIFIER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  year:
+    type: integer
+    nullable: false
+    unit: count
+    feature_group: IDENTIFIER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  observation_date:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: QUALITY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  observation_datetime:
+    type: string
+    nullable: false
+    unit: none
+    feature_group: IDENTIFIER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  area_ha:
+    type: number
+    nullable: true
+    unit: ha
+    feature_group: GEOMETRY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NDVI_mean:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  NDVI_median:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NDVI_std:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NDVI_min:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NDVI_max:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NBR_mean:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  NBR_median:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NBR_std:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NBR_min:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  NBR_max:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  BAIS2_mean:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  BAIS2_median:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  BAIS2_std:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  BAIS2_min:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  BAIS2_max:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B2_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B3_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B4_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B6_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B7_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B8_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B8A_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B11_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  B12_mean:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  valid_pixel_count:
+    type: integer
+    nullable: true
+    unit: count
+    feature_group: QUALITY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  total_pixel_count:
+    type: integer
+    nullable: true
+    unit: count
+    feature_group: QUALITY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  valid_pixel_fraction:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: QUALITY
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  cloud_fraction:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: QUALITY
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  VV_mean_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  VH_mean_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  VV_minus_VH_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  VV_VH_ratio_linear:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  missing_vh:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  firms_points_within_field:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  firms_points_within_500m:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  firms_points_within_1km:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  nearest_firms_distance_m:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  recent_fire_24h:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  recent_fire_72h:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  precipitation_mm:
+    type: number
+    nullable: true
+    unit: mm
+    feature_group: WEATHER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  rain_24h:
+    type: number
+    nullable: true
+    unit: mm
+    feature_group: WEATHER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  rain_72h:
+    type: number
+    nullable: true
+    unit: mm
+    feature_group: WEATHER
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  humidity_pct:
+    type: number
+    nullable: true
+    unit: percent
+    feature_group: WEATHER
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  temperature_c:
+    type: number
+    nullable: true
+    unit: C
+    feature_group: WEATHER
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  wind_speed:
+    type: number
+    nullable: true
+    unit: km/h
+    feature_group: WEATHER
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  s2_available:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: QUALITY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_available:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  weather_available:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: WEATHER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  firms_available:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  observation_quality:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: QUALITY
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint C base observation
+    status: feature
+  observation_quality_flags:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: QUALITY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s2_observation_datetime:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: QUALITY
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_observation_datetime:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_age_days:
+    type: number
+    nullable: true
+    unit: day
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  weather_window_end:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: WEATHER
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  firms_window_end:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: FIRE_CONTEXT
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  source_image_id_s2:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  source_image_id_s1:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s2_collection:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_collection:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_orbit_pass:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_relative_orbit_number:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_instrument_mode:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  s1_polarizations:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  weather_source:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  weather_record_type:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  firms_source:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  fixture_or_real:
+    type: string
+    nullable: false
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  processing_version:
+    type: string
+    nullable: false
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint C base observation
+    status: identifier_or_excluded
+  status_label:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: LABEL
+    training_allowed: false
+    inference_required: false
+    provenance: Future human/external label table; never temporal source
+    status: label
+  feature_schema_version:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  temporal_duplicate_timestamp:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: TEMPORAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  temporal_history_count:
+    type: integer
+    nullable: true
+    unit: count
+    feature_group: TEMPORAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  temporal_previous_valid:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: TEMPORAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  temporal_previous_quality:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: TEMPORAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  previous_observation_datetime:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  previous_source_image_id_s2:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  days_since_previous_observation:
+    type: number
+    nullable: true
+    unit: day
+    feature_group: TEMPORAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  temporal_gap_category:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: TEMPORAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  observation_number_in_season:
+    type: integer
+    nullable: true
+    unit: count
+    feature_group: TEMPORAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  day_of_year:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: TEMPORAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  days_since_first_observation_in_season:
+    type: number
+    nullable: true
+    unit: day
+    feature_group: TEMPORAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  peak_NDVI_so_far:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: TEMPORAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  peak_NDVI_datetime_so_far:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  days_since_peak_NDVI:
+    type: number
+    nullable: true
+    unit: day
+    feature_group: TEMPORAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NDVI_drop_from_peak:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NDVI_drop_fraction_from_peak:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  VV_minus_VH_prev_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  VV_minus_VH_delta_db:
+    type: string
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  VV_VH_ratio_linear_prev:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  VV_VH_ratio_linear_delta:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  radar_temporal_comparison_available:
+    type: boolean
+    nullable: true
+    unit: none
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  radar_previous_observation_datetime:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  radar_previous_source_image_id_s1:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: PROVENANCE
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NDVI_prev:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NDVI_delta:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NDVI_pct_change:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NDVI_delta_2obs:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NDVI_rolling_mean_2:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NDVI_rolling_mean_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NBR_prev:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NBR_delta:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NBR_pct_change:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NBR_delta_2obs:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NBR_rolling_mean_2:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NBR_rolling_mean_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  BAIS2_prev:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  BAIS2_delta:
+    type: number
+    nullable: true
+    unit: ratio
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  BAIS2_pct_change:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  BAIS2_delta_2obs:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  BAIS2_rolling_mean_2:
+    type: number
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  BAIS2_rolling_mean_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  VV_prev_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  VV_delta_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  VH_prev_db:
+    type: number
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  VH_delta_db:
+    type: string
+    nullable: true
+    unit: dB
+    feature_group: RADAR
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NDVI_rolling_std_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NBR_rolling_std_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: false
+    inference_required: false
+    provenance: Checkpoint D causal transform
+    status: identifier_or_excluded
+  NDVI_slope_last_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  NBR_slope_last_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature
+  BAIS2_slope_last_3:
+    type: string
+    nullable: true
+    unit: none
+    feature_group: OPTICAL
+    training_allowed: true
+    inference_required: true
+    provenance: Checkpoint D causal transform
+    status: feature

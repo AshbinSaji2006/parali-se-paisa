@@ -1,0 +1,37 @@
+{
+  "feature_schema_version": "1.0",
+  "number_of_fields": 520,
+  "number_of_seasons": 2080,
+  "temporal_rows": 3640,
+  "rows_with_previous_observations": 1560,
+  "median_observations_per_field": 7.0,
+  "min_observations_per_field": 7,
+  "max_observations_per_field": 7,
+  "temporal_gap_days": {
+    "count": 1560,
+    "min": 12.997430555555555,
+    "median": 45.002175925925926,
+    "max": 60.00370370370371
+  },
+  "rows_with_radar_temporal_comparison": 0,
+  "rows_without_compatible_radar_history": 3640,
+  "large_gap_count": 1040,
+  "duplicate_timestamp_rows": 0,
+  "synthetic_rows": 0,
+  "real_rows": 0,
+  "nan_rate": {
+    "NDVI_prev": 0.5714285714285714,
+    "NDVI_delta": 0.5714285714285714,
+    "peak_NDVI_so_far": 0.0,
+    "NDVI_rolling_mean_3": 1.0,
+    "NDVI_slope_last_3": 1.0,
+    "VV_delta_db": 1.0
+  },
+  "leakage_test_status": "automated prefix-invariance tests are in tests/test_temporal_features.py; run pytest to execute",
+  "warnings": [],
+  "temporal_policy": "Within field_id+season+year; sort UTC; exclude POOR or zero-valid-pixel rows from future history; LIMITED rows are eligible; same-time duplicates are retained and see only strictly earlier timestamps.",
+  "omitted_history": [
+    "FIRMS event count histories are omitted because the C table has only as-of window summaries, not event-level detections.",
+    "Weather rolling histories are omitted because the C table has only observation-level aggregates, not daily record histories."
+  ]
+}

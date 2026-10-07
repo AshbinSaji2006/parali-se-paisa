@@ -1,0 +1,160 @@
+{
+  "run_timestamp": "2026-10-07T16:06:33.167622+00:00",
+  "pilot": {
+    "district": "Sri Muktsar Sahib",
+    "district_aliases": [
+      "Muktsar"
+    ],
+    "state": "Punjab",
+    "country": "India",
+    "season": "kharif",
+    "year": 2026,
+    "aoi_bbox_wgs84": [
+      74.0,
+      29.5,
+      75.2,
+      30.2
+    ],
+    "area_crs": "EPSG:32643"
+  },
+  "aoi_bbox_wgs84": [
+    74.0,
+    29.5,
+    75.2,
+    30.2
+  ],
+  "date_range": {
+    "start": "2026-10-01",
+    "end": "2026-12-31"
+  },
+  "fixture_mode": true,
+  "sources": {
+    "sentinel2": {
+      "dataset_type": "DEMO",
+      "warning": "SYNTHETIC DEMO METADATA ONLY; not returned by Sentinel-2.",
+      "images_queried": 1,
+      "images_accepted": [
+        {
+          "source_image_id": "DEMO-S2-001",
+          "acquisition_datetime": "2026-10-02T05:30:00+00:00",
+          "cloud_percentage": 12.5,
+          "sensor": "Sentinel-2",
+          "collection": "DEMO_FIXTURE",
+          "processing_source": "synthetic fixture",
+          "bands": [
+            "B2",
+            "B3",
+            "B4",
+            "B6",
+            "B7",
+            "B8",
+            "B8A",
+            "B11",
+            "B12"
+          ]
+        }
+      ],
+      "images_rejected": [],
+      "warnings": [
+        "Metadata fixture only; contains no satellite measurements."
+      ],
+      "fixture": true,
+      "cache_hit": true
+    },
+    "sentinel1": {
+      "dataset_type": "DEMO",
+      "warning": "SYNTHETIC DEMO METADATA ONLY; not returned by Sentinel-1.",
+      "images_queried": 1,
+      "images_accepted": [
+        {
+          "source_image_id": "DEMO-S1-001",
+          "acquisition_datetime": "2026-10-03T00:10:00+00:00",
+          "sensor": "Sentinel-1",
+          "collection": "DEMO_FIXTURE",
+          "orbit_pass": "ASCENDING",
+          "relative_orbit_number": 42,
+          "instrument_mode": "IW",
+          "polarizations": [
+            "VV"
+          ],
+          "has_vv": true,
+          "has_vh": false,
+          "processing_source": "synthetic fixture"
+        }
+      ],
+      "warnings": [
+        "Metadata fixture only; contains no radar measurements."
+      ],
+      "fixture": true,
+      "cache_hit": true
+    },
+    "firms": {
+      "points_loaded": 1,
+      "points_rejected": [
+        {
+          "row": 3,
+          "reason": "malformed_or_missing_required_value"
+        }
+      ],
+      "points": [
+        {
+          "latitude": 30.02,
+          "longitude": 74.52,
+          "acquisition_date": "2026-10-03",
+          "acquisition_time": "0512",
+          "acquisition_datetime": "2026-10-03T05:12:00+00:00",
+          "confidence": "nominal",
+          "satellite": "NOAA-20",
+          "instrument": "VIIRS",
+          "frp": 2.4,
+          "source": "DEMO_SYNTHETIC_FIXTURE"
+        }
+      ],
+      "fixture": true,
+      "dataset_type": "DEMO",
+      "cache_hit": true
+    },
+    "weather": {
+      "records_loaded": 2,
+      "records_rejected": [],
+      "records": [
+        {
+          "timestamp": "2026-10-02T00:00",
+          "date": "2026-10-02",
+          "temperature_c": null,
+          "humidity_pct": null,
+          "precipitation_mm": null,
+          "wind_speed": null,
+          "source": "DEMO_SYNTHETIC_FIXTURE",
+          "record_type": "demo_synthetic"
+        },
+        {
+          "timestamp": "2026-10-02T01:00",
+          "date": "2026-10-02",
+          "temperature_c": null,
+          "humidity_pct": null,
+          "precipitation_mm": null,
+          "wind_speed": null,
+          "source": "DEMO_SYNTHETIC_FIXTURE",
+          "record_type": "demo_synthetic"
+        }
+      ],
+      "variables": [
+        "temperature_2m",
+        "relative_humidity_2m",
+        "precipitation",
+        "wind_speed_10m"
+      ],
+      "dataset_type": "DEMO",
+      "fixture": true,
+      "cache_hit": true
+    }
+  },
+  "warnings": [],
+  "output_paths": {
+    "sentinel2": "data\\interim\\acquisitions\\sentinel2.json",
+    "sentinel1": "data\\interim\\acquisitions\\sentinel1.json",
+    "firms": "data\\interim\\acquisitions\\firms.json",
+    "weather": "data\\interim\\acquisitions\\weather.json"
+  }
+}

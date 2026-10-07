@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "typescript": {"status": "PASS", "command": "npm run typecheck"},
+  "unit_tests": {"status": "PASS", "passed": 12, "failed": 0, "skipped": 0},
+  "production_build": {"status": "PASS", "command": "npm run build", "largest_chunk_kb": 221.86, "warnings": ["Rollup removed misplaced @__PURE__ annotations from Zod dependency sources."]},
+  "openapi_contract": {"status": "PASS", "export": "frontend/openapi.json", "typescript_types": "frontend/src/api/generated.ts"},
+  "translations": {"hindi": "PASS", "punjabi": "PASS", "coverage": "Farmer-view RTL assertions"},
+  "responsive_overflow": {"status": "PASS", "route": "/dispatch", "viewports": {"1366x768": "PASS", "1920x1080": "PASS", "768x1024": "PASS", "390x844": "PASS"}, "assertion": "documentElement.scrollWidth <= window.innerWidth"},
+  "playwright_browser_journey": {"status": "PASS", "passed": 2, "failed": 0, "coverage": ["official login", "field map and candidate detail", "dispatch plan", "unauthenticated route gate", "farmer view", "mobile layout"]}
+}

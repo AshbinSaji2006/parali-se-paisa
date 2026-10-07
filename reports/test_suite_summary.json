@@ -1,0 +1,7 @@
+{
+  "passed": 85,
+  "failed": 0,
+  "skipped": 1,
+  "command": "PYTHONPATH=. pytest -q",
+  "scope": "offline repository suite; skipped test is the external Earth Engine integration check"
+}

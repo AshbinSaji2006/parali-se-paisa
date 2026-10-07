@@ -1,0 +1,28 @@
+{
+  "allocations": [
+    {
+      "field_id": "SYNTHETIC-ACTION-FIELD-01",
+      "buyer_id": "DEMO-BUYER-02",
+      "match_score": 99.7015,
+      "distance_km": 2.985,
+      "distance_method": "GEODESIC_PROXY",
+      "allocated_tonnes": 12.0,
+      "remaining_buyer_capacity_tonnes": 18.0,
+      "matching_reasons": [
+        "Accepted residue type matches",
+        "Whole field fits remaining daily demand",
+        "Distance scored using GEODESIC_PROXY",
+        "Field priority order reflects supplied normalized risk score; it is not a probability"
+      ],
+      "status": "MATCHED",
+      "provenance": "SYNTHETIC"
+    }
+  ],
+  "buyer_remaining_capacity_tonnes": {
+    "DEMO-BUYER-01": 40.0,
+    "DEMO-BUYER-02": 18.0
+  },
+  "unassigned_field_ids": [],
+  "distance_method": "GEODESIC_PROXY",
+  "provenance": "SYNTHETIC"
+}

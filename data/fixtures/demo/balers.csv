@@ -1,0 +1,3 @@
+baler_id,name,operator_name,latitude,longitude,status,working_start,working_end,service_rate_acres_per_hour,daily_capacity_acres,max_straw_capacity_tonnes,available_from,demo_or_real,source
+DEMO-BALER-01,DEMO Baler One,,30.018,74.519,AVAILABLE,08:00,17:00,1.0,20,30,,DEMO,synthetic_demo_fixture
+DEMO-BALER-02,DEMO Baler Two,,30.025,74.528,AVAILABLE,08:00,17:00,1.2,18,25,,DEMO,synthetic_demo_fixture

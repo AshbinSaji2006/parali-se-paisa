@@ -1,0 +1,29 @@
+{
+  "dataset_type": "DEMO",
+  "warning": "SYNTHETIC DEMO METADATA ONLY; not returned by Sentinel-2.",
+  "images_queried": 1,
+  "images_accepted": [
+    {
+      "source_image_id": "DEMO-S2-001",
+      "acquisition_datetime": "2026-10-02T05:30:00+00:00",
+      "cloud_percentage": 12.5,
+      "sensor": "Sentinel-2",
+      "collection": "DEMO_FIXTURE",
+      "processing_source": "synthetic fixture",
+      "bands": [
+        "B2",
+        "B3",
+        "B4",
+        "B8",
+        "B8A",
+        "B11",
+        "B12"
+      ]
+    }
+  ],
+  "images_rejected": [],
+  "warnings": [
+    "Metadata fixture only; contains no satellite measurements."
+  ],
+  "fixture": true
+}

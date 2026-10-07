@@ -1,0 +1,19 @@
+{
+  "status": "WARN",
+  "checks": {
+    "isolated_sqlite_reset_repeated": true,
+    "real_row_preserved": true,
+    "health_endpoint": true,
+    "official_authentication": true,
+    "typed_product_endpoint": true,
+    "openapi_export": true,
+    "production_frontend_artifact": true,
+    "live_providers_configured": false,
+    "postgresql_service_verified": false
+  },
+  "failures": [],
+  "warnings": [
+    "Live satellite/provider integration is not configured or verified.",
+    "PostgreSQL service is not available; PostgreSQL is configuration-only."
+  ]
+}

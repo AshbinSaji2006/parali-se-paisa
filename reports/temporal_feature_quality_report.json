@@ -1,0 +1,44 @@
+{
+  "feature_schema_version": "1.0",
+  "number_of_fields": 3,
+  "number_of_seasons": 3,
+  "temporal_rows": 6,
+  "rows_with_previous_observations": 3,
+  "median_observations_per_field": 2,
+  "min_observations_per_field": 2,
+  "max_observations_per_field": 2,
+  "temporal_gap_days": {
+    "count": 3,
+    "min": 5.0,
+    "median": 5.0,
+    "max": 5.0
+  },
+  "rows_with_radar_temporal_comparison": 1,
+  "rows_without_compatible_radar_history": 5,
+  "large_gap_count": 0,
+  "duplicate_timestamp_rows": 0,
+  "synthetic_rows": 6,
+  "real_rows": 0,
+  "nan_rate": {
+    "NDVI_prev": 0.5,
+    "NDVI_delta": 0.5,
+    "peak_NDVI_so_far": 0.0,
+    "NDVI_rolling_mean_3": 1.0,
+    "NDVI_slope_last_3": 1.0,
+    "VV_delta_db": 0.8333333333333334
+  },
+  "leakage_test_status": "PASS: 85 passed, 0 failed, 1 skipped; includes future-append prefix invariance, future peak, rolling, slope, field/year/season isolation, and radar causal tests.",
+  "warnings": [],
+  "temporal_policy": "Within field_id+season+year; sort UTC; exclude POOR or zero-valid-pixel rows from future history; LIMITED rows are eligible; same-time duplicates are retained and see only strictly earlier timestamps.",
+  "omitted_history": [
+    "FIRMS event count histories are omitted because the C table has only as-of window summaries, not event-level detections.",
+    "Weather rolling histories are omitted because the C table has only observation-level aggregates, not daily record histories."
+  ],
+  "input": "data\\processed\\features\\field_features.csv",
+  "output": "data\\processed\\features\\field_features_temporal.csv",
+  "generated_at": "2026-10-06T20:04:39.353507+00:00",
+  "base_feature_count": 78,
+  "temporal_feature_count": 51,
+  "final_column_count": 129,
+  "processing_version": "0.1.0"
+}

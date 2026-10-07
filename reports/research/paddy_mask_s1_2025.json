@@ -1,0 +1,19 @@
+{
+ "year": 2025,
+ "s1_passes": 10,
+ "flood_window_passes": 6,
+ "canopy_window_passes": 4,
+ "rule": "paddy if min VH (25 May-31 Jul) < -20.0 dB and canopy (15 Aug-30 Sep) rise >= 4.0 dB",
+ "crop_fields": 165384,
+ "paddy_fields": 90684,
+ "paddy_ha": 106682,
+ "non_paddy_crop_ha": 81224,
+ "burn_loose_share_paddy": 0.1471,
+ "burn_loose_share_non_paddy": 0.0954,
+ "burn_strict_share_paddy": 0.0625,
+ "burn_strict_share_non_paddy": 0.0342,
+ "median_harvest_doy_paddy": 296.0,
+ "median_harvest_doy_non_paddy": 301.0,
+ "south_of_30_15N_paddy_share": 0.5848,
+ "north_of_30_15N_paddy_share": 0.5389
+}

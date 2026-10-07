@@ -1,0 +1,48 @@
+pilot:
+  district: Sri Muktsar Sahib
+  district_aliases: [Muktsar]
+  state: Punjab
+  country: India
+  season: kharif
+  year: 2026
+  # Approximate pilot AOI; replace with authoritative boundary before acquisition.
+  aoi_bbox_wgs84: [74.0, 29.5, 75.2, 30.2]
+  area_crs: EPSG:32643
+fields:
+  input: data/raw/fields/fields.geojson
+  output: data/processed/fields/fields_clean.geojson
+  report: reports/field_validation_report.json
+  min_area_ha: 0.01
+acquisition:
+  date_start: "2026-10-01"
+  date_end: "2026-12-31"
+  cloud_threshold_pct: 40
+  aoi_bbox_wgs84: [74.0, 29.5, 75.2, 30.2]
+  cache_dir: data/interim/acquisition_cache
+  output_dir: data/interim/acquisitions
+  firms:
+    source: VIIRS_NOAA20_NRT
+    fixture: data/fixtures/demo/firms.csv
+  weather:
+    provider: open_meteo
+    fixture: data/fixtures/demo/weather.json
+  earth_engine:
+    sentinel2_collection: COPERNICUS/S2_SR_HARMONIZED
+    sentinel1_collection: COPERNICUS/S1_GRD
+    instrument_mode: IW
+features:
+  input: data/fixtures/demo/feature_observations.json
+  output: data/processed/features/field_features.csv
+  quality_report: reports/feature_quality_report.json
+  s1_lookback_days: 12
+  weather_lookback_hours: 72
+  firms_buffers_m: [500, 1000]
+  processing_version: "0.1.0"
+  temporal:
+    output: data/processed/features/field_features_temporal.csv
+    quality_report: reports/temporal_feature_quality_report.json
+    quality_report_markdown: reports/temporal_feature_quality_report.md
+    feature_schema_version: "1.0"
+    pct_change_epsilon: 0.000001
+    moderate_gap_days: 14
+    large_gap_days: 30

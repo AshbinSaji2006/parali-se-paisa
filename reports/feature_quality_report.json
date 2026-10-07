@@ -1,0 +1,39 @@
+{
+  "dataset_type": "SYNTHETIC",
+  "number_of_fields": 4,
+  "number_of_field_time_rows": 6,
+  "number_of_optical_observations": 6,
+  "number_of_radar_observations": 4,
+  "number_missing_s1": 2,
+  "number_missing_vh": 1,
+  "firms_points_considered": 4,
+  "weather_record_coverage": {
+    "records": 11,
+    "first_timestamp": "2026-10-01T00:00:00+00:00",
+    "last_timestamp": "2026-10-10T00:00:00+00:00"
+  },
+  "nan_rate": {
+    "NDVI_mean": 0.0,
+    "NBR_mean": 0.0,
+    "BAIS2_mean": 0.0,
+    "VV_mean_db": 0.3333333333333333,
+    "VH_mean_db": 0.5,
+    "rain_24h": 0.0,
+    "humidity_pct": 0.0,
+    "nearest_firms_distance_m": 0.0
+  },
+  "quality_category_counts": {
+    "GOOD": 3,
+    "LIMITED": 3
+  },
+  "synthetic_rows": 6,
+  "real_rows": 0,
+  "status_label_populated_rows": 0,
+  "warnings": [
+    "SYNTHETIC / TEST FIXTURE / NOT REAL SATELLITE OBSERVATIONS. Spectra are controlled vectors for mathematical validation only. No field-status labels are assigned."
+  ],
+  "input": "data\\fixtures\\demo\\feature_observations.json",
+  "output": "data\\processed\\features\\field_features.csv",
+  "generated_at": "2026-10-07T16:07:20.748411+00:00",
+  "processing_version": "0.1.0"
+}

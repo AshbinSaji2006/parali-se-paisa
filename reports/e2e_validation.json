@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "generated_at": "2026-10-07",
+  "data_class": "SYNTHETIC DEMONSTRATION ONLY",
+  "api_judge_story": {
+    "status": "PASS",
+    "script": "scripts/run_block4_demo.py",
+    "coverage": ["official login", "dashboard and field API", "persisted dispatch", "baler and buyer reservation", "duplicate dispatch blocked", "operator transitions to DELIVERED", "three chronological safe observations", "NO_BURN_VERIFIED", "prototype certificate", "public metadata checksum", "certificate PDF", "burn evidence blocks certification", "unclear evidence enters manual review", "farmer role and field ownership"]
+  },
+  "playwright_browser": {
+    "status": "PASS",
+    "passed": 2,
+    "failed": 0,
+    "coverage": ["official map/field/dispatch workflow", "unauthenticated route gate", "farmer route and mobile layout", "horizontal overflow at 1366x768, 1920x1080, 768x1024, 390x844"],
+    "server_cleanup": "PASS; no listeners remained on ports 8000 or 5173 after run"
+  },
+  "live_browser_mode": "NOT VERIFIED; live isolation is covered by backend integration tests",
+  "certificate_id": "PARALI-DEMO-9ee1c639-d429-417f-8e17-716ac04dd386",
+  "certificate_integrity": true,
+  "burn_state": "BURN_SIGNAL_DETECTED",
+  "unclear_state": "MANUAL_REVIEW_REQUIRED"
+}

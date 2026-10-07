@@ -1,0 +1,14 @@
+{
+  "dataset_type": "DEMO",
+  "warning": "SYNTHETIC DEMO VALUES ONLY; not observations or forecasts.",
+  "record_type": "demo_synthetic",
+  "payload": {
+    "hourly": {
+      "time": ["2026-10-02T00:00", "2026-10-02T01:00"],
+      "temperature_2m": [null, null],
+      "relative_humidity_2m": [null, null],
+      "precipitation": [null, null],
+      "wind_speed_10m": [null, null]
+    }
+  }
+}

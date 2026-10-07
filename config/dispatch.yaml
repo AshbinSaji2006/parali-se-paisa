@@ -1,0 +1,21 @@
+service_assumptions:
+  default_service_rate_acres_per_hour: 1.0
+  typical_bales_quintals_per_acre_min: 12
+  typical_bales_quintals_per_acre_max: 15
+  hectares_to_acres: 2.4710538147
+working_hours:
+  default_start: "08:00"
+  default_end: "17:00"
+weather:
+  unknown_policy: WARN # BLOCK, WARN, or PERMIT; no forecast is fabricated.
+  accepted_quality: [GOOD]
+prioritisation:
+  require_high_risk: false
+  unserved_base_penalty: 1000000
+  risk_priority_weight: 100000
+  straw_priority_weight: 10000
+  distance_cost_per_km: 100
+constraints:
+  maximum_route_distance_km: 250
+  solver_time_limit_seconds: 3
+  require_buyer_match: false

@@ -1,0 +1,21 @@
+{
+  "status": "ENGINE_IMPLEMENTED_UNCALIBRATED",
+  "validation_scope": "formula and boundary behavior are exercised by unit tests; no measured straw validation data exist",
+  "formula": "area_ha * baseline_yield_t_per_ha * clamp(1 + coefficient * (peak_NDVI - reference_peak_NDVI), adjustment_min, adjustment_max)",
+  "configuration": {
+    "baseline_yield_t_per_ha": 6.0,
+    "peak_adjustment_enabled": true,
+    "reference_peak_ndvi": 0.75,
+    "peak_adjustment_coefficient": 0.25,
+    "adjustment_min": 0.85,
+    "adjustment_max": 1.1,
+    "uncertainty_fraction": 0.3,
+    "eligibility_rule_confidence_bands": [
+      "MODERATE",
+      "HIGH"
+    ]
+  },
+  "statistical_confidence_interval": false,
+  "uncertainty": "configurable scenario range only",
+  "real_validation_rows": 0
+}

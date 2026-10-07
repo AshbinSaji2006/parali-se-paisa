@@ -1,0 +1,1032 @@
+{
+ "generated_by": "scripts/run_research.py",
+ "census": [
+  {
+   "year": 2023,
+   "s2_dates": 20,
+   "s2_dates_5day": 20,
+   "viirs_alerts": 2792,
+   "viirs_alerts_incl_noaa21": 2792,
+   "modis_alerts": 560,
+   "crop_fields": 164625,
+   "crop_ha": 187293,
+   "harvested_share": 0.9669,
+   "burned_loose_fields": 17048,
+   "burned_strict_fields": 6422,
+   "burned_loose_share": 0.1036,
+   "burned_strict_share": 0.039,
+   "burned_loose_ha": 21121,
+   "burned_strict_ha": 7883,
+   "strict_fields_per_viirs_alert": 2.3,
+   "burns_with_viirs_short_window": 0.3377,
+   "n_short_window": 3669,
+   "control_with_viirs_short_window": 0.204,
+   "burns_with_viirs_any_window": 0.4011,
+   "control_with_viirs_any_window": 0.2757,
+   "viirs_alerts_with_s2_burn_nearby": 0.673
+  },
+  {
+   "year": 2024,
+   "s2_dates": 19,
+   "s2_dates_5day": 19,
+   "viirs_alerts": 1527,
+   "viirs_alerts_incl_noaa21": 1527,
+   "modis_alerts": 372,
+   "crop_fields": 163815,
+   "crop_ha": 186778,
+   "harvested_share": 0.9591,
+   "burned_loose_fields": 8857,
+   "burned_strict_fields": 3229,
+   "burned_loose_share": 0.0541,
+   "burned_strict_share": 0.0197,
+   "burned_loose_ha": 10566,
+   "burned_strict_ha": 3643,
+   "strict_fields_per_viirs_alert": 2.11,
+   "burns_with_viirs_short_window": 0.0598,
+   "n_short_window": 2375,
+   "control_with_viirs_short_window": 0.025,
+   "burns_with_viirs_any_window": 0.1459,
+   "control_with_viirs_any_window": 0.0998,
+   "viirs_alerts_with_s2_burn_nearby": 0.5311
+  },
+  {
+   "year": 2025,
+   "s2_dates": 26,
+   "s2_dates_5day": 21,
+   "viirs_alerts": 600,
+   "viirs_alerts_incl_noaa21": 884,
+   "modis_alerts": 258,
+   "crop_fields": 165025,
+   "crop_ha": 187674,
+   "harvested_share": 0.9615,
+   "burned_loose_fields": 17983,
+   "burned_strict_fields": 7130,
+   "burned_loose_share": 0.109,
+   "burned_strict_share": 0.0432,
+   "burned_loose_ha": 20150,
+   "burned_strict_ha": 7930,
+   "strict_fields_per_viirs_alert": 11.88,
+   "burns_with_viirs_short_window": 0.0823,
+   "n_short_window": 6972,
+   "control_with_viirs_short_window": 0.0411,
+   "burns_with_viirs_any_window": 0.0829,
+   "control_with_viirs_any_window": 0.0416,
+   "viirs_alerts_with_s2_burn_nearby": 0.6433
+  }
+ ],
+ "naive_vs_aware": [
+  {
+   "year": 2023,
+   "crop_ha": 187293,
+   "naive_dnbr_027_share": 0.9785,
+   "naive_dnbr_027_ha": 184801,
+   "naive_dnbr_044_share": 0.9397,
+   "mcd64a1_pixels": 4209,
+   "mcd64a1_nominal_ha": 90367.0,
+   "aware_loose_ha": 21121,
+   "aware_strict_ha": 7883
+  },
+  {
+   "year": 2024,
+   "crop_ha": 186778,
+   "naive_dnbr_027_share": 0.9841,
+   "naive_dnbr_027_ha": 184880,
+   "naive_dnbr_044_share": 0.9609,
+   "mcd64a1_pixels": 3055,
+   "mcd64a1_nominal_ha": 65591.0,
+   "aware_loose_ha": 10566,
+   "aware_strict_ha": 3643
+  },
+  {
+   "year": 2025,
+   "crop_ha": 187906,
+   "naive_dnbr_027_share": 0.9797,
+   "naive_dnbr_027_ha": 185489,
+   "naive_dnbr_044_share": 0.954,
+   "mcd64a1_pixels": 0,
+   "mcd64a1_nominal_ha": null,
+   "aware_loose_ha": 22941,
+   "aware_strict_ha": 9137
+  }
+ ],
+ "latency": {
+  "2023": {
+   "n": 17048,
+   "median_days": 15.0,
+   "p25": 5.0,
+   "p75": 20.0,
+   "share_within_5d": 0.2652,
+   "share_within_10d": 0.3934,
+   "share_after_20d": 0.1194,
+   "median_harvest_window_days": 5.0,
+   "median_burn_window_days": 5.0
+  },
+  "2024": {
+   "n": 8857,
+   "median_days": 20.0,
+   "p25": 5.0,
+   "p75": 30.0,
+   "share_within_5d": 0.2627,
+   "share_within_10d": 0.3436,
+   "share_after_20d": 0.4667,
+   "median_harvest_window_days": 5.0,
+   "median_burn_window_days": 5.0
+  },
+  "2025": {
+   "n": 20464,
+   "median_days": 15.0,
+   "p25": 10.0,
+   "p75": 20.0,
+   "share_within_5d": 0.1108,
+   "share_within_10d": 0.3512,
+   "share_after_20d": 0.2262,
+   "median_harvest_window_days": 5.0,
+   "median_burn_window_days": 5.0
+  }
+ },
+ "persistence": {
+  "fields_in_all_seasons": 159836,
+  "share_by_seasons_burned": {
+   "0": 0.7641,
+   "1": 0.1895,
+   "2": 0.0409,
+   "3": 0.0054
+  },
+  "ever_burned_share": 0.2359,
+  "repeat_burner_share": 0.0464,
+  "repeat_burner_share_of_burn_events": 0.3414,
+  "all_three_observed": 0.0054,
+  "all_three_expected_if_independent": 0.00074,
+  "at_least_two_observed": 0.0464,
+  "at_least_two_expected_if_independent": 0.0247,
+  "burn_share_by_field_size_2025": {
+   "XS": 0.1039,
+   "S": 0.1231,
+   "M": 0.1339,
+   "L": 0.1365,
+   "XL": 0.1218
+  }
+ },
+ "risk_model": {
+  "history_logistic (pre-season)": {
+   "y_loose": {
+    "auc": 0.646,
+    "ap": 0.2298,
+    "precision_top10": 0.2897,
+    "lift_top10": 2.268,
+    "base_rate": 0.1277
+   },
+   "y_strict": {
+    "auc": 0.6652,
+    "ap": 0.1134,
+    "precision_top10": 0.1372,
+    "lift_top10": 2.673,
+    "base_rate": 0.0513
+   }
+  },
+  "in-season GBM (adds harvest timing, contagion, size, biomass)": {
+   "y_loose": {
+    "auc": 0.6686,
+    "ap": 0.2167,
+    "precision_top10": 0.2604,
+    "lift_top10": 2.039,
+    "base_rate": 0.1277
+   },
+   "y_strict": {
+    "auc": 0.6908,
+    "ap": 0.1038,
+    "precision_top10": 0.1248,
+    "lift_top10": 2.432,
+    "base_rate": 0.0513
+   }
+  },
+  "neighbourhood last-season rate only": {
+   "y_loose": {
+    "auc": 0.6386,
+    "ap": 0.2204,
+    "precision_top10": 0.2719,
+    "lift_top10": 2.129,
+    "base_rate": 0.1277
+   },
+   "y_strict": {
+    "auc": 0.657,
+    "ap": 0.1062,
+    "precision_top10": 0.1274,
+    "lift_top10": 2.482,
+    "base_rate": 0.0513
+   }
+  },
+  "field burned last season only": {
+   "y_loose": {
+    "auc": 0.5432,
+    "ap": 0.1687,
+    "precision_top10": 0.2149,
+    "lift_top10": 1.683,
+    "base_rate": 0.1277
+   },
+   "y_strict": {
+    "auc": 0.5527,
+    "ap": 0.0749,
+    "precision_top10": 0.0979,
+    "lift_top10": 1.907,
+    "base_rate": 0.0513
+   }
+  },
+  "random": {
+   "y_loose": {
+    "auc": 0.4976,
+    "ap": 0.1276,
+    "precision_top10": 0.1292,
+    "lift_top10": 1.012,
+    "base_rate": 0.1277
+   },
+   "y_strict": {
+    "auc": 0.4959,
+    "ap": 0.0511,
+    "precision_top10": 0.0517,
+    "lift_top10": 1.007,
+    "base_rate": 0.0513
+   }
+  },
+  "persistence": {
+   "p_burn_given_prior_burn": 0.3002,
+   "p_burn_given_no_prior": 0.1177
+  },
+  "train": "2024 season (history from 2023)",
+  "test": "2025 season (history from 2024), never seen in training"
+ },
+ "dynamic_hazard": {
+  "panel_rows_train": 918972,
+  "panel_rows_test": 1274902,
+  "positive_rate_test": 0.0152,
+  "auc": 0.6936,
+  "ap": 0.0313,
+  "ablation_auc": {
+   "without_recent_neighbour_burns": 0.6253,
+   "without_rain": 0.689,
+   "without_history": 0.6776,
+   "without_days_since_harvest": 0.6814
+  },
+  "median_per_pass_lift_top10": 2.06,
+  "label": "burn first observed at the next Sentinel-2 pass"
+ },
+ "replay": [
+  {
+   "fleet": 50,
+   "policy": "random",
+   "burned_fields": 20464,
+   "preempted_fields": 743,
+   "preempted_share": 0.0363,
+   "preempted_ha": 654,
+   "baled_ha": 11286,
+   "baled_t": 37244,
+   "preempted_baled_t": 2157
+  },
+  {
+   "fleet": 50,
+   "policy": "fifo",
+   "burned_fields": 20464,
+   "preempted_fields": 539,
+   "preempted_share": 0.0263,
+   "preempted_ha": 506,
+   "baled_ha": 12271,
+   "baled_t": 40494,
+   "preempted_baled_t": 1668
+  },
+  {
+   "fleet": 50,
+   "policy": "risk",
+   "burned_fields": 20464,
+   "preempted_fields": 1476,
+   "preempted_share": 0.0721,
+   "preempted_ha": 1603,
+   "baled_ha": 11950,
+   "baled_t": 39436,
+   "preempted_baled_t": 5291
+  },
+  {
+   "fleet": 50,
+   "policy": "dynamic",
+   "burned_fields": 20464,
+   "preempted_fields": 967,
+   "preempted_share": 0.0473,
+   "preempted_ha": 955,
+   "baled_ha": 11922,
+   "baled_t": 39343,
+   "preempted_baled_t": 3153
+  },
+  {
+   "fleet": 50,
+   "policy": "oracle",
+   "burned_fields": 20464,
+   "preempted_fields": 4344,
+   "preempted_share": 0.2123,
+   "preempted_ha": 4346,
+   "baled_ha": 12069,
+   "baled_t": 39827,
+   "preempted_baled_t": 14342
+  },
+  {
+   "fleet": 100,
+   "policy": "random",
+   "burned_fields": 20464,
+   "preempted_fields": 1408,
+   "preempted_share": 0.0688,
+   "preempted_ha": 1205,
+   "baled_ha": 19606,
+   "baled_t": 64701,
+   "preempted_baled_t": 3978
+  },
+  {
+   "fleet": 100,
+   "policy": "fifo",
+   "burned_fields": 20464,
+   "preempted_fields": 888,
+   "preempted_share": 0.0434,
+   "preempted_ha": 822,
+   "baled_ha": 21575,
+   "baled_t": 71197,
+   "preempted_baled_t": 2712
+  },
+  {
+   "fleet": 100,
+   "policy": "risk",
+   "burned_fields": 20464,
+   "preempted_fields": 2339,
+   "preempted_share": 0.1143,
+   "preempted_ha": 2498,
+   "baled_ha": 21037,
+   "baled_t": 69421,
+   "preempted_baled_t": 8245
+  },
+  {
+   "fleet": 100,
+   "policy": "dynamic",
+   "burned_fields": 20464,
+   "preempted_fields": 1693,
+   "preempted_share": 0.0827,
+   "preempted_ha": 1670,
+   "baled_ha": 21078,
+   "baled_t": 69556,
+   "preempted_baled_t": 5512
+  },
+  {
+   "fleet": 100,
+   "policy": "oracle",
+   "burned_fields": 20464,
+   "preempted_fields": 8131,
+   "preempted_share": 0.3973,
+   "preempted_ha": 8400,
+   "baled_ha": 21282,
+   "baled_t": 70231,
+   "preempted_baled_t": 27720
+  },
+  {
+   "fleet": 200,
+   "policy": "random",
+   "burned_fields": 20464,
+   "preempted_fields": 2580,
+   "preempted_share": 0.1261,
+   "preempted_ha": 2286,
+   "baled_ha": 35048,
+   "baled_t": 115658,
+   "preempted_baled_t": 7543
+  },
+  {
+   "fleet": 200,
+   "policy": "fifo",
+   "burned_fields": 20464,
+   "preempted_fields": 1629,
+   "preempted_share": 0.0796,
+   "preempted_ha": 1587,
+   "baled_ha": 38681,
+   "baled_t": 127648,
+   "preempted_baled_t": 5237
+  },
+  {
+   "fleet": 200,
+   "policy": "risk",
+   "burned_fields": 20464,
+   "preempted_fields": 3588,
+   "preempted_share": 0.1753,
+   "preempted_ha": 3973,
+   "baled_ha": 37426,
+   "baled_t": 123505,
+   "preempted_baled_t": 13111
+  },
+  {
+   "fleet": 200,
+   "policy": "dynamic",
+   "burned_fields": 20464,
+   "preempted_fields": 2758,
+   "preempted_share": 0.1348,
+   "preempted_ha": 2779,
+   "baled_ha": 37740,
+   "baled_t": 124543,
+   "preempted_baled_t": 9171
+  },
+  {
+   "fleet": 200,
+   "policy": "oracle",
+   "burned_fields": 20464,
+   "preempted_fields": 13263,
+   "preempted_share": 0.6481,
+   "preempted_ha": 13934,
+   "baled_ha": 38256,
+   "baled_t": 126243,
+   "preempted_baled_t": 45984
+  },
+  {
+   "fleet": 400,
+   "policy": "random",
+   "burned_fields": 20464,
+   "preempted_fields": 4760,
+   "preempted_share": 0.2326,
+   "preempted_ha": 4254,
+   "baled_ha": 62553,
+   "baled_t": 206423,
+   "preempted_baled_t": 14037
+  },
+  {
+   "fleet": 400,
+   "policy": "fifo",
+   "burned_fields": 20464,
+   "preempted_fields": 3329,
+   "preempted_share": 0.1627,
+   "preempted_ha": 3313,
+   "baled_ha": 70362,
+   "baled_t": 232194,
+   "preempted_baled_t": 10933
+  },
+  {
+   "fleet": 400,
+   "policy": "risk",
+   "burned_fields": 20464,
+   "preempted_fields": 5649,
+   "preempted_share": 0.276,
+   "preempted_ha": 6223,
+   "baled_ha": 67464,
+   "baled_t": 222632,
+   "preempted_baled_t": 20537
+  },
+  {
+   "fleet": 400,
+   "policy": "dynamic",
+   "burned_fields": 20464,
+   "preempted_fields": 4976,
+   "preempted_share": 0.2432,
+   "preempted_ha": 5131,
+   "baled_ha": 68233,
+   "baled_t": 225170,
+   "preempted_baled_t": 16932
+  },
+  {
+   "fleet": 400,
+   "policy": "oracle",
+   "burned_fields": 20464,
+   "preempted_fields": 17420,
+   "preempted_share": 0.8513,
+   "preempted_ha": 18745,
+   "baled_ha": 69653,
+   "baled_t": 229856,
+   "preempted_baled_t": 61860
+  }
+ ],
+ "replay_impact": {
+  "50": {
+   "preempted_share": 0.0721,
+   "fifo_share": 0.0263,
+   "preempted_ha": 1603,
+   "avoided_CH4_N2O_CO2e_t": 1193,
+   "avoided_CH4_N2O_CO2e_t_p05_p95": [
+    211,
+    3111
+   ],
+   "avoided_PM25_t": 54.7,
+   "avoided_BC_t": 2.8,
+   "straw_value_preempted_rs_crore": 0.89,
+   "straw_value_all_baled_rs_crore": 6.66
+  },
+  "100": {
+   "preempted_share": 0.1143,
+   "fifo_share": 0.0434,
+   "preempted_ha": 2498,
+   "avoided_CH4_N2O_CO2e_t": 1859,
+   "avoided_CH4_N2O_CO2e_t_p05_p95": [
+    328,
+    4849
+   ],
+   "avoided_PM25_t": 85.2,
+   "avoided_BC_t": 4.4,
+   "straw_value_preempted_rs_crore": 1.39,
+   "straw_value_all_baled_rs_crore": 11.73
+  },
+  "200": {
+   "preempted_share": 0.1753,
+   "fifo_share": 0.0796,
+   "preempted_ha": 3973,
+   "avoided_CH4_N2O_CO2e_t": 2956,
+   "avoided_CH4_N2O_CO2e_t_p05_p95": [
+    522,
+    7711
+   ],
+   "avoided_PM25_t": 135.5,
+   "avoided_BC_t": 7.0,
+   "straw_value_preempted_rs_crore": 2.22,
+   "straw_value_all_baled_rs_crore": 20.87
+  },
+  "400": {
+   "preempted_share": 0.276,
+   "fifo_share": 0.1627,
+   "preempted_ha": 6223,
+   "avoided_CH4_N2O_CO2e_t": 4630,
+   "avoided_CH4_N2O_CO2e_t_p05_p95": [
+    818,
+    12079
+   ],
+   "avoided_PM25_t": 212.3,
+   "avoided_BC_t": 11.0,
+   "straw_value_preempted_rs_crore": 3.47,
+   "straw_value_all_baled_rs_crore": 37.62
+  }
+ },
+ "emissions_burned_area": {
+  "2023": {
+   "strict": {
+    "burned_ha": 7883,
+    "dry_matter_burned_t": {
+     "median": 33388,
+     "p05": 26163,
+     "p95": 41592
+    },
+    "CO2_t": {
+     "median": 47204.5,
+     "p05": 32212.4,
+     "p95": 65765.0
+    },
+    "CH4_t": {
+     "median": 186.7,
+     "p05": 17.2,
+     "p95": 530.8
+    },
+    "N2O_t": {
+     "median": 3.0,
+     "p05": 0.8,
+     "p95": 5.5
+    },
+    "CO_t": {
+     "median": 2492.4,
+     "p05": 246.9,
+     "p95": 5768.3
+    },
+    "PM2.5_t": {
+     "median": 270.9,
+     "p05": 34.0,
+     "p95": 538.4
+    },
+    "BC_t": {
+     "median": 13.9,
+     "p05": 1.4,
+     "p95": 30.3
+    },
+    "OC_t": {
+     "median": 162.3,
+     "p05": 16.1,
+     "p95": 371.0
+    },
+    "CH4_N2O_CO2e_t": {
+     "median": 5853,
+     "p05": 1031,
+     "p95": 15282
+    },
+    "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+   },
+   "loose": {
+    "burned_ha": 21121,
+    "dry_matter_burned_t": {
+     "median": 89457,
+     "p05": 70098,
+     "p95": 111438
+    },
+    "CO2_t": {
+     "median": 126475.4,
+     "p05": 86306.9,
+     "p95": 176204.7
+    },
+    "CH4_t": {
+     "median": 500.3,
+     "p05": 46.0,
+     "p95": 1422.3
+    },
+    "N2O_t": {
+     "median": 7.9,
+     "p05": 2.1,
+     "p95": 14.7
+    },
+    "CO_t": {
+     "median": 6677.8,
+     "p05": 661.5,
+     "p95": 15454.9
+    },
+    "PM2.5_t": {
+     "median": 725.8,
+     "p05": 91.2,
+     "p95": 1442.5
+    },
+    "BC_t": {
+     "median": 37.2,
+     "p05": 3.8,
+     "p95": 81.1
+    },
+    "OC_t": {
+     "median": 434.9,
+     "p05": 43.2,
+     "p95": 994.0
+    },
+    "CH4_N2O_CO2e_t": {
+     "median": 15681,
+     "p05": 2763,
+     "p95": 40945
+    },
+    "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+   }
+  },
+  "2024": {
+   "strict": {
+    "burned_ha": 3643,
+    "dry_matter_burned_t": {
+     "median": 15430,
+     "p05": 12091,
+     "p95": 19221
+    },
+    "CO2_t": {
+     "median": 21814.8,
+     "p05": 14886.4,
+     "p95": 30392.2
+    },
+    "CH4_t": {
+     "median": 86.3,
+     "p05": 7.9,
+     "p95": 245.3
+    },
+    "N2O_t": {
+     "median": 1.4,
+     "p05": 0.4,
+     "p95": 2.5
+    },
+    "CO_t": {
+     "median": 1151.8,
+     "p05": 114.1,
+     "p95": 2665.7
+    },
+    "PM2.5_t": {
+     "median": 125.2,
+     "p05": 15.7,
+     "p95": 248.8
+    },
+    "BC_t": {
+     "median": 6.4,
+     "p05": 0.7,
+     "p95": 14.0
+    },
+    "OC_t": {
+     "median": 75.0,
+     "p05": 7.4,
+     "p95": 171.5
+    },
+    "CH4_N2O_CO2e_t": {
+     "median": 2705,
+     "p05": 476,
+     "p95": 7062
+    },
+    "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+   },
+   "loose": {
+    "burned_ha": 10566,
+    "dry_matter_burned_t": {
+     "median": 44752,
+     "p05": 35067,
+     "p95": 55748
+    },
+    "CO2_t": {
+     "median": 63270.6,
+     "p05": 43175.9,
+     "p95": 88148.3
+    },
+    "CH4_t": {
+     "median": 250.3,
+     "p05": 23.0,
+     "p95": 711.5
+    },
+    "N2O_t": {
+     "median": 4.0,
+     "p05": 1.0,
+     "p95": 7.4
+    },
+    "CO_t": {
+     "median": 3340.7,
+     "p05": 330.9,
+     "p95": 7731.5
+    },
+    "PM2.5_t": {
+     "median": 363.1,
+     "p05": 45.6,
+     "p95": 721.6
+    },
+    "BC_t": {
+     "median": 18.6,
+     "p05": 1.9,
+     "p95": 40.6
+    },
+    "OC_t": {
+     "median": 217.6,
+     "p05": 21.6,
+     "p95": 497.3
+    },
+    "CH4_N2O_CO2e_t": {
+     "median": 7845,
+     "p05": 1382,
+     "p95": 20483
+    },
+    "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+   }
+  },
+  "2025": {
+   "strict": {
+    "burned_ha": 7930,
+    "dry_matter_burned_t": {
+     "median": 33587,
+     "p05": 26319,
+     "p95": 41840
+    },
+    "CO2_t": {
+     "median": 47485.9,
+     "p05": 32404.4,
+     "p95": 66157.1
+    },
+    "CH4_t": {
+     "median": 187.8,
+     "p05": 17.3,
+     "p95": 534.0
+    },
+    "N2O_t": {
+     "median": 3.0,
+     "p05": 0.8,
+     "p95": 5.5
+    },
+    "CO_t": {
+     "median": 2507.2,
+     "p05": 248.4,
+     "p95": 5802.6
+    },
+    "PM2.5_t": {
+     "median": 272.5,
+     "p05": 34.2,
+     "p95": 541.6
+    },
+    "BC_t": {
+     "median": 14.0,
+     "p05": 1.4,
+     "p95": 30.4
+    },
+    "OC_t": {
+     "median": 163.3,
+     "p05": 16.2,
+     "p95": 373.2
+    },
+    "CH4_N2O_CO2e_t": {
+     "median": 5888,
+     "p05": 1037,
+     "p95": 15373
+    },
+    "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+   },
+   "loose": {
+    "burned_ha": 20150,
+    "dry_matter_burned_t": {
+     "median": 85344,
+     "p05": 66875,
+     "p95": 106315
+    },
+    "CO2_t": {
+     "median": 120660.9,
+     "p05": 82339.1,
+     "p95": 168104.0
+    },
+    "CH4_t": {
+     "median": 477.3,
+     "p05": 43.9,
+     "p95": 1356.9
+    },
+    "N2O_t": {
+     "median": 7.6,
+     "p05": 2.0,
+     "p95": 14.1
+    },
+    "CO_t": {
+     "median": 6370.8,
+     "p05": 631.1,
+     "p95": 14744.4
+    },
+    "PM2.5_t": {
+     "median": 692.5,
+     "p05": 87.0,
+     "p95": 1376.1
+    },
+    "BC_t": {
+     "median": 35.5,
+     "p05": 3.6,
+     "p95": 77.3
+    },
+    "OC_t": {
+     "median": 414.9,
+     "p05": 41.2,
+     "p95": 948.3
+    },
+    "CH4_N2O_CO2e_t": {
+     "median": 14960,
+     "p05": 2636,
+     "p95": 39063
+    },
+    "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+   }
+  }
+ },
+ "emissions_per_1000_ha_burned": {
+  "burned_ha": 1000,
+  "dry_matter_burned_t": {
+   "median": 4222,
+   "p05": 3320,
+   "p95": 5286
+  },
+  "CO2_t": {
+   "median": 6001.5,
+   "p05": 4085.4,
+   "p95": 8389.6
+  },
+  "CH4_t": {
+   "median": 23.6,
+   "p05": 2.2,
+   "p95": 67.6
+  },
+  "N2O_t": {
+   "median": 0.4,
+   "p05": 0.1,
+   "p95": 0.7
+  },
+  "CO_t": {
+   "median": 317.2,
+   "p05": 31.6,
+   "p95": 726.0
+  },
+  "PM2.5_t": {
+   "median": 34.3,
+   "p05": 4.3,
+   "p95": 67.5
+  },
+  "BC_t": {
+   "median": 1.8,
+   "p05": 0.2,
+   "p95": 3.8
+  },
+  "OC_t": {
+   "median": 20.5,
+   "p05": 2.0,
+   "p95": 47.3
+  },
+  "CH4_N2O_CO2e_t": {
+   "median": 741,
+   "p05": 132,
+   "p95": 1941
+  },
+  "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
+ },
+ "nowcast_2026": {
+  "latest_image": "2026-10-03",
+  "crop_fields": 158635,
+  "crop_ha": 182853,
+  "harvested_share_now": 0.0067,
+  "same_date_prior": {
+   "2023": 0.0112,
+   "2024": 0.0092,
+   "2025": 0.0164
+  },
+  "district_straw_total_t": 1146489,
+  "weekly_forecast": [
+   {
+    "week_start": "2026-10-03",
+    "expected_harvest_ha": 4284,
+    "range_ha": [
+     2176,
+     7700
+    ],
+    "expected_baleable_straw_t": 14136,
+    "expected_total_straw_t": 26858
+   },
+   {
+    "week_start": "2026-10-10",
+    "expected_harvest_ha": 17605,
+    "range_ha": [
+     9399,
+     31732
+    ],
+    "expected_baleable_straw_t": 58095,
+    "expected_total_straw_t": 110380
+   },
+   {
+    "week_start": "2026-10-17",
+    "expected_harvest_ha": 36572,
+    "range_ha": [
+     27165,
+     51597
+    ],
+    "expected_baleable_straw_t": 120687,
+    "expected_total_straw_t": 229305
+   },
+   {
+    "week_start": "2026-10-24",
+    "expected_harvest_ha": 50835,
+    "range_ha": [
+     40826,
+     59162
+    ],
+    "expected_baleable_straw_t": 167755,
+    "expected_total_straw_t": 318735
+   },
+   {
+    "week_start": "2026-10-31",
+    "expected_harvest_ha": 27075,
+    "range_ha": [
+     18068,
+     27791
+    ],
+    "expected_baleable_straw_t": 89349,
+    "expected_total_straw_t": 169762
+   },
+   {
+    "week_start": "2026-11-07",
+    "expected_harvest_ha": 12534,
+    "range_ha": [
+     2632,
+     12038
+    ],
+    "expected_baleable_straw_t": 41363,
+    "expected_total_straw_t": 78590
+   },
+   {
+    "week_start": "2026-11-14",
+    "expected_harvest_ha": 17196,
+    "range_ha": [
+     1835,
+     33549
+    ],
+    "expected_baleable_straw_t": 56748,
+    "expected_total_straw_t": 107822
+   },
+   {
+    "week_start": "2026-11-21",
+    "expected_harvest_ha": 7841,
+    "range_ha": [
+     452,
+     21373
+    ],
+    "expected_baleable_straw_t": 25875,
+    "expected_total_straw_t": 49162
+   },
+   {
+    "week_start": "2026-11-28",
+    "expected_harvest_ha": 185,
+    "range_ha": [
+     112,
+     121
+    ],
+    "expected_baleable_straw_t": 611,
+    "expected_total_straw_t": 1160
+   }
+  ],
+  "method": "Weekly harvest = district crop area x increment of the 2023-2025 mean harvest-progress curve (range = min/max year).",
+  "preseason_risk": {
+   "model": "logistic regression on field + 1.5 km neighbourhood burn history (trained 2024->2025)",
+   "top_decile_fields": 15864,
+   "top_decile_ha": 18399,
+   "top2000_ha": 2590
+  }
+ },
+ "assumptions": {
+  "straw_t_per_ha": 6.27,
+  "baled_t_per_ha": 3.3,
+  "straw_price_rs_per_t": 1690,
+  "emission_factors_g_per_kg": "Andreae 2019 ACP Table 1 agricultural residues (open)",
+  "gwp100": {
+   "CH4": 27.0,
+   "N2O": 273.0
+  }
+ },
+ "caveats": [
+  "Burn outcomes are rule-derived Sentinel-2 candidates, not ground truth; precision awaits Tier-B human labels.",
+  "Char-based detection is a lower bound: small, partial or quickly tilled burns can be missed between revisits.",
+  "2024 burned area is a lower bound because smog removed 3-21 Nov observations.",
+  "Fields of The World polygons are model-derived and overlap; areas use non-overlapping 20 m pixels.",
+  "Replay assumes a baled field is not burned and ignores intra-zone travel; it compares policies, it does not forecast impact."
+ ]
+}

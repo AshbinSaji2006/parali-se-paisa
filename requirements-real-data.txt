@@ -1,0 +1,7 @@
+# Optional acquisition-only dependencies. Kept separate from the application runtime.
+geopandas>=1.0
+rasterio>=1.4
+pystac-client>=0.8
+planetary-computer>=1.0
+duckdb>=1.2
+pyarrow>=17

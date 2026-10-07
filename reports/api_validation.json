@@ -1,0 +1,10 @@
+{
+  "health": "PASS",
+  "api_v1_operations": 27,
+  "sqlite_persistence": "PASS",
+  "dispatch_run_id": "c393db72-ba3d-42f4-b2dd-2d7e051d1932",
+  "job_final_state": "DELIVERED",
+  "certificate_retrieval": "PASS",
+  "database_url": "temporary SQLite fixture",
+  "provenance": "SYNTHETIC"
+}
