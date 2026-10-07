@@ -25,7 +25,7 @@ type SeasonEvent = { year: number; harvest_observed: string | null; burn_tier: s
 
 const FIGURES: Record<string, [string, string]> = {
   'f1_alerts_vs_scars.png': ['Fire alerts fell, burn scars did not', 'VIIRS active-fire alerts against Sentinel-2 burn-scar area, indexed to 2023, at a harmonised 5-day revisit.'],
-  'f2_blind_spot.png': ['The fire-count blind spot', 'Share of Sentinel-2 confirmed burns with any VIIRS alert within 500 m, against a proximity control.'],
+  'f2_blind_spot.png': ['The fire-count blind spot', 'Share of Sentinel-2 strict-tier burn candidates with any VIIRS alert within 500 m, against a proximity control.'],
   'f3_smoke_blindness.png': ['Smoke blinds optical monitoring', 'Clear-sky observability collapses during peak burning; the SWIR-based detector keeps most fields observable.'],
   'f4_naive_vs_aware.png': ['Harvest-aware burn detection', 'A naive dNBR mistakes the paddy harvest for a fire; harvest-aware logic scores only post-harvest char.'],
   'f5_intervention_window.png': ['The intervention window', 'Days from the first harvested observation to the first char observation, 2025.'],
@@ -86,7 +86,7 @@ export function ResearchEvents({ fieldId }: { fieldId: string }) {
   if (q.isLoading) return null;
   if (!q.data) return <Panel title="Satellite season events"><EmptyState title="No dense-time-series events for this field" detail="Research events cover Fields of The World polygons with at least 3 Sentinel-2 pixels." /></Panel>;
   return <Panel title="Satellite season events (dense Sentinel-2)"><div className="table-wrap"><table><thead><tr><th>Season</th><th>Harvest observed</th><th>Burn tier</th><th>Burn observed</th><th>Harvest → burn</th></tr></thead><tbody>
-    {q.data.seasons.map(s => <tr key={s.year}><td>{s.year}</td><td>{s.harvest_observed ? date(s.harvest_observed) : 'Not yet'}</td><td><Badge tone={s.burn_tier === 'CHAR_STRICT' ? 'danger' : s.burn_tier === 'CHAR_LOOSE' ? 'warning' : 'neutral'}>{s.burn_tier === 'NONE' ? 'No burn candidate' : s.burn_tier === 'CHAR_STRICT' ? 'Char confirmed' : 'Burn candidate'}</Badge></td><td>{s.burn_observed ? `${date(s.last_unburned_observation)} – ${date(s.burn_observed)}` : '—'}</td><td>{s.harvest_to_burn_days !== null ? `${s.harvest_to_burn_days} days` : '—'}</td></tr>)}
+    {q.data.seasons.map(s => <tr key={s.year}><td>{s.year}</td><td>{s.harvest_observed ? date(s.harvest_observed) : 'Not yet'}</td><td><Badge tone={s.burn_tier === 'CHAR_STRICT' ? 'danger' : s.burn_tier === 'CHAR_LOOSE' ? 'warning' : 'neutral'}>{s.burn_tier === 'NONE' ? 'No burn candidate' : s.burn_tier === 'CHAR_STRICT' ? 'Strict burn candidate' : 'Burn candidate'}</Badge></td><td>{s.burn_observed ? `${date(s.last_unburned_observation)} – ${date(s.burn_observed)}` : '—'}</td><td>{s.harvest_to_burn_days !== null ? `${s.harvest_to_burn_days} days` : '—'}</td></tr>)}
   </tbody></table></div><p className="notice">Rule-derived candidates from harvest-aware Sentinel-2 logic; not ground truth and never a basis for penalties.</p></Panel>;
 }
 
@@ -108,8 +108,8 @@ export function Research() {
     <p className="notice">{q.data.notice}</p>
     <div className="metric-grid">
       <Metric label="VIIRS fire alerts, 2023 → 2025" value={`−${Math.round(100 * (1 - c25.viirs_alerts / c23.viirs_alerts))}%`} note={`${num(c23.viirs_alerts, 0)} → ${num(c25.viirs_alerts, 0)} alerts (S-NPP + NOAA-20)`} />
-      <Metric label="Char-confirmed burn area, 2025 vs 2023" value={`${Math.round(100 * c25.burned_strict_ha / c23.burned_strict_ha)}`} note={`index · ${num(c25.burned_strict_ha, 0)} ha strict, ${num(c25.burned_loose_ha, 0)} ha loose`} />
-      <Metric label="Confirmed burns with a VIIRS alert, 2025" value={pct(c25.burns_with_viirs_short_window)} note={`proximity control ${pct(c25.control_with_viirs_short_window)} · ≤5-day windows`} />
+      <Metric label="Strict-tier burn-scar candidate area, 2025 vs 2023" value={`${Math.round(100 * c25.burned_strict_ha / c23.burned_strict_ha)}`} note={`index · ${num(c25.burned_strict_ha, 0)} ha strict, ${num(c25.burned_loose_ha, 0)} ha loose`} />
+      <Metric label="Strict-tier burn candidates with a VIIRS alert, 2025" value={pct(c25.burns_with_viirs_short_window)} note={`proximity control ${pct(c25.control_with_viirs_short_window)} · ≤5-day windows`} />
       <Metric label="Intervention window" value={`${r.latency['2025'].median_days} days`} note="median, first harvested → first char observation (2025)" />
       <Metric label="Burns pre-empted with 100 balers" value={pct(imp.preempted_share)} note={`risk-ranked vs ${pct(imp.fifo_share, 1)} first-come-first-served`} />
       <Metric label={`2026 harvest, ${date(now.latest_image)}`} value={pct(now.harvested_share_now, 1)} note={`same date: ${Object.entries(now.same_date_prior).map(([y, v]) => `${y} ${pct(v, 1)}`).join(' · ')}`} />
@@ -132,7 +132,7 @@ export function Research() {
       </tbody></table></div><p className="map-caption">{watch.data.notice} Top decile: {num(now.preseason_risk.top_decile_fields, 0)} fields, {num(now.preseason_risk.top_decile_ha, 0)} ha.</p></> : <EmptyState title="Watch-list unavailable" />}</Panel>
     </div>
     <div className="detail-grid">
-      <Panel title="Emissions from 2025 burning (char-confirmed area)"><p>{num(c25.burned_strict_ha, 0)} ha strict burn area ≈ <strong>{num(em25.strict.CH4_N2O_CO2e_t.median, 0)} t CO₂e</strong> (CH₄ + N₂O, 90% range {num(em25.strict.CH4_N2O_CO2e_t.p05, 0)}–{num(em25.strict.CH4_N2O_CO2e_t.p95, 0)}), <strong>{num(em25.strict['PM2.5_t'].median, 0)} t PM2.5</strong>, {num(em25.strict.BC_t.median, 1)} t black carbon. Loose tier: {num(em25.loose.CH4_N2O_CO2e_t.median, 0)} t CO₂e.</p><p className="map-caption">Andreae (2019) agricultural-residue emission factors; IPCC AR6 GWP100 (CH₄ 27.0, N₂O 273); biogenic CO₂ excluded from CO₂e. Monte Carlo over straw load, dry matter and combustion factor.</p></Panel>
+      <Panel title="Emissions from 2025 burning (strict-tier candidate area)"><p>{num(c25.burned_strict_ha, 0)} ha strict burn area ≈ <strong>{num(em25.strict.CH4_N2O_CO2e_t.median, 0)} t CO₂e</strong> (CH₄ + N₂O, 90% range {num(em25.strict.CH4_N2O_CO2e_t.p05, 0)}–{num(em25.strict.CH4_N2O_CO2e_t.p95, 0)}), <strong>{num(em25.strict['PM2.5_t'].median, 0)} t PM2.5</strong>, {num(em25.strict.BC_t.median, 1)} t black carbon. Loose tier: {num(em25.loose.CH4_N2O_CO2e_t.median, 0)} t CO₂e.</p><p className="map-caption">Andreae (2019) agricultural-residue emission factors; IPCC AR6 GWP100 (CH₄ 27.0, N₂O 273); biogenic CO₂ excluded from CO₂e. Monte Carlo over straw load, dry matter and combustion factor.</p></Panel>
       <Panel title="What this evidence does not show"><ul>{r.caveats.map(x => <li key={x}>{x}</li>)}</ul></Panel>
     </div>
   </>;

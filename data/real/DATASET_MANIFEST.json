@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-10-07T17:10:22.062515+00:00",
+  "generated_at": "2026-10-07T17:20:53.002772+00:00",
   "pilot": {
     "district": "Sri Muktsar Sahib",
     "state": "Punjab",
@@ -902,7 +902,7 @@
       "source_dataset": "Sentinel-2 + ERA5 real field features",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:10:21.786648+00:00",
+      "downloaded_at": "2026-10-07T17:20:52.753887+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
@@ -919,7 +919,7 @@
       "source_dataset": "Leakage-safe real observation deltas",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:10:21.812862+00:00",
+      "downloaded_at": "2026-10-07T17:20:52.784238+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
@@ -936,7 +936,7 @@
       "source_dataset": "Low-confidence rule proxy labels",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:10:21.826194+00:00",
+      "downloaded_at": "2026-10-07T17:20:52.794508+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
@@ -953,7 +953,7 @@
       "source_dataset": "Observed real research fields",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:10:21.899256+00:00",
+      "downloaded_at": "2026-10-07T17:20:52.841939+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
@@ -970,13 +970,13 @@
       "source_dataset": "Read-only real product snapshot",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:10:21.919813+00:00",
+      "downloaded_at": "2026-10-07T17:20:52.856594+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "data/real/derived/app_snapshot.json",
-          "bytes": 3433970,
-          "sha256": "4bda72c553aa08d97482d61e719ec11d08fa4dbc32dd2e63887ce9fd6eac254b"
+          "bytes": 3450098,
+          "sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180"
         }
       ],
       "mode_switch": "DATA_MODE=real",
@@ -988,13 +988,13 @@
       "source_dataset": "Real data status reports",
       "aoi": "Sri Muktsar Sahib, Punjab, India",
       "status": "real_derived",
-      "downloaded_at": "2026-10-07T17:10:22.062503+00:00",
+      "downloaded_at": "2026-10-07T17:20:53.002758+00:00",
       "processing_version": "real-acquisition-1.0",
       "files": [
         {
           "path": "reports/real_data_summary.md",
           "bytes": 3166,
-          "sha256": "5545f3556d42d8ef8a0706985f678d9e982922a6a0601230d914659d0be2f05d"
+          "sha256": "a8fb968eadcc0b11e5fa5a50cd3f0ad789dbb47a60dd613e02c1acf5b2d0781e"
         },
         {
           "path": "reports/real_field_provenance_example.md",
@@ -1004,12 +1004,12 @@
         {
           "path": "reports/real_data_disk_usage.json",
           "bytes": 237,
-          "sha256": "d5c75c1dc1830499c62c98931181897893cd67b868060a6d91193a4e95bce695"
+          "sha256": "e13643f2ed41461f7d9d719bd5e71c29e0b87c5b93e4b382c56428ed97c8f547"
         },
         {
           "path": "reports/real_data_validation.json",
           "bytes": 1216,
-          "sha256": "add578df9dff06993f1955a705fb2c7922e1dda57f33119d48f10194ce25f876"
+          "sha256": "90a36ca5844bd67e7ae1eea9eebb0f5962a640add069c46b994a15e5fb59110c"
         }
       ]
     }

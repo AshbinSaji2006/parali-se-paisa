@@ -186,6 +186,49 @@ def _research_events(field_ids: set[str]) -> dict[str, dict[int, dict]]:
     return out
 
 
+def _dense_series_state(field_ids: set[str], year: int) -> dict[str, dict]:
+    """Per-field dense-series state for one season (timeseries/events_<year>.parquet)."""
+    path = REAL / "derived" / "timeseries" / f"events_{year}.parquet"
+    if not content_available(path):
+        return {}
+    events = pd.read_parquet(path, columns=["field_id", "n_usable", "last_date", "peak_nbr", "harvested",
+                                           "harvest_date", "last_green_date", "harvest_window_days"])
+    return {r.field_id: r._asdict() for r in events.loc[events.field_id.isin(field_ids)].itertuples(index=False)}
+
+
+def _current_candidate(last: pd.Series, dense: dict | None, weak: dict) -> dict:
+    """Latest-date RULE-BASED STATUS CANDIDATE.
+
+    A sparse weak label is used when it exists. Otherwise the candidate needs two
+    reductions of real Sentinel-2 data to agree on the same acquisition: the dense
+    harvest-aware series (harvest = first usable NBR < 0.30 after NBR reached 0.50)
+    and the sparse field NDVI. Disagreement or missing evidence stays UNKNOWN.
+    """
+    if weak["candidate"]:
+        return {**weak, "candidate_source": "SPARSE_S2_WEAK_LABEL"}
+    day = pd.Timestamp(last.observation_datetime).tz_convert("UTC").tz_localize(None).normalize()
+    unknown = {"candidate": None, "evidence_window_days": None, "temporal_gap_category": None,
+               "candidate_source": None, "reason": weak["reason"]}
+    if not dense or pd.isna(dense.get("last_date")) or pd.Timestamp(dense["last_date"]).normalize() != day:
+        return {**unknown, "reason": weak["reason"] + " Dense series has no usable observation on this date."}
+    ndvi = last.get("NDVI")
+    if dense["harvested"] and pd.Timestamp(dense["harvest_date"]) <= day:
+        if pd.notna(ndvi) and ndvi <= .40:
+            return {"candidate": "HARVESTED", "evidence_window_days": dense.get("harvest_window_days"),
+                    "temporal_gap_category": None, "candidate_source": "DENSE_S2_SERIES_AND_SPARSE_NDVI_AGREE",
+                    "reason": f"Dense series harvest transition observed {pd.Timestamp(dense['harvest_date']).date()} "
+                              f"(last green {pd.Timestamp(dense['last_green_date']).date()}); field NDVI {ndvi:.2f} on this date. Harvest proxy only."}
+        return {**unknown, "reason": "Dense series and field NDVI disagree on harvest; review required."}
+    if not dense["harvested"] and dense["peak_nbr"] >= .50:
+        if pd.notna(ndvi) and ndvi >= .55:
+            return {"candidate": "STANDING", "evidence_window_days": None, "temporal_gap_category": None,
+                    "candidate_source": "DENSE_S2_SERIES_AND_SPARSE_NDVI_AGREE",
+                    "reason": f"No harvest transition in {int(dense['n_usable'])} usable dense-series observations through "
+                              f"{day.date()} (season peak NBR {dense['peak_nbr']:.2f}); field NDVI {ndvi:.2f}. Standing-crop proxy only."}
+        return {**unknown, "reason": "Dense series shows no harvest but field NDVI is low; ambiguous, review required."}
+    return {**unknown, "reason": "No established crop in the dense series this season; insufficient evidence."}
+
+
 def _demo_suitability(obs: pd.DataFrame, labels: pd.DataFrame, events: dict) -> pd.DataFrame:
     """Rank fields for a transparent demonstration; this is not a scientific ranking.
 
@@ -318,6 +361,8 @@ def build() -> dict:
     labels_df.to_parquet(label_path, index=False)
 
     events = _research_events(set(obs.field_id))
+    latest_year = int(obs.year.max())
+    dense_latest = _dense_series_state(set(obs.field_id), latest_year)
     suitability = _demo_suitability(obs, labels_df, events)
     # Showcase only fields with real processed observations and committed source geometry.
     geometries = context["geometries"]
@@ -360,7 +405,8 @@ def build() -> dict:
         if hist.empty:
             continue
         last = hist.iloc[-1]
-        latest_status = status_entry(f.field_id, last.observation_datetime)
+        latest_status = _current_candidate(last, dense_latest.get(f.field_id) if int(last.year) == latest_year else None,
+                                           status_entry(f.field_id, last.observation_datetime))
         season_candidates = []
         for _, r in hist.iterrows():
             entry = status_entry(f.field_id, r.observation_datetime)
@@ -381,6 +427,7 @@ def build() -> dict:
             "intelligence": {
                 "field_status": {"status_candidate": latest_status["candidate"], "method": STATUS_METHOD, "confidence_band": "LOW",
                                  "is_ground_truth": False, "label_source": "REAL_S2_HEURISTIC_PROXY",
+                                 "candidate_source": latest_status["candidate_source"],
                                  "evidence": [f"Latest observation {pd.Timestamp(last.observation_datetime).date()}: {latest_status['reason']}",
                                               *season_candidates,
                                               "No trained or validated field-status model; weak proxy labels are not ground truth."]},
@@ -401,6 +448,7 @@ def build() -> dict:
         "certificates": [], "allocations": [], "pickup_requests": [],
         "read_only": True,
         "stats": {"fields": len(snapshot_fields),
+                  "standing_candidates": sum(f["intelligence"]["field_status"]["status_candidate"] == "STANDING" for f in snapshot_fields),
                   "harvested_candidates": sum(f["intelligence"]["field_status"]["status_candidate"] == "HARVESTED" for f in snapshot_fields),
                   "high_risk": 0, "estimated_straw_tonnes": 0, "assigned_fields": 0, "collected_tonnes": 0,
                   "active_verification": 0, "certificates": 0, "manual_review": 0},

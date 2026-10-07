@@ -193,24 +193,24 @@ text(s, 0.6, 5.5, 12, 1.2, ["Inputs: Sentinel-2 (ESA), VIIRS S-NPP / NOAA-20 / N
 
 # 4 Finding 1
 s = base(f"Fire alerts fell {viirs_drop}%. Burn scars did not.", "Finding 1",
-         "Sentinel-2 at a harmonised 5-day revisit. Strict = char-confirmed tier; loose = all burn candidates. 2024 burn area is a lower bound (smog gap, 3–21 Nov).",
+         "Sentinel-2 at a harmonised 5-day revisit. Strict = char-like signature tier; loose = all burn candidates; both are unverified rule candidates. 2024 burn area is a lower bound (smog gap, 3–21 Nov).",
          f"From 2023 to 2025, VIIRS fire alerts in Muktsar fell from {fmt(C[2023]['viirs_alerts'])} to {fmt(C[2025]['viirs_alerts'])}. "
          f"Sentinel-2 burn scars, mapped field by field, stayed flat at {fmt(C[2023]['burned_strict_ha'])} and {fmt(C[2025]['burned_strict_ha'])} hectares. "
          "Every season was thinned to the same 5-day revisit, so 2025's extra satellite does not create the result.")
 picture(s, FIG / "f1_alerts_vs_scars.png", 0.6, 1.55, w=8.3)
 bullets(s, 9.2, 1.7, 3.8, 5, [(f"{fmt(C[2023]['viirs_alerts'])} → {fmt(C[2025]['viirs_alerts'])}", "VIIRS fire alerts in the district"),
-                              (f"{fmt(C[2023]['burned_strict_ha'])} → {fmt(C[2025]['burned_strict_ha'])} ha", f"char-confirmed burn area (index {scar_index})"),
+                              (f"{fmt(C[2023]['burned_strict_ha'])} → {fmt(C[2025]['burned_strict_ha'])} ha", f"strict-tier burn-scar candidate area (index {scar_index})"),
                               (f"{C[2023]['strict_fields_per_viirs_alert']} → {C[2025]['strict_fields_per_viirs_alert']}", "burned fields per fire alert"),
                               ("Same revisit,", "same thresholds, same fields")])
 
 # 5 Finding 2
-s = base(f"9 in 10 confirmed burns in 2025 raised no fire alert", "Finding 2",
+s = base(f"9 in 10 strict-tier burn candidates in 2025 raised no fire alert", "Finding 2",
          "Strict burns observed within ≤5 days; VIIRS within 500 m. Control: unburned fields with the same windows. Smoke panel: 2023 season.",
-         f"Only {seen25} percent of 2025's confirmed field burns had a VIIRS alert anywhere within 500 metres during the burn window, against {seen23} percent in 2023. "
+         f"Only {seen25} percent of 2025's strict-tier field burn candidates had a VIIRS alert anywhere within 500 metres during the burn window, against {seen23} percent in 2023. "
          "Unburned control fields match 4 percent by proximity alone, so the true share is lower still. And at the peak, smoke blinds ordinary optical monitoring too, which our SWIR logic is built to survive.")
 picture(s, FIG / "f2_blind_spot.png", 0.6, 1.55, w=6.2)
 picture(s, FIG / "f3_smoke_blindness.png", 7.0, 1.55, w=5.8)
-bullets(s, 0.6, 5.25, 6.2, 1.6, [(f"{seen23}% → {seen25}%", f"confirmed burns with any VIIRS alert (control {ctl25}%)"),
+bullets(s, 0.6, 5.25, 6.2, 1.6, [(f"{seen23}% → {seen25}%", f"strict-tier burn candidates with any VIIRS alert (control {ctl25}%)"),
                                  ("Independent of iFOREST:", "field-level evidence of after-overpass burning")], size=14)
 
 # 6 Rigour
@@ -315,7 +315,7 @@ bullets(s, 6.9, 1.7, 6.0, 5, [("Week 1:", "finish labels → publish precision, 
 # 13 Close
 s = base("Measure burns, not alerts. Pay for straw, not fines.", None, None,
          "Close by repeating the two numbers: fire alerts fell 79 percent but burn scars did not, and the same balers reach 2.6 times more would-be burns when guided by our risk map. Invite the judges to the live app.")
-text(s, 0.6, 2.0, 12, 2.5, [f"Fire alerts −{viirs_drop}% · burn scars unchanged · {100-seen25}% of confirmed burns unseen by fire satellites (2025)",
+text(s, 0.6, 2.0, 12, 2.5, [f"Fire alerts −{viirs_drop}% · burn scars unchanged · {100-seen25}% of strict-tier burn candidates unseen by fire satellites (2025)",
                             f"{round(i100['preempted_share']/i100['fifo_share'],1)}× more burns pre-empted with the same 100 balers · live 2026 nowcast for Muktsar"], size=20, color=INK2)
 text(s, 0.6, 4.6, 12, 1.5, ["Parali Se Paisa · Greenovators Hackathon 2026 · Amity University Noida",
                             "Reproducible: scripts/run_research.py · docs/RESEARCH_METHODS.md · reports/research/RESEARCH_SUMMARY.md"], size=14, color=MUTED)

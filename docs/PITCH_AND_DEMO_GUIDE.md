@@ -19,7 +19,7 @@ Every number in the deck is generated from `reports/research/results.json`.
 | 0:30 | 2 | 18.8 Mt of straw; fire counts down 92%; over 90% of large fires now after 3 PM (iFOREST, SEVIRI) | Big numbers |
 | 1:00 | 3 | "Every field, every 2–5 days, from free data, on a laptop." | Pipeline |
 | 1:30 | 4 | **Fire alerts −79%, burn scars unchanged** (harmonised revisit) | f1 |
-| 2:10 | 5 | **9 in 10 confirmed burns raised no fire alert in 2025**; smoke blinds optical sensors too | f2 + f3 |
+| 2:10 | 5 | **9 in 10 strict-tier burn candidates raised no fire alert in 2025**; smoke blinds optical sensors too | f2 + f3 |
 | 2:50 | 6 | Rigour: naive dNBR flags 98% of fields; harvest-aware logic, thermal recall, proximity controls, blind human labels | f4 |
 | 3:20 | 7 | A two-week window; repeat burners (4.6% of fields) do 34% of the burning | Map + f5 |
 | 3:50 | 8 | Same 100 balers, 2.6× more burns pre-empted with risk ranking; early beats precise | f6 |

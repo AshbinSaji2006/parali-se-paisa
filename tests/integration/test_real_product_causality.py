@@ -64,3 +64,23 @@ def test_weak_label_records_its_evidence_window():
     assert label.weak_label == "HARVESTED" and not label.is_ground_truth
     assert label.temporal_gap_category == "LARGE" and round(label.evidence_window_days) == 60
     assert "ambiguous" in label.reason
+
+
+def test_current_candidate_requires_dense_and_sparse_agreement():
+    from scripts.build_real_products import _current_candidate
+    weak = {"candidate": None, "reason": "Insufficient same-season evidence; review required.",
+            "evidence_window_days": None, "temporal_gap_category": None}
+    last = pd.Series({"observation_datetime": pd.Timestamp("2026-10-03T05:36Z"), "NDVI": .80})
+    dense = {"last_date": pd.Timestamp("2026-10-03"), "harvested": False, "peak_nbr": .70, "n_usable": 9,
+             "harvest_date": pd.NaT, "last_green_date": pd.NaT, "harvest_window_days": None}
+    assert _current_candidate(last, dense, weak)["candidate"] == "STANDING"
+    assert _current_candidate(last.copy().replace({.80: .30}), dense, weak)["candidate"] is None   # NDVI disagrees
+    assert _current_candidate(last, {**dense, "last_date": pd.Timestamp("2026-09-28")}, weak)["candidate"] is None  # other date
+    assert _current_candidate(last, None, weak)["candidate"] is None
+    harvested = {**dense, "harvested": True, "harvest_date": pd.Timestamp("2026-10-03"),
+                 "last_green_date": pd.Timestamp("2026-09-28"), "harvest_window_days": 5}
+    assert _current_candidate(last, harvested, weak)["candidate"] is None  # NDVI 0.80 contradicts harvest
+    low = pd.Series({"observation_datetime": pd.Timestamp("2026-10-03T05:36Z"), "NDVI": .25})
+    assert _current_candidate(low, harvested, weak)["candidate"] == "HARVESTED"
+    # A sparse weak label always takes precedence and keeps its own source.
+    assert _current_candidate(last, None, {**weak, "candidate": "HARVESTED"})["candidate_source"] == "SPARSE_S2_WEAK_LABEL"

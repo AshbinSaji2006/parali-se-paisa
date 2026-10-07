@@ -1,6 +1,6 @@
 # Real-data acquisition summary
 
-Generated: 2026-10-07T17:10:21.991237+00:00
+Generated: 2026-10-07T17:20:52.939533+00:00
 - District: PASS; source geoBoundaries gbOpen IND ADM2; area: 2633.1 km2.
 - Research fields: 243,530 (from acquisition metadata; LFS Parquet not fetched in this working copy, so polygons were not re-validated); cropland fields >50% WorldCover class-40 fraction: 469.
 - WorldCover: PASS; ESA WorldCover class 40 cropland; district clipped.

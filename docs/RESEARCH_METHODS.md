@@ -35,7 +35,7 @@ This document describes how every number in `reports/research/results.json` and 
 - **Burn candidate (loose tier):** at or after harvest, an observation where the field turns char-dark relative to the previous usable observation, or where at least 25% of its pixels are char-like:
   - darkness: B8A < 0.15, B12 < 0.17 and NBR < 0.03
   - drop: B8A falls by more than 0.06, B12 by more than 0.03 and NBR by more than 0.08
-- **Char-confirmed (strict tier):** darker char (B8A < 0.12, B12 < 0.14, NBR < 0) together with the drop, or at least 40% char-like pixels.
+- **Strict tier (char-like signature; an unverified rule candidate, not a confirmation):** darker char (B8A < 0.12, B12 < 0.14, NBR < 0) together with the drop, or at least 40% char-like pixels.
 - **Wet-soil rejection:** irrigated or rained-on soil darkens SWIR more than NIR, so its NBR stays positive and is rejected. After the 20–21 Nov 2025 rain the whole landscape was dark in true colour, yet it was not flagged.
 - **Event dating:** events are interval-censored between the last usable observation before the event and the first one after. Both bounds are stored (`last_green_date`/`harvest_date`, `burn_prev_date`/`burn_date`). The median interval is 5 days.
 - **Revisit harmonisation:** 2025 had three Sentinel-2 satellites. For cross-year comparisons every season is thinned to one acquisition per 5-day slot before detection (`census_and_blindspot` in `scripts/run_research.py`).

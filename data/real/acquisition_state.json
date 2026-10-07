@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated_at": "2026-10-07T17:10:22.061244+00:00",
+  "updated_at": "2026-10-07T17:20:53.001494+00:00",
   "pilot": {
     "district": "Sri Muktsar Sahib",
     "aliases": [
@@ -826,7 +826,7 @@
           "sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db"
         }
       ],
-      "updated_at": "2026-10-07T17:10:21.781160+00:00",
+      "updated_at": "2026-10-07T17:20:52.748179+00:00",
       "metadata": {
         "rows": 3640
       }
@@ -840,7 +840,7 @@
           "sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db"
         }
       ],
-      "updated_at": "2026-10-07T17:10:21.807973+00:00",
+      "updated_at": "2026-10-07T17:20:52.778593+00:00",
       "metadata": {
         "rows": 3640
       }
@@ -854,7 +854,7 @@
           "sha256": "18f1bf07afa58c8127b8e6eccd617e862733f856099c0d26e0b011d9bf9e3031"
         }
       ],
-      "updated_at": "2026-10-07T17:10:21.823547+00:00",
+      "updated_at": "2026-10-07T17:20:52.792661+00:00",
       "metadata": {
         "rows": 3640
       }
@@ -868,7 +868,7 @@
           "sha256": "65106b7a23070258fd43edbbc521d52373023bc341db33974e18532ba72d45e6"
         }
       ],
-      "updated_at": "2026-10-07T17:10:21.892746+00:00",
+      "updated_at": "2026-10-07T17:20:52.837751+00:00",
       "metadata": {
         "rows": 100
       }
@@ -878,11 +878,11 @@
       "artifacts": [
         {
           "path": "data/real/derived/app_snapshot.json",
-          "bytes": 3433970,
-          "sha256": "4bda72c553aa08d97482d61e719ec11d08fa4dbc32dd2e63887ce9fd6eac254b"
+          "bytes": 3450098,
+          "sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180"
         }
       ],
-      "updated_at": "2026-10-07T17:10:21.901704+00:00",
+      "updated_at": "2026-10-07T17:20:52.843445+00:00",
       "date_range": null,
       "warnings": [],
       "metadata": {
@@ -896,7 +896,7 @@
         {
           "path": "reports/real_data_summary.md",
           "bytes": 3166,
-          "sha256": "5545f3556d42d8ef8a0706985f678d9e982922a6a0601230d914659d0be2f05d"
+          "sha256": "a8fb968eadcc0b11e5fa5a50cd3f0ad789dbb47a60dd613e02c1acf5b2d0781e"
         },
         {
           "path": "reports/real_field_provenance_example.md",
@@ -906,15 +906,15 @@
         {
           "path": "reports/real_data_disk_usage.json",
           "bytes": 237,
-          "sha256": "d5c75c1dc1830499c62c98931181897893cd67b868060a6d91193a4e95bce695"
+          "sha256": "e13643f2ed41461f7d9d719bd5e71c29e0b87c5b93e4b382c56428ed97c8f547"
         },
         {
           "path": "reports/real_data_validation.json",
           "bytes": 1216,
-          "sha256": "add578df9dff06993f1955a705fb2c7922e1dda57f33119d48f10194ce25f876"
+          "sha256": "90a36ca5844bd67e7ae1eea9eebb0f5962a640add069c46b994a15e5fb59110c"
         }
       ],
-      "updated_at": "2026-10-07T17:10:22.060934+00:00",
+      "updated_at": "2026-10-07T17:20:53.001117+00:00",
       "metadata": {}
     },
     "sentinel2_catalog": {

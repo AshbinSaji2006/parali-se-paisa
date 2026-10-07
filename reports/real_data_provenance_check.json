@@ -148,13 +148,13 @@
     {
       "dataset": "app_import",
       "path": "data/real/derived/app_snapshot.json",
-      "expected_sha256": "4bda72c553aa08d97482d61e719ec11d08fa4dbc32dd2e63887ce9fd6eac254b",
+      "expected_sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_summary.md",
-      "expected_sha256": "a13ba89f6871c144f290efdf9dbe2f727b37b4498b66984f9715c2b7130df2a6",
+      "expected_sha256": "5545f3556d42d8ef8a0706985f678d9e982922a6a0601230d914659d0be2f05d",
       "status": "OK"
     },
     {
@@ -166,13 +166,13 @@
     {
       "dataset": "reports",
       "path": "reports/real_data_disk_usage.json",
-      "expected_sha256": "de8210b799c5c436509e24bdff77cf8034563ef2f47eb88d2cd1046c9989356b",
+      "expected_sha256": "d5c75c1dc1830499c62c98931181897893cd67b868060a6d91193a4e95bce695",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_validation.json",
-      "expected_sha256": "5b97d98402304432f03cd56daded095a1ac4e123dace56e946d83736cd4a71a0",
+      "expected_sha256": "add578df9dff06993f1955a705fb2c7922e1dda57f33119d48f10194ce25f876",
       "status": "OK"
     },
     {

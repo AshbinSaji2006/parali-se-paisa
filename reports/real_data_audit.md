@@ -39,3 +39,14 @@ Before this branch, the snapshot also had four correctness defects and one wrong
 * Raw S2 stacks (`data/real/s2_stack/**/*.tif`, about 7.6 GiB) or the excluded `field_timeseries_*.parquet`: needed to densify the 520-field sample from 7 to about 74 acquisitions. Re-reducing pixel BAIS2 with the v4 red floor also needs the raw stacks or Planetary Computer access.
 * MCD64A1 for 2025, the remaining ERA5 grid points over the district, and FIRMS for Sep 2025: needed to remove the PARTIAL/NOT_COVERED windows.
 * Independent field-level reference labels (for example from `reports/research/label_tool/`): there are none, so no accuracy can be claimed.
+
+## Follow-up (same branch)
+
+* **Current status candidate.** The latest (2026-10-03) status is now a `RULE-BASED STATUS CANDIDATE` only when two independent reductions of real Sentinel-2 data agree on the same acquisition:
+  * the dense harvest-aware series (`timeseries/events_2026.parquet`, 9 acquisitions);
+  * the sparse field NDVI.
+
+  For example, STANDING needs no harvest transition through that date, season peak NBR ≥ 0.50 and NDVI ≥ 0.55. Disagreement stays UNKNOWN. Result: all 100 showcase fields are STANDING candidates (`candidate_source = DENSE_S2_SERIES_AND_SPARSE_NDVI_AGREE`). This is consistent with the research nowcast (0.7% of crop fields harvested by 3 Oct 2026). It is still a weak proxy, not ground truth.
+* **Research claims re-checked against committed products.** The 2023 and 2024 census reproduces exactly from `field_events_*.parquet` and `firms_muktsar.parquet`: crop fields, strict and loose fields and hectares, and VIIRS S-NPP + NOAA-20 alert counts. The 2025 headline (7,930 ha) uses the 5-day harmonised subset and needs the excluded full time series to reproduce; the all-date value (9,137 ha) reproduces. The summary now states the cross-archive caveat for the 2023→2025 alert comparison.
+* **Wording.** "Char-confirmed" and "confirmed burns" implied verification of unvalidated rule candidates. They are renamed to "strict-tier burn(-scar) candidate" in the README, research summary, methods, demo guide, overlay legend, figure, map and deck generators, and four research-page labels. The committed PNG figures and the pitch PDF/PPTX keep their old titles until they are re-rendered with the full data; the figure render needs the LFS `risk_features_2025` and the excluded time series.
+* **Network.** This environment's egress policy denies Planetary Computer, source.coop, Open-Meteo, FIRMS and Azure blob hosts. Git LFS content is unreachable from it. Densification, polygon re-validation and coverage-gap filling therefore remain blocked here.
