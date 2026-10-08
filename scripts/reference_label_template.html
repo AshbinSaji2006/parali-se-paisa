@@ -37,14 +37,14 @@ pre{white-space:pre-wrap;font:12px/1.4 ui-monospace,monospace;margin:0}
 
 <h2>1 · Did the outlined field burn between the before and after dates?</h2>
 <div class="row" id="burnRow">
-  <button class="burn" data-burn="BURNT">B · Burnt (char/ash in outlined field)</button>
-  <button data-burn="NOT_BURNT">N · Not burnt</button>
-  <button class="unk" data-burn="UNCLEAR">U · Can't tell</button>
+  <button class="burn" data-burn="BURNED">B · Burned (char/ash in outlined field)</button>
+  <button data-burn="NOT_BURNED">N · Not burned</button>
+  <button class="unk" data-burn="UNCERTAIN">U · Uncertain</button>
 </div>
 <h2>2 · Field state on the candidate (middle) date</h2>
 <div class="row" id="stateRow">
   <button data-state="STANDING">Standing crop</button><button data-state="HARVESTED">Harvested, residue present</button>
-  <button data-state="BURNT">Burnt</button><button data-state="SOWN">Tilled or sown / green-up</button>
+  <button data-state="BURNED">Burned</button><button data-state="SOWN">Tilled or sown / green-up</button>
   <button data-state="UNKNOWN">Unknown / ambiguous</button>
 </div>
 <h2>3 · Confidence and evidence</h2>
@@ -66,7 +66,7 @@ pre{white-space:pre-wrap;font:12px/1.4 ui-monospace,monospace;margin:0}
 <span class="muted"> FIRMS/MODIS proximity is context, not proof. Opening it is recorded; you may revise your answer afterwards.</span>
 <pre id="ctx" hidden></pre></div>
 
-<div class="card" style="margin-top:12px"><b>How to judge.</b> Look at the yellow-outlined field across the three dates. In SWIR false colour fresh burn scars turn near black or deep maroon; in true colour they look charcoal grey or black and are usually sharply bounded by the field edge. Tilled soil is brown-grey to pink-purple in SWIR, not black; freshly irrigated soil is dark in true colour but stays reddish-purple in SWIR. Partial burns count as Burnt. Use Can't tell for haze, cloud or ambiguous cases. The detector's answer is hidden.
+<div class="card" style="margin-top:12px"><b>How to judge.</b> Look at the yellow-outlined field across the three dates. In SWIR false colour fresh burn scars turn near black or deep maroon; in true colour they look charcoal grey or black and are usually sharply bounded by the field edge. Tilled soil is brown-grey to pink-purple in SWIR, not black; freshly irrigated soil is dark in true colour but stays reddish-purple in SWIR. Partial burns count as Burned. Use Uncertain for haze, cloud or ambiguous cases. The detector's answer is hidden.
 <div class="row"><button id="export">Export CSV</button><span class="muted">Save as <code>data/real/labels/reference_labels___YEAR___&lt;reviewer&gt;.csv</code> and run <code>python scripts/import_reference_labels.py</code>.</span></div>
 <textarea id="csv" hidden readonly style="min-height:120px;font:12px monospace"></textarea></div>
 </main>
@@ -125,10 +125,10 @@ $("skip").onclick = () => { if (i < ITEMS.length - 1) { i++; render(); } };
 const q = v => { const s = v == null ? "" : String(v); return /[",;]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
 $("export").onclick = () => {
   const head = ["package","item_id","field_id","year","candidate_date","reviewer","reviewed_at","burn_label","state_label","confidence",
-                "evidence","notes","label_before_context","context_viewed","context_viewed_at","source_images","label_quality","label_source"];
+                "evidence","notes","label_before_context","context_viewed","context_viewed_at","source_dates","source_images","label_quality","label_source"];
   const rows = [head];
   for (const [id, v] of Object.entries(store.labels)) rows.push([PACKAGE, id, v.field_id, v.year, v.candidate_date, v.reviewer, v.reviewed_at,
-    v.burn_label, v.state_label, v.confidence, (v.evidence||[]).join("|"), v.notes, v.label_before_context, v.context_viewed, v.context_viewed_at || "",
+    v.burn_label, v.state_label, v.confidence, (v.evidence||[]).join("|"), v.notes, v.label_before_context, v.context_viewed, v.context_viewed_at || "", (v.frame_dates||[]).join("|"),
     "Sentinel-2 L2A true colour + SWIR chips: " + (v.frame_dates||[]).join(" / "), "B", "HUMAN_MULTI_DATE_VISUAL_REVIEW"]);
   const csv = rows.map(r => r.map(q).join(",")).join("\n");
   const ta = $("csv"); ta.hidden = false; ta.value = csv; ta.select();
@@ -136,7 +136,7 @@ $("export").onclick = () => {
         a.download = `reference_labels___YEAR___${(store.reviewer||"reviewer").replace(/\W+/g, "_")}.csv`; a.click(); } catch (e) {}
 };
 document.addEventListener("keydown", e => { if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-  const k = e.key.toLowerCase(); const m = {b:"BURNT", n:"NOT_BURNT", u:"UNCLEAR"};
+  const k = e.key.toLowerCase(); const m = {b:"BURNED", n:"NOT_BURNED", u:"UNCERTAIN"};
   if (m[k]) document.querySelector(`#burnRow button[data-burn="${m[k]}"]`).click();
   else if (k === "arrowleft") $("back").click(); else if (k === "arrowright") $("skip").click(); });
 render();

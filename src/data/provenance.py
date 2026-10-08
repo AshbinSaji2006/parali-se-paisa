@@ -61,6 +61,9 @@ def verify_artifact(root: Path, record: dict, excluded_paths: set[str]) -> dict:
         result["status"] = "OK"
     elif b"\r\n" not in data and hashlib.sha256(data.replace(b"\n", b"\r\n")).hexdigest() == expected:
         result["status"] = "OK_LINE_ENDINGS_NORMALISED"
+    elif b"\r\n" in data and hashlib.sha256(data.replace(b"\r\n", b"\n")).hexdigest() == expected:
+        # Recorded with LF (e.g. on Linux) and checked out with CRLF on Windows.
+        result["status"] = "OK_LINE_ENDINGS_NORMALISED"
     else:
         result["status"] = "SHA256_MISMATCH"
         result["actual_sha256"] = actual

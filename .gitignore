@@ -72,3 +72,5 @@ data/real/cache/
 # Regenerable deck-rendering crops and slide-review screenshots
 reports/pitch/preview/
 reports/pitch/_*_crop.png
+.runtime/
+frontend/.runtime/

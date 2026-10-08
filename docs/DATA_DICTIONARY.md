@@ -126,7 +126,7 @@ The rule status engine emits `status_candidate`, evidence strings, and a qualita
 
 ## Real-data quality and fire-context columns (`real_field_features.parquet`)
 
-Built by `scripts/build_real_products.py`; see `reports/real_data_audit.md`.
+Built by `scripts/build_real_products.py`; see `reports/research/FINAL_JUDGE_EVIDENCE.md`.
 
 | Column | Meaning |
 |---|---|

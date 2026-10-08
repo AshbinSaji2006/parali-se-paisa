@@ -1,4 +1,408 @@
 {
+ "candidate_summary": {
+  "rule_version": "burn-candidate-rules-v2",
+  "haze_rule": {
+   "metric": "field-mean Sentinel-2 B02 (blue) surface reflectance",
+   "clear_below": 0.1,
+   "thick_smoke_from": 0.2,
+   "cloud_excluded_below_valid_fraction": 0.6,
+   "downgraded_meaning": "kept for NIR/SWIR change logic; cannot be the pre-event reference of a strict candidate"
+  },
+  "labels": {
+   "burn": "RULE-BASED BURN CANDIDATE",
+   "never": "CONFIRMED BURN"
+  },
+  "area_statistics": {
+   "polygons_total": 243530,
+   "polygon_area_sum_ha_overlapping": 345202,
+   "polygons_with_ge3_pixels": 170623,
+   "polygons_without_any_pixel": 44593,
+   "non_overlapping_pixel_area_ha_all_fields": 193403,
+   "method": "Each 20 m pixel is assigned to exactly one field when polygons are rasterised, so pixel areas never double count. Polygon areas overlap and are never summed for district totals.",
+   "seasons": {
+    "2023": {
+     "crop_fields": 164625,
+     "crop_pixel_area_ha": 187293,
+     "crop_polygon_area_ha_overlapping": 273426,
+     "strict_fields": 530,
+     "strict_field_share": 0.0032,
+     "strict_pixel_area_ha": 649,
+     "strict_pixel_area_share": 0.0035,
+     "strict_polygon_area_ha_overlapping": 881,
+     "loose_any_fields": 17048,
+     "loose_any_field_share": 0.1036,
+     "loose_any_pixel_area_ha": 21121,
+     "loose_any_pixel_area_share": 0.1128,
+     "loose_any_polygon_area_ha_overlapping": 29326,
+     "loose_only_fields": 16518,
+     "loose_only_field_share": 0.1003,
+     "loose_only_pixel_area_ha": 20471,
+     "loose_only_pixel_area_share": 0.1093,
+     "loose_only_polygon_area_ha_overlapping": 28445,
+     "harvested_no_burn_fields": 142121,
+     "harvested_no_burn_field_share": 0.8633,
+     "harvested_no_burn_pixel_area_ha": 162419,
+     "harvested_no_burn_pixel_area_share": 0.8672,
+     "harvested_no_burn_polygon_area_ha_overlapping": 238544,
+     "no_harvest_observed_fields": 5456,
+     "no_harvest_observed_field_share": 0.0331,
+     "no_harvest_observed_pixel_area_ha": 3753,
+     "no_harvest_observed_pixel_area_share": 0.02,
+     "no_harvest_observed_polygon_area_ha_overlapping": 5556
+    },
+    "2024": {
+     "crop_fields": 163815,
+     "crop_pixel_area_ha": 186778,
+     "crop_polygon_area_ha_overlapping": 272783,
+     "strict_fields": 796,
+     "strict_field_share": 0.0049,
+     "strict_pixel_area_ha": 1022,
+     "strict_pixel_area_share": 0.0055,
+     "strict_polygon_area_ha_overlapping": 1376,
+     "loose_any_fields": 8857,
+     "loose_any_field_share": 0.0541,
+     "loose_any_pixel_area_ha": 10566,
+     "loose_any_pixel_area_share": 0.0566,
+     "loose_any_polygon_area_ha_overlapping": 14632,
+     "loose_only_fields": 8061,
+     "loose_only_field_share": 0.0492,
+     "loose_only_pixel_area_ha": 9543,
+     "loose_only_pixel_area_share": 0.0511,
+     "loose_only_polygon_area_ha_overlapping": 13256,
+     "harvested_no_burn_fields": 148250,
+     "harvested_no_burn_field_share": 0.905,
+     "harvested_no_burn_pixel_area_ha": 171599,
+     "harvested_no_burn_pixel_area_share": 0.9187,
+     "harvested_no_burn_polygon_area_ha_overlapping": 251444,
+     "no_harvest_observed_fields": 6708,
+     "no_harvest_observed_field_share": 0.0409,
+     "no_harvest_observed_pixel_area_ha": 4614,
+     "no_harvest_observed_pixel_area_share": 0.0247,
+     "no_harvest_observed_polygon_area_ha_overlapping": 6707
+    },
+    "2025": {
+     "crop_fields": 165384,
+     "crop_pixel_area_ha": 187906,
+     "crop_polygon_area_ha_overlapping": 274421,
+     "strict_fields": 2015,
+     "strict_field_share": 0.0122,
+     "strict_pixel_area_ha": 2269,
+     "strict_pixel_area_share": 0.0121,
+     "strict_polygon_area_ha_overlapping": 3170,
+     "loose_any_fields": 20464,
+     "loose_any_field_share": 0.1237,
+     "loose_any_pixel_area_ha": 22941,
+     "loose_any_pixel_area_share": 0.1221,
+     "loose_any_polygon_area_ha_overlapping": 31616,
+     "loose_only_fields": 18449,
+     "loose_only_field_share": 0.1116,
+     "loose_only_pixel_area_ha": 20672,
+     "loose_only_pixel_area_share": 0.11,
+     "loose_only_polygon_area_ha_overlapping": 28446,
+     "harvested_no_burn_fields": 139770,
+     "harvested_no_burn_field_share": 0.8451,
+     "harvested_no_burn_pixel_area_ha": 161356,
+     "harvested_no_burn_pixel_area_share": 0.8587,
+     "harvested_no_burn_polygon_area_ha_overlapping": 237640,
+     "no_harvest_observed_fields": 5150,
+     "no_harvest_observed_field_share": 0.0311,
+     "no_harvest_observed_pixel_area_ha": 3610,
+     "no_harvest_observed_pixel_area_share": 0.0192,
+     "no_harvest_observed_polygon_area_ha_overlapping": 5165
+    },
+    "2026": {
+     "crop_fields": 158635,
+     "crop_pixel_area_ha": 182853,
+     "crop_polygon_area_ha_overlapping": 266785,
+     "strict_fields": 0,
+     "strict_field_share": 0.0,
+     "strict_pixel_area_ha": 0,
+     "strict_pixel_area_share": 0.0,
+     "strict_polygon_area_ha_overlapping": 0,
+     "loose_any_fields": 0,
+     "loose_any_field_share": 0.0,
+     "loose_any_pixel_area_ha": 0,
+     "loose_any_pixel_area_share": 0.0,
+     "loose_any_polygon_area_ha_overlapping": 0,
+     "loose_only_fields": 0,
+     "loose_only_field_share": 0.0,
+     "loose_only_pixel_area_ha": 0,
+     "loose_only_pixel_area_share": 0.0,
+     "loose_only_polygon_area_ha_overlapping": 0,
+     "harvested_no_burn_fields": 1059,
+     "harvested_no_burn_field_share": 0.0067,
+     "harvested_no_burn_pixel_area_ha": 723,
+     "harvested_no_burn_pixel_area_share": 0.004,
+     "harvested_no_burn_polygon_area_ha_overlapping": 988,
+     "no_harvest_observed_fields": 157576,
+     "no_harvest_observed_field_share": 0.9933,
+     "no_harvest_observed_pixel_area_ha": 182130,
+     "no_harvest_observed_pixel_area_share": 0.996,
+     "no_harvest_observed_polygon_area_ha_overlapping": 265797
+    }
+   }
+  },
+  "thermal_context": {
+   "2023": {
+    "sensors": [
+     "VIIRS_SNPP",
+     "VIIRS_NOAA20"
+    ],
+    "temporal_tolerance_days": 1,
+    "window": "candidate evidence window [pre-event image - 1 d, event image + 1 d]",
+    "viirs_detections_in_district_sep_dec": 2792,
+    "strict": {
+     "375m": {
+      "candidates": 530,
+      "candidates_with_viirs_nearby": 159,
+      "share_candidates_with_viirs_nearby": 0.3,
+      "share_short_window_candidates_with_viirs_nearby": 0.2678,
+      "short_window_candidates": 351,
+      "proximity_control_share": 0.1661,
+      "viirs_detections_with_optical_candidate_nearby": 127,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.0455
+     },
+     "500m": {
+      "candidates": 530,
+      "candidates_with_viirs_nearby": 233,
+      "share_candidates_with_viirs_nearby": 0.4396,
+      "share_short_window_candidates_with_viirs_nearby": 0.4017,
+      "short_window_candidates": 351,
+      "proximity_control_share": 0.2564,
+      "viirs_detections_with_optical_candidate_nearby": 201,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.072
+     },
+     "1000m": {
+      "candidates": 530,
+      "candidates_with_viirs_nearby": 400,
+      "share_candidates_with_viirs_nearby": 0.7547,
+      "share_short_window_candidates_with_viirs_nearby": 0.6895,
+      "short_window_candidates": 351,
+      "proximity_control_share": 0.5843,
+      "viirs_detections_with_optical_candidate_nearby": 511,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.183
+     }
+    },
+    "loose": {
+     "375m": {
+      "candidates": 17048,
+      "candidates_with_viirs_nearby": 4445,
+      "share_candidates_with_viirs_nearby": 0.2607,
+      "share_short_window_candidates_with_viirs_nearby": 0.2106,
+      "short_window_candidates": 10088,
+      "proximity_control_share": 0.1681,
+      "viirs_detections_with_optical_candidate_nearby": 1583,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.567
+     },
+     "500m": {
+      "candidates": 17048,
+      "candidates_with_viirs_nearby": 6416,
+      "share_candidates_with_viirs_nearby": 0.3763,
+      "share_short_window_candidates_with_viirs_nearby": 0.3079,
+      "short_window_candidates": 10088,
+      "proximity_control_share": 0.2592,
+      "viirs_detections_with_optical_candidate_nearby": 1879,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.673
+     },
+     "1000m": {
+      "candidates": 17048,
+      "candidates_with_viirs_nearby": 12151,
+      "share_candidates_with_viirs_nearby": 0.7128,
+      "share_short_window_candidates_with_viirs_nearby": 0.6355,
+      "short_window_candidates": 10088,
+      "proximity_control_share": 0.5813,
+      "viirs_detections_with_optical_candidate_nearby": 2385,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.8542
+     }
+    }
+   },
+   "2024": {
+    "sensors": [
+     "VIIRS_SNPP",
+     "VIIRS_NOAA20"
+    ],
+    "temporal_tolerance_days": 1,
+    "window": "candidate evidence window [pre-event image - 1 d, event image + 1 d]",
+    "viirs_detections_in_district_sep_dec": 1527,
+    "strict": {
+     "375m": {
+      "candidates": 796,
+      "candidates_with_viirs_nearby": 166,
+      "share_candidates_with_viirs_nearby": 0.2085,
+      "share_short_window_candidates_with_viirs_nearby": 0.0429,
+      "short_window_candidates": 140,
+      "proximity_control_share": 0.1616,
+      "viirs_detections_with_optical_candidate_nearby": 143,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.0936
+     },
+     "500m": {
+      "candidates": 796,
+      "candidates_with_viirs_nearby": 265,
+      "share_candidates_with_viirs_nearby": 0.3329,
+      "share_short_window_candidates_with_viirs_nearby": 0.0714,
+      "short_window_candidates": 140,
+      "proximity_control_share": 0.2511,
+      "viirs_detections_with_optical_candidate_nearby": 237,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.1552
+     },
+     "1000m": {
+      "candidates": 796,
+      "candidates_with_viirs_nearby": 534,
+      "share_candidates_with_viirs_nearby": 0.6709,
+      "share_short_window_candidates_with_viirs_nearby": 0.1929,
+      "short_window_candidates": 140,
+      "proximity_control_share": 0.5907,
+      "viirs_detections_with_optical_candidate_nearby": 593,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.3883
+     }
+    },
+    "loose": {
+     "375m": {
+      "candidates": 8857,
+      "candidates_with_viirs_nearby": 1087,
+      "share_candidates_with_viirs_nearby": 0.1227,
+      "share_short_window_candidates_with_viirs_nearby": 0.0394,
+      "short_window_candidates": 5426,
+      "proximity_control_share": 0.0873,
+      "viirs_detections_with_optical_candidate_nearby": 608,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.3982
+     },
+     "500m": {
+      "candidates": 8857,
+      "candidates_with_viirs_nearby": 1645,
+      "share_candidates_with_viirs_nearby": 0.1857,
+      "share_short_window_candidates_with_viirs_nearby": 0.061,
+      "short_window_candidates": 5426,
+      "proximity_control_share": 0.1366,
+      "viirs_detections_with_optical_candidate_nearby": 811,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.5311
+     },
+     "1000m": {
+      "candidates": 8857,
+      "candidates_with_viirs_nearby": 3351,
+      "share_candidates_with_viirs_nearby": 0.3783,
+      "share_short_window_candidates_with_viirs_nearby": 0.1351,
+      "short_window_candidates": 5426,
+      "proximity_control_share": 0.3309,
+      "viirs_detections_with_optical_candidate_nearby": 1262,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.8265
+     }
+    }
+   },
+   "2025": {
+    "sensors": [
+     "VIIRS_SNPP",
+     "VIIRS_NOAA20"
+    ],
+    "temporal_tolerance_days": 1,
+    "window": "candidate evidence window [pre-event image - 1 d, event image + 1 d]",
+    "viirs_detections_in_district_sep_dec": 604,
+    "strict": {
+     "375m": {
+      "candidates": 2015,
+      "candidates_with_viirs_nearby": 133,
+      "share_candidates_with_viirs_nearby": 0.066,
+      "share_short_window_candidates_with_viirs_nearby": 0.0656,
+      "short_window_candidates": 1965,
+      "proximity_control_share": 0.0249,
+      "viirs_detections_with_optical_candidate_nearby": 100,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.1656
+     },
+     "500m": {
+      "candidates": 2015,
+      "candidates_with_viirs_nearby": 179,
+      "share_candidates_with_viirs_nearby": 0.0888,
+      "share_short_window_candidates_with_viirs_nearby": 0.088,
+      "short_window_candidates": 1965,
+      "proximity_control_share": 0.0423,
+      "viirs_detections_with_optical_candidate_nearby": 137,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.2268
+     },
+     "1000m": {
+      "candidates": 2015,
+      "candidates_with_viirs_nearby": 435,
+      "share_candidates_with_viirs_nearby": 0.2159,
+      "share_short_window_candidates_with_viirs_nearby": 0.2087,
+      "short_window_candidates": 1965,
+      "proximity_control_share": 0.1439,
+      "viirs_detections_with_optical_candidate_nearby": 250,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.4139
+     }
+    },
+    "loose": {
+     "375m": {
+      "candidates": 20464,
+      "candidates_with_viirs_nearby": 951,
+      "share_candidates_with_viirs_nearby": 0.0465,
+      "share_short_window_candidates_with_viirs_nearby": 0.0461,
+      "short_window_candidates": 20197,
+      "proximity_control_share": 0.0217,
+      "viirs_detections_with_optical_candidate_nearby": 329,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.5447
+     },
+     "500m": {
+      "candidates": 20464,
+      "candidates_with_viirs_nearby": 1438,
+      "share_candidates_with_viirs_nearby": 0.0703,
+      "share_short_window_candidates_with_viirs_nearby": 0.0698,
+      "short_window_candidates": 20197,
+      "proximity_control_share": 0.0372,
+      "viirs_detections_with_optical_candidate_nearby": 393,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.6507
+     },
+     "1000m": {
+      "candidates": 20464,
+      "candidates_with_viirs_nearby": 3675,
+      "share_candidates_with_viirs_nearby": 0.1796,
+      "share_short_window_candidates_with_viirs_nearby": 0.1778,
+      "short_window_candidates": 20197,
+      "proximity_control_share": 0.1283,
+      "viirs_detections_with_optical_candidate_nearby": 509,
+      "share_viirs_detections_with_optical_candidate_nearby": 0.8427
+     }
+    }
+   }
+  },
+  "thermal_context_note": "Active fires are thermal context: polar-orbit overpasses (~01:30/13:30 local) miss fires lit later in the day, fires under smoke or cloud, and short-lived small fires; VIIRS pixels are 375 m and a detection near a field is not a field-level confirmation. 2023-2024 are the primary comparison; 2025 uses the UMD monthly archive (Sep-Dec).",
+  "haze_scenes": {
+   "2023": {
+    "scenes": 20,
+    "mostly_usable": 14,
+    "mostly_haze_downgraded": 6,
+    "mostly_excluded": 0,
+    "observations_haze_downgraded": 812070,
+    "observations_thick_smoke_excluded": 3135,
+    "observations_cloud_or_no_data_excluded": 274662
+   },
+   "2024": {
+    "scenes": 19,
+    "mostly_usable": 14,
+    "mostly_haze_downgraded": 1,
+    "mostly_excluded": 4,
+    "observations_haze_downgraded": 369078,
+    "observations_thick_smoke_excluded": 159783,
+    "observations_cloud_or_no_data_excluded": 447214
+   },
+   "2025": {
+    "scenes": 26,
+    "mostly_usable": 22,
+    "mostly_haze_downgraded": 2,
+    "mostly_excluded": 2,
+    "observations_haze_downgraded": 624074,
+    "observations_thick_smoke_excluded": 1328,
+    "observations_cloud_or_no_data_excluded": 392337
+   },
+   "2026": {
+    "scenes": 9,
+    "mostly_usable": 9,
+    "mostly_haze_downgraded": 0,
+    "mostly_excluded": 0,
+    "observations_haze_downgraded": 60197,
+    "observations_thick_smoke_excluded": 1677,
+    "observations_cloud_or_no_data_excluded": 99409
+   }
+  }
+ },
  "generated_by": "scripts/run_research.py",
  "census": [
   {
@@ -12,17 +416,17 @@
    "crop_ha": 187293,
    "harvested_share": 0.9669,
    "burned_loose_fields": 17048,
-   "burned_strict_fields": 6422,
+   "burned_strict_fields": 530,
    "burned_loose_share": 0.1036,
-   "burned_strict_share": 0.039,
+   "burned_strict_share": 0.0032,
    "burned_loose_ha": 21121,
-   "burned_strict_ha": 7883,
-   "strict_fields_per_viirs_alert": 2.3,
-   "burns_with_viirs_short_window": 0.3377,
-   "n_short_window": 3669,
-   "control_with_viirs_short_window": 0.204,
-   "burns_with_viirs_any_window": 0.4011,
-   "control_with_viirs_any_window": 0.2757,
+   "burned_strict_ha": 649,
+   "strict_fields_per_viirs_alert": 0.19,
+   "burns_with_viirs_short_window": 0.4017,
+   "n_short_window": 351,
+   "control_with_viirs_short_window": 0.1884,
+   "burns_with_viirs_any_window": 0.4396,
+   "control_with_viirs_any_window": 0.2564,
    "viirs_alerts_with_s2_burn_nearby": 0.673
   },
   {
@@ -36,42 +440,42 @@
    "crop_ha": 186778,
    "harvested_share": 0.9591,
    "burned_loose_fields": 8857,
-   "burned_strict_fields": 3229,
+   "burned_strict_fields": 796,
    "burned_loose_share": 0.0541,
-   "burned_strict_share": 0.0197,
+   "burned_strict_share": 0.0049,
    "burned_loose_ha": 10566,
-   "burned_strict_ha": 3643,
-   "strict_fields_per_viirs_alert": 2.11,
-   "burns_with_viirs_short_window": 0.0598,
-   "n_short_window": 2375,
-   "control_with_viirs_short_window": 0.025,
-   "burns_with_viirs_any_window": 0.1459,
-   "control_with_viirs_any_window": 0.0998,
+   "burned_strict_ha": 1022,
+   "strict_fields_per_viirs_alert": 0.52,
+   "burns_with_viirs_short_window": 0.0714,
+   "n_short_window": 140,
+   "control_with_viirs_short_window": 0.0274,
+   "burns_with_viirs_any_window": 0.3329,
+   "control_with_viirs_any_window": 0.2511,
    "viirs_alerts_with_s2_burn_nearby": 0.5311
   },
   {
    "year": 2025,
    "s2_dates": 26,
    "s2_dates_5day": 21,
-   "viirs_alerts": 600,
-   "viirs_alerts_incl_noaa21": 884,
+   "viirs_alerts": 604,
+   "viirs_alerts_incl_noaa21": 891,
    "modis_alerts": 258,
    "crop_fields": 165025,
    "crop_ha": 187674,
    "harvested_share": 0.9615,
    "burned_loose_fields": 17983,
-   "burned_strict_fields": 7130,
+   "burned_strict_fields": 2216,
    "burned_loose_share": 0.109,
-   "burned_strict_share": 0.0432,
+   "burned_strict_share": 0.0134,
    "burned_loose_ha": 20150,
-   "burned_strict_ha": 7930,
-   "strict_fields_per_viirs_alert": 11.88,
-   "burns_with_viirs_short_window": 0.0823,
-   "n_short_window": 6972,
-   "control_with_viirs_short_window": 0.0411,
-   "burns_with_viirs_any_window": 0.0829,
-   "control_with_viirs_any_window": 0.0416,
-   "viirs_alerts_with_s2_burn_nearby": 0.6433
+   "burned_strict_ha": 2531,
+   "strict_fields_per_viirs_alert": 3.67,
+   "burns_with_viirs_short_window": 0.1026,
+   "n_short_window": 2145,
+   "control_with_viirs_short_window": 0.0485,
+   "burns_with_viirs_any_window": 0.1038,
+   "control_with_viirs_any_window": 0.049,
+   "viirs_alerts_with_s2_burn_nearby": 0.6407
   }
  ],
  "naive_vs_aware": [
@@ -82,9 +486,9 @@
    "naive_dnbr_027_ha": 184801,
    "naive_dnbr_044_share": 0.9397,
    "mcd64a1_pixels": 4209,
-   "mcd64a1_nominal_ha": 90367.0,
+   "mcd64a1_nominal_ha": 90367,
    "aware_loose_ha": 21121,
-   "aware_strict_ha": 7883
+   "aware_strict_ha": 649
   },
   {
    "year": 2024,
@@ -93,9 +497,9 @@
    "naive_dnbr_027_ha": 184880,
    "naive_dnbr_044_share": 0.9609,
    "mcd64a1_pixels": 3055,
-   "mcd64a1_nominal_ha": 65591.0,
+   "mcd64a1_nominal_ha": 65591,
    "aware_loose_ha": 10566,
-   "aware_strict_ha": 3643
+   "aware_strict_ha": 1022
   },
   {
    "year": 2025,
@@ -103,10 +507,10 @@
    "naive_dnbr_027_share": 0.9797,
    "naive_dnbr_027_ha": 185489,
    "naive_dnbr_044_share": 0.954,
-   "mcd64a1_pixels": 0,
-   "mcd64a1_nominal_ha": null,
+   "mcd64a1_pixels": 1713,
+   "mcd64a1_nominal_ha": 36778,
    "aware_loose_ha": 22941,
-   "aware_strict_ha": 9137
+   "aware_strict_ha": 2269
   }
  ],
  "latency": {
@@ -115,8 +519,8 @@
    "median_days": 15.0,
    "p25": 5.0,
    "p75": 20.0,
-   "share_within_5d": 0.2652,
-   "share_within_10d": 0.3934,
+   "share_within_5d": 0.2651,
+   "share_within_10d": 0.3933,
    "share_after_20d": 0.1194,
    "median_harvest_window_days": 5.0,
    "median_burn_window_days": 5.0
@@ -126,9 +530,9 @@
    "median_days": 20.0,
    "p25": 5.0,
    "p75": 30.0,
-   "share_within_5d": 0.2627,
-   "share_within_10d": 0.3436,
-   "share_after_20d": 0.4667,
+   "share_within_5d": 0.2626,
+   "share_within_10d": 0.3433,
+   "share_after_20d": 0.467,
    "median_harvest_window_days": 5.0,
    "median_burn_window_days": 5.0
   },
@@ -137,9 +541,9 @@
    "median_days": 15.0,
    "p25": 10.0,
    "p75": 20.0,
-   "share_within_5d": 0.1108,
-   "share_within_10d": 0.3512,
-   "share_after_20d": 0.2262,
+   "share_within_5d": 0.1105,
+   "share_within_10d": 0.3503,
+   "share_after_20d": 0.2269,
    "median_harvest_window_days": 5.0,
    "median_burn_window_days": 5.0
   }
@@ -177,27 +581,27 @@
     "base_rate": 0.1277
    },
    "y_strict": {
-    "auc": 0.6652,
-    "ap": 0.1134,
-    "precision_top10": 0.1372,
-    "lift_top10": 2.673,
-    "base_rate": 0.0513
+    "auc": 0.6264,
+    "ap": 0.0238,
+    "precision_top10": 0.0302,
+    "lift_top10": 2.402,
+    "base_rate": 0.0126
    }
   },
   "in-season GBM (adds harvest timing, contagion, size, biomass)": {
    "y_loose": {
-    "auc": 0.6686,
-    "ap": 0.2167,
-    "precision_top10": 0.2604,
-    "lift_top10": 2.039,
+    "auc": 0.6687,
+    "ap": 0.2158,
+    "precision_top10": 0.2551,
+    "lift_top10": 1.997,
     "base_rate": 0.1277
    },
    "y_strict": {
-    "auc": 0.6908,
-    "ap": 0.1038,
-    "precision_top10": 0.1248,
-    "lift_top10": 2.432,
-    "base_rate": 0.0513
+    "auc": 0.6498,
+    "ap": 0.0212,
+    "precision_top10": 0.0255,
+    "lift_top10": 2.025,
+    "base_rate": 0.0126
    }
   },
   "neighbourhood last-season rate only": {
@@ -209,11 +613,11 @@
     "base_rate": 0.1277
    },
    "y_strict": {
-    "auc": 0.657,
-    "ap": 0.1062,
-    "precision_top10": 0.1274,
-    "lift_top10": 2.482,
-    "base_rate": 0.0513
+    "auc": 0.6174,
+    "ap": 0.0227,
+    "precision_top10": 0.0281,
+    "lift_top10": 2.238,
+    "base_rate": 0.0126
    }
   },
   "field burned last season only": {
@@ -225,11 +629,11 @@
     "base_rate": 0.1277
    },
    "y_strict": {
-    "auc": 0.5527,
-    "ap": 0.0749,
-    "precision_top10": 0.0979,
-    "lift_top10": 1.907,
-    "base_rate": 0.0513
+    "auc": 0.5431,
+    "ap": 0.017,
+    "precision_top10": 0.0221,
+    "lift_top10": 1.757,
+    "base_rate": 0.0126
    }
   },
   "random": {
@@ -241,11 +645,11 @@
     "base_rate": 0.1277
    },
    "y_strict": {
-    "auc": 0.4959,
-    "ap": 0.0511,
-    "precision_top10": 0.0517,
-    "lift_top10": 1.007,
-    "base_rate": 0.0513
+    "auc": 0.4962,
+    "ap": 0.0125,
+    "precision_top10": 0.0125,
+    "lift_top10": 0.998,
+    "base_rate": 0.0126
    }
   },
   "persistence": {
@@ -256,18 +660,18 @@
   "test": "2025 season (history from 2024), never seen in training"
  },
  "dynamic_hazard": {
-  "panel_rows_train": 918972,
-  "panel_rows_test": 1274902,
+  "panel_rows_train": 918978,
+  "panel_rows_test": 1275011,
   "positive_rate_test": 0.0152,
-  "auc": 0.6936,
-  "ap": 0.0313,
+  "auc": 0.7052,
+  "ap": 0.0369,
   "ablation_auc": {
-   "without_recent_neighbour_burns": 0.6253,
-   "without_rain": 0.689,
-   "without_history": 0.6776,
-   "without_days_since_harvest": 0.6814
+   "without_recent_neighbour_burns": 0.6792,
+   "without_rain": 0.6927,
+   "without_history": 0.6905,
+   "without_days_since_harvest": 0.6474
   },
-  "median_per_pass_lift_top10": 2.06,
+  "median_per_pass_lift_top10": 2.2,
   "label": "burn first observed at the next Sentinel-2 pass"
  },
  "replay": [
@@ -275,12 +679,12 @@
    "fleet": 50,
    "policy": "random",
    "burned_fields": 20464,
-   "preempted_fields": 743,
-   "preempted_share": 0.0363,
-   "preempted_ha": 654,
-   "baled_ha": 11286,
-   "baled_t": 37244,
-   "preempted_baled_t": 2157
+   "preempted_fields": 716,
+   "preempted_share": 0.035,
+   "preempted_ha": 641,
+   "baled_ha": 11244,
+   "baled_t": 37105,
+   "preempted_baled_t": 2117
   },
   {
    "fleet": 50,
@@ -290,7 +694,7 @@
    "preempted_share": 0.0263,
    "preempted_ha": 506,
    "baled_ha": 12271,
-   "baled_t": 40494,
+   "baled_t": 40496,
    "preempted_baled_t": 1668
   },
   {
@@ -300,53 +704,53 @@
    "preempted_fields": 1476,
    "preempted_share": 0.0721,
    "preempted_ha": 1603,
-   "baled_ha": 11950,
-   "baled_t": 39436,
+   "baled_ha": 11951,
+   "baled_t": 39440,
    "preempted_baled_t": 5291
   },
   {
    "fleet": 50,
    "policy": "dynamic",
    "burned_fields": 20464,
-   "preempted_fields": 967,
-   "preempted_share": 0.0473,
-   "preempted_ha": 955,
-   "baled_ha": 11922,
-   "baled_t": 39343,
-   "preempted_baled_t": 3153
+   "preempted_fields": 1056,
+   "preempted_share": 0.0516,
+   "preempted_ha": 1183,
+   "baled_ha": 11373,
+   "baled_t": 37530,
+   "preempted_baled_t": 3904
   },
   {
    "fleet": 50,
    "policy": "oracle",
    "burned_fields": 20464,
-   "preempted_fields": 4344,
-   "preempted_share": 0.2123,
-   "preempted_ha": 4346,
-   "baled_ha": 12069,
-   "baled_t": 39827,
-   "preempted_baled_t": 14342
+   "preempted_fields": 4363,
+   "preempted_share": 0.2132,
+   "preempted_ha": 4362,
+   "baled_ha": 12082,
+   "baled_t": 39870,
+   "preempted_baled_t": 14395
   },
   {
    "fleet": 100,
    "policy": "random",
    "burned_fields": 20464,
-   "preempted_fields": 1408,
-   "preempted_share": 0.0688,
-   "preempted_ha": 1205,
-   "baled_ha": 19606,
-   "baled_t": 64701,
-   "preempted_baled_t": 3978
+   "preempted_fields": 1377,
+   "preempted_share": 0.0673,
+   "preempted_ha": 1156,
+   "baled_ha": 19818,
+   "baled_t": 65398,
+   "preempted_baled_t": 3815
   },
   {
    "fleet": 100,
    "policy": "fifo",
    "burned_fields": 20464,
-   "preempted_fields": 888,
-   "preempted_share": 0.0434,
-   "preempted_ha": 822,
-   "baled_ha": 21575,
-   "baled_t": 71197,
-   "preempted_baled_t": 2712
+   "preempted_fields": 891,
+   "preempted_share": 0.0435,
+   "preempted_ha": 829,
+   "baled_ha": 21570,
+   "baled_t": 71181,
+   "preempted_baled_t": 2735
   },
   {
    "fleet": 100,
@@ -356,129 +760,129 @@
    "preempted_share": 0.1143,
    "preempted_ha": 2498,
    "baled_ha": 21037,
-   "baled_t": 69421,
+   "baled_t": 69422,
    "preempted_baled_t": 8245
   },
   {
    "fleet": 100,
    "policy": "dynamic",
    "burned_fields": 20464,
-   "preempted_fields": 1693,
-   "preempted_share": 0.0827,
-   "preempted_ha": 1670,
-   "baled_ha": 21078,
-   "baled_t": 69556,
-   "preempted_baled_t": 5512
+   "preempted_fields": 1855,
+   "preempted_share": 0.0906,
+   "preempted_ha": 2060,
+   "baled_ha": 19953,
+   "baled_t": 65846,
+   "preempted_baled_t": 6798
   },
   {
    "fleet": 100,
    "policy": "oracle",
    "burned_fields": 20464,
-   "preempted_fields": 8131,
-   "preempted_share": 0.3973,
-   "preempted_ha": 8400,
-   "baled_ha": 21282,
-   "baled_t": 70231,
-   "preempted_baled_t": 27720
+   "preempted_fields": 8127,
+   "preempted_share": 0.3971,
+   "preempted_ha": 8378,
+   "baled_ha": 21253,
+   "baled_t": 70136,
+   "preempted_baled_t": 27646
   },
   {
    "fleet": 200,
    "policy": "random",
    "burned_fields": 20464,
-   "preempted_fields": 2580,
-   "preempted_share": 0.1261,
-   "preempted_ha": 2286,
-   "baled_ha": 35048,
-   "baled_t": 115658,
-   "preempted_baled_t": 7543
+   "preempted_fields": 2471,
+   "preempted_share": 0.1207,
+   "preempted_ha": 2165,
+   "baled_ha": 34974,
+   "baled_t": 115414,
+   "preempted_baled_t": 7144
   },
   {
    "fleet": 200,
    "policy": "fifo",
    "burned_fields": 20464,
-   "preempted_fields": 1629,
-   "preempted_share": 0.0796,
-   "preempted_ha": 1587,
-   "baled_ha": 38681,
-   "baled_t": 127648,
-   "preempted_baled_t": 5237
+   "preempted_fields": 1632,
+   "preempted_share": 0.0797,
+   "preempted_ha": 1595,
+   "baled_ha": 38687,
+   "baled_t": 127667,
+   "preempted_baled_t": 5263
   },
   {
    "fleet": 200,
    "policy": "risk",
    "burned_fields": 20464,
-   "preempted_fields": 3588,
+   "preempted_fields": 3587,
    "preempted_share": 0.1753,
    "preempted_ha": 3973,
-   "baled_ha": 37426,
-   "baled_t": 123505,
-   "preempted_baled_t": 13111
+   "baled_ha": 37424,
+   "baled_t": 123500,
+   "preempted_baled_t": 13110
   },
   {
    "fleet": 200,
    "policy": "dynamic",
    "burned_fields": 20464,
-   "preempted_fields": 2758,
-   "preempted_share": 0.1348,
-   "preempted_ha": 2779,
-   "baled_ha": 37740,
-   "baled_t": 124543,
-   "preempted_baled_t": 9171
+   "preempted_fields": 3160,
+   "preempted_share": 0.1544,
+   "preempted_ha": 3507,
+   "baled_ha": 35651,
+   "baled_t": 117649,
+   "preempted_baled_t": 11574
   },
   {
    "fleet": 200,
    "policy": "oracle",
    "burned_fields": 20464,
-   "preempted_fields": 13263,
-   "preempted_share": 0.6481,
-   "preempted_ha": 13934,
+   "preempted_fields": 13267,
+   "preempted_share": 0.6483,
+   "preempted_ha": 13927,
    "baled_ha": 38256,
-   "baled_t": 126243,
-   "preempted_baled_t": 45984
+   "baled_t": 126246,
+   "preempted_baled_t": 45959
   },
   {
    "fleet": 400,
    "policy": "random",
    "burned_fields": 20464,
-   "preempted_fields": 4760,
-   "preempted_share": 0.2326,
-   "preempted_ha": 4254,
-   "baled_ha": 62553,
-   "baled_t": 206423,
-   "preempted_baled_t": 14037
+   "preempted_fields": 4659,
+   "preempted_share": 0.2277,
+   "preempted_ha": 4136,
+   "baled_ha": 62316,
+   "baled_t": 205642,
+   "preempted_baled_t": 13649
   },
   {
    "fleet": 400,
    "policy": "fifo",
    "burned_fields": 20464,
-   "preempted_fields": 3329,
-   "preempted_share": 0.1627,
-   "preempted_ha": 3313,
-   "baled_ha": 70362,
-   "baled_t": 232194,
-   "preempted_baled_t": 10933
+   "preempted_fields": 3333,
+   "preempted_share": 0.1629,
+   "preempted_ha": 3320,
+   "baled_ha": 70356,
+   "baled_t": 232175,
+   "preempted_baled_t": 10955
   },
   {
    "fleet": 400,
    "policy": "risk",
    "burned_fields": 20464,
-   "preempted_fields": 5649,
-   "preempted_share": 0.276,
-   "preempted_ha": 6223,
-   "baled_ha": 67464,
-   "baled_t": 222632,
-   "preempted_baled_t": 20537
+   "preempted_fields": 5651,
+   "preempted_share": 0.2761,
+   "preempted_ha": 6228,
+   "baled_ha": 67467,
+   "baled_t": 222642,
+   "preempted_baled_t": 20553
   },
   {
    "fleet": 400,
    "policy": "dynamic",
    "burned_fields": 20464,
-   "preempted_fields": 4976,
-   "preempted_share": 0.2432,
-   "preempted_ha": 5131,
-   "baled_ha": 68233,
-   "baled_t": 225170,
-   "preempted_baled_t": 16932
+   "preempted_fields": 5605,
+   "preempted_share": 0.2739,
+   "preempted_ha": 6178,
+   "baled_ha": 63766,
+   "baled_t": 210427,
+   "preempted_baled_t": 20388
   },
   {
    "fleet": 400,
@@ -486,10 +890,10 @@
    "burned_fields": 20464,
    "preempted_fields": 17420,
    "preempted_share": 0.8513,
-   "preempted_ha": 18745,
+   "preempted_ha": 18737,
    "baled_ha": 69653,
    "baled_t": 229856,
-   "preempted_baled_t": 61860
+   "preempted_baled_t": 61832
   }
  ],
  "replay_impact": {
@@ -505,11 +909,11 @@
    "avoided_PM25_t": 54.7,
    "avoided_BC_t": 2.8,
    "straw_value_preempted_rs_crore": 0.89,
-   "straw_value_all_baled_rs_crore": 6.66
+   "straw_value_all_baled_rs_crore": 6.67
   },
   "100": {
    "preempted_share": 0.1143,
-   "fifo_share": 0.0434,
+   "fifo_share": 0.0435,
    "preempted_ha": 2498,
    "avoided_CH4_N2O_CO2e_t": 1859,
    "avoided_CH4_N2O_CO2e_t_p05_p95": [
@@ -523,7 +927,7 @@
   },
   "200": {
    "preempted_share": 0.1753,
-   "fifo_share": 0.0796,
+   "fifo_share": 0.0797,
    "preempted_ha": 3973,
    "avoided_CH4_N2O_CO2e_t": 2956,
    "avoided_CH4_N2O_CO2e_t_p05_p95": [
@@ -536,68 +940,68 @@
    "straw_value_all_baled_rs_crore": 20.87
   },
   "400": {
-   "preempted_share": 0.276,
-   "fifo_share": 0.1627,
-   "preempted_ha": 6223,
-   "avoided_CH4_N2O_CO2e_t": 4630,
+   "preempted_share": 0.2761,
+   "fifo_share": 0.1629,
+   "preempted_ha": 6228,
+   "avoided_CH4_N2O_CO2e_t": 4634,
    "avoided_CH4_N2O_CO2e_t_p05_p95": [
     818,
-    12079
+    12088
    ],
-   "avoided_PM25_t": 212.3,
+   "avoided_PM25_t": 212.4,
    "avoided_BC_t": 11.0,
    "straw_value_preempted_rs_crore": 3.47,
-   "straw_value_all_baled_rs_crore": 37.62
+   "straw_value_all_baled_rs_crore": 37.63
   }
  },
  "emissions_burned_area": {
   "2023": {
    "strict": {
-    "burned_ha": 7883,
+    "burned_ha": 649,
     "dry_matter_burned_t": {
-     "median": 33388,
-     "p05": 26163,
-     "p95": 41592
+     "median": 2749,
+     "p05": 2154,
+     "p95": 3424
     },
     "CO2_t": {
-     "median": 47204.5,
-     "p05": 32212.4,
-     "p95": 65765.0
+     "median": 3886.3,
+     "p05": 2652.0,
+     "p95": 5414.4
     },
     "CH4_t": {
-     "median": 186.7,
-     "p05": 17.2,
-     "p95": 530.8
+     "median": 15.4,
+     "p05": 1.4,
+     "p95": 43.7
     },
     "N2O_t": {
-     "median": 3.0,
-     "p05": 0.8,
-     "p95": 5.5
+     "median": 0.2,
+     "p05": 0.1,
+     "p95": 0.5
     },
     "CO_t": {
-     "median": 2492.4,
-     "p05": 246.9,
-     "p95": 5768.3
+     "median": 205.2,
+     "p05": 20.3,
+     "p95": 474.9
     },
     "PM2.5_t": {
-     "median": 270.9,
-     "p05": 34.0,
-     "p95": 538.4
+     "median": 22.3,
+     "p05": 2.8,
+     "p95": 44.3
     },
     "BC_t": {
-     "median": 13.9,
-     "p05": 1.4,
-     "p95": 30.3
+     "median": 1.1,
+     "p05": 0.1,
+     "p95": 2.5
     },
     "OC_t": {
-     "median": 162.3,
-     "p05": 16.1,
-     "p95": 371.0
+     "median": 13.4,
+     "p05": 1.3,
+     "p95": 30.5
     },
     "CH4_N2O_CO2e_t": {
-     "median": 5853,
-     "p05": 1031,
-     "p95": 15282
+     "median": 482,
+     "p05": 85,
+     "p95": 1258
     },
     "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
    },
@@ -653,51 +1057,51 @@
   },
   "2024": {
    "strict": {
-    "burned_ha": 3643,
+    "burned_ha": 1022,
     "dry_matter_burned_t": {
-     "median": 15430,
-     "p05": 12091,
-     "p95": 19221
+     "median": 4329,
+     "p05": 3392,
+     "p95": 5392
     },
     "CO2_t": {
-     "median": 21814.8,
-     "p05": 14886.4,
-     "p95": 30392.2
+     "median": 6119.9,
+     "p05": 4176.2,
+     "p95": 8526.2
     },
     "CH4_t": {
-     "median": 86.3,
-     "p05": 7.9,
-     "p95": 245.3
+     "median": 24.2,
+     "p05": 2.2,
+     "p95": 68.8
     },
     "N2O_t": {
-     "median": 1.4,
-     "p05": 0.4,
-     "p95": 2.5
+     "median": 0.4,
+     "p05": 0.1,
+     "p95": 0.7
     },
     "CO_t": {
-     "median": 1151.8,
-     "p05": 114.1,
-     "p95": 2665.7
+     "median": 323.1,
+     "p05": 32.0,
+     "p95": 747.8
     },
     "PM2.5_t": {
-     "median": 125.2,
-     "p05": 15.7,
-     "p95": 248.8
+     "median": 35.1,
+     "p05": 4.4,
+     "p95": 69.8
     },
     "BC_t": {
-     "median": 6.4,
-     "p05": 0.7,
-     "p95": 14.0
+     "median": 1.8,
+     "p05": 0.2,
+     "p95": 3.9
     },
     "OC_t": {
-     "median": 75.0,
-     "p05": 7.4,
-     "p95": 171.5
+     "median": 21.0,
+     "p05": 2.1,
+     "p95": 48.1
     },
     "CH4_N2O_CO2e_t": {
-     "median": 2705,
-     "p05": 476,
-     "p95": 7062
+     "median": 759,
+     "p05": 134,
+     "p95": 1981
     },
     "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
    },
@@ -753,51 +1157,51 @@
   },
   "2025": {
    "strict": {
-    "burned_ha": 7930,
+    "burned_ha": 2531,
     "dry_matter_burned_t": {
-     "median": 33587,
-     "p05": 26319,
-     "p95": 41840
+     "median": 10720,
+     "p05": 8400,
+     "p95": 13354
     },
     "CO2_t": {
-     "median": 47485.9,
-     "p05": 32404.4,
-     "p95": 66157.1
+     "median": 15156.0,
+     "p05": 10342.4,
+     "p95": 21115.2
     },
     "CH4_t": {
-     "median": 187.8,
-     "p05": 17.3,
-     "p95": 534.0
+     "median": 59.9,
+     "p05": 5.5,
+     "p95": 170.4
     },
     "N2O_t": {
-     "median": 3.0,
-     "p05": 0.8,
-     "p95": 5.5
+     "median": 1.0,
+     "p05": 0.3,
+     "p95": 1.8
     },
     "CO_t": {
-     "median": 2507.2,
-     "p05": 248.4,
-     "p95": 5802.6
+     "median": 800.2,
+     "p05": 79.3,
+     "p95": 1852.0
     },
     "PM2.5_t": {
-     "median": 272.5,
-     "p05": 34.2,
-     "p95": 541.6
+     "median": 87.0,
+     "p05": 10.9,
+     "p95": 172.9
     },
     "BC_t": {
-     "median": 14.0,
-     "p05": 1.4,
-     "p95": 30.4
+     "median": 4.5,
+     "p05": 0.5,
+     "p95": 9.7
     },
     "OC_t": {
-     "median": 163.3,
-     "p05": 16.2,
-     "p95": 373.2
+     "median": 52.1,
+     "p05": 5.2,
+     "p95": 119.1
     },
     "CH4_N2O_CO2e_t": {
-     "median": 5888,
-     "p05": 1037,
-     "p95": 15373
+     "median": 1879,
+     "p05": 331,
+     "p95": 4907
     },
     "convention": "CO2 from residue burning is biogenic and reported separately; CO2e counts CH4 (GWP100 27.0) and N2O (273)."
    },

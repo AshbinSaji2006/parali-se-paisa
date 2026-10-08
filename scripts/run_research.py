@@ -373,45 +373,51 @@ def figures(census, naive, smoke, lat, risk, rep, now) -> None:
     fs.setup()
     FIG.mkdir(parents=True, exist_ok=True)
     yrs = census.year.astype(str).tolist()
-    # F1 hero: indexed trends
+    # F1 hero: indexed trends. Only the loose tier is a comparable series: the strict tier needs a
+    # haze-free pre-event image, so its count follows each season's smoke conditions.
     fig, ax = plt.subplots(figsize=(8.6, 4.4))
     series = [("VIIRS fire alerts (S-NPP + NOAA-20)", census.viirs_alerts, fs.SERIES[1], 0, "alerts"),
-              ("Sentinel-2 strict-tier burn-scar candidate area", census.burned_strict_ha, fs.SERIES[0], 13, "ha"),
-              ("Sentinel-2 burn-candidate area (loose)", census.burned_loose_ha, fs.SERIES[2], -13, "ha")]
+              ("Sentinel-2 loose burn-candidate area (exploratory)", census.burned_loose_ha, fs.SERIES[2], 0, "ha")]
     for name, v, col, dy, unit in series:
         idx = 100 * v / v.iloc[0]
         ax.plot(range(len(yrs)), idx, color=col, marker="o", ms=7, mec=fs.SURFACE, mew=2)
-        ax.annotate(f"{name}: {int(v.iloc[-1]):,} {unit} in 2025 (index {idx.iloc[-1]:.0f})", (len(yrs) - 1, idx.iloc[-1]),
+        ax.annotate(f"{name}: {int(v.iloc[-1]):,} {unit} in {yrs[-1]} (index {idx.iloc[-1]:.0f})", (len(yrs) - 1, idx.iloc[-1]),
                     xytext=(10, dy), textcoords="offset points", va="center", fontsize=8.5, color=fs.INK2)
     ax.axhline(100, color=fs.BASE, lw=1)
-    ax.annotate("2024: smog removed 3-21 Nov images,\nso burn area is a lower bound", (1, 46), xytext=(0, -40),
+    ax.annotate("2024: smog removed 3-21 Nov images,\nso candidate area is a lower bound", (1, 46), xytext=(0, -40),
                 textcoords="offset points", ha="center", fontsize=8, color=fs.MUTED)
     ax.set_xticks(range(len(yrs)), yrs)
-    ax.set_ylabel("Index, 2023 = 100")
+    ax.set_ylabel("Index, first season = 100")
     ax.set_xlim(-0.2, 4.7)
     ax.set_ylim(0, 130)
-    ax.set_title("Fire alerts fell 79%. Burn scars did not.")
-    fs.note(fig, "Sri Muktsar Sahib, Oct-Dec. Sentinel-2 L2A at a harmonised 5-day revisit; VIIRS 375 m active fires (NASA FIRMS 2023-24, UMD archive 2025),\n"
-                 "vegetation-fire type, inside the district. Strict = char-like signature tier; loose = all burn candidates; both are unverified rule candidates.")
+    dv = 100 * (census.viirs_alerts.iloc[-1] / census.viirs_alerts.iloc[0] - 1)
+    dl = 100 * (census.burned_loose_ha.iloc[-1] / census.burned_loose_ha.iloc[0] - 1)
+    ax.set_title(f"VIIRS fire alerts {dv:+.0f}% since {yrs[0]}; loose burn-candidate area {dl:+.0f}%")
+    fs.note(fig, "Sri Muktsar Sahib, Oct-Dec, Sentinel-2 L2A at a harmonised 5-day revisit. Loose = exploratory rule-based burn candidates (not confirmed burns).\n"
+                 "The strict tier is not plotted as a trend: it needs a haze-free pre-event image, so its count follows each season's smoke conditions.")
     fig.tight_layout(rect=(0, 0.07, 1, 1))
     fig.savefig(FIG / "f1_alerts_vs_scars.png", dpi=180)
     plt.close(fig)
-    # F2 blind spot
+    # F2 thermal context, from the event-table summary (scripts/build_burn_candidate_events.py), all windows
+    cand = json.loads((REP / "burn_candidate_summary.json").read_text(encoding="utf-8"))["thermal_context"]
+    tyrs = [y for y in yrs if y in cand]
     fig, ax = plt.subplots(figsize=(7.2, 4.0))
-    x = np.arange(len(yrs))
-    a = 100 * census.burns_with_viirs_short_window
-    b = 100 * census.control_with_viirs_short_window
-    ax.bar(x - 0.19, a, 0.36, color=fs.SERIES[0], label="Sentinel-2 burned fields")
-    ax.bar(x + 0.19, b, 0.36, color=fs.BASE, label="Unburned control fields, same windows")
+    x = np.arange(len(tyrs))
+    st = [cand[y]["strict"]["500m"] for y in tyrs]
+    a = np.array([100 * s["share_candidates_with_viirs_nearby"] for s in st])
+    b = np.array([100 * s["proximity_control_share"] for s in st])
+    ax.bar(x - 0.19, a, 0.36, color=fs.SERIES[0], label="Strict rule-based burn candidates")
+    ax.bar(x + 0.19, b, 0.36, color=fs.BASE, label="Control: harvested fields without candidates")
     for i in range(len(x)):
-        ax.text(x[i] - 0.19, a.iloc[i] + 1, f"{a.iloc[i]:.0f}%", ha="center", fontsize=9, color=fs.INK)
-        ax.text(x[i] + 0.19, b.iloc[i] + 1, f"{b.iloc[i]:.0f}%", ha="center", fontsize=9, color=fs.INK2)
-    ax.set_xticks(x, yrs)
-    ax.set_ylabel("Share with a VIIRS alert within 500 m (%)")
-    ax.set_ylim(0, 45)
+        ax.text(x[i] - 0.19, a[i] + 1, f"{a[i]:.1f}%\n{st[i]['candidates_with_viirs_nearby']:,} of {st[i]['candidates']:,}", ha="center", fontsize=8, color=fs.INK)
+        ax.text(x[i] + 0.19, b[i] + 1, f"{b[i]:.1f}%", ha="center", fontsize=8.5, color=fs.INK2)
+    ax.set_xticks(x, tyrs)
+    ax.set_ylabel("Share with a matched VIIRS detection (%)")
+    ax.set_ylim(0, 60)
     ax.legend(loc="upper right")
-    ax.set_title("How many strict-tier burn candidates did the fire satellites see?")
-    fs.note(fig, "Burned fields observed within <=5 days by Sentinel-2 (strict char tier).\nControl: unburned harvested fields given the same observation windows (proximity baseline).")
+    ax.set_title("Strict optical candidates with a matched VIIRS active-fire detection")
+    fs.note(fig, "Match: VIIRS S-NPP/NOAA-20 detection within 500 m of the field centroid between the pre-event image - 1 d and the event image + 1 d.\n"
+                 "Thermal context only, not field-level confirmation; candidates are rule-based, not ground truth. 2025 uses the UMD monthly archive.")
     fig.tight_layout(rect=(0, 0.075, 1, 1))
     fig.savefig(FIG / "f2_blind_spot.png", dpi=180)
     plt.close(fig)
@@ -535,6 +541,11 @@ def main() -> None:
     now = nowcast_2026(te)
     export_field_products(te)
     figures(census, naive, smoke, lat, risk, rep, now)
+    cs_path = REP / "burn_candidate_summary.json"
+    if cs_path.exists():  # judge-facing candidate areas and thermal context (scripts/build_burn_candidate_events.py)
+        cs = json.loads(cs_path.read_text(encoding="utf-8"))
+        R["candidate_summary"] = {k: cs.get(k) for k in ("rule_version", "haze_rule", "labels", "area_statistics", "thermal_context",
+                                                        "thermal_context_note", "haze_scenes")}
     R.update(dict(generated_by="scripts/run_research.py", census=census.to_dict("records"), naive_vs_aware=naive.to_dict("records"),
                   latency=lat, persistence=pers, risk_model=risk, dynamic_hazard=haz, replay=rep.to_dict("records"), replay_impact=replay_impact,
                   emissions_burned_area=em, emissions_per_1000_ha_burned=per_1000, nowcast_2026={k: v for k, v in now.items() if k not in ("curves", "forecast_grid")},

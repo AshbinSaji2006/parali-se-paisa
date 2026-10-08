@@ -19,9 +19,15 @@ from shapely.geometry import box
 
 ROOT = Path(__file__).resolve().parents[1]
 REAL = ROOT / "data" / "real"
-PROCESSING_VERSION = "grid-aligned-20m-v4-bais2-red-floor"
-# Reflectance floor for BAIS2 pixels (see BAIS2 comment in run()); applies to new reductions only.
+PROCESSING_VERSION = "grid-aligned-20m-v5-nd-nonnegative"
+# Reflectance floor for BAIS2 pixels (see BAIS2 comment in field_statistics()); applies to new reductions only.
 BAIS2_MIN_B04 = 0.005
+INDEX_BANDS = ["B04", "B06", "B07", "B08", "B8A", "B12"]
+SCL_VALID = (4, 5, 6)
+# Harvest-season window per year; the live season runs to the latest local acquisition.
+SEASON_WINDOW = ("09-15", "12-15")
+STACK = REAL / "s2_stack"
+STACK_NODATA = -32768
 
 
 def _read_aligned_band(src, reference_crs, transform, width, height, *, categorical=False):
@@ -30,6 +36,65 @@ def _read_aligned_band(src, reference_crs, transform, width, height, *, categori
     with WarpedVRT(src, crs=reference_crs, transform=transform, width=width, height=height,
                    resampling=method, dtype=src.dtypes[0]) as vrt:
         return vrt.read(1)
+
+
+def field_statistics(refl: dict[str, np.ndarray], valid: np.ndarray, zones: np.ndarray, n_zones: int) -> dict:
+    """Per-field v5 means for one scene, shared by the remote and local-stack paths.
+
+    ``refl`` holds harmonised B04/B06/B07/B08/B8A/B12 reflectance on one 20 m grid and
+    ``valid`` already excludes nodata and SCL classes other than 4/5/6. Arrays may be the
+    full window or only the field pixels; zone 0 is background.
+    """
+    valid = valid & (zones > 0)
+    valid &= np.logical_and.reduce([np.isfinite(v) & (v > -0.05) & (v <= 1.5) for v in refl.values()])
+    b4, b6, b7, b8, b8a, b12 = (refl[k] for k in INDEX_BANDS)
+    ndvi_den = b8 + b4; nbr_den = b8 + b12; bais_den = np.sqrt(np.maximum(b12 + b8a, 0))
+    # v5: a normalized difference is only bounded to [-1, 1] when both bands are non-negative.
+    # Slightly negative post-offset reflectance (atmospheric over-correction of dark pixels) is
+    # kept for the band means, but such pixels do not enter the NDVI/NBR means.
+    ndvi_ok = (b8 >= 0) & (b4 >= 0) & (ndvi_den > 0)
+    nbr_ok = (b8 >= 0) & (b12 >= 0) & (nbr_den > 0)
+    ndvi = np.divide(b8-b4, ndvi_den, out=np.full_like(b8, np.nan), where=ndvi_ok)
+    nbr = np.divide(b8-b12, nbr_den, out=np.full_like(b8, np.nan), where=nbr_ok)
+    # BAIS2 divides by B04. The valid mask admits slightly negative post-offset
+    # reflectance, and a near-zero red pixel would dominate the field mean, so
+    # BAIS2 is only computed where B04 is physically meaningful.
+    bais2_ok = b4 >= BAIS2_MIN_B04
+    bais2 = np.where(bais2_ok, (1-np.sqrt(np.maximum(b6*b7*b8a/np.maximum(b4, BAIS2_MIN_B04), 0))) * ((b12-b8a)/np.maximum(bais_den, 1e-8)+1), np.nan)
+    size = n_zones + 1
+
+    def means(a):
+        finite = valid & np.isfinite(a)
+        zz = zones[finite].ravel().astype(np.int64)
+        n = np.bincount(zz, minlength=size)
+        return np.divide(np.bincount(zz, weights=a[finite].ravel(), minlength=size), n,
+                         out=np.full(size, np.nan), where=n > 0)
+
+    return {"counts": np.bincount(zones[valid].ravel().astype(np.int64), minlength=size),
+            "zone_pixels": np.bincount(zones.ravel().astype(np.int64), minlength=size),
+            "bais2_counts": np.bincount(zones[valid & bais2_ok].ravel().astype(np.int64), minlength=size),
+            "means": {key: means(arr) for key, arr in {"B04": b4, "B06": b6, "B07": b7, "B08": b8, "B8A": b8a, "B12": b12,
+                                                       "ndvi": ndvi, "nbr": nbr, "bais2": bais2}.items()}}
+
+
+def observation_row(field, idx: int, stats: dict, provenance: dict) -> dict | None:
+    """One v5 field-date row, or None when fewer than 3 clear pixels were observed."""
+    count, total = int(stats["counts"][idx]), int(stats["zone_pixels"][idx])
+    if count < 3:
+        return None
+    row = {"field_id": field.field_id, **provenance, "processing_version": PROCESSING_VERSION,
+           "valid_pixel_count": count, "area_ha": float(field.area_ha),
+           "valid_pixel_fraction": float(count / total) if total else None,
+           "cloud_fraction": float(1 - count / total) if total else None,
+           "observation_quality": "GOOD" if count >= 10 and count / max(total, 1) >= 0.5 else "POOR",
+           "cropland_fraction": field.get("cropland_fraction", None),
+           "reflectance_scale": 0.0001, "scl_valid_classes": ",".join(map(str, SCL_VALID)),
+           "bais2_valid_pixel_count": int(stats["bais2_counts"][idx]), "bais2_min_b04": BAIS2_MIN_B04,
+           "real_or_synthetic": "REAL"}
+    row.update({f"{k.lower()}_mean": float(v[idx]) for k, v in stats["means"].items()})
+    row["NDVI"] = row.pop("ndvi_mean"); row["NBR"] = row.pop("nbr_mean"); row["BAIS2"] = row.pop("bais2_mean")
+    row["NDVI_mean"] = row["NDVI"]; row["NBR_mean"] = row["NBR"]; row["BAIS2_mean"] = row["BAIS2"]
+    return row
 
 
 def sample_fields(fields: gpd.GeoDataFrame, limit: int = 600) -> gpd.GeoDataFrame:
@@ -173,59 +238,27 @@ def run(year_filter: int | None = None, force: bool = False) -> tuple[Path, gpd.
                     # baseline 04.00 (25 Jan 2022) BOA_ADD_OFFSET is -1000; earlier products have no
                     # offset. Planetary Computer serves the original DN, so harmonise per item.
                     scl = data.pop("SCL")
-                    valid = np.isin(scl, [4, 5, 6]) & (zones > 0)
                     baseline = float(item.properties.get("s2:processing_baseline", "0") or 0)
                     boa_offset = 1000.0 if baseline >= 4.0 else 0.0
-                    valid &= np.logical_and.reduce([v > 0 for v in data.values()])  # DN 0 = nodata
+                    valid = np.isin(scl, SCL_VALID) & np.logical_and.reduce([v > 0 for v in data.values()])  # DN 0 = nodata
                     refl = {k: (v.astype(np.float32) - boa_offset) / 10000.0 for k, v in data.items()}
-                    valid &= np.logical_and.reduce([np.isfinite(v) & (v > -0.05) & (v <= 1.5) for v in refl.values()])
-                    b4, b6, b7, b8, b8a, b12 = (refl[k] for k in ["B04", "B06", "B07", "B08", "B8A", "B12"])
-                    ndvi_den = b8 + b4; nbr_den = b8 + b12; bais_den = np.sqrt(np.maximum(b12 + b8a, 0))
-                    ndvi = np.divide(b8-b4, ndvi_den, out=np.full_like(b8, np.nan), where=ndvi_den != 0)
-                    nbr = np.divide(b8-b12, nbr_den, out=np.full_like(b8, np.nan), where=nbr_den != 0)
-                    # BAIS2 divides by B04. The valid mask admits slightly negative post-offset
-                    # reflectance, and a near-zero red pixel would dominate the field mean, so
-                    # BAIS2 is only computed where B04 is physically meaningful.
-                    bais2_ok = b4 >= BAIS2_MIN_B04
-                    bais2 = np.where(bais2_ok, (1-np.sqrt(np.maximum(b6*b7*b8a/np.maximum(b4, BAIS2_MIN_B04), 0))) * ((b12-b8a)/np.maximum(bais_den, 1e-8)+1), np.nan)
-                    z = zones[valid].ravel().astype(np.int64)
-                    max_id = len(local)
-                    counts = np.bincount(z, minlength=max_id+1)
-                    zone_pixels = np.bincount(zones.ravel().astype(np.int64), minlength=max_id+1)
-                    def means(a):
-                        finite = valid & np.isfinite(a)
-                        zz = zones[finite].ravel().astype(np.int64)
-                        n = np.bincount(zz, minlength=max_id+1)
-                        return np.divide(np.bincount(zz, weights=a[finite].ravel(), minlength=max_id+1), n,
-                                         out=np.full(max_id+1, np.nan), where=n > 0)
-                    bais2_counts = np.bincount(zones[valid & bais2_ok].ravel().astype(np.int64), minlength=max_id+1)
-                    stats = {key: means(arr) for key, arr in {"B04":b4,"B06":b6,"B07":b7,"B08":b8,"B8A":b8a,"B12":b12,
-                                                              "ndvi":ndvi,"nbr":nbr,"bais2":bais2}.items()}
-                    obs_time = pd.Timestamp(item.datetime).isoformat()
+                    stats = field_statistics(refl, valid, zones, len(local))
+                    provenance = {"observation_datetime": pd.Timestamp(item.datetime).isoformat(), "year": int(scene.year),
+                                  "scene_id": item.id, "collection": "sentinel-2-l2a", "tile": scene.tile,
+                                  "source_provider": "Microsoft Planetary Computer", "source_item_url": item.get_self_href(),
+                                  "source_asset_urls": json.dumps(source_hrefs, sort_keys=True), "cloud_cover_pct": scene.cloud_cover,
+                                  "processing_baseline": baseline, "boa_offset_dn": boa_offset,
+                                  "processing_source": "REMOTE_COG_WINDOW"}
                     for idx, (_, field) in enumerate(local.iterrows(), start=1):
-                        if counts[idx] < 3:
-                            continue
-                        row = {"field_id": field.field_id, "observation_datetime": obs_time, "year": int(scene.year),
-                               "processing_version": PROCESSING_VERSION,
-                               "scene_id": item.id, "collection": "sentinel-2-l2a", "tile": scene.tile,
-                               "source_provider": "Microsoft Planetary Computer", "source_item_url": item.get_self_href(),
-                               "source_asset_urls": json.dumps(source_hrefs, sort_keys=True), "cloud_cover_pct": scene.cloud_cover,
-                               "valid_pixel_count": int(counts[idx]), "area_ha": float(field.area_ha),
-                               "valid_pixel_fraction": float(counts[idx] / zone_pixels[idx]) if zone_pixels[idx] else None,
-                               "cloud_fraction": float(1-counts[idx] / zone_pixels[idx]) if zone_pixels[idx] else None,
-                               "observation_quality": "GOOD" if counts[idx] >= 10 and counts[idx] / max(zone_pixels[idx],1) >= 0.5 else "POOR",
-                               "cropland_fraction": field.get("cropland_fraction", None),
-                               "reflectance_scale": 0.0001, "processing_baseline": baseline, "boa_offset_dn": boa_offset,
-                               "scl_valid_classes": "4,5,6", "bais2_valid_pixel_count": int(bais2_counts[idx]),
-                               "bais2_min_b04": BAIS2_MIN_B04, "real_or_synthetic": "REAL"}
-                        row.update({f"{k.lower()}_mean": float(v[idx]) for k, v in stats.items()})
-                        row["NDVI"] = row.pop("ndvi_mean"); row["NBR"] = row.pop("nbr_mean"); row["BAIS2"] = row.pop("bais2_mean")
-                        row["NDVI_mean"] = row["NDVI"]; row["NBR_mean"] = row["NBR"]; row["BAIS2_mean"] = row["BAIS2"]
-                        rows.append(row)
+                        row = observation_row(field, idx, stats, provenance)
+                        if row is not None:
+                            rows.append(row)
                     # Keep one true pixel-derived, district-window NDVI preview per year.
                     if preview_count < 4:
                         import matplotlib.pyplot as plt
-                        img = np.where(valid, ndvi, np.nan)
+                        b4, b8 = refl["B04"], refl["B08"]
+                        ndvi = np.divide(b8-b4, b8+b4, out=np.full_like(b8, np.nan), where=(b8+b4) != 0)
+                        img = np.where(valid & (zones > 0), ndvi, np.nan)
                         out = REAL / "derived" / "previews" / f"ndvi_{scene.year}_{str(scene.scene_id)[:32]}.png"
                         out.parent.mkdir(parents=True, exist_ok=True)
                         fig, ax = plt.subplots(figsize=(6, 5)); ax.imshow(img, cmap="RdYlGn", vmin=-1, vmax=1); ax.set_axis_off()
@@ -249,10 +282,119 @@ def run(year_filter: int | None = None, force: bool = False) -> tuple[Path, gpd.
     return out, fields
 
 
+def local_stack_scenes(years=(2023, 2024, 2025, 2026)) -> pd.DataFrame:
+    """Harmonised local acquisitions (download_s2_stack.py) inside each season window."""
+    rows = []
+    for year in years:
+        start, end = (pd.Timestamp(f"{year}-{d}", tz="UTC") for d in SEASON_WINDOW)
+        for meta_path in sorted((STACK / str(year)).glob("S2_*_43RDP.json")):
+            tif = meta_path.with_suffix(".tif")
+            if not tif.exists():
+                continue
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            when = pd.Timestamp(meta["datetime"]).tz_convert("UTC")
+            if start <= when < end + pd.Timedelta(days=1):
+                rows.append({"year": year, "datetime": when, "path": tif, "meta": meta})
+    return pd.DataFrame(rows).sort_values("datetime").reset_index(drop=True) if rows else pd.DataFrame()
+
+
+def _sha256(path: Path) -> str:
+    import hashlib
+    digest = hashlib.sha256()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 22), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def run_local_stack(years=(2023, 2024, 2025, 2026)) -> tuple[Path, pd.DataFrame]:
+    """Reduce every local harmonised scene in the season windows with the v5 rules.
+
+    The stacks already hold (DN - BOA_ADD_OFFSET) on the district 20 m grid, whose origin
+    lies on tile 43RDP's 20 m B06 lattice, so the reflectance, SCL 4/5/6 mask, BAIS2 red
+    floor and zonal means are the same as the remote path. No scene is interpolated or
+    gap-filled: a field only gets a row when it has >= 3 clear pixels on that date.
+    """
+    scenes = local_stack_scenes(years)
+    if scenes.empty:
+        raise FileNotFoundError(f"No local Sentinel-2 stacks in {STACK.relative_to(ROOT)}; run scripts/download_s2_stack.py")
+    with rasterio.open(scenes.path.iloc[0]) as ref:
+        crs, transform, width, height = ref.crs, ref.transform, ref.width, ref.height
+        names = list(ref.descriptions)
+    band_index = {name: names.index(name) + 1 for name in [*INDEX_BANDS, "SCL"]}
+    fields = sample_fields(gpd.read_parquet(REAL / "fields" / "fields_of_the_world_muktsar.parquet")).to_crs(crs)
+    grid = np.zeros((height, width), dtype=np.int32)
+    zones = rasterize(((geom, i) for i, geom in enumerate(fields.geometry, start=1)), out=grid,
+                      transform=transform, fill=0, all_touched=False)
+    pixels = np.flatnonzero(zones.ravel())
+    zone_vector = zones.ravel()[pixels]
+    rows: list[dict] = []
+    for scene in scenes.itertuples():
+        meta = scene.meta
+        with rasterio.open(scene.path) as src:
+            if src.crs != crs or src.transform != transform or (src.width, src.height) != (width, height):
+                raise ValueError(f"{scene.path.name} is not on the common stack grid")
+            data = {name: src.read(i).ravel()[pixels] for name, i in band_index.items()}
+        scl = data.pop("SCL")
+        valid = np.isin(scl, SCL_VALID) & np.logical_and.reduce([v != STACK_NODATA for v in data.values()])
+        refl = {k: v.astype(np.float32) / 10000.0 for k, v in data.items()}
+        stats = field_statistics(refl, valid, zone_vector, len(fields))
+        provenance = {"observation_datetime": scene.datetime.isoformat(), "year": int(scene.year),
+                      "scene_id": meta["item_id"], "collection": "sentinel-2-l2a", "tile": meta["tile"],
+                      "source_provider": "Microsoft Planetary Computer", "source_item_url": meta["source_item_url"],
+                      "source_asset_urls": json.dumps(meta["source_asset_urls"], sort_keys=True),
+                      "cloud_cover_pct": meta["tile_cloud_cover"], "platform": meta.get("platform"),
+                      "processing_baseline": float(meta["processing_baseline"]), "boa_offset_dn": float(meta["harmonised_offset_dn"]),
+                      "processing_source": "LOCAL_HARMONISED_STACK",
+                      "source_raster": scene.path.relative_to(ROOT).as_posix(), "source_raster_sha256": _sha256(scene.path)}
+        before = len(rows)
+        for idx, (_, field) in enumerate(fields.iterrows(), start=1):
+            row = observation_row(field, idx, stats, provenance)
+            if row is not None:
+                rows.append(row)
+        print(f"LOCAL_SCENE {meta['item_id']} rows={len(rows) - before}", flush=True)
+    result = (pd.DataFrame(rows).sort_values(["field_id", "observation_datetime"])
+              .drop_duplicates(["field_id", "observation_datetime"], keep="first").reset_index(drop=True))
+    out = REAL / "derived" / "features" / "sentinel2_field_observations.parquet"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    result.to_parquet(out, index=False)
+    return out, scenes
+
+
+def record_local_stack(out: Path, scenes: pd.DataFrame) -> None:
+    """Record per-season acquisition state for a local-stack reduction."""
+    import sys
+    if str(ROOT) not in sys.path:
+        sys.path.insert(0, str(ROOT))
+    from scripts.acquire_real_data import record_dataset
+    obs = pd.read_parquet(out)
+    for year, group in obs.groupby("year"):
+        season = scenes.loc[scenes.year == year]
+        record_dataset(f"sentinel2_{int(year)}", "real_derived", source_provider="Microsoft Planetary Computer",
+                       source_dataset="Sentinel-2 L2A field-level surface reflectance and index reductions",
+                       date_range={"start": f"{int(year)}-{SEASON_WINDOW[0]}", "end": season.datetime.max().date().isoformat()},
+                       paths=[out], metadata={"processing_version": PROCESSING_VERSION, "processing_source": "LOCAL_HARMONISED_STACK",
+                                              "scenes_processed": int(len(season)), "scene_ids": [m["item_id"] for m in season.meta],
+                                              "field_observations": int(len(group)), "observed_fields": int(group.field_id.nunique()),
+                                              "scale": 0.0001, "cloud_mask": "SCL classes 4,5,6", "indices": ["NDVI", "NBR", "BAIS2"],
+                                              "minimum_clear_pixels": 3},
+                       license_ref="Copernicus Sentinel data; https://dataspace.copernicus.eu/terms-and-conditions")
+
+
 if __name__ == "__main__":
     import argparse
     parser=argparse.ArgumentParser()
     parser.add_argument("--year",type=int,choices=[2023,2024,2025,2026])
+    parser.add_argument("--local-stack", action="store_true",
+                        help="Reduce every local harmonised scene (data/real/s2_stack) in the season windows instead of two remote scenes per season.")
     args=parser.parse_args()
-    p, f = run(args.year)
-    print(f"Wrote {p}: fields={f.field_id.nunique()} observations={pd.read_parquet(p).shape[0]}")
+    if args.local_stack and args.year:
+        parser.error("--local-stack rewrites every season; omit --year")
+    if args.local_stack:
+        p, used = run_local_stack()
+        record_local_stack(p, used)
+        obs = pd.read_parquet(p)
+        print(f"Wrote {p}: scenes={len(used)} fields={obs.field_id.nunique()} observations={len(obs)}")
+    else:
+        p, f = run(args.year)
+        print(f"Wrote {p}: fields={f.field_id.nunique()} observations={pd.read_parquet(p).shape[0]}")

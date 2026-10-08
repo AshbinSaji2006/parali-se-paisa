@@ -158,7 +158,7 @@ def public_certificate(certificate_id, session):
     metadata = {k: v for k, v in record.metadata_json.items() if k not in {"sha256", "qr_payload"}}
     payload = certificate_payload(record)
     payload["integrity_valid"] = metadata_sha256(metadata) == record.sha256
-    payload["integrity_scope"] = "Stored metadata SHA-256; not a digital signature or a hash of the PDF file"
+    payload["integrity_scope"] = "Stored metadata SHA-256 check only; it does not authenticate the PDF document."
     return record, payload
 
 

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-07T17:53:59.954979+00:00",
+  "generated_at": "2026-10-07T22:36:18.430575+00:00",
   "checks": {
     "boundary": true,
     "field_count_ge_100": true,
@@ -16,6 +16,7 @@
     "weather_not_after_satellite_time": true,
     "sentinel2_boa_offset_harmonised": true,
     "bais2_pixel_artefacts_withheld": true,
+    "unphysical_reflectance_withheld": true,
     "weather_availability_consistent": true,
     "fire_context_coverage_flags": true,
     "weak_label_evidence_windows": true,

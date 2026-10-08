@@ -59,7 +59,7 @@ def generate_prototype_certificate(case: VerificationCase, output_dir: str | Pat
     lines = [f"Certificate ID: {certificate_id}", f"Field: {case.field_id}",
              f"Pilot / district: {case.pilot} / {case.district}",
              f"Monitoring: {metadata['monitoring_start']} to {metadata['monitoring_end']}",
-             f"Status: {case.state.value}", f"Good quality satellite observations: {len(case.observations)}",
+             "Stored rule result: prototype evidence rules passed (not an independent field determination)", f"Good quality satellite observations: {len(case.observations)}",
              f"Before image: {metadata['before_image_reference'] or 'Not available'}",
              f"After image: {metadata['after_image_reference'] or 'Not available'}",
              f"Method: {metadata['verification_method']}", f"Provenance: {case.provenance}",

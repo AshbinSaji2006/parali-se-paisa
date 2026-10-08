@@ -41,15 +41,15 @@ def test_no_reviewer_files_means_no_labels(tmp_path, monkeypatch):
 
 def test_validation_agreement_and_consensus(tmp_path, monkeypatch):
     labels = _setup(tmp_path, monkeypatch, {
-        "alice": [_row(0, "alice", "BURNT"), _row(1, "alice", "NOT_BURNT"), _row(2, "", "BURNT")],
-        "bob": [_row(0, "bob", "BURNT"), _row(1, "bob", "BURNT"), {**_row(9, "bob", "BURNT")}],
+        "alice": [_row(0, "alice", "BURNED"), _row(1, "alice", "NOT_BURNED"), _row(2, "", "BURNED")],
+        "bob": [_row(0, "bob", "BURNED"), _row(1, "bob", "BURNED"), {**_row(9, "bob", "BURNED")}],
     })
     status = imp.run()
     assert status["accepted_rows"] == 4 and status["rejected_rows"] == 2  # missing reviewer; item not in package
     assert status["double_reviewed_items"] == 2 and status["burn_label_agreement"] == 0.5
     assert status["unresolved_disagreements"] == 1
     out = pd.read_csv(labels / "visual_labels_2025.csv")
-    assert out.field_id.tolist() == ["F0"] and out.label.tolist() == ["BURNT"]  # disagreement is not resolved silently
+    assert out.field_id.tolist() == ["F0"] and out.label.tolist() == ["BURNED"]  # disagreement is not resolved silently
     assert out.stratum.tolist() == ["rule_no_burn"]
 
 
@@ -60,10 +60,35 @@ def test_review_package_is_blind_and_matches_source_chips(year):
         pytest.skip("reference package not built")
     html = html_path.read_text(encoding="utf-8")
     items = json.loads(re.search(r"const ITEMS = (\[.*?\]);\n", html, re.S).group(1))
-    source = json.loads(re.search(r"const ITEMS = (\[.*?\]);\s*\n",
-                                  (html_path.parent / f"label_burns_{year}.html").read_text(encoding="utf-8"), re.S).group(1))
+    archive = html_path.parent.parent / "internal_do_not_share" / "legacy-reviewer-artifacts"
+    source = json.loads((archive / f"chips_{year}.json").read_text(encoding="utf-8"))["items"]
     assert [i["field_id"] for i in items] == [s["field_id"] for s in source]
     assert all(i["frames"] == s["frames"] for i, s in zip(items, source))
     assert not any("stratum" in i or "burn_tier" in json.dumps(i["context"]) for i in items)
-    manifest = json.loads((html_path.parent / f"reference_package_{year}.json").read_text(encoding="utf-8"))
+    manifest = json.loads((archive / f"reference_package_{year}.json").read_text(encoding="utf-8"))
     assert manifest["item_count"] == len(items) and all("stratum" in m for m in manifest["items"])
+    design = json.loads((archive / f"sample_design_{year}.json").read_text(encoding="utf-8"))
+    assert {m["stratum"] for m in manifest["items"]} <= set(design["population_by_stratum"])
+
+
+def test_legacy_vocabulary_is_rejected(tmp_path, monkeypatch):
+    _setup(tmp_path, monkeypatch, {"carol": [_row(0, "carol", "BURNT"), _row(1, "carol", "UNCLEAR")]})
+    status = imp.run()
+    assert status["accepted_rows"] == 0 and status["rejected_rows"] == 2
+
+
+@pytest.mark.parametrize("year", [2023, 2025])
+def test_review_interface_uses_required_labels_and_captures_reviewer_fields(year):
+    html_path = ROOT / "reports" / "research" / "label_tool" / f"label_reference_{year}.html"
+    if not html_path.exists():
+        pytest.skip("reference package not built")
+    html = html_path.read_text(encoding="utf-8")
+    for label in ("BURNED", "NOT_BURNED", "UNCERTAIN"):
+        assert f'data-burn="{label}"' in html
+    for legacy in ('data-burn="BURNT"', 'data-burn="NOT_BURNT"', 'data-burn="UNCLEAR"'):
+        assert legacy not in html
+    for column in ("reviewer", "reviewed_at", "confidence", "notes", "source_dates"):
+        assert f'"{column}"' in html
+    assert "burn_label: null" in html and "confidence: null" in html  # nothing pre-selected
+    for detector_term in ("STRICT_BURN_CANDIDATE", "LOOSE_BURN_CANDIDATE", "HARVESTED_NO_BURN_CANDIDATE", "stratum"):
+        assert detector_term not in html

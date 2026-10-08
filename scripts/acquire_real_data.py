@@ -409,6 +409,49 @@ def worldcover(district_gdf, fields_gdf=None, force: bool = False):
         raise
 
 
+def era5_nodes(district) -> list[tuple[float, float]]:
+    """ERA5 0.25 degree grid nodes whose nearest-node cell intersects the district."""
+    from shapely.geometry import box
+    minx, miny, maxx, maxy = district.bounds
+    nodes = []
+    for lat in np.arange(round(miny * 4) / 4, round(maxy * 4) / 4 + 1e-9, 0.25):
+        for lon in np.arange(round(minx * 4) / 4, round(maxx * 4) / 4 + 1e-9, 0.25):
+            if district.intersects(box(lon - 0.125, lat - 0.125, lon + 0.125, lat + 0.125)):
+                nodes.append((round(float(lat), 3), round(float(lon), 3)))
+    return nodes
+
+
+def weather_derived(frame: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Rolling rain and daily aggregates that stay null wherever an hour is missing.
+
+    ERA5 is published with a few days' latency, so trailing hours are null. A rolling or
+    daily value is only computed from a complete window; missing weather is never zero.
+    """
+    frame = frame.sort_values(["grid_id", "timestamp"]).reset_index(drop=True)
+    for hours, col in ((24, "rain_previous_24h_mm"), (72, "rain_previous_72h_mm"), (168, "rain_previous_7d_mm")):
+        frame[col] = frame.groupby("grid_id")["precipitation_mm"].transform(lambda s: s.rolling(hours, min_periods=hours).sum())
+    days = frame.assign(day=frame.timestamp.dt.floor("D")).groupby(["grid_id", "day"])
+    daily = days.agg(latitude=("latitude", "first"), longitude=("longitude", "first"),
+                     hours=("precipitation_mm", "count"), temperature_hours=("temperature_2m_c", "count"),
+                     precipitation_mm=("precipitation_mm", lambda s: s.sum(min_count=24) if s.notna().sum() == 24 else np.nan),
+                     temperature_mean_c=("temperature_2m_c", "mean"), humidity_mean_pct=("relative_humidity_2m_pct", "mean"),
+                     wind_mean_ms=("wind_speed_10m_ms", "mean"),
+                     rain_previous_24h_mm=("rain_previous_24h_mm", "last"), rain_previous_72h_mm=("rain_previous_72h_mm", "last"),
+                     rain_previous_7d_mm=("rain_previous_7d_mm", "last")).reset_index()
+    incomplete = daily.temperature_hours.lt(24)
+    daily.loc[incomplete, ["temperature_mean_c", "humidity_mean_pct", "wind_mean_ms"]] = np.nan
+    daily["complete_day"] = daily.hours.eq(24) & ~incomplete
+    # Dry days among the 7 calendar days ending on this day; null unless all 7 are complete.
+    daily = daily.sort_values(["grid_id", "day"])
+    dry = daily.precipitation_mm.lt(1.0).astype(float).where(daily.precipitation_mm.notna())
+    daily["dry_days_previous_7d"] = dry.groupby(daily.grid_id).transform(lambda s: s.rolling(7, min_periods=7).sum())
+    # Hourly rows carry the count over the 7 complete days before their own (unfinished) day.
+    prior = daily[["grid_id", "day", "dry_days_previous_7d"]].assign(day=lambda d: d.day + pd.Timedelta(days=1))
+    frame = frame.assign(day=frame.timestamp.dt.floor("D")).merge(prior, on=["grid_id", "day"], how="left").drop(columns="day")
+    daily = daily.rename(columns={"day": "timestamp"}).drop(columns=["temperature_hours"])
+    return frame, daily
+
+
 def weather(force: bool = False):
     hourly_path = REAL / "weather" / "weather_hourly.parquet"
     daily_path = REAL / "weather" / "weather_daily.parquet"
@@ -418,69 +461,52 @@ def weather(force: bool = False):
         district_path = REAL / "boundaries" / "sri_muktsar_sahib_adm2.geojson"
         import geopandas as gpd
         district = gpd.read_file(district_path).to_crs("EPSG:4326").geometry.iloc[0]
-        minx, miny, maxx, maxy = district.bounds
-        candidates = []
-        for lat in np.arange(math.floor(miny * 4) / 4, maxy + 0.125, 0.25):
-            for lon in np.arange(math.floor(minx * 4) / 4, maxx + 0.125, 0.25):
-                p = Point(float(lon + 0.125), float(lat + 0.125))
-                if district.intersects(p): candidates.append((round(p.y, 3), round(p.x, 3)))
-        if not candidates:
-            p = district.representative_point(); candidates = [(round(p.y, 3), round(p.x, 3))]
-        # ERA5's ~25 km grid is coarse; query no more than six representative points.
-        points = candidates[:6]
-        coords_lat = ",".join(str(x[0]) for x in points)
-        coords_lon = ",".join(str(x[1]) for x in points)
+        # ERA5 is a ~25 km reanalysis grid; every node nearest to some part of the district is
+        # requested so each field can use its nearest node rather than a distant representative.
+        points = era5_nodes(district) or [(round(district.representative_point().y * 4) / 4, round(district.representative_point().x * 4) / 4)]
         start = "2023-09-15"
-        end = min(TODAY - timedelta(days=5), date(2026, 10, 7)).isoformat()
-        params = {"latitude": coords_lat, "longitude": coords_lon, "start_date": start, "end_date": end,
-                  "hourly": "temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m",
-                  "models": "era5", "timezone": "UTC", "wind_speed_unit": "ms"}
-        response = SESSION.get("https://archive-api.open-meteo.com/v1/archive", params=params, timeout=(20, 120))
-        payload = json.loads(safe_response(response, "json"))
-        locations = payload if isinstance(payload, list) else [payload]
+        end = (TODAY - timedelta(days=1)).isoformat()
         rows = []
-        for idx, loc in enumerate(locations):
+        for idx, (lat, lon) in enumerate(points):
+            params = {"latitude": lat, "longitude": lon, "start_date": start, "end_date": end,
+                      "hourly": "temperature_2m,relative_humidity_2m,precipitation,wind_speed_10m",
+                      "models": "era5", "timezone": "UTC", "wind_speed_unit": "ms"}
+            response = SESSION.get("https://archive-api.open-meteo.com/v1/archive", params=params, timeout=(20, 180))
+            loc = json.loads(safe_response(response, "json"))
             hourly = loc.get("hourly", {})
             n = len(hourly.get("time", []))
-            for i in range(n):
-                rows.append({"grid_id": idx, "latitude": loc.get("latitude"), "longitude": loc.get("longitude"),
-                             "timestamp": hourly["time"][i], "temperature_2m_c": hourly.get("temperature_2m", [None]*n)[i],
-                             "relative_humidity_2m_pct": hourly.get("relative_humidity_2m", [None]*n)[i],
-                             "precipitation_mm": hourly.get("precipitation", [None]*n)[i],
-                             "wind_speed_10m_ms": hourly.get("wind_speed_10m", [None]*n)[i],
-                             "source_provider": "Open-Meteo", "source_dataset": "ERA5 historical reanalysis",
-                             "source_model": "era5", "record_type": "historical_reanalysis",
-                             "real_or_synthetic": "REAL"})
-        frame = pd.DataFrame(rows)
+            rows.append(pd.DataFrame({
+                "grid_id": idx, "request_latitude": lat, "request_longitude": lon,
+                "latitude": loc.get("latitude"), "longitude": loc.get("longitude"), "timestamp": hourly.get("time", []),
+                "temperature_2m_c": hourly.get("temperature_2m", [None] * n),
+                "relative_humidity_2m_pct": hourly.get("relative_humidity_2m", [None] * n),
+                "precipitation_mm": hourly.get("precipitation", [None] * n),
+                "wind_speed_10m_ms": hourly.get("wind_speed_10m", [None] * n)}))
+        frame = pd.concat(rows, ignore_index=True)
         if frame.empty:
             raise ValueError("Open-Meteo returned no historical weather rows")
+        for col in ("temperature_2m_c", "relative_humidity_2m_pct", "precipitation_mm", "wind_speed_10m_ms"):
+            frame[col] = pd.to_numeric(frame[col], errors="coerce")
         frame["timestamp"] = pd.to_datetime(frame["timestamp"], utc=True)
-        frame = frame.sort_values(["grid_id", "timestamp"])
-        frame["rain_previous_24h_mm"] = frame.groupby("grid_id")["precipitation_mm"].transform(lambda s: s.rolling(24, min_periods=1).sum())
-        frame["rain_previous_72h_mm"] = frame.groupby("grid_id")["precipitation_mm"].transform(lambda s: s.rolling(72, min_periods=1).sum())
-        frame["rain_previous_7d_mm"] = frame.groupby("grid_id")["precipitation_mm"].transform(lambda s: s.rolling(168, min_periods=1).sum())
-        dry_counts = {}
-        for gid, group in frame.groupby("grid_id"):
-            daily_rain = group.set_index("timestamp")["precipitation_mm"].resample("1D").sum(min_count=1)
-            dry_counts[gid] = (daily_rain.fillna(0).lt(1).astype("int8").rolling(7, min_periods=1).sum())
-        frame["dry_days_previous_7d"] = [int(dry_counts[gid].get(ts.floor("D"), 0))
-                                             for gid, ts in zip(frame.grid_id, frame.timestamp)]
+        frame, daily = weather_derived(frame)
+        for table in (frame, daily):
+            table["source_provider"] = "Open-Meteo"; table["source_dataset"] = "ERA5 historical reanalysis"
+            table["record_type"] = "historical_reanalysis"; table["real_or_synthetic"] = "REAL"
+        frame["source_model"] = "era5"
         hourly_path.parent.mkdir(parents=True, exist_ok=True)
         frame.to_parquet(hourly_path, index=False)
-        daily = frame.set_index("timestamp").groupby("grid_id").resample("1D").agg(
-            latitude=("latitude", "first"), longitude=("longitude", "first"),
-            precipitation_mm=("precipitation_mm", "sum"), temperature_mean_c=("temperature_2m_c", "mean"),
-            humidity_mean_pct=("relative_humidity_2m_pct", "mean"), wind_mean_ms=("wind_speed_10m_ms", "mean"),
-            rain_previous_24h_mm=("rain_previous_24h_mm", "last"), rain_previous_72h_mm=("rain_previous_72h_mm", "last"),
-            rain_previous_7d_mm=("rain_previous_7d_mm", "last"), dry_days_previous_7d=("dry_days_previous_7d", "last"))
-        daily = daily.reset_index()
-        daily["source_provider"] = "Open-Meteo"; daily["source_dataset"] = "ERA5 historical reanalysis"
-        daily["record_type"] = "historical_reanalysis"; daily["real_or_synthetic"] = "REAL"
         daily.to_parquet(daily_path, index=False)
+        published = frame.dropna(subset=["temperature_2m_c", "precipitation_mm"])
+        nodes = [{"grid_id": int(g), "request_latitude": float(r.request_latitude.iloc[0]), "request_longitude": float(r.request_longitude.iloc[0]),
+                  "era5_latitude": float(r.latitude.iloc[0]), "era5_longitude": float(r.longitude.iloc[0]),
+                  "last_published_hour": str(published.loc[published.grid_id == g, "timestamp"].max()),
+                  "unpublished_or_missing_hours": int(r.temperature_2m_c.isna().sum())} for g, r in frame.groupby("grid_id")]
         record_dataset("weather", "real_downloaded", source_provider="Open-Meteo",
                        source_dataset="Historical Weather API / ERA5", date_range={"start": start, "end": end},
                        paths=[hourly_path, daily_path], metadata={"hourly_records": int(len(frame)),
                            "daily_records": int(len(daily)), "grid_points": len(points), "grid_spacing_degrees": 0.25,
+                           "grid_nodes": nodes, "last_published_hour": str(published.timestamp.max()),
+                           "missing_value_policy": "Unpublished/missing hours stay null; rolling and daily values need complete windows; never zero-filled.",
                            "units": {"temperature": "degC", "humidity": "%", "precipitation": "mm", "wind": "m/s"},
                            "note": "ERA5 grid-point reanalysis; not field-level station measurements."},
                        license_ref="Open-Meteo CC BY 4.0; https://open-meteo.com/en/terms")

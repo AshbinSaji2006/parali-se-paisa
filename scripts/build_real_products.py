@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from src.data.provenance import content_available
-from src.features.radar_context import S1_SEASON, radar_season_context
+from src.features.radar_context import S1_SEASON, radar_observation_context, radar_season_context
 from src.features.fire_context import bais2_stability, firms_context, modis_burned_area_context
 from src.features.temporal_features import build_temporal_rows
 
@@ -27,10 +27,22 @@ REAL = ROOT / "data" / "real"
 FIELDS_PATH = REAL / "fields" / "fields_of_the_world_muktsar.parquet"
 FEATURES_PATH = REAL / "derived" / "features" / "real_field_features.parquet"
 SHOWCASE_PATH = REAL / "derived" / "showcase" / "showcase_real_fields.geojson"
+S1_PASSES_PATH = REAL / "sentinel1" / "sentinel1_field_observations.parquet"
 # Same thresholds as src.features.temporal_features (moderate/large gap days).
 MODERATE_GAP_DAYS, LARGE_GAP_DAYS = 14, 30
 WEATHER_CORE = ("temperature_2m_c", "precipitation_mm")
 STATUS_METHOD = "RULE-BASED STATUS CANDIDATE"
+USABLE_QUALITY = {"GOOD", "LIMITED"}
+HARVEST_DATE_TOLERANCE_DAYS = 10
+# Snapshot history rows carry this compact subset; the latest row keeps every feature.
+HISTORY_FEATURES = [
+    "year", "scene_id", "observation_quality", "valid_pixel_count", "valid_pixel_fraction", "cloud_fraction",
+    "NDVI_mean", "NBR_mean", "BAIS2_mean", "BAIS2_quality", "days_since_previous_observation", "temporal_gap_category",
+    "weather_status", "weather_hours_before_observation", "temperature_2m_c", "relative_humidity_2m_pct", "rain_previous_72h_mm",
+    "firms_coverage_status", "firms_viirs_detections_near_field", "firms_modis_detections_near_field",
+    "modis_ba_coverage_status", "modis_ba_burned_pixels_near_field",
+    "s1_observation_status", "s1_observation_datetime", "s1_age_days", "VV_mean_db", "VH_mean_db", "VV_minus_VH_db",
+]
 
 
 def _asof_weather(hourly: pd.DataFrame, grid_id: int, reference: pd.Timestamp) -> dict:
@@ -44,10 +56,13 @@ def _asof_weather(hourly: pd.DataFrame, grid_id: int, reference: pd.Timestamp) -
     rows = rows.loc[rows.timestamp > reference - pd.Timedelta(days=7)]
     rows = rows.dropna(subset=[c for c in WEATHER_CORE if c in rows])
     if rows.empty:
-        return {"weather_available": False, "weather_observation_datetime": None}
+        return {"weather_available": False, "weather_status": "NOT_PUBLISHED_WITHIN_7D", "weather_observation_datetime": None}
     last = rows.iloc[-1]
+    fresh = bool(reference - last.timestamp <= pd.Timedelta(hours=24))
     result = {
-        "weather_available": bool(reference - last.timestamp <= pd.Timedelta(hours=24)),
+        "weather_available": fresh,
+        # STALE rows keep the last published values for transparency but are not "available".
+        "weather_status": "AVAILABLE" if fresh else "STALE_OVER_24H",
         "weather_observation_datetime": last.timestamp.isoformat(),
         "weather_hours_before_observation": (reference - last.timestamp).total_seconds() / 3600,
         "temperature_2m_c": last.temperature_2m_c,
@@ -91,24 +106,36 @@ def _build_proxy_labels(obs: pd.DataFrame) -> pd.DataFrame:
     labels = []
     for (field_id, year), group in obs.groupby(["field_id", "year"], sort=True):
         group = group.sort_values("observation_datetime")
-        for pos, (_, row) in enumerate(group.iterrows()):
+        usable = []  # earlier same-season observations with usable quality and an NDVI value
+        for _, row in group.iterrows():
             label, reason = "UNKNOWN", "Insufficient same-season evidence; review required."
-            eligible = (row.get("observation_quality") in {"GOOD", "LIMITED"} and
+            eligible = (row.get("observation_quality") in USABLE_QUALITY and
                         pd.notna(row.get("NDVI")) and pd.notna(row.get("cropland_fraction")) and
                         row.cropland_fraction >= .5)
-            previous = group.iloc[pos - 1] if pos >= 1 else None
-            prior2 = group.iloc[pos - 2] if pos >= 2 else None
+            # Compare with the previous usable observation: a cloudy (POOR) date in a dense
+            # series is not evidence and must not break or create a transition.
+            previous = usable[-1] if usable else None
+            window_start = previous
+            earlier_high = any(r.NDVI >= .55 for r in usable[:-1])
+            # Harvest is often spread over two or three 5-day acquisitions (senescence, then
+            # cutting), so the decline is measured from the last high-NDVI usable observation
+            # and labelled once, on the first low date after it.
+            last_high = next((r for r in reversed(usable) if r.NDVI >= .55), None)
+            first_low = last_high is not None and not any(
+                r.NDVI <= .35 for r in usable if r.observation_datetime > last_high.observation_datetime)
             gap = ((row.observation_datetime - previous.observation_datetime).total_seconds() / 86400
                    if previous is not None else None)
             if eligible and previous is not None:
-                delta = row.NDVI - previous.NDVI if pd.notna(previous.NDVI) else None
+                delta = row.NDVI - previous.NDVI
+                high_window = ((row.observation_datetime - last_high.observation_datetime).total_seconds() / 86400
+                               if last_high is not None else None)
                 # Large gaps across crop stages are ambiguous and do not create labels.
-                eligible = 0 < gap <= 75 and previous.get("observation_quality") in {"GOOD", "LIMITED"}
-                if eligible and delta is not None:
-                    if previous.NDVI >= .55 and row.NDVI <= .35 and delta <= -.20:
-                        label, reason = "HARVESTED", "Large same-season vegetation decline after a high-NDVI observation; harvest proxy only."
-                    elif (prior2 is not None and pd.notna(prior2.NDVI) and prior2.NDVI >= .55 and
-                          previous.NDVI <= .30 and delta >= .15 and row.NDVI > previous.NDVI):
+                if first_low and row.NDVI <= .35 and 0 < high_window <= 75:
+                    label, reason = "HARVESTED", ("Same-season decline from NDVI >= 0.55 to <= 0.35 (first low date after the "
+                                                  "last high observation); harvest proxy only.")
+                    window_start, gap = last_high, high_window
+                elif 0 < gap <= 75:
+                    if (earlier_high and previous.NDVI <= .30 and delta >= .15 and row.NDVI > previous.NDVI):
                         label, reason = "SOWN", "High-to-bare-to-green sequence within one season; sowing proxy only."
                     elif row.NDVI >= .55 and abs(delta) < .15:
                         label, reason = "STANDING", "High NDVI stable against previous same-season observation; weak vegetation proxy only."
@@ -121,9 +148,11 @@ def _build_proxy_labels(obs: pd.DataFrame) -> pd.DataFrame:
             labels.append({"field_id": field_id, "observation_datetime": row.observation_datetime,
                            "weak_label": label, "confidence": "LOW", "label_quality": "WEAK",
                            "reason": reason, "label_source": "REAL_S2_HEURISTIC_PROXY",
-                           "evidence_window_start": previous.observation_datetime if previous is not None else pd.NaT,
+                           "evidence_window_start": window_start.observation_datetime if window_start is not None else pd.NaT,
                            "evidence_window_days": gap, "temporal_gap_category": category,
                            "is_ground_truth": False, "real_or_synthetic": "REAL"})
+            if row.get("observation_quality") in USABLE_QUALITY and pd.notna(row.get("NDVI")):
+                usable.append(row)
     return pd.DataFrame(labels)
 
 
@@ -262,23 +291,30 @@ def _demo_suitability(obs: pd.DataFrame, labels: pd.DataFrame, events: dict, den
         corroborated = sorted(set(strict) & (set(firms_years) | set(modis_years)))
         green_up = []
         conflicts = []
-        for _, r in group.iterrows():
+        usable = group.loc[group.observation_quality.isin(USABLE_QUALITY)]
+        for _, r in usable.iterrows():
             e = ev.get(int(r.year), {})
             harvest = pd.Timestamp(e["harvest_observed"]) if e.get("harvest_observed") else None
             day = pd.Timestamp(r.observation_datetime).tz_convert("UTC").tz_localize(None)
             if harvest is not None and e.get("burn_tier") == "NONE" and day - harvest >= pd.Timedelta(days=20) and r.NDVI >= .40:
                 green_up.append(int(r.year))
             label = weak.get((field_id, r.observation_datetime))
-            if label == "HARVESTED" and e and (harvest is None or harvest > day):
-                conflicts.append(f"{int(r.year)}: sparse HARVESTED proxy but dense series shows no harvest by {day.date()}")
+            # NDVI <= 0.35 and the research NBR < 0.30 rule cross on different dates; within two
+            # revisits that is a threshold difference, not a disagreement about the harvest.
+            if label == "HARVESTED" and e and (harvest is None or harvest > day + pd.Timedelta(days=HARVEST_DATE_TOLERANCE_DAYS)):
+                conflicts.append(f"{int(r.year)}: weak HARVESTED proxy on {day.date()} but the dense NBR series shows "
+                                 + ("no harvest that season" if harvest is None else f"harvest only on {harvest.date()}"))
         dense = dense_latest.get(field_id) or {}
-        last = group.iloc[-1]
+        last = usable.iloc[-1] if not usable.empty else group.iloc[-1]
         standing_now = bool(dense and not dense.get("harvested") and (dense.get("peak_nbr") or 0) >= .5 and last.NDVI >= .55)
         good_obs = int(group.observation_quality.eq("GOOD").sum())
-        clean = bool(good_obs == len(group) and group.BAIS2_quality.eq("OK").all()
+        # A dense series always has a few cloud-edge dates; "clean" needs >= 90% GOOD dates and
+        # artefact-free BAIS2 on every usable date.
+        clean = bool(good_obs >= .9 * len(group) and not usable.empty and usable.BAIS2_quality.eq("OK").all()
                      and pd.to_numeric(group.cropland_fraction, errors="coerce").fillna(0).ge(.9).all())
         fire_covered = int(group.firms_coverage_status.eq("COMPLETE").sum())
-        radar = bool(group.get("s1_context_status", pd.Series(dtype=object)).eq("SEASON_SUMMARY_AVAILABLE").any())
+        radar = bool(group.get("s1_context_status", pd.Series(dtype=object)).eq("SEASON_SUMMARY_AVAILABLE").any()
+                     or group.get("s1_available", pd.Series(dtype=bool)).fillna(False).astype(bool).any())
         weather_ok = int(group.weather_available.fillna(False).astype(bool).sum())
         if corroborated:
             category = "A_BURN_LIKE_MULTI_SIGNAL"
@@ -336,6 +372,13 @@ def build() -> dict:
     obs = obs.join(bais2_stability(obs))
     obs["BAIS2_pixel_mean_raw"] = obs["BAIS2"]
     obs.loc[obs.BAIS2_quality.ne("OK"), "BAIS2"] = np.nan
+    # A non-positive field-mean red reflectance (Sen2Cor over-correction, e.g. under smoke) or a
+    # normalised index outside [-1, 1] is not a physical observation: flag it and withhold the indices.
+    obs["reflectance_quality"] = np.select(
+        [obs.b04_mean.le(0), ~obs.NDVI.between(-1, 1) | ~obs.NBR.between(-1, 1)],
+        ["NON_POSITIVE_MEAN_RED", "INDEX_OUT_OF_PHYSICAL_RANGE"], default="OK")
+    unphysical = obs.reflectance_quality.ne("OK")
+    obs.loc[unphysical, ["NDVI", "NBR", "BAIS2"]] = np.nan
     for metric in ("NDVI", "NBR", "BAIS2"):
         obs[f"{metric}_mean"] = obs[metric]
     estimated_pixels = obs["area_ha"].clip(lower=0) * 25.0  # 20 m nominal pixels per hectare
@@ -352,7 +395,7 @@ def build() -> dict:
         [obs.valid_pixel_count.ge(10) & obs.valid_pixel_fraction.ge(.5),
          obs.valid_pixel_count.ge(5) & obs.valid_pixel_fraction.ge(.25)],
         ["GOOD", "LIMITED"], default="POOR")
-    obs["observation_quality"] = np.where(obs.valid_pixel_fraction.notna(), quality, "POOR")
+    obs["observation_quality"] = np.where(obs.valid_pixel_fraction.notna() & ~unphysical, quality, "POOR")
     obs["season"] = "kharif"
     weather = pd.read_parquet(REAL / "weather" / "weather_daily.parquet")
     weather["timestamp"] = pd.to_datetime(weather["timestamp"], utc=True)
@@ -366,6 +409,8 @@ def build() -> dict:
     dy = obs.centroid_lat.to_numpy()[:, None] - grid.latitude.to_numpy()[None, :]
     nearest = np.sqrt(dx*dx + dy*dy).argmin(axis=1)
     obs["weather_grid_id"] = grid.grid_id.to_numpy()[nearest]
+    obs["weather_grid_latitude"] = grid.latitude.to_numpy()[nearest]
+    obs["weather_grid_longitude"] = grid.longitude.to_numpy()[nearest]
     obs["weather_grid_distance_km"] = np.sqrt(dx*dx + dy*dy)[np.arange(len(obs)), nearest] * 111.2
     hourly_weather = pd.read_parquet(REAL / "weather" / "weather_hourly.parquet")
     hourly_weather["timestamp"] = pd.to_datetime(hourly_weather["timestamp"], utc=True)
@@ -385,11 +430,13 @@ def build() -> dict:
                                              pd.read_parquet(REAL / "burned_area" / "mcd64a1_muktsar.parquet")))
     radar_path = REAL / "derived" / "research" / f"paddy_mask_s1_{S1_SEASON}.parquet"
     obs = obs.join(radar_season_context(obs, pd.read_parquet(radar_path) if content_available(radar_path) else None))
+    obs = obs.join(radar_observation_context(obs, pd.read_parquet(S1_PASSES_PATH) if content_available(S1_PASSES_PATH) else None))
 
     obs = obs.sort_values(["field_id", "observation_datetime"]).reset_index(drop=True)
     obs["days_since_previous_observation"] = obs.groupby("field_id").observation_datetime.diff().dt.total_seconds() / 86400
     temporal_rows, temporal_report = build_temporal_rows(obs.to_dict("records"))
     temporal = pd.DataFrame(temporal_rows)
+    # Gaps are between consecutive usable (non-POOR) observations of one field-season.
     gaps = temporal.days_since_previous_observation.dropna()
     bins = [("<=10", gaps.le(10)), ("11-20", gaps.gt(10) & gaps.le(20)), ("21-30", gaps.gt(20) & gaps.le(30)),
             ("31-45", gaps.gt(30) & gaps.le(45)), (">45", gaps.gt(45))]
@@ -398,6 +445,16 @@ def build() -> dict:
     temporal_report["fields_with_ge_3_observations"] = int(per_field.ge(3).sum())
     temporal_report["fields_with_ge_5_observations"] = int(per_field.ge(5).sum())
     temporal_report["max_observations_per_field_season"] = int(temporal.groupby(["field_id", "year"]).size().max())
+    usable = temporal.loc[temporal.observation_quality.isin(USABLE_QUALITY)].groupby(["year", "field_id"]).size()
+    usable = usable.unstack("year").reindex(sorted(temporal.field_id.unique())).fillna(0).astype(int)
+    temporal_report["usable_observations_per_field_season"] = {
+        str(y): {"median": float(usable[y].median()), "min": int(usable[y].min()), "max": int(usable[y].max()),
+                 "fields_ge_3": int(usable[y].ge(3).sum()), "fields_ge_5": int(usable[y].ge(5).sum()),
+                 "scenes": int(temporal.loc[temporal.year == y, "scene_id"].nunique())} for y in usable.columns}
+    temporal_report["fields_with_ge_3_usable_observations_in_every_season"] = int(usable.ge(3).all(axis=1).sum())
+    temporal_report["fields_with_ge_5_usable_observations_in_every_season"] = int(usable.ge(5).all(axis=1).sum())
+    temporal_report["observation_quality_counts"] = temporal.observation_quality.value_counts().to_dict()
+    temporal_report["s1_per_date_rows"] = {k: int(v) for k, v in temporal.s1_observation_status.value_counts().items()}
     temporal_report_path = ROOT / "reports" / "real_temporal_feature_quality_report.json"
     temporal_report_path.write_text(json.dumps(temporal_report, indent=2, default=str) + "\n", encoding="utf-8")
     obs = temporal
@@ -448,8 +505,31 @@ def build() -> dict:
     excluded = {"field_id", "observation_datetime", "scene_id", "collection", "tile", "source_provider",
                 "source_item_url", "source_asset_urls", "real_or_synthetic"}
 
-    def feature_values(r):
-        return {k: (v.item() if isinstance(v, np.generic) else v) for k, v in r.items() if k not in excluded and pd.notna(v)}
+    def feature_values(r, keys=None):
+        return {k: (v.item() if isinstance(v, np.generic) else v) for k, v in r.items()
+                if k not in excluded and (keys is None or k in keys) and pd.notna(v)}
+
+    def candidate_runs(hist):
+        """Collapse consecutive identical rule candidates into one evidence line per run."""
+        runs = []
+        for _, r in hist.iterrows():
+            entry = status_entry(r.field_id, r.observation_datetime)
+            if not entry["candidate"]:
+                continue
+            day = pd.Timestamp(r.observation_datetime).date()
+            if runs and runs[-1]["candidate"] == entry["candidate"] and runs[-1]["year"] == int(r.year):
+                runs[-1].update(end=day, n=runs[-1]["n"] + 1)
+            else:
+                runs.append({"candidate": entry["candidate"], "year": int(r.year), "start": day, "end": day, "n": 1,
+                             "window": entry["evidence_window_days"]})
+        lines = []
+        for run in runs:
+            if run["n"] == 1:
+                window = f" over a {run['window']:.0f}-day window" if run["window"] else ""
+                lines.append(f"{run['start']}: {run['candidate']} rule candidate{window}")
+            else:
+                lines.append(f"{run['start']} to {run['end']}: {run['candidate']} rule candidate on {run['n']} consecutive candidate dates")
+        return lines
 
     def status_entry(field_id, when):
         label = labels_by_key.loc[(field_id, when)]
@@ -462,15 +542,12 @@ def build() -> dict:
         hist = obs.loc[obs.field_id == f.field_id].sort_values("observation_datetime")
         if hist.empty:
             continue
-        last = hist.iloc[-1]
+        # The status describes the latest usable acquisition; a cloud-edge (POOR) date is not evidence.
+        usable_hist = hist.loc[hist.observation_quality.isin(USABLE_QUALITY)]
+        last = usable_hist.iloc[-1] if not usable_hist.empty else hist.iloc[-1]
         latest_status = _current_candidate(last, dense_latest.get(f.field_id) if int(last.year) == latest_year else None,
                                            status_entry(f.field_id, last.observation_datetime))
-        season_candidates = []
-        for _, r in hist.iterrows():
-            entry = status_entry(f.field_id, r.observation_datetime)
-            if entry["candidate"]:
-                window = f" over a {entry['evidence_window_days']:.0f}-day window" if entry["evidence_window_days"] else ""
-                season_candidates.append(f"{pd.Timestamp(r.observation_datetime).date()}: {entry['candidate']} rule candidate{window}")
+        season_candidates = candidate_runs(hist)
         firms_status = last.get("firms_coverage_status")
         modis_status = last.get("modis_ba_coverage_status")
         snapshot_fields.append({
@@ -495,13 +572,14 @@ def build() -> dict:
                               "availability": {"weather": bool(last.get("weather_available")),
                                                "firms": firms_status in {"COMPLETE", "PARTIAL"},
                                                "modis": modis_status in {"COMPLETE", "PARTIAL"},
-                                               "radar_season_summary": bool(hist.s1_context_status.eq("SEASON_SUMMARY_AVAILABLE").any())},
+                                               "radar_season_summary": bool(hist.s1_context_status.eq("SEASON_SUMMARY_AVAILABLE").any()),
+                                               "radar_per_date": bool(last.get("s1_available"))},
                               "fire_context_notice": "FIRMS/MODIS detections near the field centroid are proximity context, not attribution or ground truth."},
                 "provenance": {"observation_datetime": pd.Timestamp(last.observation_datetime).isoformat(), "fixture_or_real": "REAL",
                                "model_trust_state": "NO_MODEL", "processing_version": last.get("processing_version"),
                                "source_image_id_s2": last.get("scene_id"), "field_context_source": context["source"]}},
             "eligibility": {"eligible": False, "reasons": ["REAL_DATA_ONLY_NO_OPERATIONAL_VALIDATION"], "warnings": ["Research boundary; field status and burn evidence are unverified proxies."]},
-            "history": [{"observation_datetime": pd.Timestamp(r.observation_datetime).isoformat(), "features": feature_values(r),
+            "history": [{"observation_datetime": pd.Timestamp(r.observation_datetime).isoformat(), "features": feature_values(r, HISTORY_FEATURES),
                          "rule_status_candidate": status_entry(f.field_id, r.observation_datetime), "provenance": "REAL"} for _, r in hist.iterrows()]})
     snapshot = {"fields": snapshot_fields, "balers": [], "buyers": [], "jobs": [], "runs": [], "verification": [],
         "certificates": [], "allocations": [], "pickup_requests": [],
@@ -515,6 +593,10 @@ def build() -> dict:
         "notice": "Read-only real satellite and reanalysis observations; research field boundaries; rule-based status candidates and weak proxy labels only; no ground truth.",
         "real_data_summary": {"fields": len(snapshot_fields), "observed_fields": int(obs.field_id.nunique()),
                               "observations": int(len(obs)), "years": sorted(map(int, obs.year.unique())),
+                              "observations_by_season": {str(int(y)): int(n) for y, n in obs.groupby("year").size().items()},
+                              "usable_observations_per_field_season": temporal_report["usable_observations_per_field_season"],
+                              "s1_per_date_rows": temporal_report["s1_per_date_rows"],
+                              "history_feature_subset": HISTORY_FEATURES,
                               "field_context_source": context["source"],
                               "status_method": STATUS_METHOD, "fire_context": "FIRMS/UMD active fire (1 km, 30 d) and MCD64A1 (500 m, 30 d, retrospective) proximity context with coverage flags"}}
     snapshot_path = REAL / "derived" / "app_snapshot.json"

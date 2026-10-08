@@ -1,0 +1,2904 @@
+{
+ "package_version": "reference-v2",
+ "year": 2025,
+ "generated_at": "2026-10-07T20:06:59.249731+00:00",
+ "items": [
+  {
+   "item_id": "2025:FTW-IN-PB-4222801",
+   "field_id": "FTW-IN-PB-4222801",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1630944",
+   "field_id": "FTW-IN-PB-1630944",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6161276",
+   "field_id": "FTW-IN-PB-6161276",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4207093",
+   "field_id": "FTW-IN-PB-4207093",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1723276",
+   "field_id": "FTW-IN-PB-1723276",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-553779",
+   "field_id": "FTW-IN-PB-553779",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-564690",
+   "field_id": "FTW-IN-PB-564690",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6106615",
+   "field_id": "FTW-IN-PB-6106615",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4208503",
+   "field_id": "FTW-IN-PB-4208503",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1645149",
+   "field_id": "FTW-IN-PB-1645149",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6104351",
+   "field_id": "FTW-IN-PB-6104351",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6176557",
+   "field_id": "FTW-IN-PB-6176557",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-509419",
+   "field_id": "FTW-IN-PB-509419",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6173791",
+   "field_id": "FTW-IN-PB-6173791",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4221096",
+   "field_id": "FTW-IN-PB-4221096",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6062842",
+   "field_id": "FTW-IN-PB-6062842",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6058710",
+   "field_id": "FTW-IN-PB-6058710",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1629985",
+   "field_id": "FTW-IN-PB-1629985",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4193241",
+   "field_id": "FTW-IN-PB-4193241",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-17",
+   "frame_dates": [
+    "07 Dec 2025",
+    "17 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6053709",
+   "field_id": "FTW-IN-PB-6053709",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-552810",
+   "field_id": "FTW-IN-PB-552810",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4233143",
+   "field_id": "FTW-IN-PB-4233143",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1701257",
+   "field_id": "FTW-IN-PB-1701257",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1660810",
+   "field_id": "FTW-IN-PB-1660810",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-10-23",
+   "frame_dates": [
+    "20 Oct 2025",
+    "23 Oct 2025",
+    "28 Oct 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1657079",
+   "field_id": "FTW-IN-PB-1657079",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6116437",
+   "field_id": "FTW-IN-PB-6116437",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-17",
+   "frame_dates": [
+    "07 Dec 2025",
+    "17 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6088611",
+   "field_id": "FTW-IN-PB-6088611",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6078498",
+   "field_id": "FTW-IN-PB-6078498",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1635157",
+   "field_id": "FTW-IN-PB-1635157",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6112414",
+   "field_id": "FTW-IN-PB-6112414",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4144666",
+   "field_id": "FTW-IN-PB-4144666",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6676080",
+   "field_id": "FTW-IN-PB-6676080",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6103879",
+   "field_id": "FTW-IN-PB-6103879",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1698839",
+   "field_id": "FTW-IN-PB-1698839",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4157447",
+   "field_id": "FTW-IN-PB-4157447",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-17",
+   "frame_dates": [
+    "07 Dec 2025",
+    "17 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6164256",
+   "field_id": "FTW-IN-PB-6164256",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4200954",
+   "field_id": "FTW-IN-PB-4200954",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6109415",
+   "field_id": "FTW-IN-PB-6109415",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-566703",
+   "field_id": "FTW-IN-PB-566703",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1699801",
+   "field_id": "FTW-IN-PB-1699801",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "02 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4202190",
+   "field_id": "FTW-IN-PB-4202190",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6110844",
+   "field_id": "FTW-IN-PB-6110844",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6132398",
+   "field_id": "FTW-IN-PB-6132398",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1734759",
+   "field_id": "FTW-IN-PB-1734759",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-513939",
+   "field_id": "FTW-IN-PB-513939",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6082779",
+   "field_id": "FTW-IN-PB-6082779",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4227141",
+   "field_id": "FTW-IN-PB-4227141",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-516688",
+   "field_id": "FTW-IN-PB-516688",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1684319",
+   "field_id": "FTW-IN-PB-1684319",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6115778",
+   "field_id": "FTW-IN-PB-6115778",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-566251",
+   "field_id": "FTW-IN-PB-566251",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-10-13",
+   "frame_dates": [
+    "08 Oct 2025",
+    "13 Oct 2025",
+    "18 Oct 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1684487",
+   "field_id": "FTW-IN-PB-1684487",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4216296",
+   "field_id": "FTW-IN-PB-4216296",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1646845",
+   "field_id": "FTW-IN-PB-1646845",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1662926",
+   "field_id": "FTW-IN-PB-1662926",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-560959",
+   "field_id": "FTW-IN-PB-560959",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1663195",
+   "field_id": "FTW-IN-PB-1663195",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6111207",
+   "field_id": "FTW-IN-PB-6111207",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6166907",
+   "field_id": "FTW-IN-PB-6166907",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-496138",
+   "field_id": "FTW-IN-PB-496138",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1688269",
+   "field_id": "FTW-IN-PB-1688269",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1683688",
+   "field_id": "FTW-IN-PB-1683688",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6165739",
+   "field_id": "FTW-IN-PB-6165739",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1646658",
+   "field_id": "FTW-IN-PB-1646658",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "02 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6104511",
+   "field_id": "FTW-IN-PB-6104511",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1657313",
+   "field_id": "FTW-IN-PB-1657313",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4223306",
+   "field_id": "FTW-IN-PB-4223306",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6188616",
+   "field_id": "FTW-IN-PB-6188616",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6087180",
+   "field_id": "FTW-IN-PB-6087180",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-17",
+   "frame_dates": [
+    "07 Dec 2025",
+    "17 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4146159",
+   "field_id": "FTW-IN-PB-4146159",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6169979",
+   "field_id": "FTW-IN-PB-6169979",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-563116",
+   "field_id": "FTW-IN-PB-563116",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1686284",
+   "field_id": "FTW-IN-PB-1686284",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6174208",
+   "field_id": "FTW-IN-PB-6174208",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6112930",
+   "field_id": "FTW-IN-PB-6112930",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6115578",
+   "field_id": "FTW-IN-PB-6115578",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1721834",
+   "field_id": "FTW-IN-PB-1721834",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4216253",
+   "field_id": "FTW-IN-PB-4216253",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-557250",
+   "field_id": "FTW-IN-PB-557250",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1727506",
+   "field_id": "FTW-IN-PB-1727506",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-02",
+   "frame_dates": [
+    "29 Nov 2025",
+    "02 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4227410",
+   "field_id": "FTW-IN-PB-4227410",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4205728",
+   "field_id": "FTW-IN-PB-4205728",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1630868",
+   "field_id": "FTW-IN-PB-1630868",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6109437",
+   "field_id": "FTW-IN-PB-6109437",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "02 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1920141",
+   "field_id": "FTW-IN-PB-1920141",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1749461",
+   "field_id": "FTW-IN-PB-1749461",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-571759",
+   "field_id": "FTW-IN-PB-571759",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6091115",
+   "field_id": "FTW-IN-PB-6091115",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6176598",
+   "field_id": "FTW-IN-PB-6176598",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1657787",
+   "field_id": "FTW-IN-PB-1657787",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6680760",
+   "field_id": "FTW-IN-PB-6680760",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1708736",
+   "field_id": "FTW-IN-PB-1708736",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-02",
+   "frame_dates": [
+    "29 Nov 2025",
+    "02 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6115494",
+   "field_id": "FTW-IN-PB-6115494",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6105606",
+   "field_id": "FTW-IN-PB-6105606",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6680520",
+   "field_id": "FTW-IN-PB-6680520",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6100147",
+   "field_id": "FTW-IN-PB-6100147",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1710970",
+   "field_id": "FTW-IN-PB-1710970",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1648997",
+   "field_id": "FTW-IN-PB-1648997",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1705604",
+   "field_id": "FTW-IN-PB-1705604",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6108830",
+   "field_id": "FTW-IN-PB-6108830",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6677464",
+   "field_id": "FTW-IN-PB-6677464",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6088965",
+   "field_id": "FTW-IN-PB-6088965",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4212688",
+   "field_id": "FTW-IN-PB-4212688",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1712962",
+   "field_id": "FTW-IN-PB-1712962",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6096740",
+   "field_id": "FTW-IN-PB-6096740",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6194491",
+   "field_id": "FTW-IN-PB-6194491",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1707698",
+   "field_id": "FTW-IN-PB-1707698",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4235310",
+   "field_id": "FTW-IN-PB-4235310",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1924216",
+   "field_id": "FTW-IN-PB-1924216",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-553569",
+   "field_id": "FTW-IN-PB-553569",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1634173",
+   "field_id": "FTW-IN-PB-1634173",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-554530",
+   "field_id": "FTW-IN-PB-554530",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-02",
+   "frame_dates": [
+    "29 Nov 2025",
+    "02 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4162070",
+   "field_id": "FTW-IN-PB-4162070",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6165918",
+   "field_id": "FTW-IN-PB-6165918",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4230116",
+   "field_id": "FTW-IN-PB-4230116",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6078609",
+   "field_id": "FTW-IN-PB-6078609",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6675744",
+   "field_id": "FTW-IN-PB-6675744",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-516374",
+   "field_id": "FTW-IN-PB-516374",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-573483",
+   "field_id": "FTW-IN-PB-573483",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1738306",
+   "field_id": "FTW-IN-PB-1738306",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1701545",
+   "field_id": "FTW-IN-PB-1701545",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6109273",
+   "field_id": "FTW-IN-PB-6109273",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6182762",
+   "field_id": "FTW-IN-PB-6182762",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1725571",
+   "field_id": "FTW-IN-PB-1725571",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-10-18",
+   "frame_dates": [
+    "13 Oct 2025",
+    "18 Oct 2025",
+    "20 Oct 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1635881",
+   "field_id": "FTW-IN-PB-1635881",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4210793",
+   "field_id": "FTW-IN-PB-4210793",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1655712",
+   "field_id": "FTW-IN-PB-1655712",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6182709",
+   "field_id": "FTW-IN-PB-6182709",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-513003",
+   "field_id": "FTW-IN-PB-513003",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6169037",
+   "field_id": "FTW-IN-PB-6169037",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6173837",
+   "field_id": "FTW-IN-PB-6173837",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6681544",
+   "field_id": "FTW-IN-PB-6681544",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6099589",
+   "field_id": "FTW-IN-PB-6099589",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6669476",
+   "field_id": "FTW-IN-PB-6669476",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "02 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6169844",
+   "field_id": "FTW-IN-PB-6169844",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6668013",
+   "field_id": "FTW-IN-PB-6668013",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1711187",
+   "field_id": "FTW-IN-PB-1711187",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6104408",
+   "field_id": "FTW-IN-PB-6104408",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6103787",
+   "field_id": "FTW-IN-PB-6103787",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "02 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1713524",
+   "field_id": "FTW-IN-PB-1713524",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6193343",
+   "field_id": "FTW-IN-PB-6193343",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6053712",
+   "field_id": "FTW-IN-PB-6053712",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1701940",
+   "field_id": "FTW-IN-PB-1701940",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4212364",
+   "field_id": "FTW-IN-PB-4212364",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1919975",
+   "field_id": "FTW-IN-PB-1919975",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1733123",
+   "field_id": "FTW-IN-PB-1733123",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6172897",
+   "field_id": "FTW-IN-PB-6172897",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6062564",
+   "field_id": "FTW-IN-PB-6062564",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6062792",
+   "field_id": "FTW-IN-PB-6062792",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-12-17",
+   "frame_dates": [
+    "07 Dec 2025",
+    "17 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1728250",
+   "field_id": "FTW-IN-PB-1728250",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1661448",
+   "field_id": "FTW-IN-PB-1661448",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-563618",
+   "field_id": "FTW-IN-PB-563618",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1714596",
+   "field_id": "FTW-IN-PB-1714596",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6130208",
+   "field_id": "FTW-IN-PB-6130208",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-564169",
+   "field_id": "FTW-IN-PB-564169",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1924432",
+   "field_id": "FTW-IN-PB-1924432",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6058209",
+   "field_id": "FTW-IN-PB-6058209",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-504437",
+   "field_id": "FTW-IN-PB-504437",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1637410",
+   "field_id": "FTW-IN-PB-1637410",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-29",
+   "frame_dates": [
+    "27 Nov 2025",
+    "29 Nov 2025",
+    "02 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-551423",
+   "field_id": "FTW-IN-PB-551423",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4227149",
+   "field_id": "FTW-IN-PB-4227149",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6169105",
+   "field_id": "FTW-IN-PB-6169105",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1680367",
+   "field_id": "FTW-IN-PB-1680367",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1921942",
+   "field_id": "FTW-IN-PB-1921942",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-556378",
+   "field_id": "FTW-IN-PB-556378",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1920520",
+   "field_id": "FTW-IN-PB-1920520",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1721087",
+   "field_id": "FTW-IN-PB-1721087",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6192565",
+   "field_id": "FTW-IN-PB-6192565",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-556815",
+   "field_id": "FTW-IN-PB-556815",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6096144",
+   "field_id": "FTW-IN-PB-6096144",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-511676",
+   "field_id": "FTW-IN-PB-511676",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1659413",
+   "field_id": "FTW-IN-PB-1659413",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4218329",
+   "field_id": "FTW-IN-PB-4218329",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-495810",
+   "field_id": "FTW-IN-PB-495810",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4231846",
+   "field_id": "FTW-IN-PB-4231846",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6174101",
+   "field_id": "FTW-IN-PB-6174101",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1725433",
+   "field_id": "FTW-IN-PB-1725433",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4234965",
+   "field_id": "FTW-IN-PB-4234965",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-565128",
+   "field_id": "FTW-IN-PB-565128",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1713069",
+   "field_id": "FTW-IN-PB-1713069",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1721254",
+   "field_id": "FTW-IN-PB-1721254",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4218686",
+   "field_id": "FTW-IN-PB-4218686",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1722410",
+   "field_id": "FTW-IN-PB-1722410",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6681022",
+   "field_id": "FTW-IN-PB-6681022",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1663193",
+   "field_id": "FTW-IN-PB-1663193",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-567390",
+   "field_id": "FTW-IN-PB-567390",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1652088",
+   "field_id": "FTW-IN-PB-1652088",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-510414",
+   "field_id": "FTW-IN-PB-510414",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-02",
+   "frame_dates": [
+    "29 Nov 2025",
+    "02 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1727597",
+   "field_id": "FTW-IN-PB-1727597",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-10-23",
+   "frame_dates": [
+    "20 Oct 2025",
+    "23 Oct 2025",
+    "28 Oct 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-503026",
+   "field_id": "FTW-IN-PB-503026",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1732626",
+   "field_id": "FTW-IN-PB-1732626",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6116884",
+   "field_id": "FTW-IN-PB-6116884",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1918714",
+   "field_id": "FTW-IN-PB-1918714",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4231674",
+   "field_id": "FTW-IN-PB-4231674",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6194552",
+   "field_id": "FTW-IN-PB-6194552",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6162203",
+   "field_id": "FTW-IN-PB-6162203",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6057996",
+   "field_id": "FTW-IN-PB-6057996",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6095208",
+   "field_id": "FTW-IN-PB-6095208",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6088620",
+   "field_id": "FTW-IN-PB-6088620",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6165413",
+   "field_id": "FTW-IN-PB-6165413",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-10-23",
+   "frame_dates": [
+    "20 Oct 2025",
+    "23 Oct 2025",
+    "28 Oct 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1681873",
+   "field_id": "FTW-IN-PB-1681873",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1661468",
+   "field_id": "FTW-IN-PB-1661468",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6681328",
+   "field_id": "FTW-IN-PB-6681328",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-550458",
+   "field_id": "FTW-IN-PB-550458",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-12-02",
+   "frame_dates": [
+    "29 Nov 2025",
+    "02 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1698609",
+   "field_id": "FTW-IN-PB-1698609",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6161465",
+   "field_id": "FTW-IN-PB-6161465",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1685677",
+   "field_id": "FTW-IN-PB-1685677",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-571304",
+   "field_id": "FTW-IN-PB-571304",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-02",
+   "frame_dates": [
+    "28 Oct 2025",
+    "02 Nov 2025",
+    "07 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1639602",
+   "field_id": "FTW-IN-PB-1639602",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1731550",
+   "field_id": "FTW-IN-PB-1731550",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6109832",
+   "field_id": "FTW-IN-PB-6109832",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-10-23",
+   "frame_dates": [
+    "20 Oct 2025",
+    "23 Oct 2025",
+    "28 Oct 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1702602",
+   "field_id": "FTW-IN-PB-1702602",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6182690",
+   "field_id": "FTW-IN-PB-6182690",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4201978",
+   "field_id": "FTW-IN-PB-4201978",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4154772",
+   "field_id": "FTW-IN-PB-4154772",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-562123",
+   "field_id": "FTW-IN-PB-562123",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-17",
+   "frame_dates": [
+    "12 Nov 2025",
+    "17 Nov 2025",
+    "22 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6087663",
+   "field_id": "FTW-IN-PB-6087663",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4201239",
+   "field_id": "FTW-IN-PB-4201239",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1712519",
+   "field_id": "FTW-IN-PB-1712519",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6163099",
+   "field_id": "FTW-IN-PB-6163099",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1918176",
+   "field_id": "FTW-IN-PB-1918176",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1737390",
+   "field_id": "FTW-IN-PB-1737390",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-550572",
+   "field_id": "FTW-IN-PB-550572",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-12-02",
+   "frame_dates": [
+    "29 Nov 2025",
+    "02 Dec 2025",
+    "07 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4220143",
+   "field_id": "FTW-IN-PB-4220143",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1707985",
+   "field_id": "FTW-IN-PB-1707985",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4193236",
+   "field_id": "FTW-IN-PB-4193236",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1916665",
+   "field_id": "FTW-IN-PB-1916665",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1709213",
+   "field_id": "FTW-IN-PB-1709213",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-498119",
+   "field_id": "FTW-IN-PB-498119",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-27",
+   "frame_dates": [
+    "22 Nov 2025",
+    "27 Nov 2025",
+    "29 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6062562",
+   "field_id": "FTW-IN-PB-6062562",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1701615",
+   "field_id": "FTW-IN-PB-1701615",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1684184",
+   "field_id": "FTW-IN-PB-1684184",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1730507",
+   "field_id": "FTW-IN-PB-1730507",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "02 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1654141",
+   "field_id": "FTW-IN-PB-1654141",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-22",
+   "frame_dates": [
+    "17 Nov 2025",
+    "22 Nov 2025",
+    "27 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6090756",
+   "field_id": "FTW-IN-PB-6090756",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1737515",
+   "field_id": "FTW-IN-PB-1737515",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6675059",
+   "field_id": "FTW-IN-PB-6675059",
+   "year": 2025,
+   "stratum": "STRICT_BURN_CANDIDATE",
+   "candidate_date": "2025-11-07",
+   "frame_dates": [
+    "02 Nov 2025",
+    "07 Nov 2025",
+    "09 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-1702630",
+   "field_id": "FTW-IN-PB-1702630",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-12-07",
+   "frame_dates": [
+    "02 Dec 2025",
+    "07 Dec 2025",
+    "17 Dec 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-4154300",
+   "field_id": "FTW-IN-PB-4154300",
+   "year": 2025,
+   "stratum": "LOOSE_BURN_CANDIDATE",
+   "candidate_date": "2025-11-09",
+   "frame_dates": [
+    "07 Nov 2025",
+    "09 Nov 2025",
+    "12 Nov 2025"
+   ]
+  },
+  {
+   "item_id": "2025:FTW-IN-PB-6077857",
+   "field_id": "FTW-IN-PB-6077857",
+   "year": 2025,
+   "stratum": "HARVESTED_NO_BURN_CANDIDATE",
+   "candidate_date": "2025-11-12",
+   "frame_dates": [
+    "09 Nov 2025",
+    "12 Nov 2025",
+    "17 Nov 2025"
+   ]
+  }
+ ],
+ "item_count": 240,
+ "sample_design": {
+  "year": 2025,
+  "population_by_stratum": {
+   "STRICT_BURN_CANDIDATE": 1449,
+   "LOOSE_BURN_CANDIDATE": 13124,
+   "HARVESTED_NO_BURN_CANDIDATE": 94730
+  },
+  "rule_version": "burn-candidate-rules-v2",
+  "population": "crop fields (clear-sky peak NDVI >= 0.6) with an observed harvest and >= 12 pixels",
+  "n_per_stratum": 80,
+  "seed": 7,
+  "items": 240
+ },
+ "source_chips": "reports/research/label_tool/chips_2025.json (internal; Sentinel-2 L2A, harmonised BOA offset, 20 m)",
+ "blinding": "Detector stratum and burn tiers are withheld from the interface; ancillary context opens only after a first decision.",
+ "label_policy": "Human multi-date visual review (Tier B). No label is generated by this package."
+}

@@ -1,10 +1,11 @@
 """Accuracy and stratified burned-area estimate from Tier-B visual labels (Olofsson et al. 2014).
 
-Input: data/real/labels/visual_labels_<year>.csv exported by the labelling tool
-(reports/research/label_tool/label_burns_<year>.html). The sample is stratified by the detector's
-own output (rule_burn_strict, rule_burn_loose_only, rule_no_burn) with the population sizes stored in
+Input: data/real/labels/visual_labels_<year>.csv written by scripts/import_reference_labels.py from
+human exports of reports/research/label_tool/label_reference_<year>.html (labels BURNED, NOT_BURNED,
+UNCERTAIN; reviewer consensus only). The sample is stratified by the detector's
+own output (STRICT_BURN_CANDIDATE, LOOSE_BURN_CANDIDATE, HARVESTED_NO_BURN_CANDIDATE) with the population sizes stored in
 sample_design_<year>.json, so every estimate below is design-unbiased for the field population.
-UNCLEAR labels are reported and excluded from proportions.
+UNCERTAIN labels are reported and excluded from proportions.
 """
 from __future__ import annotations
 
@@ -19,7 +20,7 @@ ROOT = Path(__file__).resolve().parents[1]
 LABELS = ROOT / "data" / "real" / "labels"
 TOOL = ROOT / "reports" / "research" / "label_tool"
 OUT = ROOT / "reports" / "research"
-MAP_BURN = {"rule_burn_strict", "rule_burn_loose_only"}
+MAP_BURN = {"STRICT_BURN_CANDIDATE", "LOOSE_BURN_CANDIDATE"}
 
 
 def evaluate(year: int) -> dict:
@@ -31,12 +32,12 @@ def evaluate(year: int) -> dict:
     burned_hat = {}
     for h, Nh in pop.items():
         s = lab[lab.stratum == h]
-        decided = s[s.label.isin(["BURNT", "NOT_BURNT"])]
+        decided = s[s.label.isin(["BURNED", "NOT_BURNED"])]
         n = len(decided)
-        p = float((decided.label == "BURNT").mean()) if n else float("nan")
+        p = float((decided.label == "BURNED").mean()) if n else float("nan")
         Wh = Nh / N
-        rows.append(dict(stratum=h, population_fields=Nh, labelled=len(s), decided=n, unclear=int((s.label == "UNCLEAR").sum()),
-                         burnt_share=round(p, 4) if n else None))
+        rows.append(dict(stratum=h, population_fields=Nh, labelled=len(s), decided=n, uncertain=int((s.label == "UNCERTAIN").sum()),
+                         burned_share=round(p, 4) if n else None))
         if n:
             est += Wh * p
             var += Wh ** 2 * p * (1 - p) / max(n - 1, 1)
@@ -46,7 +47,7 @@ def evaluate(year: int) -> dict:
     map_burned = sum(pop[h] for h in MAP_BURN)
     ua = sum(burned_hat.get(h, 0) for h in MAP_BURN) / map_burned if map_burned else float("nan")
     pa = sum(burned_hat.get(h, 0) for h in MAP_BURN) / total_burned if total_burned else float("nan")
-    strict_ua = rows[[r["stratum"] for r in rows].index("rule_burn_strict")]["burnt_share"]
+    strict_ua = rows[[r["stratum"] for r in rows].index("STRICT_BURN_CANDIDATE")]["burned_share"]
     out = dict(year=year, n_labels=int(len(lab)), strata=rows,
                burned_field_share_estimate=round(est, 4), burned_field_share_ci95=[round(est - 1.96 * se, 4), round(est + 1.96 * se, 4)],
                burned_fields_estimate=round(total_burned), map_burned_fields=int(map_burned),

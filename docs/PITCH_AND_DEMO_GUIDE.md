@@ -1,71 +1,47 @@
-# Pitch and demo guide (Greenovators 2026)
+# Parali Se Paisa: 4-minute judge flow
 
-**Deck:** `reports/pitch/Parali_Se_Paisa_Greenovators2026.pptx` (editable, with speaker notes on every slide) and `.pdf`.
-**Evidence:** `reports/research/RESEARCH_SUMMARY.md` (results) and `docs/RESEARCH_METHODS.md` (methods).
-Every number in the deck is generated from `reports/research/results.json`.
+**Deck:** [Parali_Se_Paisa_Greenovators2026.pptx](../reports/pitch/Parali_Se_Paisa_Greenovators2026.pptx) and PDF. The real-data figures are generated from the research outputs. The dispatch workflow uses separate synthetic demo records.
 
-## Before the pitch (morning of 8 Oct)
+Keep the labels explicit while presenting:
 
-1. `python scripts/update_live_2026.py` downloads any new Sentinel-2 pass of Muktsar and the latest FIRMS NRT alerts, then rebuilds the results, figures, maps and deck. It takes about 5–10 minutes.
-2. `$env:DATA_MODE='real'; python scripts/start_demo.py` starts the real-data mode. Log in as `official` with the password in `.demo/credentials.json`.
-3. Open **Research Evidence** and check that the tiles show the latest image date.
-4. Keep the PDF deck open as a fallback.
+- **REAL DATA** — Muktsar satellite observations and derived field histories.
+- **RULE-BASED** — optical burn-candidate tiers and normalized risk score.
+- **DEMO/SYNTHETIC** — baler, buyer, dispatch and operational records.
+- **PROTOTYPE** — QR metadata check; it is not a signed or government certificate.
 
-## 6-minute talk track
+## Four-minute flow
 
-| Time | Slide | Say | Show |
-|---|---|---|---|
-| 0:00 | 1 | "Punjab's fire counts have collapsed. The burning hasn't. We can show it field by field." | Burn map |
-| 0:30 | 2 | 18.8 Mt of straw; fire counts down 92%; over 90% of large fires now after 3 PM (iFOREST, SEVIRI) | Big numbers |
-| 1:00 | 3 | "Every field, every 2–5 days, from free data, on a laptop." | Pipeline |
-| 1:30 | 4 | **Fire alerts −79%, burn scars unchanged** (harmonised revisit) | f1 |
-| 2:10 | 5 | **9 in 10 strict-tier burn candidates raised no fire alert in 2025**; smoke blinds optical sensors too | f2 + f3 |
-| 2:50 | 6 | Rigour: naive dNBR flags 98% of fields; harvest-aware logic, thermal recall, proximity controls, blind human labels | f4 |
-| 3:20 | 7 | A two-week window; repeat burners (4.6% of fields) do 34% of the burning | Map + f5 |
-| 3:50 | 8 | Same 100 balers, 2.6× more burns pre-empted with risk ranking; early beats precise | f6 |
-| 4:30 | **Live app** | Research Evidence → map toggles 2023/24/25 → 2026 pre-season risk → weekly straw forecast → a field's season events | App |
-| 5:30 | 11–13 | ₹194 crore of straw in one district; 741 t CO₂e per 1,000 ha not burned; no hardware; honest limits; next: pilot | Close |
+| Time | Step and label | Judge flow / exact framing |
+|---|---|---|
+| 0:00–0:20 | Problem · DEMO CONTEXT | Straw has a short post-harvest handling window. Coordinating farmers, balers and buyers is the problem. |
+| 0:20–0:45 | Solution · PROTOTYPE | Show the evidence-to-action concept. Explain that real research and synthetic operations are separated. |
+| 0:45–1:15 | Muktsar map · REAL DATA | Open Research Evidence. Show the Sri Muktsar Sahib map and the 2025 layer. Explain field boundaries are model-derived research polygons. |
+| 1:15–1:40 | One field · REAL DATA | Open a field detail and show its observations and provenance. It is a satellite time series, not a ground inspection. |
+| 1:40–2:05 | Dense history · REAL DATA | Show the 74-scene, 12.6-million field-date research panel and quality flags for haze/cloud. |
+| 2:05–2:35 | Field status · RULE-BASED | Explain STRICT_BURN_CANDIDATE and LOOSE_BURN_CANDIDATE. Read loose areas: 21,121 ha (2023), 10,566 ha (2024), 22,941 ha (2025). Strict areas are 649, 1,022 and 2,269 ha, but do not present as a trend because clean pre-event coverage changes by season. |
+| 2:35–2:55 | Fire context · REAL DATA | In 2025, 8.8% of strict optical candidates had a matched VIIRS active-fire detection in the defined window. Say: “About 9 in 10 strict optical burn candidates had no matched VIIRS active-fire detection within the defined matching window.” FIRMS/VIIRS is corroborative thermal context, not ground truth. Never say satellites missed 90% of fires. |
+| 2:55–3:10 | Straw estimate · REPORTED | The 12.1 lakh tonne figure was reported by The Tribune (reference 11 in the concept note); it is a news-reported estimate, not an official statistic. |
+| 3:10–3:35 | Baler/buyer dispatch · DEMO/SYNTHETIC | Switch to demo mode. Show dispatch and buyer matching. Say the records are synthetic and the route is straight-line GEODESIC_PROXY, not road ETA. |
+| 3:35–3:50 | Evidence workflow · DEMO/SYNTHETIC | Show evidence capture. Do not call it validated evidence or an audit. |
+| 3:50–4:00 | No-burn certificate · PROTOTYPE | Show the QR metadata check. State it checks prototype metadata only; it is not a digital signature, government certificate, verified no-burn result or incentive approval. |
 
-## Click path in the app (official login)
+## Safe terminology
 
-1. **Research Evidence**: read the tiles aloud, from fire alerts down to the 2026 harvest.
-2. On the map, click **2023 → 2024 → 2025 burn scars**, then tick **VIIRS fire alerts**. The scars are everywhere; the dots are sparse.
-3. Click **2026 pre-season risk**: "this is where we pre-book balers this week".
-4. Scroll to the **2026 straw supply forecast** and the **pre-booking list**.
-5. Open **Fields → any FTW field → Satellite tab** to show that field's harvest and burn dates for each season.
-6. For the full operational loop of dispatch, buyer, certificate and farmer in Punjabi, switch to demo mode (`DATA_MODE=demo`) and say clearly that it uses synthetic fixtures.
+- Burn outputs: **RULE-BASED BURN CANDIDATE**, **STRICT_BURN_CANDIDATE**, **LOOSE_BURN_CANDIDATE**.
+- FIRMS/VIIRS: corroborative thermal context, not validation or ground truth.
+- Risk: normalized risk score, not probability.
+- Route: straight-line **GEODESIC_PROXY**, not road routing or ETA.
+- Certificate: prototype QR metadata check only.
+- Detector: no independently validated accuracy; human labels completed: 0.
 
-## Likely judge questions
+## Judge questions
 
-**How do you know a detected burn is real?**
-- Two-thirds of VIIRS fire alerts (67% / 53% / 64% for 2023/24/25) have a Sentinel-2 burn scar within 500 m in the same window, which is independent thermal evidence.
-- Every comparison has a proximity control.
-- Human labels come from a blind, stratified before/after tool (`reports/research/label_tool/`), with precision and area estimated by the Olofsson et al. (2014) estimator. *[Insert the precision once labels are in.]*
-- Precedent: Walker et al. (2022) reached 82% accuracy with Sentinel-2 against Punjab ground truth.
+**Are the candidates confirmed burns?** No. They are optical rule-based candidates. No independent human labels are complete.
 
-**Couldn't a dark field be wet or tilled soil?** Wet soil darkens SWIR more than NIR, so its NBR stays positive; char drives NBR negative. On 22 Nov 2025 rain darkened the whole district in true colour, and the detector did not fire.
+**Why not compare strict area across years?** The strict tier requires a clean pre-event observation. Haze and cloud change the clean coverage available in each season.
 
-**What about smoke and cloud?** Sen2Cor misses smoke. Clear-sky optical observations collapse to 4–33% of fields at the burning peak, but SWIR at 2.2 µm passes through, and the detector keeps 63–100% of fields usable.
+**What does the VIIRS matching result mean?** It is corroborative thermal context within a defined time/radius window. It is not a field-level confirmation or a measure of fires missed.
 
-**Fields are small for 20 m pixels.** Fields of The World polygons average 1.4 ha, about 35 pixels. Fields under 3 pixels are excluded, and partial burns are captured as the fraction of char-like pixels.
+**Is the operations workflow live?** No. The app's real mode is read-only. The dispatch, baler and buyer records shown in demo mode are synthetic.
 
-**How is this different from iFOREST or CEEW?** They report state-level burnt area at 100 m. We work field by field, separate harvest from fire, date each event, and turn the evidence into action: risk ranking, baler dispatch and no-burn certificates. We independently corroborate their after-overpass finding.
-
-**Why is 2024 lower?** Opaque smog removed 3–21 Nov 2024. Char tilled in before 22 Nov was missed, so 2024 is a stated lower bound.
-
-**What is the model accuracy?** The risk model is modest and evaluated honestly on an unseen season: AUC 0.65–0.69, with 2.3–2.7× lift in the top decile. The value shows in operations: 2.6× more burns pre-empted with the same fleet. Scores are relative ranks, not probabilities.
-
-**Will farmers be penalised?** No. Field-level burn data is restricted to officials, the API labels it as not enforcement evidence, and the product's purpose is to pay for straw and speed up incentives.
-
-**Do you need GPUs or paid data?** No. Everything runs on a laptop CPU from free Sentinel-2, VIIRS and ERA5 data. Scaling to another district is a configuration change.
-
-**What is next?** Finish the labels, use Sentinel-1 radar for smog gaps and a paddy mask (a first attempt was inconclusive and is documented), and pilot in one block with a baler cooperative and a buyer.
-
-## Submission checklist
-
-- [ ] Deck (PPTX + PDF), refreshed by `update_live_2026.py`.
-- [ ] `README.md` with the research section, `RESEARCH_SUMMARY.md` and `RESEARCH_METHODS.md`.
-- [ ] Source code: `src/research/`, `scripts/`, `frontend/src/pages/research.tsx`, `src/api/routes/research.py`.
-- [ ] Tests: `python -m pytest -q --basetemp=data/tmp/pytest` and `cd frontend; npm test`.
-- [ ] Optional: labels in `data/real/labels/visual_labels_2025.csv`, then `python scripts/evaluate_visual_labels.py` and update the deck's validation line.
-- [ ] Repository: bulk data is in `.gitignore`. The pushable tree is about 134 MB, with no file over 100 MB.
+**What is next?** Complete blinded human labels and run a bounded pilot with participating farmers, baler operators and buyers.

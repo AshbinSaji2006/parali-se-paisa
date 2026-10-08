@@ -24,8 +24,8 @@ ROOT = Path(__file__).resolve().parents[1]
 LABELS = ROOT / "data" / "real" / "labels"
 TOOL = ROOT / "reports" / "research" / "label_tool"
 REPORT = ROOT / "reports" / "reference_label_status.json"
-BURN = {"BURNT", "NOT_BURNT", "UNCLEAR"}
-STATE = {"STANDING", "HARVESTED", "BURNT", "SOWN", "UNKNOWN"}
+BURN = {"BURNED", "NOT_BURNED", "UNCERTAIN"}
+STATE = {"STANDING", "HARVESTED", "BURNED", "SOWN", "UNKNOWN"}
 CONFIDENCE = {"HIGH", "MEDIUM", "LOW"}
 REQUIRED = ["package", "item_id", "field_id", "year", "candidate_date", "reviewer", "reviewed_at",
             "burn_label", "state_label", "confidence"]
