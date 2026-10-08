@@ -25,7 +25,8 @@ MANIFEST = REAL / "DATASET_MANIFEST.json"
 LOG = ROOT / "logs" / "real_data_download.log"
 # Processing versions that read every band on the common 20 m B06 grid (v3 also applies
 # the processing-baseline >= 04.00 BOA_ADD_OFFSET of -1000 DN).
-GRID_ALIGNED_VERSIONS = {"grid-aligned-20m-v2", "grid-aligned-20m-v3-boa-offset", "grid-aligned-20m-v4-bais2-red-floor"}
+GRID_ALIGNED_VERSIONS = {"grid-aligned-20m-v2", "grid-aligned-20m-v3-boa-offset", "grid-aligned-20m-v4-bais2-red-floor",
+                         "grid-aligned-20m-v5-nd-nonnegative"}
 
 
 def bytes_in(path: Path) -> int:
@@ -61,8 +62,14 @@ def contamination_scan(unfetched: list[str] | None = None) -> list[str]:
             if unfetched is not None: unfetched.append(p.relative_to(ROOT).as_posix())
             continue
         try:
-            pf = pd.read_parquet(p)
-            for col in ("real_or_synthetic", "fixture_or_real", "demo_or_real"):
+            # Read only the provenance marker columns: the dense field time series hold millions
+            # of rows, and loading every column exhausted memory without checking anything extra.
+            import pyarrow.parquet as pq
+            markers = [c for c in ("real_or_synthetic", "fixture_or_real", "demo_or_real") if c in pq.read_schema(p).names]
+            if not markers:
+                continue
+            pf = pd.read_parquet(p, columns=markers)
+            for col in markers:
                 if col in pf:
                     bad = pf[col].astype(str).str.casefold().isin({"synthetic", "demo", "synthetic_as_real"})
                     if bad.any(): errors.append(f"{p.relative_to(ROOT)} has {int(bad.sum())} prohibited {col} values")
@@ -146,9 +153,15 @@ def build_reports() -> dict:
                        "field_observations": int((obs.year == int(y)).sum()) if not obs.empty and "year" in obs else 0}
               for y in (2023, 2024, 2025, 2026)}
     if not obs.empty and {"NDVI", "NBR", "BAIS2"}.issubset(obs.columns):
-        idx_ok = {c: bool(obs[c].notna().any() and obs[c].dropna().between(-1, 1).all()) for c in ("NDVI", "NBR")}
+        # Raw reductions keep pixel means as computed (a smoke-season over-correction can give a
+        # non-positive mean red); the published product must withhold anything unphysical.
+        source = feature if not feature.empty and {"NDVI", "NBR"}.issubset(feature.columns) else obs
+        idx_ok = {c: bool(source[c].notna().any() and source[c].dropna().between(-1, 1).all()) for c in ("NDVI", "NBR")}
         idx_ok["BAIS2"] = bool(obs.BAIS2.notna().any() and np.isfinite(obs.BAIS2.dropna()).all())
     else: idx_ok = {"NDVI": False, "NBR": False, "BAIS2": False}
+    unphysical_withheld = bool(not feature.empty and "reflectance_quality" in feature and
+                               feature.loc[feature.reflectance_quality.ne("OK"), ["NDVI", "NBR", "BAIS2"]].isna().all().all() and
+                               feature.loc[feature.reflectance_quality.ne("OK"), "observation_quality"].eq("POOR").all())
 
     # Checksum finalized source and derived artifact rows at reporting time.
     for key, p, provider, ds in [
@@ -222,7 +235,12 @@ def build_reports() -> dict:
           f"Stored pixel-wise field means: NDVI={float(r.NDVI):.5f}, NBR={float(r.NBR):.5f}, BAIS2={float(r.BAIS2):.5f}; formula recomputation above uses band means, so nonlinear indices differ slightly. "
           f"BAIS2 quality flag: {fr.get('BAIS2_quality', 'unavailable')}.",
           weather_line, firms_line, modis_line,
-          f"Sentinel-1 context: {status.get('sentinel1')}; catalog scenes exist, but no field-level VV/VH observation is available.",
+          ("Sentinel-1 per-date context: no pass of the same field within the look-back window." if not fr.get("s1_available") else
+           f"Sentinel-1 per-date context: pass {fr.get('source_image_id_s1')} ({fr.get('s1_orbit_pass')}, relative orbit "
+           f"{fr.get('s1_relative_orbit_number')}, {fr.get('s1_platform')}) at {fr.get('s1_observation_datetime')}, "
+           f"{float(fr.get('s1_age_days')):.2f} d before the optical acquisition; VV={float(fr.get('VV_mean_db')):.2f} dB, "
+           f"VH={float(fr.get('VH_mean_db')):.2f} dB, VV-VH={float(fr.get('VV_minus_VH_db')):.2f} dB ({fr.get('s1_units')}; "
+           f"{fr.get('s1_processing_level')})."),
           "Labels are heuristic proxy labels and are not ground truth."]
     else: provenance = ["# Real field provenance example", "", "No Sentinel-2 field observation is yet available; provenance audit remains pending."]
     provenance_path.write_text("\n".join(provenance)+"\n", encoding="utf-8")
@@ -233,6 +251,17 @@ def build_reports() -> dict:
     fields_note = "" if fields is not None else " (from acquisition metadata; LFS Parquet not fetched in this working copy, so polygons were not re-validated)"
     cropland = int(feature.loc[feature.cropland_fraction.fillna(0) > 0.5, "field_id"].nunique()) if not feature.empty and "cropland_fraction" in feature else 0
     app_mode = bool(app_snapshot_path.exists() and "DATA_MODE" in (ROOT / "src" / "api" / "routes" / "product.py").read_text(encoding="utf-8"))
+    from src.features.fire_context import firms_coverage_intervals, modis_burned_area_coverage
+    unified = REAL / "firms" / "active_fire_unified.parquet"
+    span = lambda intervals: "; ".join(f"{a.date()}..{(b - pd.Timedelta(days=1)).date()}" for a, b in intervals) or "none"
+    fire_coverage = span(firms_coverage_intervals(pd.read_parquet(unified))) if unified.exists() else "none"
+    modis_coverage = span(modis_burned_area_coverage(pd.read_parquet(modis))) if modis.exists() else "none"
+    if s1_fields.exists():
+        s1_obs = pd.read_parquet(s1_fields)
+        s1_summary = (f"{len(s1_obs):,} per-date field VV/VH observations from {s1_obs.source_raster.nunique()} passes "
+                      f"({', '.join(sorted(set(s1_obs.s1_orbit_pass + ' orbit ' + s1_obs.s1_relative_orbit_number.astype(str))))})")
+    else:
+        s1_summary = "no per-date field observations"
     current_state = json.loads(STATE.read_text(encoding="utf-8"))
     status = {k: v.get("status", "pending") for k, v in current_state.get("datasets", {}).items()}
     failed = [f"{k}: {v}" for k,v in status.items() if k != "reports" and v in {"download_failed", "provider_unavailable", "credential_required", "pending"}]
@@ -247,7 +276,7 @@ def build_reports() -> dict:
       "- Model status: NO_MODEL; independent field-status ground truth and valid real-world performance metrics are unavailable.",
       f"- Sentinel-2 field sample: {obs.field_id.nunique() if not obs.empty else 0} fields with real field-date reductions (selected from the full research polygon set).",
       f"- Weather hourly reanalysis rows: {len(weather):,}; coverage: {weather.timestamp.min() if len(weather) else 'none'} to {weather.timestamp.max() if len(weather) else 'none'}.",
-      f"- FIRMS/UMD: {status.get('firms')} ({len(pd.read_parquet(firms)) if firms.exists() else 0} Muktsar Sep-Dec detections; archive coverage 2023-2024 full years, 2025 Oct-Dec only, 2026 NRT 7-day only; joined to field rows as 1 km/30 d proximity context); MODIS burn: {status.get('modis_burned_area')} ({len(pd.read_parquet(modis_pixels)) if modis_pixels.exists() else 0} burned pixels in {len(pd.read_parquet(modis)) if modis.exists() else 0} monthly tile observations); Sentinel-1: {status.get('sentinel1')} ({len(pd.read_parquet(s1)) if s1.exists() else 0} scenes; {len(pd.read_parquet(s1_fields)) if s1_fields.exists() else 0} field observations).",
+      f"- FIRMS/UMD: {status.get('firms')} ({len(pd.read_parquet(firms)) if firms.exists() else 0} Muktsar Sep-Dec detections; archive coverage {fire_coverage}; joined to field rows as 1 km/30 d proximity context; uncovered windows are null, not zero); MODIS burn: {status.get('modis_burned_area')} ({len(pd.read_parquet(modis_pixels)) if modis_pixels.exists() else 0} burned pixels in {len(pd.read_parquet(modis)) if modis.exists() else 0} monthly tile observations; product months {modis_coverage}); Sentinel-1: {status.get('sentinel1')} ({len(pd.read_parquet(s1)) if s1.exists() else 0} catalogued scenes; {s1_summary}).",
       f"- Weak labels (rule proxies, not ground truth): `{json.dumps(label_counts, sort_keys=True)}`; showcase real fields: {len(gpd.read_file(showcase_path)) if showcase_path.exists() else 0}; preview assets: {preview_n}.",
       f"- Application real-data mode: {'PASS' if app_mode else 'FAIL'} via `DATA_MODE=real`; existing DEMO_MODE remains available.",
       f"- Working-copy disk usage of data/real: {disk['total_real_gb']:.4f} GB; excluded bulk data is listed in DATASET_MANIFEST.json (details in `reports/real_data_disk_usage.json`).",
@@ -268,6 +297,7 @@ def build_reports() -> dict:
               "weather_not_after_satellite_time": weather_asof,
               "sentinel2_boa_offset_harmonised": boa_offset_ok,
               "bais2_pixel_artefacts_withheld": bais2_stable,
+              "unphysical_reflectance_withheld": unphysical_withheld,
               "weather_availability_consistent": weather_consistent,
               "fire_context_coverage_flags": fire_context,
               "weak_label_evidence_windows": labels_windowed,

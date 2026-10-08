@@ -23,7 +23,7 @@ OVERLAYS = PRODUCTS / "overlays"
 FIRES = ROOT / "data" / "real" / "firms" / "active_fire_unified.parquet"
 SAFE_NAME = re.compile(r"^[a-z0-9_]+\.png$")
 USE_NOTICE = ("Research evidence from real satellite data. Burn tiers are rule-derived Sentinel-2 candidates, "
-              "not ground truth and not enforcement evidence; they exist to prioritise straw pickup and payments.")
+              "not ground truth; this is not enforcement evidence and is only a signal for research and human review.")
 
 router = APIRouter(prefix="/research", tags=["research"])
 
@@ -61,7 +61,7 @@ def summary(request: Request):
     results = _json(REPORTS / "results.json")
     figures = sorted(p.name for p in FIGURES.glob("f*.png")) if FIGURES.exists() else []
     overlays = _json(OVERLAYS / "overlays.json") if (OVERLAYS / "overlays.json").exists() else {"overlays": []}
-    keep = ["census", "naive_vs_aware", "latency", "persistence", "risk_model", "dynamic_hazard", "replay", "replay_impact", "emissions_burned_area",
+    keep = ["census", "candidate_summary", "naive_vs_aware", "latency", "persistence", "risk_model", "dynamic_hazard", "replay", "replay_impact", "emissions_burned_area",
             "emissions_per_1000_ha_burned", "nowcast_2026", "assumptions", "caveats"]
     return {"notice": USE_NOTICE, "data_mode": "REAL", "results": {k: results.get(k) for k in keep},
             "figures": figures, "overlays": overlays.get("overlays", [])}

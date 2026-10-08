@@ -13,6 +13,9 @@ def test_artifact_classification(tmp_path):
     expected = hashlib.sha256(crlf).hexdigest()
     check = lambda path, sha, excluded=(): verify_artifact(tmp_path, {"path": path, "sha256": sha}, set(excluded))["status"]
     assert check("lf.csv", expected) == "OK_LINE_ENDINGS_NORMALISED"
+    # Recorded with LF, checked out with CRLF (Git autocrlf on Windows).
+    (tmp_path / "crlf.csv").write_bytes(crlf)
+    assert check("crlf.csv", hashlib.sha256(crlf.replace(b"\r\n", b"\n")).hexdigest()) == "OK_LINE_ENDINGS_NORMALISED"
     assert check("changed.csv", expected) == "SHA256_MISMATCH"
     assert is_lfs_pointer(tmp_path / "big.parquet")
     assert check("big.parquet", oid) == "LFS_POINTER_NOT_FETCHED_OID_MATCH"

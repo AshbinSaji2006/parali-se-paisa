@@ -1,3 +1,5 @@
+> **SUPERSEDED — INTERNAL ONLY — NOT FOR JUDGE PRESENTATION OR REVIEWER DISTRIBUTION.** Retained only as historical record. Use [current judge-facing evidence](research/FINAL_JUDGE_EVIDENCE.md) and [blinded human-review workflow](research/REVIEWERS_START_HERE.md).
+
 # Real-data credibility audit (branch `claude/real-data-hardening`)
 
 Audit date: 2026-10-07. Scope: everything served or reported as REAL DATA. The repository excludes about 9.3 GiB of reproducible raw data by policy (`DATASET_MANIFEST.json`); absent excluded files are not treated as corruption. Six Parquet files are Git LFS objects that this working copy could not fetch. They are reported as missing content, not as data.

@@ -1,0 +1,494 @@
+{
+ "rule_version": "burn-candidate-rules-v2",
+ "haze_rule": {
+  "metric": "field-mean Sentinel-2 B02 (blue) surface reflectance",
+  "clear_below": 0.1,
+  "thick_smoke_from": 0.2,
+  "cloud_excluded_below_valid_fraction": 0.6,
+  "downgraded_meaning": "kept for NIR/SWIR change logic; cannot be the pre-event reference of a strict candidate"
+ },
+ "labels": {
+  "burn": "RULE-BASED BURN CANDIDATE",
+  "never": "CONFIRMED BURN"
+ },
+ "seasons": {
+  "2023": {
+   "scenes": 20,
+   "field_time_rows": 3412460,
+   "usable_field_time_rows": 3134663,
+   "median_usable_obs_per_crop_field_season": 18.0,
+   "event_table_rows": 159169,
+   "event_rows_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": 142121,
+    "LOOSE_BURN_CANDIDATE": 16518,
+    "STRICT_BURN_CANDIDATE": 530
+   },
+   "strict_blocked_by_haze_fields": 13631,
+   "firms_coverage_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": {
+     "COMPLETE": 142121
+    },
+    "LOOSE_BURN_CANDIDATE": {
+     "COMPLETE": 16518
+    },
+    "STRICT_BURN_CANDIDATE": {
+     "COMPLETE": 530
+    }
+   }
+  },
+  "2024": {
+   "scenes": 19,
+   "field_time_rows": 3241837,
+   "usable_field_time_rows": 2634840,
+   "median_usable_obs_per_crop_field_season": 15.0,
+   "event_table_rows": 157107,
+   "event_rows_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": 148250,
+    "LOOSE_BURN_CANDIDATE": 8061,
+    "STRICT_BURN_CANDIDATE": 796
+   },
+   "strict_blocked_by_haze_fields": 3949,
+   "firms_coverage_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": {
+     "COMPLETE": 148250
+    },
+    "LOOSE_BURN_CANDIDATE": {
+     "COMPLETE": 8061
+    },
+    "STRICT_BURN_CANDIDATE": {
+     "COMPLETE": 796
+    }
+   }
+  },
+  "2025": {
+   "scenes": 26,
+   "field_time_rows": 4436198,
+   "usable_field_time_rows": 4042533,
+   "median_usable_obs_per_crop_field_season": 24.0,
+   "event_table_rows": 160234,
+   "event_rows_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": 139770,
+    "LOOSE_BURN_CANDIDATE": 18449,
+    "STRICT_BURN_CANDIDATE": 2015
+   },
+   "strict_blocked_by_haze_fields": 10212,
+   "firms_coverage_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": {
+     "COMPLETE": 139770
+    },
+    "LOOSE_BURN_CANDIDATE": {
+     "COMPLETE": 18449
+    },
+    "STRICT_BURN_CANDIDATE": {
+     "COMPLETE": 2015
+    }
+   }
+  },
+  "2026": {
+   "scenes": 9,
+   "field_time_rows": 1535607,
+   "usable_field_time_rows": 1434521,
+   "median_usable_obs_per_crop_field_season": 9.0,
+   "event_table_rows": 1059,
+   "event_rows_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": 1059
+   },
+   "strict_blocked_by_haze_fields": 0,
+   "firms_coverage_by_type": {
+    "HARVESTED_NO_BURN_CANDIDATE": {
+     "PARTIAL": 1059
+    }
+   }
+  }
+ },
+ "haze_scenes": {
+  "2023": {
+   "scenes": 20,
+   "mostly_usable": 14,
+   "mostly_haze_downgraded": 6,
+   "mostly_excluded": 0,
+   "observations_haze_downgraded": 812070,
+   "observations_thick_smoke_excluded": 3135,
+   "observations_cloud_or_no_data_excluded": 274662
+  },
+  "2024": {
+   "scenes": 19,
+   "mostly_usable": 14,
+   "mostly_haze_downgraded": 1,
+   "mostly_excluded": 4,
+   "observations_haze_downgraded": 369078,
+   "observations_thick_smoke_excluded": 159783,
+   "observations_cloud_or_no_data_excluded": 447214
+  },
+  "2025": {
+   "scenes": 26,
+   "mostly_usable": 22,
+   "mostly_haze_downgraded": 2,
+   "mostly_excluded": 2,
+   "observations_haze_downgraded": 624074,
+   "observations_thick_smoke_excluded": 1328,
+   "observations_cloud_or_no_data_excluded": 392337
+  },
+  "2026": {
+   "scenes": 9,
+   "mostly_usable": 9,
+   "mostly_haze_downgraded": 0,
+   "mostly_excluded": 0,
+   "observations_haze_downgraded": 60197,
+   "observations_thick_smoke_excluded": 1677,
+   "observations_cloud_or_no_data_excluded": 99409
+  }
+ },
+ "area_statistics": {
+  "polygons_total": 243530,
+  "polygon_area_sum_ha_overlapping": 345202,
+  "polygons_with_ge3_pixels": 170623,
+  "polygons_without_any_pixel": 44593,
+  "non_overlapping_pixel_area_ha_all_fields": 193403,
+  "method": "Each 20 m pixel is assigned to exactly one field when polygons are rasterised, so pixel areas never double count. Polygon areas overlap and are never summed for district totals.",
+  "seasons": {
+   "2023": {
+    "crop_fields": 164625,
+    "crop_pixel_area_ha": 187293,
+    "crop_polygon_area_ha_overlapping": 273426,
+    "strict_fields": 530,
+    "strict_field_share": 0.0032,
+    "strict_pixel_area_ha": 649,
+    "strict_pixel_area_share": 0.0035,
+    "strict_polygon_area_ha_overlapping": 881,
+    "loose_any_fields": 17048,
+    "loose_any_field_share": 0.1036,
+    "loose_any_pixel_area_ha": 21121,
+    "loose_any_pixel_area_share": 0.1128,
+    "loose_any_polygon_area_ha_overlapping": 29326,
+    "loose_only_fields": 16518,
+    "loose_only_field_share": 0.1003,
+    "loose_only_pixel_area_ha": 20471,
+    "loose_only_pixel_area_share": 0.1093,
+    "loose_only_polygon_area_ha_overlapping": 28445,
+    "harvested_no_burn_fields": 142121,
+    "harvested_no_burn_field_share": 0.8633,
+    "harvested_no_burn_pixel_area_ha": 162419,
+    "harvested_no_burn_pixel_area_share": 0.8672,
+    "harvested_no_burn_polygon_area_ha_overlapping": 238544,
+    "no_harvest_observed_fields": 5456,
+    "no_harvest_observed_field_share": 0.0331,
+    "no_harvest_observed_pixel_area_ha": 3753,
+    "no_harvest_observed_pixel_area_share": 0.02,
+    "no_harvest_observed_polygon_area_ha_overlapping": 5556
+   },
+   "2024": {
+    "crop_fields": 163815,
+    "crop_pixel_area_ha": 186778,
+    "crop_polygon_area_ha_overlapping": 272783,
+    "strict_fields": 796,
+    "strict_field_share": 0.0049,
+    "strict_pixel_area_ha": 1022,
+    "strict_pixel_area_share": 0.0055,
+    "strict_polygon_area_ha_overlapping": 1376,
+    "loose_any_fields": 8857,
+    "loose_any_field_share": 0.0541,
+    "loose_any_pixel_area_ha": 10566,
+    "loose_any_pixel_area_share": 0.0566,
+    "loose_any_polygon_area_ha_overlapping": 14632,
+    "loose_only_fields": 8061,
+    "loose_only_field_share": 0.0492,
+    "loose_only_pixel_area_ha": 9543,
+    "loose_only_pixel_area_share": 0.0511,
+    "loose_only_polygon_area_ha_overlapping": 13256,
+    "harvested_no_burn_fields": 148250,
+    "harvested_no_burn_field_share": 0.905,
+    "harvested_no_burn_pixel_area_ha": 171599,
+    "harvested_no_burn_pixel_area_share": 0.9187,
+    "harvested_no_burn_polygon_area_ha_overlapping": 251444,
+    "no_harvest_observed_fields": 6708,
+    "no_harvest_observed_field_share": 0.0409,
+    "no_harvest_observed_pixel_area_ha": 4614,
+    "no_harvest_observed_pixel_area_share": 0.0247,
+    "no_harvest_observed_polygon_area_ha_overlapping": 6707
+   },
+   "2025": {
+    "crop_fields": 165384,
+    "crop_pixel_area_ha": 187906,
+    "crop_polygon_area_ha_overlapping": 274421,
+    "strict_fields": 2015,
+    "strict_field_share": 0.0122,
+    "strict_pixel_area_ha": 2269,
+    "strict_pixel_area_share": 0.0121,
+    "strict_polygon_area_ha_overlapping": 3170,
+    "loose_any_fields": 20464,
+    "loose_any_field_share": 0.1237,
+    "loose_any_pixel_area_ha": 22941,
+    "loose_any_pixel_area_share": 0.1221,
+    "loose_any_polygon_area_ha_overlapping": 31616,
+    "loose_only_fields": 18449,
+    "loose_only_field_share": 0.1116,
+    "loose_only_pixel_area_ha": 20672,
+    "loose_only_pixel_area_share": 0.11,
+    "loose_only_polygon_area_ha_overlapping": 28446,
+    "harvested_no_burn_fields": 139770,
+    "harvested_no_burn_field_share": 0.8451,
+    "harvested_no_burn_pixel_area_ha": 161356,
+    "harvested_no_burn_pixel_area_share": 0.8587,
+    "harvested_no_burn_polygon_area_ha_overlapping": 237640,
+    "no_harvest_observed_fields": 5150,
+    "no_harvest_observed_field_share": 0.0311,
+    "no_harvest_observed_pixel_area_ha": 3610,
+    "no_harvest_observed_pixel_area_share": 0.0192,
+    "no_harvest_observed_polygon_area_ha_overlapping": 5165
+   },
+   "2026": {
+    "crop_fields": 158635,
+    "crop_pixel_area_ha": 182853,
+    "crop_polygon_area_ha_overlapping": 266785,
+    "strict_fields": 0,
+    "strict_field_share": 0.0,
+    "strict_pixel_area_ha": 0,
+    "strict_pixel_area_share": 0.0,
+    "strict_polygon_area_ha_overlapping": 0,
+    "loose_any_fields": 0,
+    "loose_any_field_share": 0.0,
+    "loose_any_pixel_area_ha": 0,
+    "loose_any_pixel_area_share": 0.0,
+    "loose_any_polygon_area_ha_overlapping": 0,
+    "loose_only_fields": 0,
+    "loose_only_field_share": 0.0,
+    "loose_only_pixel_area_ha": 0,
+    "loose_only_pixel_area_share": 0.0,
+    "loose_only_polygon_area_ha_overlapping": 0,
+    "harvested_no_burn_fields": 1059,
+    "harvested_no_burn_field_share": 0.0067,
+    "harvested_no_burn_pixel_area_ha": 723,
+    "harvested_no_burn_pixel_area_share": 0.004,
+    "harvested_no_burn_polygon_area_ha_overlapping": 988,
+    "no_harvest_observed_fields": 157576,
+    "no_harvest_observed_field_share": 0.9933,
+    "no_harvest_observed_pixel_area_ha": 182130,
+    "no_harvest_observed_pixel_area_share": 0.996,
+    "no_harvest_observed_polygon_area_ha_overlapping": 265797
+   }
+  }
+ },
+ "thermal_context": {
+  "2023": {
+   "sensors": [
+    "VIIRS_SNPP",
+    "VIIRS_NOAA20"
+   ],
+   "temporal_tolerance_days": 1,
+   "window": "candidate evidence window [pre-event image - 1 d, event image + 1 d]",
+   "viirs_detections_in_district_sep_dec": 2792,
+   "strict": {
+    "375m": {
+     "candidates": 530,
+     "candidates_with_viirs_nearby": 159,
+     "share_candidates_with_viirs_nearby": 0.3,
+     "share_short_window_candidates_with_viirs_nearby": 0.2678,
+     "short_window_candidates": 351,
+     "proximity_control_share": 0.1661,
+     "viirs_detections_with_optical_candidate_nearby": 127,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.0455
+    },
+    "500m": {
+     "candidates": 530,
+     "candidates_with_viirs_nearby": 233,
+     "share_candidates_with_viirs_nearby": 0.4396,
+     "share_short_window_candidates_with_viirs_nearby": 0.4017,
+     "short_window_candidates": 351,
+     "proximity_control_share": 0.2564,
+     "viirs_detections_with_optical_candidate_nearby": 201,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.072
+    },
+    "1000m": {
+     "candidates": 530,
+     "candidates_with_viirs_nearby": 400,
+     "share_candidates_with_viirs_nearby": 0.7547,
+     "share_short_window_candidates_with_viirs_nearby": 0.6895,
+     "short_window_candidates": 351,
+     "proximity_control_share": 0.5843,
+     "viirs_detections_with_optical_candidate_nearby": 511,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.183
+    }
+   },
+   "loose": {
+    "375m": {
+     "candidates": 17048,
+     "candidates_with_viirs_nearby": 4445,
+     "share_candidates_with_viirs_nearby": 0.2607,
+     "share_short_window_candidates_with_viirs_nearby": 0.2106,
+     "short_window_candidates": 10088,
+     "proximity_control_share": 0.1681,
+     "viirs_detections_with_optical_candidate_nearby": 1583,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.567
+    },
+    "500m": {
+     "candidates": 17048,
+     "candidates_with_viirs_nearby": 6416,
+     "share_candidates_with_viirs_nearby": 0.3763,
+     "share_short_window_candidates_with_viirs_nearby": 0.3079,
+     "short_window_candidates": 10088,
+     "proximity_control_share": 0.2592,
+     "viirs_detections_with_optical_candidate_nearby": 1879,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.673
+    },
+    "1000m": {
+     "candidates": 17048,
+     "candidates_with_viirs_nearby": 12151,
+     "share_candidates_with_viirs_nearby": 0.7128,
+     "share_short_window_candidates_with_viirs_nearby": 0.6355,
+     "short_window_candidates": 10088,
+     "proximity_control_share": 0.5813,
+     "viirs_detections_with_optical_candidate_nearby": 2385,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.8542
+    }
+   }
+  },
+  "2024": {
+   "sensors": [
+    "VIIRS_SNPP",
+    "VIIRS_NOAA20"
+   ],
+   "temporal_tolerance_days": 1,
+   "window": "candidate evidence window [pre-event image - 1 d, event image + 1 d]",
+   "viirs_detections_in_district_sep_dec": 1527,
+   "strict": {
+    "375m": {
+     "candidates": 796,
+     "candidates_with_viirs_nearby": 166,
+     "share_candidates_with_viirs_nearby": 0.2085,
+     "share_short_window_candidates_with_viirs_nearby": 0.0429,
+     "short_window_candidates": 140,
+     "proximity_control_share": 0.1616,
+     "viirs_detections_with_optical_candidate_nearby": 143,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.0936
+    },
+    "500m": {
+     "candidates": 796,
+     "candidates_with_viirs_nearby": 265,
+     "share_candidates_with_viirs_nearby": 0.3329,
+     "share_short_window_candidates_with_viirs_nearby": 0.0714,
+     "short_window_candidates": 140,
+     "proximity_control_share": 0.2511,
+     "viirs_detections_with_optical_candidate_nearby": 237,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.1552
+    },
+    "1000m": {
+     "candidates": 796,
+     "candidates_with_viirs_nearby": 534,
+     "share_candidates_with_viirs_nearby": 0.6709,
+     "share_short_window_candidates_with_viirs_nearby": 0.1929,
+     "short_window_candidates": 140,
+     "proximity_control_share": 0.5907,
+     "viirs_detections_with_optical_candidate_nearby": 593,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.3883
+    }
+   },
+   "loose": {
+    "375m": {
+     "candidates": 8857,
+     "candidates_with_viirs_nearby": 1087,
+     "share_candidates_with_viirs_nearby": 0.1227,
+     "share_short_window_candidates_with_viirs_nearby": 0.0394,
+     "short_window_candidates": 5426,
+     "proximity_control_share": 0.0873,
+     "viirs_detections_with_optical_candidate_nearby": 608,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.3982
+    },
+    "500m": {
+     "candidates": 8857,
+     "candidates_with_viirs_nearby": 1645,
+     "share_candidates_with_viirs_nearby": 0.1857,
+     "share_short_window_candidates_with_viirs_nearby": 0.061,
+     "short_window_candidates": 5426,
+     "proximity_control_share": 0.1366,
+     "viirs_detections_with_optical_candidate_nearby": 811,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.5311
+    },
+    "1000m": {
+     "candidates": 8857,
+     "candidates_with_viirs_nearby": 3351,
+     "share_candidates_with_viirs_nearby": 0.3783,
+     "share_short_window_candidates_with_viirs_nearby": 0.1351,
+     "short_window_candidates": 5426,
+     "proximity_control_share": 0.3309,
+     "viirs_detections_with_optical_candidate_nearby": 1262,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.8265
+    }
+   }
+  },
+  "2025": {
+   "sensors": [
+    "VIIRS_SNPP",
+    "VIIRS_NOAA20"
+   ],
+   "temporal_tolerance_days": 1,
+   "window": "candidate evidence window [pre-event image - 1 d, event image + 1 d]",
+   "viirs_detections_in_district_sep_dec": 604,
+   "strict": {
+    "375m": {
+     "candidates": 2015,
+     "candidates_with_viirs_nearby": 133,
+     "share_candidates_with_viirs_nearby": 0.066,
+     "share_short_window_candidates_with_viirs_nearby": 0.0656,
+     "short_window_candidates": 1965,
+     "proximity_control_share": 0.0249,
+     "viirs_detections_with_optical_candidate_nearby": 100,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.1656
+    },
+    "500m": {
+     "candidates": 2015,
+     "candidates_with_viirs_nearby": 179,
+     "share_candidates_with_viirs_nearby": 0.0888,
+     "share_short_window_candidates_with_viirs_nearby": 0.088,
+     "short_window_candidates": 1965,
+     "proximity_control_share": 0.0423,
+     "viirs_detections_with_optical_candidate_nearby": 137,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.2268
+    },
+    "1000m": {
+     "candidates": 2015,
+     "candidates_with_viirs_nearby": 435,
+     "share_candidates_with_viirs_nearby": 0.2159,
+     "share_short_window_candidates_with_viirs_nearby": 0.2087,
+     "short_window_candidates": 1965,
+     "proximity_control_share": 0.1439,
+     "viirs_detections_with_optical_candidate_nearby": 250,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.4139
+    }
+   },
+   "loose": {
+    "375m": {
+     "candidates": 20464,
+     "candidates_with_viirs_nearby": 951,
+     "share_candidates_with_viirs_nearby": 0.0465,
+     "share_short_window_candidates_with_viirs_nearby": 0.0461,
+     "short_window_candidates": 20197,
+     "proximity_control_share": 0.0217,
+     "viirs_detections_with_optical_candidate_nearby": 329,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.5447
+    },
+    "500m": {
+     "candidates": 20464,
+     "candidates_with_viirs_nearby": 1438,
+     "share_candidates_with_viirs_nearby": 0.0703,
+     "share_short_window_candidates_with_viirs_nearby": 0.0698,
+     "short_window_candidates": 20197,
+     "proximity_control_share": 0.0372,
+     "viirs_detections_with_optical_candidate_nearby": 393,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.6507
+    },
+    "1000m": {
+     "candidates": 20464,
+     "candidates_with_viirs_nearby": 3675,
+     "share_candidates_with_viirs_nearby": 0.1796,
+     "share_short_window_candidates_with_viirs_nearby": 0.1778,
+     "short_window_candidates": 20197,
+     "proximity_control_share": 0.1283,
+     "viirs_detections_with_optical_candidate_nearby": 509,
+     "share_viirs_detections_with_optical_candidate_nearby": 0.8427
+    }
+   }
+  }
+ },
+ "thermal_context_note": "Active fires are thermal context: polar-orbit overpasses (~01:30/13:30 local) miss fires lit later in the day, fires under smoke or cloud, and short-lived small fires; VIIRS pixels are 375 m and a detection near a field is not a field-level confirmation. 2023-2024 are the primary comparison; 2025 uses the UMD monthly archive (Sep-Dec)."
+}

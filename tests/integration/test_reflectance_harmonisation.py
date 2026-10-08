@@ -11,7 +11,8 @@ OBS = ROOT / "data" / "real" / "derived" / "features" / "sentinel2_field_observa
 @pytest.mark.skipif(not OBS.exists(), reason="real snapshot not built")
 def test_offset_is_applied_and_green_paddy_ndvi_is_plausible():
     obs = pd.read_parquet(OBS)
-    assert obs.processing_version.isin({"grid-aligned-20m-v3-boa-offset", "grid-aligned-20m-v4-bais2-red-floor"}).all()
+    assert obs.processing_version.isin({"grid-aligned-20m-v3-boa-offset", "grid-aligned-20m-v4-bais2-red-floor",
+                                       "grid-aligned-20m-v5-nd-nonnegative"}).all()
     assert (obs.loc[obs.processing_baseline >= 4.0, "boa_offset_dn"] == 1000).all()
     day = pd.to_datetime(obs.observation_datetime).dt.tz_convert("UTC").dt.strftime("%Y-%m-%d")
     early = obs[day == "2023-10-04"]  # standing paddy before harvest

@@ -1,27 +1,51 @@
 {
   "notice": "Demonstration suitability ranking only; not a burn ranking, a probability, or ground truth. Agreement between Sentinel-2 rule candidates and FIRMS/MODIS proximity is corroboration, not verification.",
-  "field_context_source": "DERIVED_FALLBACK_LFS_FIELD_PARQUET_NOT_FETCHED",
-  "candidate_pool": 100,
+  "field_context_source": "FIELDS_OF_THE_WORLD_PARQUET",
+  "candidate_pool": 520,
   "observed_fields": 520,
   "category_counts_in_pool": {
-    "OTHER": 87,
-    "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS": 8,
-    "HARVESTED_NO_BURN_CANDIDATE_NO_FIRE_DETECTIONS": 4,
-    "BURN_SCAR_CANDIDATE_UNCORROBORATED": 1
+    "E_AMBIGUOUS_SYSTEM_CAUTION": 208,
+    "D_STABLE_STANDING": 173,
+    "C_POST_HARVEST_GREEN_UP": 121,
+    "A_BURN_LIKE_MULTI_SIGNAL": 7,
+    "OTHER": 6,
+    "B_HARVEST_NO_BURN": 5
+  },
+  "category_counts_selected": {
+    "C_POST_HARVEST_GREEN_UP": 30,
+    "E_AMBIGUOUS_SYSTEM_CAUTION": 20,
+    "D_STABLE_STANDING": 20,
+    "A_BURN_LIKE_MULTI_SIGNAL": 7,
+    "B_HARVEST_NO_BURN": 5
+  },
+  "group_quotas": {
+    "A_BURN_LIKE_MULTI_SIGNAL": 40,
+    "C_POST_HARVEST_GREEN_UP": 30,
+    "B_HARVEST_NO_BURN": 30,
+    "D_STABLE_STANDING": 20,
+    "E_AMBIGUOUS_SYSTEM_CAUTION": 20
   },
   "fields": [
     {
       "field_id": "FTW-IN-PB-1699603",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 16.0,
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 17.531,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0215,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [
         2023,
         2024
       ],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023
       ],
@@ -32,19 +56,36 @@
       "corroborated_burn_years": [
         2023,
         2024
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-11-03 but the dense NBR series shows harvest only on 2023-11-18",
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22",
+        "2025: weak HARVESTED proxy on 2025-10-28 but the dense NBR series shows harvest only on 2025-11-09"
       ],
       "demo_rank": 1
     },
     {
       "field_id": "FTW-IN-PB-1662433",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 14.0,
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 15.664,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0075,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 52,
       "strict_burn_candidate_years": [
-        2023,
         2025
       ],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
+        2024
+      ],
+      "post_harvest_green_up_years": [
         2024
       ],
       "firms_near_field_years": [
@@ -53,141 +94,264 @@
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "corroborated_burn_years": [
-        2023
+        2025
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-11-03 but the dense NBR series shows harvest only on 2023-11-18"
       ],
       "demo_rank": 2
     },
     {
-      "field_id": "FTW-IN-PB-1654241",
-      "demo_category": "HARVESTED_NO_BURN_CANDIDATE_NO_FIRE_DETECTIONS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-551798",
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 15.625,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0181,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
+      "strict_burn_candidate_years": [
+        2025
+      ],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
+        2024
+      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [
+        2023,
+        2024
+      ],
+      "modis_ba_near_field_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [],
-      "modis_ba_near_field_years": [],
-      "corroborated_burn_years": [],
+      "corroborated_burn_years": [
+        2025
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 3
     },
     {
-      "field_id": "FTW-IN-PB-1654330",
-      "demo_category": "HARVESTED_NO_BURN_CANDIDATE_NO_FIRE_DETECTIONS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-1697478",
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 15.535,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
+      "good_observations": 52,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0157,
+      "fire_windows_complete": 44,
+      "radar_context": true,
+      "weather_available_rows": 52,
+      "strict_burn_candidate_years": [
+        2024
+      ],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
         2025
       ],
-      "firms_near_field_years": [],
-      "modis_ba_near_field_years": [],
-      "corroborated_burn_years": [],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [
+        2024
+      ],
+      "modis_ba_near_field_years": [
+        2023,
+        2024
+      ],
+      "corroborated_burn_years": [
+        2024
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-18"
+      ],
       "demo_rank": 4
     },
     {
-      "field_id": "FTW-IN-PB-1664701",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-6179900",
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 15.438,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0401,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [
-        2023
-      ],
-      "harvested_no_burn_candidate_years": [
-        2024,
         2025
       ],
+      "loose_only_burn_candidate_years": [],
+      "harvested_no_burn_candidate_years": [
+        2023,
+        2024
+      ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
+        2023,
+        2024
+      ],
+      "modis_ba_near_field_years": [
         2023,
         2024,
         2025
       ],
-      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [
-        2023
+        2025
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-11-03 but the dense NBR series shows harvest only on 2023-11-18",
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
       ],
       "demo_rank": 5
     },
     {
-      "field_id": "FTW-IN-PB-1685838",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-6675054",
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 15.368,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0392,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [
-        2024
-      ],
-      "harvested_no_burn_candidate_years": [
-        2023,
         2025
       ],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
+      "harvested_no_burn_candidate_years": [
+        2024
+      ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "corroborated_burn_years": [
-        2024
+        2025
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
       ],
       "demo_rank": 6
     },
     {
-      "field_id": "FTW-IN-PB-1697478",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-6177839",
+      "demo_category": "A_BURN_LIKE_MULTI_SIGNAL",
+      "demo_score": 15.124,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [
         2024
+      ],
+      "loose_only_burn_candidate_years": [
+        2023
       ],
       "harvested_no_burn_candidate_years": [
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024
+        2023,
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "corroborated_burn_years": [
         2024
+      ],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
       ],
       "demo_rank": 7
     },
     {
-      "field_id": "FTW-IN-PB-1699226",
-      "demo_category": "HARVESTED_NO_BURN_CANDIDATE_NO_FIRE_DETECTIONS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-4159596",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.689,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0036,
+      "fire_windows_complete": 48,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [],
-      "modis_ba_near_field_years": [],
+      "post_harvest_green_up_years": [
+        2024
+      ],
+      "firms_near_field_years": [
+        2023,
+        2025
+      ],
+      "modis_ba_near_field_years": [
+        2023
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": false,
+      "source_conflicts": [],
       "demo_rank": 8
     },
     {
-      "field_id": "FTW-IN-PB-1706148",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 11.0,
+      "field_id": "FTW-IN-PB-1684751",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.684,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [
-        2023
-      ],
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0032,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
+      "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
+        2024,
+        2025
+      ],
+      "post_harvest_green_up_years": [
         2024,
         2025
       ],
@@ -197,24 +361,33 @@
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2025
       ],
-      "corroborated_burn_years": [
-        2023
-      ],
+      "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 9
     },
     {
-      "field_id": "FTW-IN-PB-1682529",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 10.506,
+      "field_id": "FTW-IN-PB-6681652",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.682,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [
-        2025
-      ],
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0046,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
+      "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
-        2024
+        2024,
+        2025
+      ],
+      "post_harvest_green_up_years": [
+        2023
       ],
       "firms_near_field_years": [
         2023,
@@ -222,25 +395,33 @@
         2025
       ],
       "modis_ba_near_field_years": [
-        2023,
-        2024
+        2023
       ],
-      "corroborated_burn_years": [
-        2025
-      ],
+      "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 10
     },
     {
-      "field_id": "FTW-IN-PB-1633074",
-      "demo_category": "BURN_SCAR_CANDIDATE_CORROBORATED_BY_FIRE_PRODUCTS",
-      "demo_score": 10.31,
+      "field_id": "FTW-IN-PB-1663238",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.679,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [
-        2025
-      ],
+      "good_observations": 53,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 52,
+      "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
-        2024
+        2024,
+        2025
+      ],
+      "post_harvest_green_up_years": [
+        2023
       ],
       "firms_near_field_years": [
         2023,
@@ -248,352 +429,573 @@
         2025
       ],
       "modis_ba_near_field_years": [
-        2023
+        2023,
+        2024
       ],
-      "corroborated_burn_years": [
-        2025
-      ],
+      "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 11
     },
     {
-      "field_id": "FTW-IN-PB-1654258",
-      "demo_category": "HARVESTED_NO_BURN_CANDIDATE_NO_FIRE_DETECTIONS",
-      "demo_score": 10.0,
+      "field_id": "FTW-IN-PB-1663257",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.679,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0001,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 52,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2023,
+        2025
+      ],
       "harvested_no_burn_candidate_years": [
+        2024
+      ],
+      "post_harvest_green_up_years": [
+        2024
+      ],
+      "firms_near_field_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [],
-      "modis_ba_near_field_years": [],
+      "modis_ba_near_field_years": [
+        2023,
+        2024,
+        2025
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-11-03 but the dense NBR series shows harvest only on 2023-11-18",
+        "2024: weak HARVESTED proxy on 2024-11-02 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 12
     },
     {
-      "field_id": "FTW-IN-PB-1652470",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-6674150",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.678,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0064,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
+        2023,
+        2025
+      ],
+      "modis_ba_near_field_years": [
         2023,
         2024
       ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-10-28 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 13
     },
     {
-      "field_id": "FTW-IN-PB-1654017",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-1715548",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.677,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0039,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
+        2023,
+        2024,
+        2025
+      ],
+      "modis_ba_near_field_years": [
+        2023,
         2024
       ],
-      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 14
     },
     {
-      "field_id": "FTW-IN-PB-1654485",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-4210343",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.675,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.005,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
+      "loose_only_burn_candidate_years": [
         2025
       ],
+      "harvested_no_burn_candidate_years": [
+        2023,
+        2024
+      ],
+      "post_harvest_green_up_years": [
+        2024
+      ],
       "firms_near_field_years": [
-        2023,
-        2024
+        2023
       ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 15
     },
     {
-      "field_id": "FTW-IN-PB-1660447",
-      "demo_category": "BURN_SCAR_CANDIDATE_UNCORROBORATED",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-4218425",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.675,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.008,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
+      "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
+      "harvested_no_burn_candidate_years": [
+        2023,
+        2024,
         2025
       ],
-      "harvested_no_burn_candidate_years": [
-        2024
-      ],
-      "firms_near_field_years": [
-        2024
-      ],
-      "modis_ba_near_field_years": [
+      "post_harvest_green_up_years": [
         2023,
         2024
       ],
+      "firms_near_field_years": [
+        2023,
+        2024,
+        2025
+      ],
+      "modis_ba_near_field_years": [
+        2023,
+        2025
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 16
     },
     {
-      "field_id": "FTW-IN-PB-1663238",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-557359",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.673,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0031,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 52,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
-        2023,
         2024
       ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 17
     },
     {
-      "field_id": "FTW-IN-PB-1663257",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-6172444",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.669,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0079,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
-        2024
+        2023,
+        2024,
+        2025
+      ],
+      "post_harvest_green_up_years": [
+        2023
       ],
       "firms_near_field_years": [
-        2023,
         2024
       ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 18
     },
     {
-      "field_id": "FTW-IN-PB-1684577",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-563200",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.668,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0116,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
+      "post_harvest_green_up_years": [
         2024
+      ],
+      "firms_near_field_years": [
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 19
     },
     {
-      "field_id": "FTW-IN-PB-1699676",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-6165170",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.666,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0094,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2025
+      ],
       "harvested_no_burn_candidate_years": [
+        2023,
+        2024
+      ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
+      "firms_near_field_years": [
         2023,
         2024,
         2025
-      ],
-      "firms_near_field_years": [
-        2023
       ],
       "modis_ba_near_field_years": [
         2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 20
     },
     {
-      "field_id": "FTW-IN-PB-1709298",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-1631065",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.661,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 21
     },
     {
-      "field_id": "FTW-IN-PB-6194531",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-1632112",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.66,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0001,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
-        2023,
         2024
       ],
       "modis_ba_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 22
     },
     {
-      "field_id": "FTW-IN-PB-6673956",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-1637867",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.659,
       "demo_clean_observations": true,
+      "good_observations": 57,
+      "observations": 57,
+      "mean_cloud_fraction": 0.004,
+      "fire_windows_complete": 48,
+      "radar_context": true,
+      "weather_available_rows": 56,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
+      "post_harvest_green_up_years": [
         2025
       ],
+      "firms_near_field_years": [
+        2023,
+        2024
+      ],
       "modis_ba_near_field_years": [
+        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 23
     },
     {
-      "field_id": "FTW-IN-PB-6674150",
-      "demo_category": "OTHER",
-      "demo_score": 9.0,
+      "field_id": "FTW-IN-PB-4216406",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.659,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0011,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2025
+      ],
       "firms_near_field_years": [
-        2023
-      ],
-      "modis_ba_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 24
     },
     {
-      "field_id": "FTW-IN-PB-1655793",
-      "demo_category": "OTHER",
-      "demo_score": 8.956,
+      "field_id": "FTW-IN-PB-4216408",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.658,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0013,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2025
+      ],
       "firms_near_field_years": [
+        2023,
         2024,
         2025
       ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 25
     },
     {
-      "field_id": "FTW-IN-PB-6192658",
-      "demo_category": "OTHER",
-      "demo_score": 8.841,
+      "field_id": "FTW-IN-PB-1686579",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.655,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2025
+      ],
       "firms_near_field_years": [
+        2023,
         2024
       ],
       "modis_ba_near_field_years": [
+        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 26
     },
     {
-      "field_id": "FTW-IN-PB-1686259",
-      "demo_category": "OTHER",
-      "demo_score": 8.751,
+      "field_id": "FTW-IN-PB-1728285",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.655,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
+      "post_harvest_green_up_years": [
         2023,
-        2024
+        2025
+      ],
+      "firms_near_field_years": [
+        2023
       ],
       "modis_ba_near_field_years": [
-        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 27
     },
     {
-      "field_id": "FTW-IN-PB-6669669",
-      "demo_category": "OTHER",
-      "demo_score": 8.635,
+      "field_id": "FTW-IN-PB-6179940",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.654,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0124,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 52,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
+        2024,
         2025
+      ],
+      "post_harvest_green_up_years": [
+        2023
       ],
       "firms_near_field_years": [
         2023,
@@ -601,617 +1003,932 @@
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 28
     },
     {
-      "field_id": "FTW-IN-PB-6668728",
-      "demo_category": "OTHER",
-      "demo_score": 8.607,
+      "field_id": "FTW-IN-PB-1917745",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.653,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.004,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
+      "post_harvest_green_up_years": [
         2023
       ],
-      "modis_ba_near_field_years": [
+      "firms_near_field_years": [
         2023,
         2024
       ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 29
     },
     {
-      "field_id": "FTW-IN-PB-1631065",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1660606",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.65,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0022,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
+      "loose_only_burn_candidate_years": [
         2025
       ],
-      "firms_near_field_years": [
+      "harvested_no_burn_candidate_years": [
         2023,
         2024
       ],
-      "modis_ba_near_field_years": [
+      "post_harvest_green_up_years": [
         2023
       ],
+      "firms_near_field_years": [
+        2024
+      ],
+      "modis_ba_near_field_years": [
+        2024
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 30
     },
     {
-      "field_id": "FTW-IN-PB-1631103",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1636969",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.648,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 31
     },
     {
-      "field_id": "FTW-IN-PB-1632112",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1652020",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.648,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
+        2023,
         2024
       ],
       "modis_ba_near_field_years": [
-        2023
+        2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 32
     },
     {
-      "field_id": "FTW-IN-PB-1634028",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1732799",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.648,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0002,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
+      "loose_only_burn_candidate_years": [
         2025
       ],
-      "firms_near_field_years": [
+      "harvested_no_burn_candidate_years": [
         2023,
         2024
       ],
-      "modis_ba_near_field_years": [
+      "post_harvest_green_up_years": [
+        2024
+      ],
+      "firms_near_field_years": [
         2023
       ],
+      "modis_ba_near_field_years": [
+        2023,
+        2024
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-11-03 but the dense NBR series shows harvest only on 2023-11-18"
+      ],
       "demo_rank": 33
     },
     {
-      "field_id": "FTW-IN-PB-1635688",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1924260",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.648,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0001,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
+      ],
+      "post_harvest_green_up_years": [
+        2023
       ],
       "firms_near_field_years": [
         2023,
         2024
       ],
       "modis_ba_near_field_years": [
-        2023
+        2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 34
     },
     {
-      "field_id": "FTW-IN-PB-1646224",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-568438",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.648,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
+      "loose_only_burn_candidate_years": [
         2025
       ],
-      "firms_near_field_years": [],
+      "harvested_no_burn_candidate_years": [
+        2023,
+        2024
+      ],
+      "post_harvest_green_up_years": [
+        2024
+      ],
+      "firms_near_field_years": [
+        2023,
+        2025
+      ],
       "modis_ba_near_field_years": [
         2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 35
     },
     {
-      "field_id": "FTW-IN-PB-1648044",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1637141",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.647,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0003,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [
+        2023
+      ],
       "firms_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 36
     },
     {
-      "field_id": "FTW-IN-PB-1649378",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-568437",
+      "demo_category": "C_POST_HARVEST_GREEN_UP",
+      "demo_score": 13.647,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0005,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
+      "post_harvest_green_up_years": [
         2023,
         2024
       ],
+      "firms_near_field_years": [
+        2023,
+        2025
+      ],
       "modis_ba_near_field_years": [
-        2023
+        2023,
+        2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 37
     },
     {
-      "field_id": "FTW-IN-PB-1649384",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1725273",
+      "demo_category": "B_HARVEST_NO_BURN",
+      "demo_score": 13.545,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0145,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 38
     },
     {
-      "field_id": "FTW-IN-PB-1650870",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1654330",
+      "demo_category": "B_HARVEST_NO_BURN",
+      "demo_score": 13.446,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0359,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-09-28 but the dense NBR series shows harvest only on 2024-11-22",
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 39
     },
     {
-      "field_id": "FTW-IN-PB-1650978",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1699226",
+      "demo_category": "B_HARVEST_NO_BURN",
+      "demo_score": 13.44,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0347,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-11-03 but the dense NBR series shows harvest only on 2023-11-18"
+      ],
       "demo_rank": 40
     },
     {
-      "field_id": "FTW-IN-PB-1652020",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6174791",
+      "demo_category": "B_HARVEST_NO_BURN",
+      "demo_score": 13.039,
       "demo_clean_observations": true,
+      "good_observations": 52,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0403,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": false,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-10-28 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 41
     },
     {
-      "field_id": "FTW-IN-PB-1652204",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6057036",
+      "demo_category": "B_HARVEST_NO_BURN",
+      "demo_score": 12.683,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 57,
+      "mean_cloud_fraction": 0.0454,
+      "fire_windows_complete": 48,
+      "radar_context": true,
+      "weather_available_rows": 56,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 42
     },
     {
-      "field_id": "FTW-IN-PB-1652290",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1916471",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.685,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0029,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
-        2023
+        2023,
+        2024,
+        2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
-        2024
+        2025
       ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 43
     },
     {
-      "field_id": "FTW-IN-PB-1653558",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-4223486",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.683,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0039,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 44
     },
     {
-      "field_id": "FTW-IN-PB-1655390",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6111225",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.679,
       "demo_clean_observations": true,
+      "good_observations": 53,
+      "observations": 53,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 45,
+      "radar_context": true,
+      "weather_available_rows": 52,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024
-      ],
-      "modis_ba_near_field_years": [
         2023,
         2024
       ],
+      "modis_ba_near_field_years": [
+        2024
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 45
     },
     {
-      "field_id": "FTW-IN-PB-1656629",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6184575",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.679,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0057,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
-        2024
+        2025
       ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 46
     },
     {
-      "field_id": "FTW-IN-PB-1657150",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6666496",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.677,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0042,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024
+        2023,
+        2025
       ],
       "modis_ba_near_field_years": [
-        2024
+        2023,
+        2024,
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 47
     },
     {
-      "field_id": "FTW-IN-PB-1657634",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6187179",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.672,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0094,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
-        2024,
-        2025
+        2024
       ],
       "modis_ba_near_field_years": [
         2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 48
     },
     {
-      "field_id": "FTW-IN-PB-1658220",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1702251",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.671,
       "demo_clean_observations": true,
+      "good_observations": 52,
+      "observations": 52,
+      "mean_cloud_fraction": 0.0009,
+      "fire_windows_complete": 44,
+      "radar_context": true,
+      "weather_available_rows": 51,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
       "modis_ba_near_field_years": [
-        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 49
     },
     {
-      "field_id": "FTW-IN-PB-1658489",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1661746",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.668,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0085,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 50
     },
     {
-      "field_id": "FTW-IN-PB-1659322",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6676889",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.668,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0115,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
+        2025
+      ],
+      "modis_ba_near_field_years": [
         2024
       ],
-      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 51
     },
     {
-      "field_id": "FTW-IN-PB-1659361",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-509969",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.667,
       "demo_clean_observations": true,
+      "good_observations": 57,
+      "observations": 57,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 48,
+      "radar_context": true,
+      "weather_available_rows": 56,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024
+        2023
       ],
       "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 52
     },
     {
-      "field_id": "FTW-IN-PB-1660606",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-554676",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.667,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0091,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024
+        2023
       ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 53
     },
     {
-      "field_id": "FTW-IN-PB-1661746",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6132374",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.665,
       "demo_clean_observations": true,
+      "good_observations": 52,
+      "observations": 52,
+      "mean_cloud_fraction": 0.004,
+      "fire_windows_complete": 44,
+      "radar_context": true,
+      "weather_available_rows": 51,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024
+        2023,
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
-        2023
+        2023,
+        2024,
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 54
     },
     {
-      "field_id": "FTW-IN-PB-1663770",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1631103",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.661,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
+        2023,
+        2024,
+        2025
+      ],
+      "modis_ba_near_field_years": [
         2023,
         2024
       ],
-      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 55
     },
     {
-      "field_id": "FTW-IN-PB-1664628",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-552452",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.661,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
+        2025
+      ],
+      "modis_ba_near_field_years": [
         2024
       ],
-      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 56
     },
     {
-      "field_id": "FTW-IN-PB-1664849",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-561526",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.661,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024
       ],
       "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 57
     },
     {
-      "field_id": "FTW-IN-PB-1667451",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6192287",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.661,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024
@@ -1220,188 +1937,277 @@
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 58
     },
     {
-      "field_id": "FTW-IN-PB-1667683",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6677232",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.66,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0005,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2024,
-        2025
+        2023
       ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 59
     },
     {
-      "field_id": "FTW-IN-PB-1680688",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-4232179",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.659,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.001,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
+        2025
       ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 60
     },
     {
-      "field_id": "FTW-IN-PB-1682003",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1637650",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.657,
       "demo_clean_observations": true,
+      "good_observations": 57,
+      "observations": 57,
+      "mean_cloud_fraction": 0.0048,
+      "fire_windows_complete": 48,
+      "radar_context": true,
+      "weather_available_rows": 56,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024,
         2025
       ],
       "modis_ba_near_field_years": [
-        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 61
     },
     {
-      "field_id": "FTW-IN-PB-1683488",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-509409",
+      "demo_category": "D_STABLE_STANDING",
+      "demo_score": 13.657,
       "demo_clean_observations": true,
+      "good_observations": 58,
+      "observations": 58,
+      "mean_cloud_fraction": 0.0079,
+      "fire_windows_complete": 49,
+      "radar_context": true,
+      "weather_available_rows": 57,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
+        2025
       ],
-      "modis_ba_near_field_years": [
-        2023
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 62
     },
     {
-      "field_id": "FTW-IN-PB-1683548",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-550457",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.691,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024
       ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-13",
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 63
     },
     {
-      "field_id": "FTW-IN-PB-1684751",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6184211",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.682,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0015,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
         2023
       ],
+      "modis_ba_near_field_years": [
+        2023,
+        2024,
+        2025
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-13"
+      ],
       "demo_rank": 64
     },
     {
-      "field_id": "FTW-IN-PB-1686488",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6185434",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.675,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0079,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
-        2024
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
         2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 65
     },
     {
-      "field_id": "FTW-IN-PB-1686579",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1919038",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.671,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0073,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
-        2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "modis_ba_near_field_years": [
-        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 66
     },
     {
-      "field_id": "FTW-IN-PB-1687675",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-558719",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.668,
       "demo_clean_observations": true,
+      "good_observations": 54,
+      "observations": 54,
+      "mean_cloud_fraction": 0.0087,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 53,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024
@@ -1410,57 +2216,98 @@
         2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-13"
+      ],
       "demo_rank": 67
     },
     {
-      "field_id": "FTW-IN-PB-1693215",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-510698",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.666,
       "demo_clean_observations": true,
+      "good_observations": 57,
+      "observations": 57,
+      "mean_cloud_fraction": 0.0001,
+      "fire_windows_complete": 48,
+      "radar_context": true,
+      "weather_available_rows": 56,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024
       ],
-      "modis_ba_near_field_years": [],
+      "modis_ba_near_field_years": [
+        2025
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-13"
+      ],
       "demo_rank": 68
     },
     {
-      "field_id": "FTW-IN-PB-1697325",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1683488",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.658,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0011,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
-        2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023
-      ],
-      "modis_ba_near_field_years": [
+        2023,
         2024
       ],
+      "modis_ba_near_field_years": [
+        2023
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 69
     },
     {
-      "field_id": "FTW-IN-PB-1698855",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-515202",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.658,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0013,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023
       ],
@@ -1468,81 +2315,130 @@
         2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-02 but the dense NBR series shows harvest only on 2024-11-17"
+      ],
       "demo_rank": 70
     },
     {
-      "field_id": "FTW-IN-PB-1702251",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1640916",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.657,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0018,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
-        2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [
+        2023,
+        2024
+      ],
       "modis_ba_near_field_years": [
+        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 71
     },
     {
-      "field_id": "FTW-IN-PB-1702539",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-509327",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.657,
       "demo_clean_observations": true,
+      "good_observations": 58,
+      "observations": 58,
+      "mean_cloud_fraction": 0.0077,
+      "fire_windows_complete": 49,
+      "radar_context": true,
+      "weather_available_rows": 57,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023
       ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 72
     },
     {
-      "field_id": "FTW-IN-PB-1702693",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-551679",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.656,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0026,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
         2024
       ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 73
     },
     {
-      "field_id": "FTW-IN-PB-1704723",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1660447",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.655,
       "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
+      "strict_burn_candidate_years": [
         2025
       ],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
+      "harvested_no_burn_candidate_years": [
+        2024
+      ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
         2024
       ],
       "modis_ba_near_field_years": [
@@ -1550,541 +2446,276 @@
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-02 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 74
     },
     {
-      "field_id": "FTW-IN-PB-1704748",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1682003",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.655,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023
+        2023,
+        2024,
+        2025
       ],
       "modis_ba_near_field_years": [
+        2023,
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-13",
+        "2024: weak HARVESTED proxy on 2024-11-02 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 75
     },
     {
-      "field_id": "FTW-IN-PB-1704766",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1687675",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.655,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2023
+      ],
       "harvested_no_burn_candidate_years": [
+        2024,
+        2025
+      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
       "modis_ba_near_field_years": [
         2023,
-        2024
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 76
     },
     {
-      "field_id": "FTW-IN-PB-1709250",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1645703",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.654,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0033,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [],
       "modis_ba_near_field_years": [
         2024
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 77
     },
     {
-      "field_id": "FTW-IN-PB-1709569",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-517268",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.654,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0036,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "modis_ba_near_field_years": [
-        2023,
-        2024
+        2023
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2023: weak HARVESTED proxy on 2023-10-29 but the dense NBR series shows harvest only on 2023-11-13",
+        "2024: weak HARVESTED proxy on 2024-11-02 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 78
     },
     {
-      "field_id": "FTW-IN-PB-1710828",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6130106",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.654,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0001,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
         2023,
         2024
       ],
       "modis_ba_near_field_years": [
-        2023,
-        2024
+        2024,
+        2025
       ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": false,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22",
+        "2025: weak HARVESTED proxy on 2025-10-28 but the dense NBR series shows harvest only on 2025-11-09"
+      ],
       "demo_rank": 79
     },
     {
-      "field_id": "FTW-IN-PB-6187179",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-6089436",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.651,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.002,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [
+        2024
+      ],
       "harvested_no_burn_candidate_years": [
+        2023,
+        2025
+      ],
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [
         2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [],
       "demo_rank": 80
     },
     {
-      "field_id": "FTW-IN-PB-6188354",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-566812",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.65,
       "demo_clean_observations": true,
+      "good_observations": 56,
+      "observations": 56,
+      "mean_cloud_fraction": 0.0056,
+      "fire_windows_complete": 47,
+      "radar_context": true,
+      "weather_available_rows": 55,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
         2023,
         2024,
         2025
       ],
+      "post_harvest_green_up_years": [],
       "firms_near_field_years": [
-        2023
+        2023,
+        2024,
+        2025
       ],
-      "modis_ba_near_field_years": [],
+      "modis_ba_near_field_years": [
+        2023,
+        2024
+      ],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-11-07 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 81
     },
     {
-      "field_id": "FTW-IN-PB-6192057",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
+      "field_id": "FTW-IN-PB-1720213",
+      "demo_category": "E_AMBIGUOUS_SYSTEM_CAUTION",
+      "demo_score": 13.649,
       "demo_clean_observations": true,
+      "good_observations": 55,
+      "observations": 55,
+      "mean_cloud_fraction": 0.0027,
+      "fire_windows_complete": 46,
+      "radar_context": true,
+      "weather_available_rows": 54,
       "strict_burn_candidate_years": [],
+      "loose_only_burn_candidate_years": [],
       "harvested_no_burn_candidate_years": [
+        2023,
         2024,
         2025
       ],
-      "firms_near_field_years": [],
-      "modis_ba_near_field_years": [
+      "post_harvest_green_up_years": [],
+      "firms_near_field_years": [
+        2023,
         2024
       ],
+      "modis_ba_near_field_years": [],
       "corroborated_burn_years": [],
+      "current_standing_candidate": true,
+      "source_conflicts": [
+        "2024: weak HARVESTED proxy on 2024-10-28 but the dense NBR series shows harvest only on 2024-11-22"
+      ],
       "demo_rank": 82
-    },
-    {
-      "field_id": "FTW-IN-PB-6192179",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2024,
-        2025
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 83
-    },
-    {
-      "field_id": "FTW-IN-PB-6192287",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 84
-    },
-    {
-      "field_id": "FTW-IN-PB-6193891",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [],
-      "modis_ba_near_field_years": [
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 85
-    },
-    {
-      "field_id": "FTW-IN-PB-6194749",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 86
-    },
-    {
-      "field_id": "FTW-IN-PB-6666494",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2025
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 87
-    },
-    {
-      "field_id": "FTW-IN-PB-6666496",
-      "demo_category": "OTHER",
-      "demo_score": 8.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2025
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 88
-    },
-    {
-      "field_id": "FTW-IN-PB-6681653",
-      "demo_category": "OTHER",
-      "demo_score": 7.947,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "modis_ba_near_field_years": [
-        2023
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 89
-    },
-    {
-      "field_id": "FTW-IN-PB-1693357",
-      "demo_category": "OTHER",
-      "demo_score": 7.449,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [],
-      "corroborated_burn_years": [],
-      "demo_rank": 90
-    },
-    {
-      "field_id": "FTW-IN-PB-1682014",
-      "demo_category": "OTHER",
-      "demo_score": 7.296,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 91
-    },
-    {
-      "field_id": "FTW-IN-PB-1629045",
-      "demo_category": "OTHER",
-      "demo_score": 7.295,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 92
-    },
-    {
-      "field_id": "FTW-IN-PB-1710209",
-      "demo_category": "OTHER",
-      "demo_score": 7.0,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 93
-    },
-    {
-      "field_id": "FTW-IN-PB-6193169",
-      "demo_category": "OTHER",
-      "demo_score": 6.619,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023,
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 94
-    },
-    {
-      "field_id": "FTW-IN-PB-1690269",
-      "demo_category": "OTHER",
-      "demo_score": 6.586,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [],
-      "corroborated_burn_years": [],
-      "demo_rank": 95
-    },
-    {
-      "field_id": "FTW-IN-PB-1693520",
-      "demo_category": "OTHER",
-      "demo_score": 6.457,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2023
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 96
-    },
-    {
-      "field_id": "FTW-IN-PB-1669217",
-      "demo_category": "OTHER",
-      "demo_score": 6.144,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [],
-      "corroborated_burn_years": [],
-      "demo_rank": 97
-    },
-    {
-      "field_id": "FTW-IN-PB-1669215",
-      "demo_category": "OTHER",
-      "demo_score": 5.285,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 98
-    },
-    {
-      "field_id": "FTW-IN-PB-1667747",
-      "demo_category": "OTHER",
-      "demo_score": 5.229,
-      "demo_clean_observations": true,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [
-        2024
-      ],
-      "corroborated_burn_years": [],
-      "demo_rank": 99
-    },
-    {
-      "field_id": "FTW-IN-PB-1669216",
-      "demo_category": "OTHER",
-      "demo_score": 2.457,
-      "demo_clean_observations": false,
-      "strict_burn_candidate_years": [],
-      "harvested_no_burn_candidate_years": [
-        2023,
-        2024,
-        2025
-      ],
-      "firms_near_field_years": [
-        2023,
-        2024
-      ],
-      "modis_ba_near_field_years": [],
-      "corroborated_burn_years": [],
-      "demo_rank": 100
     }
   ]
 }

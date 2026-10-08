@@ -27,25 +27,50 @@ This document describes how every number in `reports/research/results.json` and 
    - **green_frac:** pixels with NDVI > 0.5
 
    SCL classes 2 (dark area), 4, 5, 6 and 7 count as usable. Fresh char is very dark, so a 4/5/6-only mask risks discarding the very signal being sought. In practice Sen2Cor labelled char as bare soil (class 5).
-3. **Smoke-robust usability.** Sen2Cor does not flag smoke haze. In 2023, blue reflectance stayed at 0.11–0.13 from 29 Oct to 28 Nov, exactly the peak burning weeks, and a clear-sky rule (B02 < 0.10) would have discarded 87–96% of fields on those dates (`f3_smoke_blindness.png`). Smoke scatters strongly at 490 nm but little at 2.2 µm, so the event logic uses only NIR (B8A) and SWIR (B11, B12). A field-date is **usable** when at least 60% of its pixels are usable and its blue reflectance is below 0.20, which drops only opaque smoke (for example 7 Nov 2024, when the median B02 was 0.265). NDVI from clear dates (B02 < 0.10) is used only for the crop peak.
+3. **Haze-quality flag.** Sen2Cor does not flag smoke haze. In 2023, blue reflectance stayed at 0.11–0.13 from 29 Oct to 28 Nov, exactly the peak burning weeks, and a clear-sky rule (B02 < 0.10) would have discarded 87–96% of fields on those dates (`f3_smoke_blindness.png`). Smoke scatters strongly at 490 nm but little at 2.2 µm. The haze metric is the field-mean B02 surface reflectance, and every field-date observation gets one flag:
+
+   | Flag | Rule | Handling |
+   |---|---|---|
+   | CLOUD_EXCLUDED | fewer than 60% of field pixels usable (SCL) | not used |
+   | THICK_SMOKE_EXCLUDED | B02 ≥ 0.20 (for example 7 Nov 2024, median B02 0.265) | not used |
+   | HAZE_DOWNGRADED | 0.10 ≤ B02 < 0.20 | used for NIR/SWIR change logic; **cannot be the pre-event reference of a strict candidate** |
+   | CLEAR | B02 < 0.10 | used; the only class for the NDVI crop peak |
+
+   No scene is dropped as a whole. `reports/research/haze_quality_by_scene.csv` lists, for every scene, the median and p90 B02 and the count of observations in each flag.
 
 ## 4. Harvest-aware event detection (`src/research/events.py`)
 
 - **Harvest:** the first usable observation with NBR < 0.30 after the running NBR maximum has reached 0.50. On clear 2025 dates this agrees with NDVI < 0.40 for 91% of observations.
-- **Burn candidate (loose tier):** at or after harvest, an observation where the field turns char-dark relative to the previous usable observation, or where at least 25% of its pixels are char-like:
+Both burn tiers are **RULE-BASED BURN CANDIDATES**: never confirmed burns and never ground truth. Active-fire data are not used to assign tiers, which keeps the thermal comparison in section 5 independent.
+
+- **LOOSE_BURN_CANDIDATE** (exploratory, recall-oriented): at or after harvest, an observation where the field turns char-dark relative to the previous usable observation, or where at least 25% of its pixels are char-like:
   - darkness: B8A < 0.15, B12 < 0.17 and NBR < 0.03
   - drop: B8A falls by more than 0.06, B12 by more than 0.03 and NBR by more than 0.08
-- **Strict tier (char-like signature; an unverified rule candidate, not a confirmation):** darker char (B8A < 0.12, B12 < 0.14, NBR < 0) together with the drop, or at least 40% char-like pixels.
+- **STRICT_BURN_CANDIDATE** (precision-oriented, `burn-candidate-rules-v2`): a loose observation that also meets all three conditions:
+  - **Spectral:** darker char (B8A < 0.12, B12 < 0.14, NBR < 0) with the drop and dNBR ≥ 0.10, or at least 40% char-like pixels with dNBR ≥ 0.10 and a NIR drop above 0.06.
+  - **Clear reference:** the pre-event observation is CLEAR. Haze raises pre-event NIR and can fake a drop.
+  - **Temporal consistency:** the next usable observation keeps NBR at least 0.05 below the pre-event NBR, which rules out one-date dips.
+
+  Because of the clear-reference requirement, the strict count depends on each season's smoke conditions. **Strict counts are not compared between seasons; only the loose tier is used as a cross-season series.**
+- **Event table** (`src/research/event_table.py`, `data/real/derived/research/burn_candidate_events_<year>.parquet`): one row per crop field-season with a candidate event, typed STRICT_BURN_CANDIDATE, LOOSE_BURN_CANDIDATE or HARVESTED_NO_BURN_CANDIDATE. Each row carries:
+  - the pre, event and post dates
+  - NDVI, NBR, dNBR, BAIS2 (from field-mean bands, red floor 0.005), and NIR/SWIR values and drops
+  - the char fraction and the haze flags of all three images
+  - FIRMS proximity, nearest distance and time difference, with archive-coverage status (counts are null where uncovered)
+  - observation quality, evidence reasons and an uncertainty or caution text
+  - the non-overlapping pixel area and the overlapping polygon area
 - **Wet-soil rejection:** irrigated or rained-on soil darkens SWIR more than NIR, so its NBR stays positive and is rejected. After the 20–21 Nov 2025 rain the whole landscape was dark in true colour, yet it was not flagged.
 - **Event dating:** events are interval-censored between the last usable observation before the event and the first one after. Both bounds are stored (`last_green_date`/`harvest_date`, `burn_prev_date`/`burn_date`). The median interval is 5 days.
 - **Revisit harmonisation:** 2025 had three Sentinel-2 satellites. For cross-year comparisons every season is thinned to one acquisition per 5-day slot before detection (`census_and_blindspot` in `scripts/run_research.py`).
 
-**Why harvest-aware?** Paddy harvest alone moves NBR from about 0.67 to about 0.1. A naive pre-season vs post-season dNBR, using the Key and Benson (2006) "moderate severity" threshold of 0.27, therefore flags 97.9% of Muktsar's crop fields in 2023 (184,801 ha) (`f4_naive_vs_aware.png`). MODIS MCD64A1 sums to about 90,400 ha (4,209 burned 463 m pixels × nominal pixel area). The harvest-aware detector gives 7,883 ha (strict) and 21,121 ha (loose).
+**Why harvest-aware?** Paddy harvest alone moves NBR from about 0.67 to about 0.1. A naive pre-season vs post-season dNBR, using the Key and Benson (2006) "moderate severity" threshold of 0.27, therefore flags 97.9% of Muktsar's crop fields in 2023 (184,801 ha) (`f4_naive_vs_aware.png`). MODIS MCD64A1 sums to about 90,400 ha (4,209 burned 463 m pixels × nominal pixel area). The harvest-aware detector gives 649 ha of strict candidates and 21,121 ha of loose candidates (5-day harmonised revisit, non-overlapping pixel area).
 
 ## 5. Thermal comparison (`src/research/firms_match.py`)
 
 - Only VIIRS vegetation-fire detections (`type = 0`) inside the district, Sep–Dec, are used. S-NPP + NOAA-20 are used in every year for comparability. NOAA-21 (2025 only) is reported separately.
-- **Blind spot:** for every strict burn field with a burn interval of 5 days or less, check whether any VIIRS detection lies within 500 m of the field centroid between `burn_prev_date − 1 day` and `burn_date + 1 day`.
+This is **thermal context, not validation accuracy**. A detection near a field is not a field-level confirmation, and the absence of one is not evidence of no burn: overpasses come at about 13:30 and 01:30, and smoke, cloud and small fires all hide detections.
+
+- **Blind spot:** for every strict candidate with a burn interval of 5 days or less, check whether any VIIRS detection lies within 500 m of the field centroid between `burn_prev_date − 1 day` and `burn_date + 1 day`. The same check is reported for the loose tier, at 375 / 500 / 1,000 m, in `reports/research/burn_candidate_summary.json` (2023–2024 primary, 2025 secondary).
 - **Proximity control:** 20,000 random harvested, unburned fields are given burn intervals sampled from the burned fields, and the same match is computed. Spatially clustered burning makes this control non-zero, so the burned-field match rate is an **upper bound** on the share of burns with their own fire alert.
 - **Thermal-anchored recall:** for each VIIRS detection, check for a loose burn field within 500 m whose interval brackets the detection date.
 - **Sensitivity:** radii of 375 / 500 / 750 / 1,000 m and tolerances of 0 / 1 / 2 days were tested. The ordering of years and the gap between burned and control fields hold at every setting.
@@ -109,10 +134,13 @@ Both distributions are **unimodal**: minimum VH peaks at −21 to −20.5 dB and
 
 ## 10. Validation design
 
-- **Detector labels are not ground truth.** Precision and recall come from **Tier-B human labels**. `scripts/build_label_tool.py` draws a stratified random sample by detector output (strict, loose only, no burn). For 2025 that is 80 fields per stratum; for 2023, 40 per stratum. Each sample field gets before, candidate and after Sentinel-2 chips in true colour and SWIR, with the detector's decision hidden.
+- **Detector labels are not ground truth.** Precision and recall come from **Tier-B human labels**.
+  - **Sampling:** `scripts/build_label_tool.py` draws a stratified random sample by detector output (STRICT_BURN_CANDIDATE, LOOSE_BURN_CANDIDATE, HARVESTED_NO_BURN_CANDIDATE): 80 fields per stratum for 2025 and 40 for 2023. Each sample field gets before, candidate and after Sentinel-2 chips in true colour and SWIR, held in an internal chip store.
+  - **Review interface:** `scripts/build_reference_label_package.py` builds the blind page `label_reference_<year>.html` (package `reference-v2`). It contains no stratum or tier. Reviewers choose **BURNED / NOT_BURNED / UNCERTAIN**, a field state and a confidence, and can add evidence and notes. The reviewer name, timestamp and source image dates are recorded, nothing is pre-selected, and ancillary context unlocks only after a first decision.
+  - **Import:** `scripts/import_reference_labels.py` validates exports and keeps every reviewer's labels. A consensus label is produced only where reviewers agree.
 - **Estimation:** `scripts/evaluate_visual_labels.py` applies the stratified estimator of Olofsson et al. (2014) to give precision, recall and the district burned-field share with a 95% confidence interval.
-- **Independent thermal evidence:** VIIRS-anchored recall, 67% (2023), 53% (2024) and 64% (2025).
-- **Preliminary AI visual audit:** a model-assisted look at 10 strict detections per year found visible char in about 8 of 10 (2023) and 7 of 10 (2025). This is not a substitute for human labels.
+- **Thermal context (not validation):** the share of VIIRS detections with a loose candidate within 500 m in the same window was 67% (2023), 53% (2024) and 64% (2025).
+- **Preliminary AI visual audit (earlier v1 strict rule):** a model-assisted look at 10 strict detections per year found visible char in about 8 of 10 (2023) and 7 of 10 (2025). It predates the v2 tiers and is not a substitute for human labels.
 
 ## 11. Limitations
 
@@ -129,12 +157,14 @@ Both distributions are **unimodal**: minimum VH peaks at −21 to −20.5 dB and
 ```powershell
 python scripts/download_s2_stack.py          # ~45 min, 74 scenes, ~8 GB
 python scripts/extract_field_timeseries.py   # ~5 min
-python scripts/run_event_detection.py
+python scripts/build_burn_candidate_events.py # haze audit, events, event tables, areas, thermal context
 python scripts/acquire_fire_archives.py --months 202510 202511 202512
 python scripts/build_fire_table.py
 python scripts/run_research.py               # ~70 s: results.json, CSVs, figures
 python scripts/build_research_maps.py        # overlays for the app
-python scripts/build_label_tool.py --year 2025
+python scripts/build_label_tool.py --year 2025 --n 80 && python scripts/build_label_tool.py --year 2023 --n 40
+python scripts/build_reference_label_package.py
+python scripts/import_reference_labels.py     # after reviewers export CSVs
 python scripts/evaluate_visual_labels.py     # after labels are exported
 python -m pytest -q tests/test_research.py --basetemp=data/tmp/pytest-research
 ```

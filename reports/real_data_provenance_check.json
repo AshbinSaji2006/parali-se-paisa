@@ -10,26 +10,25 @@
       "dataset": "district_boundary",
       "path": "data/real/cache/geoBoundaries-IND-ADM2.geojson",
       "expected_sha256": "8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40",
-      "status": "EXCLUDED_BY_POLICY"
+      "status": "OK"
     },
     {
       "dataset": "district_boundary",
       "path": "data/real/boundaries/geoboundaries_source_metadata.json",
       "expected_sha256": "d20a8310ba0f065741be57b9d3675b98dce87d2453f9f2c21ba295cfd0928929",
-      "status": "OK_LINE_ENDINGS_NORMALISED"
+      "status": "OK"
     },
     {
       "dataset": "field_boundaries",
       "path": "data/real/fields/fields_of_the_world_muktsar.parquet",
       "expected_sha256": "264820cdcc85f9a06afbd96ab58816a47c3d9ff3816ba5bb4681656cd48233c7",
-      "lfs_oid": "264820cdcc85f9a06afbd96ab58816a47c3d9ff3816ba5bb4681656cd48233c7",
-      "status": "LFS_POINTER_NOT_FETCHED_OID_MATCH"
+      "status": "OK"
     },
     {
       "dataset": "field_boundaries",
       "path": "data/real/fields/fields_of_the_world_muktsar.geojson",
       "expected_sha256": "908d8a7626f340248eb52480a28d0f8acf5fb64f192fd11d45bc13b32b7bced7",
-      "status": "EXCLUDED_BY_POLICY"
+      "status": "OK"
     },
     {
       "dataset": "worldcover",
@@ -46,73 +45,43 @@
     {
       "dataset": "sentinel2_2023",
       "path": "data/real/derived/features/sentinel2_field_observations.parquet",
-      "expected_sha256": "47b56e820714f04002442d256eb15f3a8736d0247c7a1949f0400bfe0616905a",
-      "status": "OK"
-    },
-    {
-      "dataset": "sentinel2_2023",
-      "path": "data/real/derived/previews/ndvi_2023_S2B_MSIL2A_20231004T053649_R005_.png",
-      "expected_sha256": "fce333c0d502f7ecf4a78a310eb9b943fcbf7fa971385b5c5b59c94797384758",
-      "status": "OK"
-    },
-    {
-      "dataset": "sentinel2_2023",
-      "path": "data/real/derived/previews/ndvi_2023_S2B_MSIL2A_20231203T054209_R005_.png",
-      "expected_sha256": "282b3c4e108f1a06ae8ff7ff3fd5d9b046cb11c7ffe41b4bde5ac004a8670671",
-      "status": "OK"
-    },
-    {
-      "dataset": "sentinel2_2023",
-      "path": "data/real/derived/previews/ndvi_2024_S2A_MSIL2A_20241013T053801_R005_.png",
-      "expected_sha256": "03d1966bc0ee839e0fd6f2adb9867c7fe36bce95a6ad476d2b4484785e6f1ad5",
-      "status": "OK"
-    },
-    {
-      "dataset": "sentinel2_2023",
-      "path": "data/real/derived/previews/ndvi_2024_S2B_MSIL2A_20241127T054109_R005_.png",
-      "expected_sha256": "a04b5404ff1946419bc36e928f6d1f233cd0e2a25d5e60c182ba4f3e15eb1bd3",
-      "status": "OK"
-    },
-    {
-      "dataset": "sentinel2_2023",
-      "path": "data/real/derived/previews/ndvi_2026_S2C_MSIL2A_20261003T053651_R005_.png",
-      "expected_sha256": "efcb838bcb94bad2fd958d1da7cb854c98bb0276f3021c00020a417b813cb7e6",
+      "expected_sha256": "d8aef088e4b9eb1717f73ef92d07806caa558e2ae81c0313aed6f3de2b9387b1",
       "status": "OK"
     },
     {
       "dataset": "weather",
       "path": "data/real/weather/weather_hourly.parquet",
-      "expected_sha256": "e58f082871d5a571ffc9cde8c9fe86309bdf7acaff90addf00d4f75fde7f3be1",
+      "expected_sha256": "fa9e0c7649a18b31c49b1044c84e6ab52f03a8377faa558cc74ed2957d85c213",
       "status": "OK"
     },
     {
       "dataset": "weather",
       "path": "data/real/weather/weather_daily.parquet",
-      "expected_sha256": "abe332e316e97e997a275c87e09932dcfffa9a5ee0b944dedab5d954b92e7234",
+      "expected_sha256": "1b60d4f421713bd46ed8ede9e9932c2a2e43e6501ceeb6fbb51b2dcb4b224347",
       "status": "OK"
     },
     {
       "dataset": "firms",
       "path": "data/real/firms/active_fire_unified.parquet",
-      "expected_sha256": "3d77029c51376261450d36a15df8555882b90851773588310b6fadaf0e191c00",
+      "expected_sha256": "e10f7528a58f2270b8af1d476b0ac2d8059bbafa5becbfdac95512ddd3f19234",
       "status": "OK"
     },
     {
       "dataset": "firms",
       "path": "data/real/firms/firms_muktsar.parquet",
-      "expected_sha256": "91d56f1a8cd281be6a8acacaf888979cf95116cae98fca56b8f39ae4ee0a7b86",
+      "expected_sha256": "40210b5a45197f7b7ae167f7b96487b0cfdb5e1f76c137d3240e99b017c279cd",
       "status": "OK"
     },
     {
       "dataset": "modis_burned_area",
       "path": "data/real/burned_area/mcd64a1_muktsar.parquet",
-      "expected_sha256": "571307e0a29cd9b61c93c5f72092e1e198c0e3f84f5b2e11f5fbc3c323b2dd9a",
+      "expected_sha256": "1f5aab94d248bbc7be228f57d1a502b516c2b1001bce29d8e9ffe58bb20b73ac",
       "status": "OK"
     },
     {
       "dataset": "modis_burned_area",
       "path": "data/real/burned_area/mcd64a1_burn_pixels.parquet",
-      "expected_sha256": "b2914d492d30cb0b00232972c06052e53163e081e9470f40638b351d6d862732",
+      "expected_sha256": "789b83effc84e98f4bf4772f3027d06b174511ec32e5040abbb776ac60986bd4",
       "status": "OK"
     },
     {
@@ -124,55 +93,55 @@
     {
       "dataset": "real_features",
       "path": "data/real/derived/features/real_field_features.parquet",
-      "expected_sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db",
+      "expected_sha256": "340b5465532b3893a7bb4feefe6888ce552d1a9b82773e6a6b43ec53199fd77b",
       "status": "OK"
     },
     {
       "dataset": "temporal_features",
       "path": "data/real/derived/features/real_temporal_features.parquet",
-      "expected_sha256": "4df56961d1a7417acd1ab0bb8e3c956575b21b739b993d6df5de5a92a9fd58db",
+      "expected_sha256": "340b5465532b3893a7bb4feefe6888ce552d1a9b82773e6a6b43ec53199fd77b",
       "status": "OK"
     },
     {
       "dataset": "weak_labels",
       "path": "data/real/derived/labels/real_weak_labels.parquet",
-      "expected_sha256": "18f1bf07afa58c8127b8e6eccd617e862733f856099c0d26e0b011d9bf9e3031",
+      "expected_sha256": "582c1973802f5d6b242c431d68197d20554469b1d20ced8d17dac0034d83502f",
       "status": "OK"
     },
     {
       "dataset": "showcase_fields",
       "path": "data/real/derived/showcase/showcase_real_fields.geojson",
-      "expected_sha256": "65106b7a23070258fd43edbbc521d52373023bc341db33974e18532ba72d45e6",
+      "expected_sha256": "25b50f2512d857a17888bfb43cfd47b0eb1b79187db57817ba44b8be096629ed",
       "status": "OK"
     },
     {
       "dataset": "app_import",
       "path": "data/real/derived/app_snapshot.json",
-      "expected_sha256": "55bef70a3783ffbcbce3c26229fc3609ac65c41109ae28889907966fe6b9c180",
+      "expected_sha256": "2c29b4636e4717e6d4d60a8f1aad19ed333f9b74ed5936feff6b01ea1a4a9501",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_summary.md",
-      "expected_sha256": "5545f3556d42d8ef8a0706985f678d9e982922a6a0601230d914659d0be2f05d",
+      "expected_sha256": "94b105c2b4b4e0377afec2b1cba03459ab63c4aa7de298db570645ff4df9a720",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_field_provenance_example.md",
-      "expected_sha256": "e590a2f1877b5180ed4ff8139330c7aa81fbe61abeb8aa1fa1ee86b806c9bf03",
+      "expected_sha256": "42823c33526132abee412be0e2eb5723ad6df82987f7bf9e2bd8b56e5c2dada3",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_disk_usage.json",
-      "expected_sha256": "d5c75c1dc1830499c62c98931181897893cd67b868060a6d91193a4e95bce695",
+      "expected_sha256": "28c1e161f38d7d6225fa421a94445d872ef124a0b41f49defb39b3aded532bdf",
       "status": "OK"
     },
     {
       "dataset": "reports",
       "path": "reports/real_data_validation.json",
-      "expected_sha256": "add578df9dff06993f1955a705fb2c7922e1dda57f33119d48f10194ce25f876",
+      "expected_sha256": "f3cc86a511c1bc6d9a35cf322eb5e4015f743a21c4ab57cff19c4b8503cff848",
       "status": "OK"
     },
     {
@@ -185,14 +154,17 @@
       "dataset": "sentinel2_catalog",
       "path": "data/real/sentinel2/catalog.csv",
       "expected_sha256": "f22c402b18e54e3662d105ab9a6cf3db46aa33b536beb2740ccdb7528b31d6fa",
-      "status": "OK_LINE_ENDINGS_NORMALISED"
+      "status": "OK"
+    },
+    {
+      "dataset": "sentinel1_field_observations",
+      "path": "data/real/sentinel1/sentinel1_field_observations.parquet",
+      "expected_sha256": "f11a8cb3a7adfe5528228861b6b71e101117f999bcac9aa54ea6d923cc49fed7",
+      "status": "OK"
     }
   ],
   "status_counts": {
-    "OK": 26,
-    "EXCLUDED_BY_POLICY": 2,
-    "OK_LINE_ENDINGS_NORMALISED": 2,
-    "LFS_POINTER_NOT_FETCHED_OID_MATCH": 1
+    "OK": 27
   },
   "passed": true,
   "integrity_scope": "SHA-256 file integrity against acquisition records; not a digital signature."

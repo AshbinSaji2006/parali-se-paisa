@@ -1,4 +1,0 @@
-year,dates_total,dates_5day,viirs_snpp_noaa20,viirs_all,modis,crop_fields,burned_loose_share,burned_strict_share,strict_ha,loose_ha,strict_fields_per_viirs,matched_short,control_short,n_short,matched_all,control_all,viirs_recall_loose
-2023,20,20,2792,2792,560,164625,0.1036,0.039,7883,21121,2.3,0.338,0.204,3669,0.401,0.276,0.673
-2024,19,19,1527,1527,372,163815,0.0541,0.0197,3643,10566,2.11,0.06,0.025,2375,0.146,0.1,0.531
-2025,26,21,600,884,258,165025,0.109,0.0432,7930,20150,11.88,0.082,0.041,6972,0.083,0.042,0.643

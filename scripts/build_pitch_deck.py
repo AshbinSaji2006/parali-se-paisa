@@ -1,335 +1,104 @@
-"""Build the Greenovators 2026 pitch deck (editable PPTX) from results.json and research figures.
-
-Every statistic is read from reports/research/results.json so the deck cannot drift from the analysis.
-Output: reports/pitch/Parali_Se_Paisa_Greenovators2026.pptx (with speaker notes).
-"""
-from __future__ import annotations
-
-import json
+"""Build the Parali Se Paisa judge deck from fixed, reviewed research outputs."""
 from pathlib import Path
-
-from PIL import Image
 from pptx import Presentation
 from pptx.dml.color import RGBColor
-from pptx.enum.shapes import MSO_CONNECTOR, MSO_SHAPE
+from pptx.enum.shapes import MSO_SHAPE
 from pptx.enum.text import PP_ALIGN
-from pptx.util import Emu, Inches, Pt
+from pptx.util import Inches, Pt
 
 ROOT = Path(__file__).resolve().parents[1]
-R = json.loads((ROOT / "reports" / "research" / "results.json").read_text(encoding="utf-8"))
-FIG = ROOT / "reports" / "research" / "figures"
-SHOTS = ROOT / ".demo" / "visual-audit"
-OUT = ROOT / "reports" / "pitch" / "Parali_Se_Paisa_Greenovators2026.pptx"
+OUT = ROOT / "reports/pitch/Parali_Se_Paisa_Greenovators2026.pptx"
+FIG = ROOT / "reports/research/figures"
+P = Presentation()
+P.slide_width, P.slide_height = Inches(13.333), Inches(7.5)
+BG=RGBColor(248,249,245); INK=RGBColor(27,40,33); GREEN=RGBColor(31,101,67); MUTED=RGBColor(91,105,95); PALE=RGBColor(230,239,230); GOLD=RGBColor(222,166,57); WHITE=RGBColor(255,255,255)
 
-INK, INK2, MUTED = RGBColor(0x0B, 0x0B, 0x0B), RGBColor(0x52, 0x51, 0x4E), RGBColor(0x89, 0x87, 0x81)
-GREEN, GREEN_DARK, SURFACE = RGBColor(0x2F, 0x6B, 0x4F), RGBColor(0x1D, 0x3D, 0x2B), RGBColor(0xFC, 0xFC, 0xFB)
-RED, BLUE = RGBColor(0xD0, 0x3B, 0x3B), RGBColor(0x2A, 0x78, 0xD6)
-FONT = "Segoe UI"
-
-C = {r["year"]: r for r in R["census"]}
-imp = R["replay_impact"]
-risk = R["risk_model"]
-now = R["nowcast_2026"]
-lat = R["latency"]
-per1k = R["emissions_per_1000_ha_burned"]
-
-
-def fmt(v, d=0):
-    return f"{v:,.{d}f}"
-
-
-OUT.parent.mkdir(parents=True, exist_ok=True)
-prs = Presentation()
-prs.slide_width, prs.slide_height = Inches(13.333), Inches(7.5)
-BLANK = prs.slide_layouts[6]
-slide_no = 0
-
-
-def text(slide, x, y, w, h, s, size=16, color=INK2, bold=False, align=PP_ALIGN.LEFT, font=FONT):
-    tb = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    lines = s if isinstance(s, list) else [s]
-    for i, line in enumerate(lines):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        p.alignment = align
-        r = p.add_run()
-        r.text = line
-        r.font.size, r.font.bold, r.font.color.rgb, r.font.name = Pt(size), bold, color, font
-        p.space_after = Pt(6)
-    return tb
-
-
-def bullets(slide, x, y, w, h, items, size=15):
-    tb = slide.shapes.add_textbox(Inches(x), Inches(y), Inches(w), Inches(h))
-    tf = tb.text_frame
-    tf.word_wrap = True
-    for i, (head, body) in enumerate(items):
-        p = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
-        r1 = p.add_run()
-        r1.text = head + (" " if body else "")
-        r1.font.size, r1.font.bold, r1.font.color.rgb, r1.font.name = Pt(size), True, INK, FONT
-        if body:
-            r2 = p.add_run()
-            r2.text = body
-            r2.font.size, r2.font.color.rgb, r2.font.name = Pt(size), INK2, FONT
-        p.space_after = Pt(10)
-    return tb
-
-
-def base(title, kicker=None, source=None, notes=""):
-    global slide_no
-    slide_no += 1
-    s = prs.slides.add_slide(BLANK)
-    bg = s.background.fill
-    bg.solid()
-    bg.fore_color.rgb = SURFACE
-    if kicker:
-        text(s, 0.6, 0.32, 12, 0.4, kicker.upper(), size=11, color=GREEN, bold=True)
-    text(s, 0.6, 0.62, 12.2, 1.0, title, size=28, color=INK, bold=True)
-    if source:
-        text(s, 0.6, 7.0, 11.4, 0.4, source, size=9, color=MUTED)
-    text(s, 12.2, 7.0, 0.7, 0.4, str(slide_no), size=9, color=MUTED, align=PP_ALIGN.RIGHT)
-    s.notes_slide.notes_text_frame.text = notes
-    return s
-
-
-def picture(slide, path, x, y, w=None, h=None):
-    with Image.open(path) as im:
-        ar = im.width / im.height
-    if w and not h:
-        h = w / ar
-    elif h and not w:
-        w = h * ar
-    return slide.shapes.add_picture(str(path), Inches(x), Inches(y), Inches(w), Inches(h))
-
-
-def stat(slide, x, y, w, value, label, color=GREEN_DARK):
-    text(slide, x, y, w, 0.9, value, size=40, color=color, bold=True)
-    text(slide, x, y + 0.95, w, 1.0, label, size=13, color=INK2)
-
-
-def box(slide, x, y, w, h, title, body, fill=RGBColor(0xFF, 0xFF, 0xFF), line=RGBColor(0xD9, 0xDC, 0xD5)):
-    sh = slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h))
-    sh.adjustments[0] = 0.08
-    sh.fill.solid()
-    sh.fill.fore_color.rgb = fill
-    sh.line.color.rgb = line
-    sh.shadow.inherit = False
-    tf = sh.text_frame
-    tf.word_wrap = True
-    tf.margin_left = tf.margin_right = Inches(0.12)
-    p = tf.paragraphs[0]
-    r = p.add_run()
-    r.text = title
-    r.font.size, r.font.bold, r.font.color.rgb, r.font.name = Pt(13), True, INK, FONT
-    if body:
-        p2 = tf.add_paragraph()
-        r2 = p2.add_run()
-        r2.text = body
-        r2.font.size, r2.font.color.rgb, r2.font.name = Pt(10.5), INK2, FONT
+def txt(slide,x,y,w,h,value,size=16,color=INK,bold=False,align=PP_ALIGN.LEFT):
+    sh=slide.shapes.add_textbox(Inches(x),Inches(y),Inches(w),Inches(h)); tf=sh.text_frame; tf.word_wrap=True
+    for i,line in enumerate(value.split("\n")):
+        p=tf.paragraphs[0] if i==0 else tf.add_paragraph(); p.alignment=align; p.space_after=Pt(5)
+        r=p.add_run(); r.text=line; r.font.name="Aptos"; r.font.size=Pt(size); r.font.bold=bold; r.font.color.rgb=color
     return sh
 
+def base(kicker,title,source,notes):
+    s=P.slides.add_slide(P.slide_layouts[6]); s.background.fill.solid(); s.background.fill.fore_color.rgb=BG
+    txt(s,.55,.28,12,.28,kicker.upper(),11,GREEN,True); txt(s,.55,.62,12.1,.75,title,27,INK,True)
+    if source: txt(s,.55,7.02,11.7,.28,source,8,MUTED)
+    txt(s,12.15,7.02,.6,.28,str(len(P.slides)),8,MUTED,False,PP_ALIGN.RIGHT)
+    s.notes_slide.notes_text_frame.text=notes
+    return s
 
-def arrow(slide, x1, y1, x2, y2):
-    c = slide.shapes.add_connector(MSO_CONNECTOR.STRAIGHT, Inches(x1), Inches(y1), Inches(x2), Inches(y2))
-    c.line.color.rgb = MUTED
-    c.line.width = Pt(1.5)
-    c.line._get_or_add_ln().append(c.line._get_or_add_ln().makeelement(
-        "{http://schemas.openxmlformats.org/drawingml/2006/main}tailEnd", {"type": "triangle"}))
-    return c
+def card(s,x,y,w,h,heading,body,accent=GREEN):
+    sh=s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(x), Inches(y), Inches(w), Inches(h)); sh.fill.solid(); sh.fill.fore_color.rgb=WHITE; sh.line.color.rgb=PALE
+    sh.text_frame.clear(); sh.text_frame.word_wrap=True; sh.text_frame.margin_left=Inches(.16); sh.text_frame.margin_right=Inches(.14); sh.text_frame.margin_top=Inches(.12)
+    p=sh.text_frame.paragraphs[0]; r=p.add_run(); r.text=heading; r.font.size=Pt(15); r.font.bold=True; r.font.color.rgb=accent
+    p=sh.text_frame.add_paragraph(); p.space_before=Pt(8); r=p.add_run(); r.text=body; r.font.size=Pt(12); r.font.color.rgb=INK
 
+def img(s,path,x,y,w,h):
+    s.shapes.add_picture(str(path), Inches(x), Inches(y), width=Inches(w), height=Inches(h))
 
-viirs_drop = round(100 * (1 - C[2025]["viirs_alerts"] / C[2023]["viirs_alerts"]))
-scar_index = round(100 * C[2025]["burned_strict_ha"] / C[2023]["burned_strict_ha"])
-seen25 = round(100 * C[2025]["burns_with_viirs_short_window"])
-ctl25 = round(100 * C[2025]["control_with_viirs_short_window"])
-seen23 = round(100 * C[2023]["burns_with_viirs_short_window"])
-hist = risk["history_logistic (pre-season)"]
-pers = risk["persistence"]
-i100, i400 = imp["100"], imp["400"]
+def img_fit(s,path,x,y,w,h):
+    from PIL import Image
+    with Image.open(path) as image:
+        ratio=image.width/image.height
+    width=min(w,h*ratio); height=width/ratio
+    s.shapes.add_picture(str(path), Inches(x+(w-width)/2), Inches(y+(h-height)/2), width=Inches(width), height=Inches(height))
 
-# 1 Title
-s = base("", None, None,
-         "Open with the paradox: the official fire count says the problem is nearly solved, but the burn scars say otherwise. "
-         "We use free satellite data to see every field, find the burns that fire satellites now miss, and send balers to the fields most likely to burn, so farmers earn from straw instead of burning it.")
-text(s, 0.6, 0.55, 7.4, 1.0, "Parali Se Paisa", size=44, color=GREEN_DARK, bold=True)
-text(s, 0.6, 1.65, 7.2, 1.6, "The burns the fire satellites stopped seeing, and the balers that can reach them first", size=24, color=INK2)
-text(s, 0.6, 3.25, 7.0, 1.2, ["Satellite AI that helps turn paddy straw into farmer income",
-                              "Greenovators Hackathon 2026 · Waste to Wealth · Net Zero AI Architecture"], size=15, color=INK2)
-text(s, 0.6, 5.2, 7.0, 1.2, ["Real data: Sentinel-2, VIIRS, MODIS and ERA5 for Sri Muktsar Sahib, Punjab, 2023–2026",
-                              f"{fmt(C[2025]['crop_fields'])} crop fields · 74 satellite scenes · 12.6 million field observations"], size=13, color=MUTED)
-picture(s, FIG / "f8_burn_map_2025.png", 8.4, 0.25, h=7.0)
+# 1 Problem
+s=base("Problem","After harvest, straw needs a buyer and a baler","Source: Parali Se Paisa concept note; operational workflow shown later is a synthetic prototype.","Open with the practical coordination problem: residue has a short handling window; farmers, balers and buyers need a way to coordinate pickup. Our live evidence is satellite observation. The operating workflow is a prototype and uses synthetic records.")
+txt(s,.7,1.8,6.1,2.15,"A narrow window. Many fields. Scattered machinery and demand.",26,INK,True)
+card(s,7.2,1.7,2.55,2.2,"Farmers","Need a timely straw pickup option.")
+card(s,9.95,1.7,2.55,2.2,"Operators","Need a clear dispatch queue.")
+card(s,7.2,4.15,5.3,1.55,"Buyers","Need visible, traceable supply; this prototype does not establish actual demand.")
 
-# 2 Problem
-s = base("The official indicator is going blind", "The problem",
-         "iFOREST Stubble Burning Status Report 2025 (SEVIRI geostationary data); NASA Earth Observatory, Dec 2025; concept-note references for straw volume.",
-         "Punjab will produce about 18.8 million tonnes of paddy straw this season. Fire counts from polar-orbiting satellites have collapsed, which looks like success. "
-         "But geostationary data show farmers now burn after 3 PM, after the satellites pass. Policy, incentives and enforcement that run on fire counts are steering blind.")
-stat(s, 0.6, 1.9, 3.8, "18.8 Mt", "paddy straw expected in Punjab in 2026, most of it with a 2–3 week window before wheat sowing")
-stat(s, 4.7, 1.9, 3.8, "−92%", "active-fire counts in Punjab since the 2021 peak (MODIS/VIIRS)", RED)
-stat(s, 8.8, 1.9, 3.9, ">90%", "of large farm fires in 2024–25 lit after 3 PM, after polar satellites pass (3% in 2021)", RED)
-text(s, 0.6, 4.6, 12, 1.4, ["Burnt area fell only 25–35% while fire counts fell more than 95%. Money, machines and monitoring cannot target fields nobody can see.",
-                            "Question: can free satellite data see every field's burn, and send balers before the fire?"], size=17, color=INK)
+# 2 Solution
+s=base("Solution","One evidence-to-action workflow","Source: application prototype; see README for real-data and synthetic-mode boundaries.","Explain the separation. Real mode is a read-only research view. The dispatch, buyer and evidence workflows are a separate synthetic prototype. No live service, verified registry, or incentive decision is claimed.")
+for i,(h,b) in enumerate([("Observe","Sentinel-2 field histories"),("Prioritize","Normalized burn risk score, not probability"),("Coordinate","Demo baler/buyer workflow"),("Record","Prototype QR metadata check")]): card(s,.65+i*3.15,2.05,2.8,2.3,h,b)
+txt(s,.75,5.3,11.8,.8,"REAL DATA  →  RULE-BASED INTERPRETATION  →  DEMO/SYNTHETIC OPERATIONS  →  PROTOTYPE RECORD",15,GREEN,True,PP_ALIGN.CENTER)
 
-# 3 What we built
-s = base("Every field, every 2–5 days, from free satellite data", "Our approach",
-         "Runs end to end on a laptop CPU: download 45 min, extraction 5 min, analysis 70 s. No GPU and no paid data.",
-         "We downloaded every Sentinel-2 image of Muktsar for four seasons, harmonised it, and reduced it to time series for 170 thousand fields. "
-         "A harvest-aware and smoke-robust detector dates each harvest and each burn. We then match burns with thermal fire alerts, learn who burns, replay the season with balers, and nowcast this week.")
-box(s, 0.6, 1.8, 2.6, 1.3, "Sentinel-2 L2A", "74 scenes 2023–2026 on one 20 m grid; reflectance offset harmonised")
-box(s, 3.6, 1.8, 2.8, 1.3, "170,623 field time series", "12.6 M observations · Fields of The World boundaries")
-box(s, 6.8, 1.8, 2.9, 1.3, "Harvest-aware, smoke-robust events", "NIR/SWIR change logic dates harvest and burn per field")
-box(s, 10.1, 1.8, 2.6, 1.3, "Research Evidence app", "Map, figures, forecast, pre-booking list")
-for x1, x2 in [(3.2, 3.6), (6.4, 6.8), (9.7, 10.1)]:
-    arrow(s, x1, 2.45, x2, 2.45)
-for i, (t, b) in enumerate([("Thermal blind spot", "match every burn with VIIRS/MODIS alerts, with proximity controls"),
-                            ("Burn-risk model", "trained on 2024, tested on the unseen 2025 season"),
-                            ("Season-replay twin", "replay real 2025 harvests and burns with baler fleets"),
-                            ("Live 2026 nowcast", "harvest progress, weekly straw supply, pre-booking")]):
-    box(s, 0.6 + i * 3.05, 3.85, 2.8, 1.25, t, b, fill=RGBColor(0xF0, 0xF4, 0xEF))
-arrow(s, 8.25, 3.1, 8.25, 3.85)
-text(s, 0.6, 5.5, 12, 1.2, ["Inputs: Sentinel-2 (ESA), VIIRS S-NPP / NOAA-20 / NOAA-21 and MODIS (NASA), MCD64A1, ERA5. All free and global, so it scales to any district."], size=14, color=INK2)
+# 3 Real data
+s=base("Real data","Muktsar map and one field history, 2023–2026","Source: fresh screenshots from isolated read-only real-data mode; 74 Sentinel-2 scenes, 12.6 million field-date observations; Fields of The World boundaries are model-derived.","Show the district candidate map, then the selected field's dense satellite history. Missing dates are not interpolated. The field is an example, and the burn tiers are rule-based candidates, not independently validated labels.")
+txt(s,.7,1.43,12,.35,"74 Sentinel-2 scenes  ·  12.6 million field-date observations",13,GREEN,True)
+img_fit(s,ROOT/"reports/pitch/research-real-map.png",.55,1.85,6.0,4.55)
+img_fit(s,ROOT/"reports/pitch/field-history-real.png",6.8,1.85,6.0,4.55)
+txt(s,.72,6.43,5.8,.32,"REAL DATA · rule-based candidate map",11,GREEN,True)
+txt(s,6.95,6.43,5.8,.32,"REAL DATA · one field, stored observations",11,GREEN,True)
 
-# 4 Finding 1
-s = base(f"Fire alerts fell {viirs_drop}%. Burn scars did not.", "Finding 1",
-         "Sentinel-2 at a harmonised 5-day revisit. Strict = char-like signature tier; loose = all burn candidates; both are unverified rule candidates. 2024 burn area is a lower bound (smog gap, 3–21 Nov).",
-         f"From 2023 to 2025, VIIRS fire alerts in Muktsar fell from {fmt(C[2023]['viirs_alerts'])} to {fmt(C[2025]['viirs_alerts'])}. "
-         f"Sentinel-2 burn scars, mapped field by field, stayed flat at {fmt(C[2023]['burned_strict_ha'])} and {fmt(C[2025]['burned_strict_ha'])} hectares. "
-         "Every season was thinned to the same 5-day revisit, so 2025's extra satellite does not create the result.")
-picture(s, FIG / "f1_alerts_vs_scars.png", 0.6, 1.55, w=8.3)
-bullets(s, 9.2, 1.7, 3.8, 5, [(f"{fmt(C[2023]['viirs_alerts'])} → {fmt(C[2025]['viirs_alerts'])}", "VIIRS fire alerts in the district"),
-                              (f"{fmt(C[2023]['burned_strict_ha'])} → {fmt(C[2025]['burned_strict_ha'])} ha", f"strict-tier burn-scar candidate area (index {scar_index})"),
-                              (f"{C[2023]['strict_fields_per_viirs_alert']} → {C[2025]['strict_fields_per_viirs_alert']}", "burned fields per fire alert"),
-                              ("Same revisit,", "same thresholds, same fields")])
+# 4 Real data + terminology
+s=base("Real data · rule-based","Candidate area depends on the rule tier","Source: burn_candidate_summary.json and FINAL_JUDGE_EVIDENCE.md; full-revisit areas use non-overlapping 20 m pixels.","The loose candidate area is exploratory and is the cross-season series shown. Strict area is precision-first but cannot be read as a year-to-year trend because clean pre-event coverage differs with haze and cloud. FIRMS/VIIRS is corroborative thermal context, not ground truth.")
+card(s,.75,1.7,5.7,3.9,"LOOSE_BURN_CANDIDATE","2023: 21,121 ha  |  2024: 10,566 ha  |  2025: 22,941 ha. Full-revisit, exploratory rule-based area.")
+card(s,6.85,1.7,5.7,3.9,"STRICT_BURN_CANDIDATE","2023: 649 ha  |  2024: 1,022 ha  |  2025: 2,269 ha. Not a trend: haze/cloud changes clean pre-event coverage.",GOLD)
+txt(s,.85,5.95,11.4,.5,"All outputs are RULE-BASED BURN CANDIDATES. Human review labels completed: 0.",13,INK,True)
 
-# 5 Finding 2
-s = base(f"9 in 10 strict-tier burn candidates in 2025 raised no fire alert", "Finding 2",
-         "Strict burns observed within ≤5 days; VIIRS within 500 m. Control: unburned fields with the same windows. Smoke panel: 2023 season.",
-         f"Only {seen25} percent of 2025's strict-tier field burn candidates had a VIIRS alert anywhere within 500 metres during the burn window, against {seen23} percent in 2023. "
-         "Unburned control fields match 4 percent by proximity alone, so the true share is lower still. And at the peak, smoke blinds ordinary optical monitoring too, which our SWIR logic is built to survive.")
-picture(s, FIG / "f2_blind_spot.png", 0.6, 1.55, w=6.2)
-picture(s, FIG / "f3_smoke_blindness.png", 7.0, 1.55, w=5.8)
-bullets(s, 0.6, 5.25, 6.2, 1.6, [(f"{seen23}% → {seen25}%", f"strict-tier burn candidates with any VIIRS alert (control {ctl25}%)"),
-                                 ("Independent of iFOREST:", "field-level evidence of after-overpass burning")], size=14)
+# 5 Differentiator
+s=base("Differentiator","Optical candidates and thermal context answer different questions","Source: 2025 strict-candidate / VIIRS matching analysis; defined ≤5-day evidence window; 500 m centroid radius.","In 2025, 8.8% of strict optical candidates had a matched VIIRS active-fire detection within the defined matching window. Say: About 9 in 10 strict optical burn candidates had no matched VIIRS active-fire detection within the defined matching window. Do not call this missed fires. Candidates are rule-based and VIIRS is corroborative thermal context.")
+txt(s,.85,1.8,4.4,1.2,"8.8%",48,GREEN,True)
+txt(s,.9,3.0,4.2,1.0,"of 2025 strict optical candidates had a matched VIIRS active-fire detection within the defined window.",16,INK)
+card(s,5.25,1.8,7.15,1.85,"What the match means","About 9 in 10 strict optical burn candidates had no matched VIIRS active-fire detection within the defined matching window.")
+card(s,5.25,4.0,7.15,1.5,"Interpretation","VIIRS is corroborative thermal context, not ground truth or a field-level confirmation.",GOLD)
 
-# 6 Rigour
-s = base("Harvest-aware detection, independently checked", "Method rigour",
-         "Key & Benson (2006) dNBR thresholds; Olofsson et al. (2014) stratified estimator; validation tool in reports/research/label_tool.",
-         "Our detector separates harvest from fire. A naive pre/post dNBR, as often used, flags almost every field because harvest alone moves NBR. "
-         "We validate against independent thermal alerts, with controls, and we built a blind stratified labelling tool so precision is measured by humans, not assumed.")
-picture(s, FIG / "f4_naive_vs_aware.png", 0.6, 1.55, w=6.6)
-r23 = R["census"][0]
-bullets(s, 7.5, 1.6, 5.4, 5.2, [("Smoke-robust:", "NIR/SWIR logic; Sen2Cor misses smoke haze"),
-                                ("Wet-soil rejection:", "irrigated soil keeps a positive NBR, char does not"),
-                                ("Thermal recall:", f"{round(100*C[2023]['viirs_alerts_with_s2_burn_nearby'])}% / {round(100*C[2024]['viirs_alerts_with_s2_burn_nearby'])}% / {round(100*C[2025]['viirs_alerts_with_s2_burn_nearby'])}% of VIIRS alerts have a Sentinel-2 burn within 500 m (2023/24/25)"),
-                                ("Controls and sensitivity:", "proximity controls; radius 375–1,000 m; harmonised revisit"),
-                                ("Human validation:", "stratified, blind before/after labelling tool → precision, recall, area with 95% CI"),
-                                ("Bug found and fixed:", "missing −1000 DN reflectance offset inflated reflectance by 0.10")], size=13)
+# 6 Straw estimate
+s=base("Action context","A reported straw figure needs its source","Source: The Tribune, as cited in reference 11 of Parali Se Paisa Concept Note; news-reported estimate, not an official statistic.","Attribute the 12.1 lakh tonne figure directly to The Tribune. It is a reported estimate and should not be represented as an official district statistic or as a measured result of our system.")
+card(s,.8,1.85,5.5,2.5,"12.1 lakh tonnes","The Tribune reported this straw estimate. It is not an official statistic.",GOLD)
+card(s,6.75,1.85,5.7,2.5,"From estimate to action","The product concept connects field evidence to straw pickup planning; actual supply and buyer demand still need field confirmation.")
+txt(s,.9,5.0,11.4,.9,"Attribution stays with the number wherever it appears: The Tribune (reference 11 in the concept note).",14,MUTED)
 
-# 7 Where and when
-s = base("Burning clusters, persists, and leaves about a two-week window", "Finding 3",
-         "Left: 2025 burn tiers per field with VIIRS alerts. Right: days from first harvested to first char observation (2025, interval-censored).",
-         f"Burns cluster in space and repeat in time: a field that burned last year was {round(pers['p_burn_given_prior_burn']/pers['p_burn_given_no_prior'],1)} times as likely to burn again. "
-         f"After harvest the median wait before fire was {int(lat['2025']['median_days'])} days. That is the window a satellite-triggered dispatch can use.")
-picture(s, FIG / "f8_burn_map_2025.png", 0.5, 1.4, h=5.5)
-picture(s, FIG / "f5_intervention_window.png", 4.8, 1.45, w=7.4)
-bullets(s, 4.9, 5.3, 8.0, 1.7, [(f"{int(lat['2025']['median_days'])} days", "median harvest → fire window (2025)"),
-                                (f"{round(100*pers['p_burn_given_prior_burn'])}% vs {round(100*pers['p_burn_given_no_prior'])}%", "burn again if burned last year vs not"),
-                                (f"{100*R['persistence']['repeat_burner_share']:.1f}% of fields", f"burned in 2+ seasons and did {100*R['persistence']['repeat_burner_share_of_burn_events']:.0f}% of all burning (2023–25)")], size=14)
+# 7 Demo/prototype operations
+s=base("Demo / synthetic","Dispatch is an operational prototype","Source: isolated local server, synthetic demo fixtures; route is a straight-line GEODESIC_PROXY only.","Clearly label every object in this segment DEMO/SYNTHETIC. Routing is a straight-line geodesic proxy and does not provide road travel time. Baler and buyer records are fixtures, not verified registries.")
+img(s,ROOT/"reports/pitch/prototype-dispatch.png",.65,1.55,5.9,4.6)
+img(s,ROOT/"reports/pitch/prototype-certificate-detail.png",6.8,1.55,5.9,4.6)
+txt(s,.7,6.25,5.7,.45,"DEMO/SYNTHETIC · route proxy",11,GREEN,True)
+txt(s,6.85,6.25,5.7,.45,"PROTOTYPE · QR metadata only",11,GREEN,True)
 
-# 8 Action
-s = base(f"Risk-ranked dispatch pre-empts {round(i100['preempted_share']/i100['fifo_share'],1)}× more burns", "Finding 4 · same 100 balers, smarter order",
-         "Season-replay digital twin on real 2025 events; 4 ha/baler/day; ERA5 rain days skipped; assumes baling prevents burning. Emissions: Andreae (2019), IPCC AR6 GWP100.",
-         f"We replayed the real 2025 season. With 100 balers, first-come-first-served would have reached {round(100*i100['fifo_share'],1)} percent of the fields that burned; ranking by burn history reaches {round(100*i100['preempted_share'],1)} percent. "
-         f"That is {fmt(i100['preempted_ha'])} hectares of burning avoided, about {fmt(i100['avoided_CH4_N2O_CO2e_t'])} tonnes CO2-equivalent and {fmt(i100['avoided_PM25_t'])} tonnes of PM2.5. The oracle line shows the value of better prediction.")
-picture(s, FIG / "f6_replay.png", 0.6, 1.55, w=7.4)
-bullets(s, 8.3, 1.7, 4.6, 5, [(f"{round(100*i100['preempted_share'],1)}% vs {round(100*i100['fifo_share'],1)}%", "burns pre-empted, 100 balers"),
-                              (f"{fmt(i100['avoided_CH4_N2O_CO2e_t'])} t CO₂e", f"CH₄+N₂O avoided (90%: {fmt(i100['avoided_CH4_N2O_CO2e_t_p05_p95'][0])}–{fmt(i100['avoided_CH4_N2O_CO2e_t_p05_p95'][1])})"),
-                              (f"{fmt(i100['avoided_PM25_t'])} t PM2.5", f"and {i100['avoided_BC_t']} t black carbon avoided"),
-                              (f"₹{i100['straw_value_all_baled_rs_crore']} crore", "of straw baled by the fleet at ₹169/quintal"),
-                              (f"Top decile = {hist['y_strict']['lift_top10']:.1f}× lift", "on the unseen 2025 season (pre-season model)")], size=14)
+# 8 Limits
+s=base("Limits","What the evidence can and cannot support","Source: FINAL_JUDGE_EVIDENCE.md; RESEARCH_SUMMARY.md; RESEARCH_METHODS.md.","We have not completed independent human labels. Strict and loose tiers are rule outputs. Risk is a normalized score, not a probability. Optical and thermal layers have different coverage limits. This is research decision support, not enforcement evidence.")
+for i,(h,b) in enumerate([("No human validation yet","0 completed blinded labels"),("No strict trend","Pre-event clarity varies by season"),("No ground truth claim","Thermal matches are corroborative context"),("No probability claim","Risk is normalized score, not probability")]): card(s,.7+(i%2)*6.15,1.8+(i//2)*2.2,5.5,1.7,h,b,GOLD)
 
-# 9 Live 2026
-weeks = now["weekly_forecast"][:6]
-s = base("Live: Muktsar 2026, as of this week's satellite pass", "Live nowcast",
-         f"Latest Sentinel-2 image {now['latest_image']}. Forecast = typical (2023–2025) harvest pace; baleable straw 3.3 t/ha.",
-         f"As of {now['latest_image']}, only {round(100*now['harvested_share_now'],1)} percent of the district is harvested, a normal pace. "
-         "Based on three seasons of curves, the harvest wave peaks in the last two weeks of October. Our pre-season list tells operators where to book balers first.")
-picture(s, FIG / "f7_nowcast_2026.png", 0.6, 1.55, w=7.2)
-rows = [("Week of", "Expected harvest", "Baleable straw")] + [(w["week_start"][5:], f"{fmt(w['expected_harvest_ha'])} ha", f"{fmt(w['expected_baleable_straw_t'])} t") for w in weeks]
-tbl = s.shapes.add_table(len(rows), 3, Inches(8.1), Inches(1.65), Inches(4.8), Inches(0.36 * len(rows))).table
-for i, row in enumerate(rows):
-    for j, v in enumerate(row):
-        cell = tbl.cell(i, j)
-        cell.text = v
-        para = cell.text_frame.paragraphs[0]
-        para.runs[0].font.size, para.runs[0].font.name = Pt(11), FONT
-        para.runs[0].font.bold = i == 0
-        cell.fill.solid()
-        cell.fill.fore_color.rgb = GREEN_DARK if i == 0 else (RGBColor(0xFF, 0xFF, 0xFF) if i % 2 else RGBColor(0xF0, 0xF4, 0xEF))
-        para.runs[0].font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF) if i == 0 else INK
-text(s, 8.1, 4.6, 4.8, 1.8, [f"Pre-booking list: top decile = {fmt(now['preseason_risk']['top_decile_fields'])} fields, {fmt(now['preseason_risk']['top_decile_ha'])} ha",
-                             f"District straw ≈ {now['district_straw_total_t']/1e5:.1f} lakh t (published estimate: 12.1 lakh t)"], size=13, color=INK2)
-
-# 10 Product
-s = base("One data backbone for officials, balers, buyers and farmers", "The product",
-         "FastAPI + React app; 197 backend tests plus new research tests; real-data mode is read-only; field-level burn data restricted to officials.",
-         "Everything is in a working app. Officials see the research evidence and the live map, operators get dispatch plans, buyers get traceable supply, and farmers get updates in Punjabi and Hindi and a no-burn certificate. Field-level burn data is restricted and never used to fine anyone.")
-picture(s, SHOTS / "Research-top-1366.png", 0.6, 1.5, w=7.6)
-far = Image.open(SHOTS / "Farmer Punjabi-390.png")
-far.crop((0, 0, 390, 780)).save(ROOT / "reports" / "pitch" / "_farmer_crop.png")
-picture(s, ROOT / "reports" / "pitch" / "_farmer_crop.png", 8.5, 1.5, h=5.2)
-cert = Image.open(SHOTS / "Certificate-Detail-1366.png")
-cert.crop((250, 0, 1366, 700)).save(ROOT / "reports" / "pitch" / "_cert_crop.png")
-picture(s, ROOT / "reports" / "pitch" / "_cert_crop.png", 11.2, 1.5, w=1.9)
-text(s, 11.2, 2.8, 1.9, 2, ["Prototype no-burn certificate with QR metadata check"], size=11, color=INK2)
-
-# 11 Impact and scale
-straw_value = now["district_straw_total_t"] * 1690 / 1e7
-s = base("Waste to wealth at district scale, with no hardware", "Impact and scale",
-         "Straw price ₹169/quintal (biomass plants, concept note [11]); emission factors Andreae (2019); CO₂e excludes biogenic CO₂.",
-         "The district's straw is worth almost two hundred crore rupees at today's biomass price. Each thousand hectares that is not burned avoids about 740 tonnes of CO2-equivalent and 34 tonnes of PM2.5. "
-         "The whole system uses free satellite data and a laptop, so extending to all of Punjab and Haryana is a configuration change, not a hardware rollout.")
-stat(s, 0.6, 1.8, 4.0, f"₹{straw_value:,.0f} cr", f"value of Muktsar's ≈{now['district_straw_total_t']/1e5:.1f} lakh t of straw at ₹169/quintal")
-stat(s, 4.8, 1.8, 4.0, f"{fmt(per1k['CH4_N2O_CO2e_t']['median'])} t", "CO₂e (CH₄ + N₂O) avoided per 1,000 ha not burned, plus 34 t PM2.5", BLUE)
-stat(s, 9.0, 1.8, 3.8, "₹0", "hardware: free Sentinel-2 / VIIRS / ERA5 and open-source tools", GREEN_DARK)
-bullets(s, 0.6, 4.4, 12, 2.5, [("Who pays:", "state CRM schemes for verified no-burn incentives (Haryana pays ₹1,200/acre after inspection); buyers pay per traceable tonne for ESG supply chains"),
-                               ("Scale:", "same code for any district; Punjab has 23 and Haryana 22, using the same satellite tiles and fire archives"),
-                               ("SDGs:", "12 responsible production · 13 climate action · 11 clean air in cities · 9 innovation")], size=14)
-
-# 12 Limits and next steps
-s = base("What we have not shown yet, and how we will", "Honest limits",
-         "Full limitations: docs/RESEARCH_METHODS.md §11.",
-         "We are careful about what the evidence supports. The burn tiers are rule outputs; human labels are being collected. Char can be ploughed in within days, so our counts are lower bounds. "
-         "Next we add a radar paddy mask, Sentinel-1 for smog gaps, and a one-block field pilot with a baler cooperative to measure real acceptance and tonnage.")
-bullets(s, 0.6, 1.7, 6.0, 5, [("Precision:", "blind stratified labels in progress (AI-assisted check: about 7–8 of 10 strict detections show char)"),
-                              ("Lower bounds:", "small or quickly tilled burns between revisits are missed"),
-                              ("Crop type:", "the cotton-growing south needs a Sentinel-1 paddy mask"),
-                              ("Replay assumptions:", "baling prevents burning; no travel time; no farmer acceptance yet")], size=14)
-bullets(s, 6.9, 1.7, 6.0, 5, [("Week 1:", "finish labels → publish precision, recall and area with 95% CI"),
-                              ("Month 1:", "Sentinel-1 radar for smog gaps and a paddy mask"),
-                              ("Season 2026:", "pilot in one block with a baler cooperative and a straw buyer"),
-                              ("Policy:", "propose burn-scar area, not fire counts, as the official indicator")], size=14)
-
-# 13 Close
-s = base("Measure burns, not alerts. Pay for straw, not fines.", None, None,
-         "Close by repeating the two numbers: fire alerts fell 79 percent but burn scars did not, and the same balers reach 2.6 times more would-be burns when guided by our risk map. Invite the judges to the live app.")
-text(s, 0.6, 2.0, 12, 2.5, [f"Fire alerts −{viirs_drop}% · burn scars unchanged · {100-seen25}% of strict-tier burn candidates unseen by fire satellites (2025)",
-                            f"{round(i100['preempted_share']/i100['fifo_share'],1)}× more burns pre-empted with the same 100 balers · live 2026 nowcast for Muktsar"], size=20, color=INK2)
-text(s, 0.6, 4.6, 12, 1.5, ["Parali Se Paisa · Greenovators Hackathon 2026 · Amity University Noida",
-                            "Reproducible: scripts/run_research.py · docs/RESEARCH_METHODS.md · reports/research/RESEARCH_SUMMARY.md"], size=14, color=MUTED)
-
-OUT.parent.mkdir(parents=True, exist_ok=True)
-prs.save(OUT)
-print(f"wrote {OUT} ({slide_no} slides)")
-try:  # optional PDF export through installed PowerPoint (Windows); the PPTX is the source of truth
-    import win32com.client
-    app = win32com.client.Dispatch("PowerPoint.Application")
-    pres = app.Presentations.Open(str(OUT), True, False, False)
-    pres.SaveAs(str(OUT.with_suffix(".pdf")), 32)
-    pres.Close()
-    app.Quit()
-    print(f"wrote {OUT.with_suffix('.pdf')}")
-except Exception as exc:
-    print(f"PDF export skipped ({type(exc).__name__}); open the PPTX and export manually if needed")
+# 9 Action / close
+s=base("Action","Pilot the evidence-to-pickup loop","Project sources: docs/RESEARCH_METHODS.md; docs/PITCH_AND_DEMO_GUIDE.md; synthetic prototype workflow.","Close by inviting the judges to inspect a real Muktsar field history, then show the separate synthetic dispatch and prototype QR metadata check. The next step is a bounded pilot with independent labels and real operator/buyer participation.")
+txt(s,.8,1.9,11.6,1.15,"Real satellite evidence → clear limits → a prototype path from straw to value.",27,INK,True)
+card(s,.9,4.35,3.55,1.55,"1 · Inspect","Muktsar real map and one field history")
+card(s,4.9,4.35,3.55,1.55,"2 · Demonstrate","Synthetic dispatch and buyer workflow")
+card(s,8.9,4.35,3.55,1.55,"3 · Pilot","Independent labels and local partners")
+OUT.parent.mkdir(parents=True,exist_ok=True); P.save(OUT)
+print(OUT)

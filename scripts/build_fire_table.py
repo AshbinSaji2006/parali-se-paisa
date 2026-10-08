@@ -8,6 +8,27 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
 FIRMS = ROOT / "data" / "real" / "firms"
+VIIRS_CLASSES = {"l": "low", "low": "low", "n": "nominal", "nominal": "nominal", "h": "high", "high": "high"}
+
+
+def normalise_confidence(raw: pd.Series, sensor: pd.Series) -> pd.DataFrame:
+    """Typed confidence from mixed sources, keeping the published value.
+
+    VIIRS publishes a class (l/n/h in archives, L/N/H in UMD monthly files, low/nominal/high in
+    NRT); MODIS publishes a 0-100 percentage. MODIS classes follow the C6.1 user guide bands:
+    0-29 low, 30-79 nominal, 80-100 high. Unparseable values stay null.
+    """
+    text = raw.astype("string").str.strip()
+    is_modis = sensor.astype(str).eq("MODIS")
+    pct = pd.to_numeric(text.where(is_modis), errors="coerce")
+    modis_class = pd.cut(pct, bins=[-0.1, 29.5, 79.5, 100.1], labels=["low", "nominal", "high"]).astype("string")
+    viirs_class = text.where(~is_modis).str.lower().map(VIIRS_CLASSES)
+    out = pd.DataFrame(index=raw.index)
+    # One canonical published form: MODIS integers without a float suffix, VIIRS letters as published.
+    out["confidence"] = text.where(~is_modis, pct.round().astype("Int64").astype("string"))
+    out["confidence_class"] = viirs_class.where(~is_modis, modis_class).astype("string")
+    out["confidence_pct"] = pct.astype(float)
+    return out
 
 
 def main() -> None:
@@ -27,6 +48,7 @@ def main() -> None:
         "daynight": m.dn.where(is_modis, m.dnflag).astype(str), "type": pd.to_numeric(m["type"], errors="coerce"),
         "source": m.source_file, "record_type": "ARCHIVE_MONTHLY_UMD"})
     u = pd.concat([a, m], ignore_index=True)
+    u[["confidence", "confidence_class", "confidence_pct"]] = normalise_confidence(u.confidence, u.sensor)
     d = gpd.read_file(ROOT / "data" / "real" / "boundaries" / "sri_muktsar_sahib_adm2.geojson").to_crs(4326).geometry.iloc[0]
     pts = gpd.GeoSeries(gpd.points_from_xy(u.longitude, u.latitude), crs=4326)
     u["in_muktsar"] = pts.within(d).values

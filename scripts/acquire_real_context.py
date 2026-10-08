@@ -145,8 +145,96 @@ def run(force: bool = False) -> None:
                        source_dataset="Sentinel-1 RTC",warnings=[f"{type(exc).__name__}: {exc}"])
 
 
+UMD_MCD64 = "sftp://fuoco.geog.umd.edu/data/MODIS/C61/MCD64A1/TIFF/Win18"
+
+
+def umd_burned_area(year: int) -> None:
+    """Add Sep-Dec MCD64A1 months that Planetary Computer has not published, from the UMD archive.
+
+    The UMD monthly GeoTIFF (sub-continental window Win18, 60-93E 5-36N) carries the same
+    MCD64A1 C6.1 Burn_Date on a geographic grid (~0.0044 deg, ~420 x 490 m here) instead of
+    the 500 m sinusoidal tiles, so pixel counts are not strictly comparable with earlier
+    seasons; presence near a field is. Values: 1-366 burn day, 0 unburned, <0 unmapped/water.
+    Months already present are kept; nothing is gap-filled.
+    """
+    from scripts.acquire_fire_archives import CURL
+    import subprocess
+    import tempfile
+    modis_path = REAL / "burned_area" / "mcd64a1_muktsar.parquet"
+    pixels_path = REAL / "burned_area" / "mcd64a1_burn_pixels.parquet"
+    products = pd.read_parquet(modis_path)
+    pixels = pd.read_parquet(pixels_path)
+    have = set(zip(products.product_year, products.product_start_doy))
+    district = gpd.read_file(REAL / "boundaries" / "sri_muktsar_sahib_adm2.geojson").to_crs("EPSG:4326").geometry.iloc[0]
+    new_products, new_pixels = [], []
+    for month in (9, 10, 11, 12):
+        first = date(year, month, 1)
+        last = (date(year + 1, 1, 1) if month == 12 else date(year, month + 1, 1)) - timedelta(days=1)
+        start_doy, end_doy = first.timetuple().tm_yday, last.timetuple().tm_yday
+        if (year, start_doy) in have:
+            continue
+        name = f"MCD64monthly.A{year}{start_doy:03d}.Win18.061.burndate.tif"
+        with tempfile.TemporaryDirectory() as tmp:
+            local = Path(tmp) / name
+            done = subprocess.run([CURL, "-s", "--max-time", "600", "-u", "fire:burnt", "-o", str(local), f"{UMD_MCD64}/{year}/{name}"])
+            if done.returncode != 0 or not local.exists() or local.stat().st_size == 0:
+                print(f"UMD_MCD64_MISSING {name}", flush=True)
+                continue
+            with rasterio.open(local) as src:
+                data, transform = mask(src, [mapping(district)], crop=True, indexes=1, filled=False)
+                res_x, res_y = src.res
+        vals = data.data
+        burned = ~np.ma.getmaskarray(data) & (vals >= start_doy) & (vals <= end_doy)
+        season_end = min(date(year, 12, 15), TODAY - timedelta(days=5)) if year == TODAY.year else date(year, 12, 15)
+        yy, xx = np.where(burned)
+        kept = 0
+        if len(xx):
+            lon, lat = rasterio.transform.xy(transform, yy, xx, offset="center")
+            for j in range(len(xx)):
+                d = date(year, 1, 1) + timedelta(days=int(vals[yy[j], xx[j]]) - 1)
+                if not date(year, 9, 15) <= d <= season_end:
+                    continue
+                kept += 1
+                area = (res_x * 111320 * np.cos(np.deg2rad(lat[j]))) * (res_y * 110574)
+                new_pixels.append({"source_item_id": name, "burn_date": d.isoformat(), "burn_doy": int(vals[yy[j], xx[j]]),
+                                   "longitude": float(lon[j]), "latitude": float(lat[j]), "nominal_pixel_area_m2": round(float(area)),
+                                   "source_provider": "University of Maryland fire archive (NASA MCD64A1 C6.1)",
+                                   "source_collection": "MCD64A1.061 monthly GeoTIFF Win18", "source_url": f"{UMD_MCD64}/{year}/{name}",
+                                   "real_or_synthetic": "REAL"})
+        new_products.append({"source_item_id": name, "product_year": year, "product_start_doy": start_doy, "product_end_doy": end_doy,
+                             "tile": "Win18", "burned_pixels_in_aoi": kept,
+                             "burned_area_km2_nominal": round(sum(p["nominal_pixel_area_m2"] for p in new_pixels if p["source_item_id"] == name) / 1e6, 3),
+                             "source_provider": "University of Maryland fire archive (NASA MCD64A1 C6.1)",
+                             "source_dataset": "MCD64A1.061 monthly Burn_Date GeoTIFF (window Win18)", "source_url": f"{UMD_MCD64}/{year}/{name}",
+                             "crs": "EPSG:4326", "resolution_m": 500, "real_or_synthetic": "REAL"})
+        print(f"UMD_MCD64 {name} burned_pixels_in_district_window={kept}", flush=True)
+    if not new_products:
+        return
+    products = pd.concat([products, pd.DataFrame(new_products)], ignore_index=True)
+    pixels = pd.concat([pixels, pd.DataFrame(new_pixels)], ignore_index=True) if new_pixels else pixels
+    products.to_parquet(modis_path, index=False)
+    pixels.to_parquet(pixels_path, index=False)
+    record_dataset("modis_burned_area", "real_downloaded", source_provider="NASA LP DAAC / Microsoft Planetary Computer; UMD fire archive",
+                   source_dataset="MCD64A1.061 monthly Burn_Date",
+                   date_range={"start": str(pd.to_datetime(pixels.burn_date).min().date()), "end": str(pd.to_datetime(pixels.burn_date).max().date())},
+                   paths=[modis_path, pixels_path],
+                   metadata={"items_processed": int(len(products)), "burned_pixel_records": int(len(pixels)), "nominal_resolution_m": 500,
+                             "burn_pixel_rule": "Burn_Date valid 1..366 and within the product month",
+                             "source_product_years": sorted(map(int, products.product_year.unique())),
+                             "sources": {"Planetary Computer modis-64A1-061 (500 m sinusoidal)": sorted(map(int, products.loc[products.tile != "Win18", "product_year"].unique())),
+                                         "UMD sftp MCD64monthly Win18 GeoTIFF (geographic ~0.0044 deg)": sorted(map(int, products.loc[products.tile == "Win18", "product_year"].unique()))},
+                             "note": "Coarse independent burn-area evidence; not field-level ground truth. Win18 pixel counts are not strictly comparable with 500 m sinusoidal counts."},
+                   license_ref="NASA LP DAAC data use policy; https://lpdaac.usgs.gov/terms-of-use/")
+
+
 if __name__ == "__main__":
     import argparse
     parser=argparse.ArgumentParser()
     parser.add_argument("--force",action="store_true")
-    run(parser.parse_args().force)
+    parser.add_argument("--umd-burned-area-year", type=int,
+                        help="Only add Sep-Dec MCD64A1 months missing from Planetary Computer for this year from the UMD archive.")
+    args = parser.parse_args()
+    if args.umd_burned_area_year:
+        umd_burned_area(args.umd_burned_area_year)
+    else:
+        run(args.force)

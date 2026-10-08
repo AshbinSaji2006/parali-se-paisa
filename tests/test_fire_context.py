@@ -52,3 +52,36 @@ def test_bais2_pixel_artefact_is_flagged_against_band_mean_recomputation():
     frame = pd.DataFrame([{**bands, "BAIS2": .09}, {**bands, "BAIS2": -16.3}])
     flags = bais2_stability(frame)
     assert flags.BAIS2_quality.tolist() == ["OK", "UNSTABLE_PIXEL_ARTEFACT"]
+
+
+def test_radar_season_context_is_causal_and_never_filled():
+    from src.features.radar_context import radar_season_context
+    obs = pd.DataFrame({"field_id": ["a", "a", "b", "c"], "year": [2025, 2025, 2025, 2024],
+                        "observation_datetime": pd.to_datetime(["2025-09-20T05:00Z", "2025-10-20T05:00Z",
+                                                                "2025-10-20T05:00Z", "2024-10-13T05:00Z"], utc=True)})
+    summary = pd.DataFrame({"field_id": ["a", "b"], "vh_min_transplant_db": [-21.0, None],
+                            "vh_canopy_db": [-15.0, None], "vh_rise_db": [6.0, None], "paddy_s1": [True, False]})
+    ctx = radar_season_context(obs, summary)
+    assert ctx.s1_context_status.tolist() == ["NOT_ACQUIRED_FOR_SEASON", "SEASON_SUMMARY_AVAILABLE",
+                                              "INSUFFICIENT_RADAR_PIXELS", "NOT_ACQUIRED_FOR_SEASON"]
+    assert ctx.s1_vh_canopy_db.iloc[1] == -15.0 and ctx.s1_paddy_signature.iloc[1]
+    assert ctx.s1_vh_canopy_db.drop(index=1).isna().all() and ctx.s1_season_relative_orbit.iloc[1] == 34
+
+
+def test_radar_pass_context_is_causal_bounded_and_never_filled():
+    from src.features.radar_context import radar_observation_context
+    obs = pd.DataFrame({"field_id": ["a", "a", "a", "b", "c"],
+                        "observation_datetime": pd.to_datetime(["2025-10-12T05:00Z", "2025-10-09T05:00Z", "2025-10-30T05:00Z",
+                                                                "2025-10-12T05:00Z", "2025-10-12T05:00Z"], utc=True)})
+    base = {"source_image_id_s1": "S1A_x", "s1_platform": "S1A", "s1_instrument_mode": "IW", "s1_orbit_pass": "DESCENDING",
+            "s1_relative_orbit_number": 34, "s1_processing_level": "RTC", "s1_units": "dB", "VV_VH_ratio_linear": 4.0,
+            "VV_minus_VH_db": 6.02, "s1_valid_pixel_count": 30}
+    passes = pd.DataFrame([{**base, "field_id": "a", "s1_observation_datetime": "2025-10-10T01:00:00+00:00", "VV_mean_db": -9.0, "VH_mean_db": -15.0},
+                           {**base, "field_id": "a", "s1_observation_datetime": "2025-10-22T01:00:00+00:00", "VV_mean_db": -8.0, "VH_mean_db": -14.0},
+                           {**base, "field_id": "b", "s1_observation_datetime": "2025-09-01T01:00:00+00:00", "VV_mean_db": -9.0, "VH_mean_db": -15.0}])
+    ctx = radar_observation_context(obs, passes)
+    assert ctx.s1_observation_status.tolist() == ["PASS_AVAILABLE", "NO_PASS_WITHIN_12_DAYS", "PASS_AVAILABLE",
+                                                  "NO_PASS_WITHIN_12_DAYS", "NOT_ACQUIRED"]
+    assert ctx.VV_mean_db.iloc[0] == -9.0 and ctx.VV_mean_db.iloc[2] == -8.0  # latest pass at or before the image
+    assert round(ctx.s1_age_days.iloc[0], 3) == round(52 / 24, 3)  # 2025-10-10T01:00 -> 2025-10-12T05:00
+    assert ctx.VV_mean_db.iloc[[1, 3, 4]].isna().all() and not ctx.s1_available.iloc[[1, 3, 4]].any()

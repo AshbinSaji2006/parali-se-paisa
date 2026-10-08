@@ -1,0 +1,13 @@
+{
+ "year": 2025,
+ "population_by_stratum": {
+  "STRICT_BURN_CANDIDATE": 1449,
+  "LOOSE_BURN_CANDIDATE": 13124,
+  "HARVESTED_NO_BURN_CANDIDATE": 94730
+ },
+ "rule_version": "burn-candidate-rules-v2",
+ "population": "crop fields (clear-sky peak NDVI >= 0.6) with an observed harvest and >= 12 pixels",
+ "n_per_stratum": 80,
+ "seed": 7,
+ "items": 240
+}

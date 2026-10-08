@@ -2,30 +2,30 @@
   "feature_schema_version": "1.0",
   "number_of_fields": 520,
   "number_of_seasons": 2080,
-  "temporal_rows": 3640,
-  "rows_with_previous_observations": 1560,
-  "median_observations_per_field": 7.0,
-  "min_observations_per_field": 7,
-  "max_observations_per_field": 7,
+  "temporal_rows": 28696,
+  "rows_with_previous_observations": 26571,
+  "median_observations_per_field": 55.0,
+  "min_observations_per_field": 52,
+  "max_observations_per_field": 58,
   "temporal_gap_days": {
-    "count": 1560,
-    "min": 12.997430555555555,
-    "median": 45.002175925925926,
-    "max": 60.00370370370371
+    "count": 26571,
+    "min": 2.000462951388889,
+    "median": 5.0001388888888885,
+    "max": 20.00115740740741
   },
-  "rows_with_radar_temporal_comparison": 0,
-  "rows_without_compatible_radar_history": 3640,
-  "large_gap_count": 1040,
+  "rows_with_radar_temporal_comparison": 23417,
+  "rows_without_compatible_radar_history": 5279,
+  "large_gap_count": 0,
   "duplicate_timestamp_rows": 0,
   "synthetic_rows": 0,
-  "real_rows": 3640,
+  "real_rows": 28696,
   "nan_rate": {
-    "NDVI_prev": 0.5714285714285714,
-    "NDVI_delta": 0.5714285714285714,
-    "peak_NDVI_so_far": 0.0,
-    "NDVI_rolling_mean_3": 1.0,
-    "NDVI_slope_last_3": 1.0,
-    "VV_delta_db": 1.0
+    "NDVI_prev": 0.0740521327014218,
+    "NDVI_delta": 0.08143992194034012,
+    "peak_NDVI_so_far": 0.0015681628101477559,
+    "NDVI_rolling_mean_3": 0.1484527460273209,
+    "NDVI_slope_last_3": 0.15392389183161417,
+    "VV_delta_db": 0.18396292166155562
   },
   "leakage_test_status": "automated prefix-invariance tests are in tests/test_temporal_features.py; run pytest to execute",
   "warnings": [],
@@ -33,5 +33,75 @@
   "omitted_history": [
     "FIRMS event count histories are omitted because the C table has only as-of window summaries, not event-level detections.",
     "Weather rolling histories are omitted because the C table has only observation-level aggregates, not daily record histories."
-  ]
+  ],
+  "gap_distribution_days": {
+    "<=10": {
+      "count": 24814,
+      "share": 0.9339
+    },
+    "11-20": {
+      "count": 1721,
+      "share": 0.0648
+    },
+    "21-30": {
+      "count": 36,
+      "share": 0.0014
+    },
+    "31-45": {
+      "count": 0,
+      "share": 0.0
+    },
+    ">45": {
+      "count": 0,
+      "share": 0.0
+    }
+  },
+  "fields_with_ge_3_observations": 520,
+  "fields_with_ge_5_observations": 520,
+  "max_observations_per_field_season": 22,
+  "usable_observations_per_field_season": {
+    "2023": {
+      "median": 15.0,
+      "min": 13,
+      "max": 16,
+      "fields_ge_3": 520,
+      "fields_ge_5": 520,
+      "scenes": 16
+    },
+    "2024": {
+      "median": 14.0,
+      "min": 13,
+      "max": 16,
+      "fields_ge_3": 520,
+      "fields_ge_5": 520,
+      "scenes": 16
+    },
+    "2025": {
+      "median": 21.0,
+      "min": 20,
+      "max": 22,
+      "fields_ge_3": 520,
+      "fields_ge_5": 520,
+      "scenes": 22
+    },
+    "2026": {
+      "median": 5.0,
+      "min": 3,
+      "max": 5,
+      "fields_ge_3": 520,
+      "fields_ge_5": 382,
+      "scenes": 5
+    }
+  },
+  "fields_with_ge_3_usable_observations_in_every_season": 520,
+  "fields_with_ge_5_usable_observations_in_every_season": 382,
+  "observation_quality_counts": {
+    "GOOD": 28231,
+    "POOR": 257,
+    "LIMITED": 208
+  },
+  "s1_per_date_rows": {
+    "PASS_AVAILABLE": 27990,
+    "NO_PASS_WITHIN_12_DAYS": 706
+  }
 }
